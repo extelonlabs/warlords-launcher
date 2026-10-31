@@ -18,6 +18,7 @@ public partial class MainWindow : Window
     private readonly GameService _game = new();
     private readonly InstallService _installer = new();
     private readonly ChannelService _channels = new();
+    private readonly ChangelogService _changelogs = new();
     private readonly string _preferencesPath = Path.Combine(App.DataDirectory, "settings.json");
     private ChannelSource? _source;
     private GameInspection? _inspection;
@@ -32,6 +33,11 @@ public partial class MainWindow : Window
     private bool _wasCancelled;
     private bool _steamOpened;
     private string _busyTitle = "Checking your setup";
+    private CancellationTokenSource? _changelogOperation;
+    private string? _changelogLoadedKey;
+    private string? _changelogCachedText;
+    private bool _windowClosed;
+    private const string ChangelogLoadedStatus = "Changes for this build and recent releases. Some features may still be in testing.";
 
     private enum PrimaryAction { ChooseFolder, CheckAgain, GetArmory, Install, Play }
 
@@ -57,6 +63,11 @@ public partial class MainWindow : Window
             ChannelUrlBox.Text = _channelLocation;
         Loaded += async (_, _) => await RunAsync(InitializeAsync);
         Closing += OnClosing;
+        Closed += (_, _) =>
+        {
+            _windowClosed = true;
+            CancelChangelogRequest();
+        };
         UpdateButtons();
     }
 
@@ -112,6 +123,10 @@ public partial class MainWindow : Window
 
     private async Task LoadChannelAsync(string location, CancellationToken token)
     {
+        CancelChangelogRequest();
+        ChangelogText.Clear();
+        ChangelogStatusText.Text = "Release notes will be available after the update check.";
+        ChangelogRetryButton.Visibility = Visibility.Collapsed;
         _source = null;
         _releaseReady = false;
         _channelLocation = location;
@@ -146,6 +161,7 @@ public partial class MainWindow : Window
         SavePreferences();
         Append($"Loaded module {release.Version}, source {release.SourceCommit[..12]}, {release.Files.Count} verified inventory entries.");
         SetStatus("Latest version found. Checking your installation…", "Checking your files");
+        if (ChangelogExpander.IsExpanded) _ = RefreshChangelogAsync();
     }
 
     private async Task RefreshAndSynchronizeAsync(CancellationToken token)
@@ -328,6 +344,7 @@ public partial class MainWindow : Window
             _operation = null;
             _busy = false;
             Progress.IsIndeterminate = false;
+            if (_source is null && ChangelogExpander.IsExpanded) ShowChangelogNeedsBuild();
             UpdateButtons();
             if (_closeAfterOperation) Close();
         }
@@ -473,6 +490,111 @@ public partial class MainWindow : Window
             case PrimaryAction.Install: await RunAsync(InstallWithConsentAsync); break;
             case PrimaryAction.Play: await RunAsync(PlayCurrentAsync); break;
             default: await RunAsync(RefreshAndSynchronizeAsync); break;
+        }
+    }
+
+    private async void Changelog_Expanded(object sender, RoutedEventArgs e)
+    {
+        if (!ReferenceEquals(e.OriginalSource, sender)) return;
+        QueueChangelogIntoView();
+        await RefreshChangelogAsync();
+        QueueChangelogIntoView();
+    }
+
+    private async void ChangelogRetry_Click(object sender, RoutedEventArgs e)
+    {
+        await RefreshChangelogAsync();
+        QueueChangelogIntoView();
+    }
+
+    private void QueueChangelogIntoView()
+    {
+        if (_windowClosed || Dispatcher.HasShutdownStarted) return;
+        Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Loaded, new Action(() =>
+        {
+            if (!_windowClosed && ChangelogExpander.IsExpanded) ChangelogExpander.BringIntoView();
+        }));
+    }
+
+    private static string ChangelogKey(ChannelSource source)
+        => source.Location + "\n" + source.Release.SourceCommit + "\n" + source.Release.Version;
+
+    private void CancelChangelogRequest()
+    {
+        var previous = _changelogOperation;
+        _changelogOperation = null;
+        // Each request owns its own disposal in finally; cancellation alone
+        // avoids disposing a token while its read is still completing.
+        previous?.Cancel();
+    }
+
+    private void ShowChangelogNeedsBuild()
+    {
+        ChangelogText.Clear();
+        ChangelogStatusText.Text = _busy
+            ? "Release notes will appear after the update check finishes."
+            : "Choose Check again to load the current build and its release notes.";
+        ChangelogRetryButton.Visibility = Visibility.Collapsed;
+    }
+
+    private bool IsCurrentChangelogRequest(CancellationTokenSource request, string key)
+        => !_windowClosed && ReferenceEquals(_changelogOperation, request) && !request.IsCancellationRequested
+            && _source is { } source && ChangelogKey(source) == key;
+
+    private async Task RefreshChangelogAsync()
+    {
+        if (_windowClosed || !ChangelogExpander.IsExpanded) return;
+        var source = _source;
+        if (source is null)
+        {
+            ShowChangelogNeedsBuild();
+            return;
+        }
+        var key = ChangelogKey(source);
+        if (_changelogLoadedKey == key && _changelogCachedText is { } cached)
+        {
+            ChangelogText.Text = cached;
+            ChangelogStatusText.Text = ChangelogLoadedStatus;
+            ChangelogRetryButton.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        CancelChangelogRequest();
+        var request = new CancellationTokenSource();
+        _changelogOperation = request;
+        ChangelogText.Clear();
+        ChangelogStatusText.Text = "Loading release notes…";
+        ChangelogRetryButton.Visibility = Visibility.Collapsed;
+        ChangelogRetryButton.IsEnabled = false;
+        try
+        {
+            var notes = await _changelogs.LoadAsync(source, request.Token);
+            if (!IsCurrentChangelogRequest(request, key)) return;
+            _changelogLoadedKey = key;
+            _changelogCachedText = notes;
+            ChangelogText.Text = notes;
+            ChangelogStatusText.Text = ChangelogLoadedStatus;
+        }
+        catch (Exception ex)
+        {
+            if (!IsCurrentChangelogRequest(request, key)) return;
+            ChangelogText.Clear();
+            ChangelogStatusText.Text = ex switch
+            {
+                FileNotFoundException or DirectoryNotFoundException => "Release notes are not available for this build yet. You can still play.",
+                System.Net.Http.HttpRequestException { StatusCode: System.Net.HttpStatusCode.NotFound } => "Release notes are not available for this build yet. You can still play.",
+                InvalidDataException => "Release notes could not be read for this build. You can still play.",
+                OperationCanceledException => "Release notes took too long to load. You can still play.",
+                _ => "Could not load release notes. You can still play."
+            };
+            ChangelogRetryButton.IsEnabled = true;
+            ChangelogRetryButton.Visibility = Visibility.Visible;
+            App.Log("Optional release notes unavailable: " + ex.GetType().Name);
+        }
+        finally
+        {
+            if (ReferenceEquals(_changelogOperation, request)) _changelogOperation = null;
+            request.Dispose();
         }
     }
 

@@ -7,7 +7,7 @@ namespace Warlords.Launcher;
 
 public static class Profile
 {
-    public const string LauncherVersion = "0.3.0";
+    public const string LauncherVersion = "0.3.1";
     public const string DefaultChannelUrl = "https://raw.githubusercontent.com/extelonlabs/warlords-launcher/StratLords/channel.json";
     public const string Repository = "MB-Warlords/The-Last-Concord";
     public const string Branch = "StratLords";
@@ -45,6 +45,24 @@ public sealed record ReleaseChannel
 }
 
 public sealed record ChannelSource(ReleaseChannel Release, string Location);
+public sealed record ReleaseChangelog
+{
+    public int SchemaVersion { get; init; }
+    public string SourceCommit { get; init; } = "";
+    public string Version { get; init; } = "";
+    public List<ChangelogEntry> Entries { get; init; } = [];
+}
+public sealed record ChangelogEntry
+{
+    public string Version { get; init; } = "";
+    public string Date { get; init; } = "";
+    public List<ChangelogSection> Sections { get; init; } = [];
+}
+public sealed record ChangelogSection
+{
+    public string Title { get; init; } = "";
+    public List<string> Items { get; init; } = [];
+}
 public sealed record OperationProgress(string Message, double? Fraction = null);
 public sealed record GameInspection(string GameRoot, string? InstalledVersion, bool CanPlay, IReadOnlyList<string> Messages)
 {

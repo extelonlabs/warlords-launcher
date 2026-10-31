@@ -17,8 +17,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "8cfbb8caba7f1d07cb6059c6978601cfa12e046d3260bffd9af6987d1b5ab13b",
-      "size": 3049
+      "sha256": "85895e4ca6caffcc6a0bcc7771a05d6baaf9253586fcd30c646b2c5dd763fe94",
+      "size": 3346
     },
     {
       "path": "SECURITY.md",
@@ -46,6 +46,11 @@
       "size": 800
     },
     {
+      "path": "src/Warlords.Launcher/ChangelogService.cs",
+      "sha256": "7a1bdded6ad6decd03f327e848fa016d35c447f5f75553b647b458778d261dec",
+      "size": 8660
+    },
+    {
       "path": "src/Warlords.Launcher/ChannelService.cs",
       "sha256": "06fb276fc2f3dad871819dd1f78a930a30e4e8b1668bd95a2e05f0d2cc82a991",
       "size": 6141
@@ -62,18 +67,18 @@
     },
     {
       "path": "src/Warlords.Launcher/MainWindow.xaml",
-      "sha256": "f731012d680b23e265401c3181696c48bc8ced9bea77fa9f32ce6c1295fe62d2",
-      "size": 10701
+      "sha256": "b3dc65b3f5da1d7fbd1e1acd40e7f20bbb27ab374c930345c876d660c66b87d4",
+      "size": 11593
     },
     {
       "path": "src/Warlords.Launcher/MainWindow.xaml.cs",
-      "sha256": "f8752e0af0374c6c698be2818731fc51bf6c9c678a71b1f9dcf926f1906e10bc",
-      "size": 30718
+      "sha256": "fc39e286003af7b0de70d9ce891dbabb35bb39c22fb9a5026b5d89bd785d12c4",
+      "size": 35939
     },
     {
       "path": "src/Warlords.Launcher/Models.cs",
-      "sha256": "2d9d8868e92317e85bdc61bde892fab411d16c774d0a737c6947a9eb808384f4",
-      "size": 2779
+      "sha256": "6dd940b79177684f019f59b602043757ce74f6e5ea3a229ec8d1338c8d33317b",
+      "size": 3358
     },
     {
       "path": "src/Warlords.Launcher/SafeFiles.cs",
@@ -82,11 +87,11 @@
     },
     {
       "path": "src/Warlords.Launcher/Warlords.Launcher.csproj",
-      "sha256": "9862e8d138bbab1aa30cfcfe2af9bdcde1a4dfada368c5adecbc0d7a18e5896c",
+      "sha256": "965ccec24fd2e3c038921651daf62fb993c3d82a3c34973bbe537a12708ddcc3",
       "size": 796
     }
   ],
-  "launcherVersion": "0.3.0",
+  "launcherVersion": "0.3.1",
   "license": "MIT",
   "schemaVersion": 1,
   "scope": "original-launcher-app-only"

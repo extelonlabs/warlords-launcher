@@ -50,7 +50,7 @@
             <Button x:Name="ArmoryButton" Grid.Column="2" Content="Get _Armory" Click="Armory_Click" VerticalAlignment="Top" Style="{StaticResource QuietButton}" AutomationProperties.Name="Open Warlords Armory in Steam Workshop"/>
           </Grid>
         </Border>
-        <Grid Margin="0,16,0,18">
+        <Grid Margin="0,16,0,4">
           <Grid.ColumnDefinitions><ColumnDefinition Width="42"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
           <Border Style="{StaticResource StepMarker}"><TextBlock Text="3" Foreground="{StaticResource Muted}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
           <StackPanel Grid.Column="1" Margin="0,0,16,0">
@@ -60,7 +60,14 @@
           </StackPanel>
           <Button x:Name="RefreshButton" Grid.Column="2" Content="Check _again" Click="Refresh_Click" VerticalAlignment="Top" Style="{StaticResource QuietButton}" AutomationProperties.Name="Check the game and update again"/>
         </Grid>
-        <Expander x:Name="SettingsExpander" Header="Settings &amp; help" Style="{StaticResource SettingsExpanderStyle}" Margin="0,16,0,0">
+        <Expander x:Name="ChangelogExpander" Header="What’s new" Expanded="Changelog_Expanded" Style="{StaticResource SettingsExpanderStyle}">
+          <StackPanel>
+            <TextBlock x:Name="ChangelogStatusText" Text="Open this section to read the latest changes." Foreground="{StaticResource Muted}" Margin="0,0,0,8" AutomationProperties.LiveSetting="Polite"/>
+            <TextBox x:Name="ChangelogText" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" MaxHeight="280" Background="Transparent" BorderThickness="0" Padding="0" AutomationProperties.Name="Warlords release notes"/>
+            <Button x:Name="ChangelogRetryButton" Content="_Retry release notes" Click="ChangelogRetry_Click" HorizontalAlignment="Left" Style="{StaticResource QuietButton}" Visibility="Collapsed" Margin="0,8,0,0"/>
+          </StackPanel>
+        </Expander>
+        <Expander x:Name="SettingsExpander" Header="Settings &amp; help" Style="{StaticResource SettingsExpanderStyle}" Margin="0,8,0,0">
           <StackPanel>
             <TextBlock Text="Bannerlord folder" Style="{StaticResource SectionLabel}"/>
             <TextBlock Text="Usually found automatically. Choose the Steam game folder if you need to change it." Foreground="{StaticResource Muted}" Margin="0,0,0,8"/>

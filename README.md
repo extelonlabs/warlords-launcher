@@ -2,7 +2,7 @@
 
 Open-source Windows launcher for the small StratLords testing group. The original
 launcher app is available under the [MIT license](LICENSE). Current source
-version: **0.3.0**.
+version: **0.3.1**.
 
 [Download Warlords.exe](https://github.com/extelonlabs/warlords-launcher/releases/latest/download/Warlords.exe).
 Players do not need GitHub accounts or the .NET SDK to run the self-contained
@@ -21,6 +21,11 @@ already managed by the launcher. It checks again before Play. The launcher
 downloads compiled StratLords builds from the public channel:
 
 `https://raw.githubusercontent.com/extelonlabs/warlords-launcher/StratLords/channel.json`
+
+Open **What's new** to read player-facing changes for the selected build.
+Release notes load separately when opened; unavailable notes do not block Play
+or updates. The publisher supplies notes from the exact source revision of the
+compiled mod, rather than exposing the private game repository.
 
 It validates the package and release-file SHA-256 hashes, stages the update,
 preserves player options and retains a recovery backup. Failed or expired
