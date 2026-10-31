@@ -7,7 +7,7 @@ namespace Warlords.Launcher;
 
 public static class Profile
 {
-    public const string LauncherVersion = "0.3.1";
+    public const string LauncherVersion = "0.3.2";
     public const string DefaultChannelUrl = "https://raw.githubusercontent.com/extelonlabs/warlords-launcher/StratLords/channel.json";
     public const string Repository = "MB-Warlords/The-Last-Concord";
     public const string Branch = "StratLords";

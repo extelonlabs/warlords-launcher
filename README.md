@@ -2,7 +2,7 @@
 
 Open-source Windows launcher for the small StratLords testing group. The original
 launcher app is available under the [MIT license](LICENSE). Current source
-version: **0.3.1**.
+version: **0.3.2**.
 
 [Download Warlords.exe](https://github.com/extelonlabs/warlords-launcher/releases/latest/download/Warlords.exe).
 Players do not need GitHub accounts or the .NET SDK to run the self-contained
@@ -49,6 +49,9 @@ This repository contains the launcher app and public release metadata. The
 private StratLords game source, build runner, feed publisher, server operations,
 licensed game resources and owner configuration are outside this source export.
 The game, mod payloads and framework components retain their respective licenses.
+The bundled Warlords crest and icon retain their original artwork rights;
+the MIT code license does not relicense the name or logo. See
+[branding notice](src/Warlords.Launcher/Assets/NOTICE.md).
 
 ## Security limits
 

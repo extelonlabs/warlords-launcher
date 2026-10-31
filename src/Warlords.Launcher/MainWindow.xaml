@@ -1,17 +1,18 @@
 <Window x:Class="Warlords.Launcher.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Warlords" Width="900" Height="700" MinWidth="800" MinHeight="560"
+        Title="Warlords" Icon="Assets/warlords.ico" Width="900" Height="700" MinWidth="800" MinHeight="560"
         WindowStartupLocation="CenterScreen" Background="{StaticResource Canvas}"
         Foreground="{StaticResource Text}" FontFamily="Segoe UI" FontSize="14"
         UseLayoutRounding="True" SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display">
   <Grid Background="{StaticResource Canvas}">
     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-    <Border Background="{StaticResource Surface}" BorderBrush="{StaticResource Line}" BorderThickness="0,0,0,1" Padding="32,20">
+    <Border Background="{StaticResource Surface}" BorderBrush="{StaticResource Line}" BorderThickness="0,0,0,1" Padding="32,14">
       <Grid>
         <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-          <TextBlock Text="Warlords" FontFamily="Georgia" FontSize="28" LineHeight="36" Foreground="{StaticResource Accent}"/>
+          <Image Source="Assets/warlords-logo.png" Width="48" Height="48" Stretch="Uniform" Margin="0,0,14,0" RenderOptions.BitmapScalingMode="HighQuality" AutomationProperties.Name="Warlords crest"/>
+          <TextBlock Text="Warlords" FontFamily="Georgia" FontSize="28" LineHeight="36" Foreground="{StaticResource Accent}" VerticalAlignment="Center"/>
           <TextBlock Text="StratLords for Bannerlord" Foreground="{StaticResource Muted}" Margin="20,0,0,0" VerticalAlignment="Center"/>
         </StackPanel>
         <TextBlock x:Name="LauncherVersionText" Grid.Column="1" Foreground="{StaticResource Muted}" FontSize="12" VerticalAlignment="Center" Margin="20,0,0,0"/>

@@ -1,12 +1,12 @@
 # Public launcher source boundary
 
-This snapshot contains only the original Warlords launcher app, a standalone
-launcher build script, its license and public documentation. The app files are
+This snapshot contains the original Warlords launcher app, its named branding
+assets/notice, a standalone build script, code license and public documentation. The app files are
 copied byte-for-byte from the maintained launcher project. The standalone build
 script uses repository-local output and has no workspace/producer dependencies.
 
 An explicit filename allowlist excludes the private feed publisher, package
-producer, owner configuration, credentials, operational receipts, game resources,
+producer, owner configuration, credentials, operational receipts, other game resources,
 other repositories, generated binaries and build output. Every filename equal
 to AGENTS.md is excluded case-insensitively at every depth. Links and reparse
 points are refused. No private game repository was exported.
@@ -18,4 +18,5 @@ This manifest describes the source snapshot, not a publisher signature or proof
 that a prebuilt executable was reproduced from it.
 
 The MIT license covers the original launcher source. Bannerlord, Armory,
-downloaded mod payloads and framework components are not relicensed by it.
+downloaded mod payloads, bundled Warlords branding and framework components are
+not relicensed by it. See the bundled Assets/NOTICE.md.

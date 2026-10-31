@@ -7,7 +7,8 @@
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AssemblyName>Warlords</AssemblyName>
-    <Version>0.3.1</Version>
+    <Version>0.3.2</Version>
+    <ApplicationIcon>Assets/warlords.ico</ApplicationIcon>
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PublishSingleFile>true</PublishSingleFile>
@@ -16,4 +17,10 @@
     <DebugType>none</DebugType>
     <SelfContained>true</SelfContained>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Assets/warlords-logo.png;Assets/warlords.ico;Assets/NOTICE.md" />
+    <Resource Include="Assets/warlords-logo.png" />
+    <Resource Include="Assets/warlords.ico" />
+    <Resource Include="Assets/NOTICE.md" />
+  </ItemGroup>
 </Project>
