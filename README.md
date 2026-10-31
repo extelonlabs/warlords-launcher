@@ -2,7 +2,7 @@
 
 Open-source Windows launcher for the small StratLords testing group. The original
 launcher app is available under the [MIT license](LICENSE). Current source
-version: **0.2.1**.
+version: **0.3.0**.
 
 [Download Warlords.exe](https://github.com/extelonlabs/warlords-launcher/releases/latest/download/Warlords.exe).
 Players do not need GitHub accounts or the .NET SDK to run the self-contained
@@ -14,8 +14,9 @@ Requires Windows x64, Steam Bannerlord **v1.4.8**, and Warlords Armory exactly
 **v1.0.0.17** (Steam Workshop item 3712562953). Steam/TaleWorlds authentication
 and normal server admission remain required. This launcher does not grant access.
 
-Run Warlords.exe, locate Bannerlord, and choose Install / Update once for the
-first installation or adoption. Later launches automatically update a module
+Run Warlords.exe and follow the main button: choose your game folder if needed,
+finish the Armory requirement, then install Warlords once. The launcher shows
+Play when setup is complete. Later launches automatically update a module
 already managed by the launcher. It checks again before Play. The launcher
 downloads compiled StratLords builds from the public channel:
 

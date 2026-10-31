@@ -45,6 +45,7 @@ public sealed class GameService
         var inventory = new Dictionary<string, List<ModuleDescriptor>>(StringComparer.OrdinalIgnoreCase);
         var folders = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         bool ready = true;
+        bool inventoryReadable = true;
         foreach (string container in ModuleContainers(root))
         {
             try
@@ -57,6 +58,7 @@ public sealed class GameService
                     {
                         messages.Add("There are too many module folders to inspect safely. Remove unused module copies before playing.");
                         ready = false;
+                        inventoryReadable = false;
                         break;
                     }
                     string descriptor = Path.Combine(folder, "SubModule.xml");
@@ -93,40 +95,52 @@ public sealed class GameService
             {
                 messages.Add("Cannot inspect module library " + container + ": " + ex.Message);
                 ready = false;
+                inventoryReadable = false;
             }
         }
 
         string? installedVersion = null;
+        var moduleReady = new Dictionary<string, bool>(StringComparer.Ordinal);
+        var gameMessages = new List<string>();
+        var armoryMessages = new List<string>();
+        var warlordsMessages = new List<string>();
+        bool warlordsNeedsManualAttention = false;
         foreach (string id in Profile.Modules)
         {
+            moduleReady[id] = false;
+            var requirementMessages = id == Profile.ModuleId ? warlordsMessages : id == ArmoryId ? armoryMessages : gameMessages;
+            int before = messages.Count;
+            void Issue(string message)
+            {
+                messages.Add(message);
+                requirementMessages.Add(message);
+                ready = false;
+            }
             if (!inventory.TryGetValue(id, out List<ModuleDescriptor>? matches) || matches.Count == 0)
             {
-                messages.Add(id == Profile.ModuleId
-                    ? "Warlords is not installed. Choose Install / Update."
+                Issue(id == Profile.ModuleId
+                    ? "Warlords is not installed. Choose Install Warlords to get started."
                     : id == ArmoryId
                         ? "Subscribe to Warlords Armory in Steam Workshop and let Steam finish its download."
                         : $"{id} is missing. Verify Bannerlord's files in Steam.");
-                ready = false;
                 continue;
             }
             if (matches.Count != 1)
             {
-                messages.Add($"More than one installed copy uses {id}. Keep one copy for this profile; the launcher will not delete Workshop content.");
-                ready = false;
+                Issue($"More than one installed copy uses {id}. Keep one copy for this profile; the launcher will not delete Workshop content.");
+                if (id == Profile.ModuleId) warlordsNeedsManualAttention = true;
                 continue;
             }
             ModuleDescriptor module = matches[0];
             if (!module.Id.Equals(id, StringComparison.Ordinal))
             {
-                messages.Add($"{id} has an unexpected module identity. Repair or reinstall its official package.");
-                ready = false;
+                Issue($"{id} has an unexpected module identity. Repair or reinstall its official package.");
             }
             string? requiredVersion = id is "Native" or "Multiplayer" ? Profile.GameVersion
                 : id == ArmoryId ? Profile.ArmoryVersion : null;
             if (requiredVersion != null && !module.Version.Equals(requiredVersion, StringComparison.Ordinal))
             {
-                messages.Add($"{id}: found {module.Version}; requires exactly {requiredVersion}.");
-                ready = false;
+                Issue($"{id}: found {module.Version}; requires exactly {requiredVersion}.");
             }
             if (id == Profile.ModuleId)
             {
@@ -134,27 +148,35 @@ public sealed class GameService
                 string expected = Path.Combine(root, "Modules", "StratLords", "SubModule.xml");
                 if (!Path.GetFullPath(module.File).Equals(expected, StringComparison.OrdinalIgnoreCase))
                 {
-                    messages.Add("The managed Warlords copy must be in Modules/StratLords. Install it with this launcher and keep only one copy of its module ID.");
-                    ready = false;
+                    Issue("An existing Warlords copy is outside the launcher's folder. Remove that copy before installing with this launcher; Workshop content is never removed automatically.");
+                    warlordsNeedsManualAttention = true;
                 }
                 if (!module.IsMultiplayer)
                 {
-                    messages.Add("The Warlords module descriptor does not declare a multiplayer module. Repair this installation.");
-                    ready = false;
+                    Issue("The Warlords module descriptor does not declare a multiplayer module. Repair this installation.");
                 }
                 foreach ((string dependency, string version) in new[] { ("Native", Profile.GameVersion), ("Multiplayer", Profile.GameVersion), (ArmoryId, Profile.ArmoryVersion) })
                 {
                     if (!module.Dependencies.TryGetValue(dependency, out string? actual) || actual != version)
                     {
-                        messages.Add($"Warlords must declare dependency {dependency} {version}. Repair this installation.");
-                        ready = false;
+                        Issue($"Warlords must declare dependency {dependency} {version}. Repair this installation.");
                     }
                 }
             }
+            moduleReady[id] = messages.Count == before;
         }
         if (ready)
             messages.Add("Game and required modules are compatible. In Bannerlord, select the Multiplayer tab and the four modules shown below.");
-        return new GameInspection(root, installedVersion, ready, messages);
+        return new GameInspection(root, installedVersion, ready, messages)
+        {
+            GameFound = true,
+            GameReady = inventoryReadable && moduleReady["Native"] && moduleReady["Multiplayer"],
+            ArmoryReady = inventoryReadable && moduleReady[ArmoryId],
+            WarlordsNeedsManualAttention = warlordsNeedsManualAttention,
+            GameMessages = gameMessages,
+            ArmoryMessages = armoryMessages,
+            WarlordsMessages = warlordsMessages
+        };
     }
 
     public void Play(string gameRoot)

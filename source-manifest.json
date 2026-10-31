@@ -17,8 +17,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "dacee7fb9bbfd313f99c0c8fa14b2efcaecc64e976c4465533ac94d06c48e21a",
-      "size": 2972
+      "sha256": "8cfbb8caba7f1d07cb6059c6978601cfa12e046d3260bffd9af6987d1b5ab13b",
+      "size": 3049
     },
     {
       "path": "SECURITY.md",
@@ -32,8 +32,8 @@
     },
     {
       "path": "src/Warlords.Launcher/App.xaml",
-      "sha256": "55d1b6bc6defe309ce3573d9e1463417d8529f3f282f3fb99737369426c8e616",
-      "size": 2845
+      "sha256": "3e814ed4dceef296a8577d3b75e6d0e9104f8a3656925591923cf0ff1297b56e",
+      "size": 8561
     },
     {
       "path": "src/Warlords.Launcher/App.xaml.cs",
@@ -52,8 +52,8 @@
     },
     {
       "path": "src/Warlords.Launcher/GameService.cs",
-      "sha256": "5de001aea2ff2e8c3a045b623e4742cd8c83091e67eaf60d573f3b330d1e1134",
-      "size": 16872
+      "sha256": "3f48f4b8dc964baec7f88a9f5ce1145532c77d9f7590dde48c0b1a346e410e9a",
+      "size": 18066
     },
     {
       "path": "src/Warlords.Launcher/InstallService.cs",
@@ -62,18 +62,18 @@
     },
     {
       "path": "src/Warlords.Launcher/MainWindow.xaml",
-      "sha256": "70a9934a86f177c68ceabc287b0da74475747bdff8d3c86fb5f158fd7c4ef1c3",
-      "size": 7004
+      "sha256": "faa09c1cd9e1f4f25c3f2f3a7f590b1ae92e3a6f9584eabf4b679cdaee3cf02b",
+      "size": 10702
     },
     {
       "path": "src/Warlords.Launcher/MainWindow.xaml.cs",
-      "sha256": "1a9956f264d3c9089f41260e50f7800eb0ea17cfaa2208c1ed16e8663de7681f",
-      "size": 21233
+      "sha256": "f8752e0af0374c6c698be2818731fc51bf6c9c678a71b1f9dcf926f1906e10bc",
+      "size": 30718
     },
     {
       "path": "src/Warlords.Launcher/Models.cs",
-      "sha256": "a6ed779737d59c14a65650680af1fa1525fca8b89b150328ac96a29444758cbc",
-      "size": 2295
+      "sha256": "2d9d8868e92317e85bdc61bde892fab411d16c774d0a737c6947a9eb808384f4",
+      "size": 2779
     },
     {
       "path": "src/Warlords.Launcher/SafeFiles.cs",
@@ -82,11 +82,11 @@
     },
     {
       "path": "src/Warlords.Launcher/Warlords.Launcher.csproj",
-      "sha256": "139c7088ee47c4b0f295feb2ae0f08366758174b625f148cd743bc6bc92ab94b",
+      "sha256": "9862e8d138bbab1aa30cfcfe2af9bdcde1a4dfada368c5adecbc0d7a18e5896c",
       "size": 796
     }
   ],
-  "launcherVersion": "0.2.1",
+  "launcherVersion": "0.3.0",
   "license": "MIT",
   "schemaVersion": 1,
   "scope": "original-launcher-app-only"

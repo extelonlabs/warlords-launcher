@@ -27,10 +27,25 @@ public partial class MainWindow : Window
     private bool _closeAfterOperation;
     private bool _releaseReady;
     private bool _localChannelMode;
+    private bool _managedInstallation;
+    private bool _hadError;
+    private bool _wasCancelled;
+    private bool _steamOpened;
+    private string _busyTitle = "Checking your setup";
+
+    private enum PrimaryAction { ChooseFolder, CheckAgain, GetArmory, Install, Play }
 
     public MainWindow(string? channelOverride)
     {
         InitializeComponent();
+        LauncherVersionText.Text = "Launcher " + Profile.LauncherVersion;
+        var workArea = SystemParameters.WorkArea;
+        var availableWidth = Math.Max(1, workArea.Width - 24);
+        var availableHeight = Math.Max(1, workArea.Height - 24);
+        MinWidth = Math.Min(MinWidth, availableWidth);
+        MinHeight = Math.Min(MinHeight, availableHeight);
+        Width = Math.Min(Width, availableWidth);
+        Height = Math.Min(Height, availableHeight);
         var preferences = ReadPreferences();
         GameRootBox.Text = preferences.GameRoot ?? "";
         var preferredChannel = preferences.Channel ?? "";
@@ -100,15 +115,16 @@ public partial class MainWindow : Window
         _source = null;
         _releaseReady = false;
         _channelLocation = location;
-        ReleaseText.Text = "Checking the latest StratLords build…";
+        ReleaseText.Text = "Checking the latest version…";
         SourceText.Text = "";
         ChannelSourceText.Text = "";
         ExpiryText.Text = "";
+        SetStatus("Checking for the latest Warlords update…", "Checking for updates");
         var loaded = await _channels.LoadAsync(location, token);
         _source = loaded;
         _channelLocation = loaded.Location;
         var release = loaded.Release;
-        ReleaseText.Text = $"StratLords {release.Version} · {release.Files.Count:N0} files";
+        ReleaseText.Text = $"Latest version: {release.Version}";
         SourceText.Text = $"Built from {Profile.Branch} / {release.SourceCommit[..12]}";
         SourceText.ToolTip = release.SourceCommit;
         if (Uri.TryCreate(location, UriKind.Absolute, out var channelUri) && channelUri.Scheme == "https")
@@ -129,7 +145,7 @@ public partial class MainWindow : Window
             : "Local test mode. Online updates are disabled for this explicitly selected pack.";
         SavePreferences();
         Append($"Loaded module {release.Version}, source {release.SourceCommit[..12]}, {release.Files.Count} verified inventory entries.");
-        SetStatus("Latest build found. Checking your installation…");
+        SetStatus("Latest version found. Checking your installation…", "Checking your files");
     }
 
     private async Task RefreshAndSynchronizeAsync(CancellationToken token)
@@ -147,29 +163,29 @@ public partial class MainWindow : Window
         await InspectGameAsync(token);
         if (string.IsNullOrWhiteSpace(GameRootBox.Text))
         {
-            SetStatus("Select your Bannerlord folder, then choose Install / Update once. Future updates are automatic.");
+            SetStatus("Choose your Bannerlord folder to continue.");
             return false;
         }
         var root = GameRootBox.Text.Trim();
         if (!IsManagedInstallation(root))
         {
-            SetStatus("Choose Install / Update once to set up this installation. Future updates are automatic.");
+            SetStatus("Choose Install Warlords to set up automatic updates.");
             return false;
         }
         if (_inspection?.CanPlay != true)
         {
-            SetStatus("Check the requirements above before updating or playing.");
+            SetStatus("Finish the setup steps below, then choose Check again.");
             return false;
         }
-        SetStatus("Checking installed files against the latest build…");
+        SetStatus("Checking your installed files…", "Checking your files");
         if (await _installer.VerifyAsync(root, source.Release, Reporter(), token))
         {
             _releaseReady = true;
             Progress.Value = 100;
-            SetStatus($"StratLords {source.Release.Version} is up to date. Ready to play.");
+            SetStatus($"Warlords {source.Release.Version} is up to date.");
             return true;
         }
-        SetStatus($"Updating automatically to StratLords {source.Release.Version}…");
+        SetStatus($"Updating Warlords to {source.Release.Version}…", "Updating Warlords");
         await InstallCurrentAsync(token);
         return _releaseReady;
     }
@@ -179,6 +195,7 @@ public partial class MainWindow : Window
         _releaseReady = false;
         var source = _source ?? throw new InvalidOperationException("Refresh the update channel before installing.");
         var root = GameRootBox.Text.Trim();
+        SetStatus($"Preparing Warlords {source.Release.Version}…", _managedInstallation ? "Updating Warlords" : "Installing Warlords");
         // Check the actual game descriptors before writing a new module, including
         // first installations where the managed module does not yet exist.
         var modules = SafeFiles.Modules(root);
@@ -191,8 +208,8 @@ public partial class MainWindow : Window
         _releaseReady = _inspection?.CanPlay == true && IsManagedInstallation(root);
         Progress.Value = 100;
         SetStatus(_releaseReady
-            ? $"StratLords {source.Release.Version} is up to date. Ready to play."
-            : "Latest build installed. Finish the requirements above before playing.");
+            ? $"Warlords {source.Release.Version} is up to date."
+            : "Warlords is installed. Finish the remaining setup steps before playing.");
     }
 
     private static bool IsManagedInstallation(string root)
@@ -228,44 +245,80 @@ public partial class MainWindow : Window
         if (root.Length == 0)
         {
             _inspection = null;
-            GameStatusText.Text = "Bannerlord was not found. Browse to its installation folder.";
+            _managedInstallation = false;
+            GameStatusText.Text = "Choose the folder where Steam installed Bannerlord.";
+            ArmoryStatusText.Text = "Checked after Bannerlord is found.";
             return;
         }
-        _inspection = await Task.Run(() => _game.Inspect(root), token);
-        GameStatusText.Text = _inspection.CanPlay
-            ? $"Installed Warlords {_inspection.InstalledVersion}. Game and required modules found."
-            : string.Join(Environment.NewLine, _inspection.Messages);
+        var result = await Task.Run(() => (Inspection: _game.Inspect(root), Managed: IsManagedInstallation(root)), token);
+        _inspection = result.Inspection;
+        _managedInstallation = result.Managed;
+        GameStatusText.Text = _inspection.GameReady
+            ? $"Bannerlord {Profile.GameVersion.TrimStart('v')} found."
+            : FirstMessage(_inspection.GameMessages,
+                _inspection.GameFound ? "The required game files need attention. See Settings & help for details." : FirstMessage(_inspection.Messages, "Choose a valid Bannerlord folder."));
+        ArmoryStatusText.Text = _inspection.ArmoryReady
+            ? $"Armory {Profile.ArmoryVersion.TrimStart('v')} is installed."
+            : _inspection.GameFound
+                ? FirstMessage(_inspection.ArmoryMessages, "Armory could not be checked. Finish the Bannerlord step first.")
+                : "Checked after Bannerlord is found.";
+        if (!_inspection.CanPlay)
+            Append(string.Join(Environment.NewLine, _inspection.Messages));
         SavePreferences();
+        UpdateButtons();
     }
 
-    private IProgress<OperationProgress> Reporter() => new Progress<OperationProgress>(value =>
+    private IProgress<OperationProgress> Reporter()
     {
-        OperationText.Text = value.Message;
-        Progress.IsIndeterminate = value.Fraction is null;
-        if (value.Fraction is { } fraction) Progress.Value = Math.Clamp(fraction, 0, 1) * 100;
-    });
+        var operation = _operation;
+        return new Progress<OperationProgress>(value =>
+        {
+            if (!_busy || !ReferenceEquals(_operation, operation) || operation?.IsCancellationRequested == true) return;
+            OperationText.Text = value.Message;
+            Progress.IsIndeterminate = value.Fraction is null;
+            if (value.Fraction is { } fraction)
+            {
+                Progress.Value = Math.Clamp(fraction, 0, 1) * 100;
+                ProgressPercentText.Text = $"{Progress.Value:0}%";
+            }
+            else ProgressPercentText.Text = "Working…";
+        });
+    }
 
     private async Task RunAsync(Func<CancellationToken, Task> action)
     {
         if (_busy) return;
         _busy = true;
+        _hadError = false;
+        _wasCancelled = false;
+        _steamOpened = false;
+        _busyTitle = "Checking your setup";
         _operation = new CancellationTokenSource();
         OperationText.Foreground = (Brush)FindResource("Text");
+        OperationText.Text = "Checking your setup…";
+        Progress.Value = 0;
+        Progress.IsIndeterminate = true;
+        ProgressPercentText.Text = "Working…";
         UpdateButtons();
         try { await action(_operation.Token); }
         catch (OperationCanceledException)
         {
             _releaseReady = false;
+            _wasCancelled = _operation.IsCancellationRequested;
+            _hadError = !_wasCancelled;
+            if (_source is null) ReleaseText.Text = _wasCancelled ? "Update check cancelled." : "Latest version unavailable.";
             SetStatus(_operation.IsCancellationRequested
                 ? "Cancelled. Any interrupted installation will be recovered before the next update."
-                : "The update request timed out. Check your connection, then choose Check for updates.");
+                : "The update request timed out. Check your connection, then choose Try again.");
         }
         catch (Exception ex)
         {
             _releaseReady = false;
+            _hadError = true;
+            if (_source is null) ReleaseText.Text = "Latest version unavailable.";
             OperationText.Foreground = new SolidColorBrush(Color.FromRgb(255, 181, 166));
             SetStatus(ex is System.Net.Http.HttpRequestException
-                ? "The update feed could not be reached. Check your connection, then choose Check for updates."
+                ? "Could not check for updates. Check your internet connection, then choose Try again."
                 : ex.Message);
             App.Log(ex.ToString());
         }
@@ -280,10 +333,12 @@ public partial class MainWindow : Window
         }
     }
 
-    private void SetStatus(string message)
+    private void SetStatus(string message, string? busyTitle = null)
     {
+        if (busyTitle is not null) _busyTitle = busyTitle;
         OperationText.Text = message;
         Append(message);
+        UpdateButtons();
     }
 
     private void Append(string message)
@@ -295,14 +350,130 @@ public partial class MainWindow : Window
 
     private void UpdateButtons()
     {
-        var hasGame = !string.IsNullOrWhiteSpace(GameRootBox.Text);
+        var inspection = _inspection;
+        var hasGame = inspection?.GameFound == true;
         var hasRelease = _source is not null;
-        InstallButton.IsEnabled = !_busy && hasGame && hasRelease;
+        InstallButton.IsEnabled = !_busy && hasRelease && inspection?.CanInstall == true;
         VerifyButton.IsEnabled = !_busy && hasGame && hasRelease;
-        PlayButton.IsEnabled = !_busy && hasGame && hasRelease && _releaseReady && _inspection?.CanPlay == true;
-        CancelButton.IsEnabled = _busy;
+        PrimaryButton.IsEnabled = !_busy;
+        CancelButton.IsEnabled = _busy && _operation?.IsCancellationRequested != true;
+        CancelButton.Visibility = _busy ? Visibility.Visible : Visibility.Collapsed;
+        Progress.Visibility = ProgressPercentText.Visibility = _busy ? Visibility.Visible : Visibility.Collapsed;
         DetectButton.IsEnabled = BrowseButton.IsEnabled = ChoosePackButton.IsEnabled = RefreshButton.IsEnabled = BranchButton.IsEnabled = ConnectButton.IsEnabled = !_busy;
+        ArmoryButton.IsEnabled = !_busy;
+        ArmoryButton.Visibility = hasGame && inspection?.ArmoryReady != true ? Visibility.Visible : Visibility.Collapsed;
         GameRootBox.IsEnabled = ChannelUrlBox.IsEnabled = !_busy;
+        BrowseButton.Content = hasGame ? "_Change…" : "Choose _folder";
+        RefreshButton.Content = _hadError ? "Try _again" : "Check _again";
+
+        InstallStateText.Text = inspection is { WarlordsNeedsManualAttention: true }
+            ? FirstMessage(inspection.WarlordsMessages, "Keep one Warlords copy for this installation.")
+            : _releaseReady && inspection?.CanPlay == true ? "Installed and up to date."
+            : inspection?.InstalledVersion is { } installed ? $"Installed version: {installed.TrimStart('v')}."
+            : "Not installed yet. The launcher will keep it updated after setup.";
+
+        var next = NextAction();
+        PrimaryButton.Content = _busy ? "Working…" : next switch
+        {
+            PrimaryAction.ChooseFolder => "Choose game _folder",
+            PrimaryAction.GetArmory => "Get _Armory",
+            PrimaryAction.Install => _managedInstallation ? "_Repair Warlords" : "_Install Warlords",
+            PrimaryAction.Play => "_Play Warlords",
+            _ => _hadError || _wasCancelled ? "_Try again" : "_Check again"
+        };
+
+        if (_busy && _operation?.IsCancellationRequested == true)
+        {
+            StatusTitleText.Text = _closeAfterOperation ? "Finishing before closing" : "Cancelling safely";
+            StatusHintText.Text = "The current file operation will finish before Warlords stops.";
+        }
+        else if (_busy)
+        {
+            StatusTitleText.Text = _busyTitle;
+            StatusHintText.Text = "Keep Warlords open while this finishes. You can cancel safely.";
+        }
+        else if (_hadError)
+        {
+            StatusTitleText.Text = "Something needs attention";
+            StatusHintText.Text = next == PrimaryAction.ChooseFolder
+                ? "Choose your Bannerlord folder to continue. Details are available in Settings & help."
+                : "Follow the message below, then try again. Details are available in Settings & help.";
+        }
+        else if (_wasCancelled)
+        {
+            StatusTitleText.Text = next == PrimaryAction.ChooseFolder ? "Setup paused" : "Update cancelled";
+            StatusHintText.Text = next == PrimaryAction.ChooseFolder
+                ? "Choose your Bannerlord folder when you’re ready to continue."
+                : "Choose Try again when you’re ready. Interrupted updates are recovered safely.";
+        }
+        else if (_steamOpened)
+        {
+            StatusTitleText.Text = "Continue in Steam";
+            StatusHintText.Text = "In Bannerlord’s launcher, select Multiplayer and enable Native, Multiplayer, Armory and Warlords.";
+        }
+        else if (inspection is not { GameFound: true })
+        {
+            StatusTitleText.Text = "Find your Bannerlord game";
+            StatusHintText.Text = "Choose the folder where Steam installed Mount & Blade II Bannerlord.";
+        }
+        else if (!inspection.GameReady)
+        {
+            StatusTitleText.Text = "Check your Bannerlord setup";
+            StatusHintText.Text = $"Bannerlord {Profile.GameVersion.TrimStart('v')} and its Multiplayer files are required. After fixing the issue below, choose Check again.";
+        }
+        else if (inspection.ArmoryReady != true)
+        {
+            StatusTitleText.Text = "Install Armory in Steam";
+            StatusHintText.Text = "Subscribe to Armory, let Steam finish downloading, then choose Check again.";
+        }
+        else if (!hasRelease)
+        {
+            StatusTitleText.Text = "Check for the latest version";
+            StatusHintText.Text = "Connect to the internet and choose Check again to load the Warlords update.";
+        }
+        else if (inspection.WarlordsNeedsManualAttention)
+        {
+            StatusTitleText.Text = "Keep one Warlords installation";
+            StatusHintText.Text = "Resolve the Warlords message below, then choose Check again. Workshop files are never removed automatically.";
+        }
+        else if (_releaseReady && inspection.CanPlay)
+        {
+            StatusTitleText.Text = "Ready to play";
+            StatusHintText.Text = "You’re up to date. Play opens Steam; future Warlords updates are automatic.";
+        }
+        else
+        {
+            StatusTitleText.Text = _managedInstallation ? "Repair your Warlords files" : "Install Warlords once";
+            StatusHintText.Text = _managedInstallation
+                ? "The launcher will replace changed files and keep a recovery backup."
+                : "The launcher downloads the correct version and keeps it updated for you.";
+        }
+    }
+
+    private PrimaryAction NextAction()
+    {
+        var inspection = _inspection;
+        if (inspection is not { GameFound: true }) return PrimaryAction.ChooseFolder;
+        if (_hadError || _wasCancelled || !inspection.GameReady) return PrimaryAction.CheckAgain;
+        if (!inspection.ArmoryReady) return PrimaryAction.GetArmory;
+        if (_source is null || inspection.WarlordsNeedsManualAttention) return PrimaryAction.CheckAgain;
+        return _releaseReady && inspection.CanPlay ? PrimaryAction.Play : PrimaryAction.Install;
+    }
+
+    private static string FirstMessage(System.Collections.Generic.IReadOnlyList<string> messages, string fallback)
+        => messages.Count > 0 ? messages[0] : fallback;
+
+    private async void Primary_Click(object sender, RoutedEventArgs e)
+    {
+        if (_busy) return;
+        switch (NextAction())
+        {
+            case PrimaryAction.ChooseFolder: await ChooseGameFolderAsync(); break;
+            case PrimaryAction.GetArmory: OpenArmoryPage(); break;
+            case PrimaryAction.Install: await RunAsync(InstallWithConsentAsync); break;
+            case PrimaryAction.Play: await RunAsync(PlayCurrentAsync); break;
+            default: await RunAsync(RefreshAndSynchronizeAsync); break;
+        }
     }
 
     private async void Detect_Click(object sender, RoutedEventArgs e) => await RunAsync(async token =>
@@ -311,7 +482,9 @@ public partial class MainWindow : Window
         await RefreshAndSynchronizeAsync(token);
     });
 
-    private async void Browse_Click(object sender, RoutedEventArgs e)
+    private async void Browse_Click(object sender, RoutedEventArgs e) => await ChooseGameFolderAsync();
+
+    private async Task ChooseGameFolderAsync()
     {
         var dialog = new OpenFolderDialog { Title = "Select Mount & Blade II Bannerlord", Multiselect = false };
         if (dialog.ShowDialog(this) != true) return;
@@ -370,25 +543,30 @@ public partial class MainWindow : Window
         }
     });
 
-    private async void Install_Click(object sender, RoutedEventArgs e)
+    private async void Install_Click(object sender, RoutedEventArgs e) => await RunAsync(InstallWithConsentAsync);
+
+    private async Task InstallWithConsentAsync(CancellationToken token)
     {
-        await RunAsync(async token =>
+        await LoadChannelAsync(_channelLocation, token);
+        await InspectGameAsync(token);
+        if (_inspection?.CanInstall != true)
         {
-            await LoadChannelAsync(_channelLocation, token);
-            var root = GameRootBox.Text.Trim();
-            var target = Path.Combine(root, "Modules", "StratLords");
-            if (Directory.Exists(target) && !IsManagedInstallation(root))
+            SetStatus("Finish the Bannerlord and Armory setup steps, then choose Check again.");
+            return;
+        }
+        var root = GameRootBox.Text.Trim();
+        var target = Path.Combine(root, "Modules", "StratLords");
+        if (Directory.Exists(target) && !IsManagedInstallation(root))
+        {
+            if (MessageBox.Show(this,
+                "Let Warlords manage this existing installation and download the latest version?\n\nThe launcher keeps a recovery backup and preserves your player options. Future updates are automatic.\n\n" + target,
+                "Set up Warlords", MessageBoxButton.OKCancel, MessageBoxImage.Question) != MessageBoxResult.OK)
             {
-                if (MessageBox.Show(this,
-                    "Let Warlords manage this existing StratLords module and install the latest build?\n\nThe launcher keeps a recovery backup and preserves your player options. Future updates are automatic.\n\n" + target,
-                    "Set up Warlords", MessageBoxButton.OKCancel, MessageBoxImage.Question) != MessageBoxResult.OK)
-                {
-                    SetStatus("Installation was not changed. Choose Install / Update when you are ready.");
-                    return;
-                }
+                SetStatus("Nothing was changed. You can choose Install Warlords when you’re ready.");
+                return;
             }
-            await InstallCurrentAsync(token);
-        });
+        }
+        await InstallCurrentAsync(token);
     }
 
     private async void Verify_Click(object sender, RoutedEventArgs e) => await RunAsync(async token =>
@@ -398,28 +576,28 @@ public partial class MainWindow : Window
         var valid = await _installer.VerifyAsync(GameRootBox.Text.Trim(), _source.Release, Reporter(), token);
         await InspectGameAsync(token);
         _releaseReady = valid && _inspection?.CanPlay == true && IsManagedInstallation(GameRootBox.Text.Trim());
-        SetStatus(_releaseReady ? "All managed release files match the latest build. Ready to play."
-            : valid ? "Files match the latest build. Choose Install / Update once to enable automatic management."
-            : "Installed files differ from the latest build. Use Install / Update to repair them.");
+        SetStatus(_releaseReady ? "Your Warlords files are up to date."
+            : valid ? "Files are up to date. Choose Install Warlords once to enable automatic updates."
+            : "Some Warlords files need updating. Choose Repair Warlords to replace them.");
     });
 
-    private async void Play_Click(object sender, RoutedEventArgs e) => await RunAsync(async token =>
+    private async Task PlayCurrentAsync(CancellationToken token)
     {
         await LoadChannelAsync(_channelLocation, token);
         if (!await SynchronizeCurrentAsync(token) || _source is null) return;
         var root = GameRootBox.Text.Trim();
         var valid = await _installer.VerifyAndRunAsync(root, _source.Release, Reporter(), token, () => _game.PlayUnderLock(root));
         _releaseReady = valid;
+        _steamOpened = valid;
         SetStatus(valid
             ? "Steam opened. In Bannerlord's launcher, select Multiplayer and the four required modules, then Play."
-            : "This installation differs from the selected test build. Use Install / Update before playing.");
-    });
+            : "Some Warlords files need updating. Choose Repair Warlords before playing.");
+    }
 
     private void Cancel_Click(object sender, RoutedEventArgs e)
     {
         _operation?.Cancel();
-        OperationText.Text = "Cancelling safely…";
-        CancelButton.IsEnabled = false;
+        SetStatus("Cancelling safely…");
     }
 
     private void OnClosing(object? sender, CancelEventArgs e)
@@ -428,7 +606,7 @@ public partial class MainWindow : Window
         e.Cancel = true;
         _closeAfterOperation = true;
         _operation?.Cancel();
-        OperationText.Text = "Finishing the current file operation before closing…";
+        SetStatus("Finishing the current file operation before closing…");
     }
 
     private void OpenLogs_Click(object sender, RoutedEventArgs e)
@@ -441,9 +619,19 @@ public partial class MainWindow : Window
         catch (Exception ex) { SetStatus("Could not open the logs folder: " + ex.Message); }
     }
 
-    private void Armory_Click(object sender, RoutedEventArgs e)
+    private void Armory_Click(object sender, RoutedEventArgs e) => OpenArmoryPage();
+
+    private void OpenArmoryPage()
     {
-        try { Process.Start(new ProcessStartInfo("https://steamcommunity.com/sharedfiles/filedetails/?id=3712562953") { UseShellExecute = true }); }
-        catch (Exception ex) { SetStatus("Could not open the Armory page: " + ex.Message); }
+        try
+        {
+            Process.Start(new ProcessStartInfo("https://steamcommunity.com/sharedfiles/filedetails/?id=3712562953") { UseShellExecute = true });
+            SetStatus("Armory’s Steam Workshop page is open. Subscribe, wait for Steam to finish, then choose Check again.");
+        }
+        catch (Exception ex)
+        {
+            _hadError = true;
+            SetStatus("Could not open the Armory page: " + ex.Message);
+        }
     }
 }

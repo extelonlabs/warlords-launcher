@@ -1,84 +1,110 @@
 <Window x:Class="Warlords.Launcher.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Warlords" Width="980" Height="730" MinWidth="860" MinHeight="600"
+        Title="Warlords" Width="900" Height="700" MinWidth="800" MinHeight="560"
         WindowStartupLocation="CenterScreen" Background="{StaticResource Canvas}"
-        Foreground="{StaticResource Text}" FontFamily="Segoe UI" FontSize="14">
-  <Grid>
-    <Grid.ColumnDefinitions><ColumnDefinition Width="222"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-    <Border Background="{StaticResource Surface}" Padding="26,34">
-      <DockPanel LastChildFill="True">
-        <StackPanel DockPanel.Dock="Bottom">
-          <TextBlock Text="Windows / Steam" Foreground="{StaticResource Muted}" Margin="0,0,0,12"/>
-          <Button x:Name="LogsButton" Content="Open _logs" Click="OpenLogs_Click" HorizontalContentAlignment="Left"/>
-          <TextBlock Text="Launcher 0.2.1 · unsigned test build" FontSize="12" Foreground="{StaticResource Muted}" Margin="0,16,0,0"/>
+        Foreground="{StaticResource Text}" FontFamily="Segoe UI" FontSize="14"
+        UseLayoutRounding="True" SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display">
+  <Grid Background="{StaticResource Canvas}">
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <Border Background="{StaticResource Surface}" BorderBrush="{StaticResource Line}" BorderThickness="0,0,0,1" Padding="32,20">
+      <Grid>
+        <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+          <TextBlock Text="Warlords" FontFamily="Georgia" FontSize="28" LineHeight="36" Foreground="{StaticResource Accent}"/>
+          <TextBlock Text="StratLords for Bannerlord" Foreground="{StaticResource Muted}" Margin="20,0,0,0" VerticalAlignment="Center"/>
         </StackPanel>
-        <StackPanel>
-          <TextBlock Text="Warlords" FontFamily="Georgia" FontSize="33" Foreground="{StaticResource Accent}"/>
-          <TextBlock Text="Your next battle starts here." Margin="0,12,0,34" Foreground="{StaticResource Muted}"/>
-          <TextBlock Text="StratLords" FontSize="18" FontWeight="SemiBold"/>
-          <TextBlock Text="Closed testing" Margin="0,6,0,0" Foreground="{StaticResource Muted}"/>
-          <Separator Margin="0,28,0,22" Background="#526052"/>
-          <TextBlock Text="Requirements" FontWeight="SemiBold" Margin="0,0,0,10"/>
-          <TextBlock Text="Bannerlord 1.4.8&#10;Armory 1.0.0.17" LineHeight="23" Foreground="{StaticResource Muted}"/>
-          <Button Content="Get _Armory" Click="Armory_Click" Margin="0,18,0,0"/>
-          <TextBlock Text="Every tester needs the same client build and an approved test server." Margin="0,26,0,0" Foreground="{StaticResource Muted}" FontSize="13"/>
-        </StackPanel>
-      </DockPanel>
+        <TextBlock x:Name="LauncherVersionText" Grid.Column="1" Foreground="{StaticResource Muted}" FontSize="12" VerticalAlignment="Center" Margin="20,0,0,0"/>
+      </Grid>
     </Border>
-    <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-      <StackPanel Margin="34,32,34,28">
-        <TextBlock Text="Ready your company." FontFamily="Georgia" FontSize="31" Margin="0,0,0,8"/>
-        <TextBlock Text="Warlords checks for the latest StratLords build and keeps your installation up to date." Foreground="{StaticResource Muted}" Margin="0,0,0,28"/>
-        <Grid Margin="0,0,0,10">
+    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" PanningMode="VerticalOnly">
+      <StackPanel Margin="32,24,32,24">
+        <TextBlock x:Name="StatusTitleText" Text="Getting things ready" FontSize="30" LineHeight="40" FontWeight="SemiBold"/>
+        <TextBlock x:Name="StatusHintText" Text="We’ll find your game and check for the latest Warlords update." Foreground="{StaticResource Muted}" Margin="0,5,0,20"/>
+        <Grid Margin="0,0,0,12">
           <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-          <TextBlock Text="Bannerlord folder" FontWeight="SemiBold" VerticalAlignment="Center"/>
-          <Button Grid.Column="1" x:Name="DetectButton" Content="_Detect" Click="Detect_Click" MinHeight="30" Padding="12,4"/>
+          <TextBlock x:Name="OperationText" Text="Checking the latest build…" Margin="0,0,16,0" AutomationProperties.LiveSetting="Polite"/>
+          <TextBlock x:Name="ProgressPercentText" Grid.Column="1" Foreground="{StaticResource Muted}"/>
         </Grid>
-        <Grid>
-          <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-          <TextBox x:Name="GameRootBox" AutomationProperties.Name="Bannerlord installation folder" ToolTip="Select the Mount &amp; Blade II Bannerlord folder that contains Modules and bin." LostKeyboardFocus="GameRoot_LostKeyboardFocus"/>
-          <Button Grid.Column="1" x:Name="BrowseButton" Content="_Browse" Click="Browse_Click" Margin="10,0,0,0"/>
+        <ProgressBar x:Name="Progress" Height="5" Minimum="0" Maximum="100" Background="{StaticResource Surface}" Foreground="{StaticResource Accent}" BorderThickness="0" Margin="0,0,0,16" AutomationProperties.Name="Current operation progress"/>
+        <Border BorderBrush="{StaticResource Line}" BorderThickness="0,0,0,1" Padding="0,0,0,16">
+          <Grid>
+            <Grid.ColumnDefinitions><ColumnDefinition Width="42"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <Border Style="{StaticResource StepMarker}"><TextBlock Text="1" Foreground="{StaticResource Muted}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+            <StackPanel Grid.Column="1" Margin="0,0,16,0">
+              <TextBlock Text="Bannerlord" Style="{StaticResource SectionLabel}"/>
+              <TextBlock x:Name="GameStatusText" Text="Looking for your Steam installation…" Foreground="{StaticResource Muted}"/>
+              <TextBlock Text="{Binding Text, ElementName=GameRootBox}" ToolTip="{Binding Text, ElementName=GameRootBox}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Foreground="{StaticResource Muted}" FontSize="12" Margin="0,3,0,0"/>
+            </StackPanel>
+            <Button x:Name="BrowseButton" Grid.Column="2" Content="Choose _folder" Click="Browse_Click" VerticalAlignment="Top" Style="{StaticResource QuietButton}" AutomationProperties.Name="Choose Bannerlord folder"/>
+          </Grid>
+        </Border>
+        <Border BorderBrush="{StaticResource Line}" BorderThickness="0,0,0,1" Padding="0,16">
+          <Grid>
+            <Grid.ColumnDefinitions><ColumnDefinition Width="42"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <Border Style="{StaticResource StepMarker}"><TextBlock Text="2" Foreground="{StaticResource Muted}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+            <StackPanel Grid.Column="1" Margin="0,0,16,0">
+              <TextBlock Text="Armory" Style="{StaticResource SectionLabel}"/>
+              <TextBlock x:Name="ArmoryStatusText" Text="Checking the required Workshop mod…" Foreground="{StaticResource Muted}"/>
+            </StackPanel>
+            <Button x:Name="ArmoryButton" Grid.Column="2" Content="Get _Armory" Click="Armory_Click" VerticalAlignment="Top" Style="{StaticResource QuietButton}" AutomationProperties.Name="Open Warlords Armory in Steam Workshop"/>
+          </Grid>
+        </Border>
+        <Grid Margin="0,16,0,18">
+          <Grid.ColumnDefinitions><ColumnDefinition Width="42"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+          <Border Style="{StaticResource StepMarker}"><TextBlock Text="3" Foreground="{StaticResource Muted}" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+          <StackPanel Grid.Column="1" Margin="0,0,16,0">
+            <TextBlock Text="Warlords" Style="{StaticResource SectionLabel}"/>
+            <TextBlock x:Name="ReleaseText" Text="Checking for updates…"/>
+            <TextBlock x:Name="InstallStateText" Text="Your installation will stay up to date automatically." Foreground="{StaticResource Muted}" Margin="0,3,0,0"/>
+          </StackPanel>
+          <Button x:Name="RefreshButton" Grid.Column="2" Content="Check _again" Click="Refresh_Click" VerticalAlignment="Top" Style="{StaticResource QuietButton}" AutomationProperties.Name="Check the game and update again"/>
         </Grid>
-        <TextBlock x:Name="GameStatusText" Text="Looking for Bannerlord…" Foreground="{StaticResource Muted}" Margin="0,10,0,24"/>
-        <Grid Margin="0,0,0,10">
-          <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-          <TextBlock Text="Latest build" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center"/>
-          <Button Grid.Column="1" x:Name="ChoosePackButton" Content="Choose test _pack" Click="ChoosePack_Click" MinHeight="32" Padding="12,5"/>
-        </Grid>
-        <TextBlock x:Name="ReleaseText" Text="Checking for updates…" FontSize="16"/>
-        <TextBlock x:Name="SourceText" Foreground="{StaticResource Muted}" Margin="0,6,0,0"/>
-        <TextBlock x:Name="ChannelSourceText" Foreground="{StaticResource Muted}" FontSize="12" Margin="0,5,0,0"/>
-        <TextBlock x:Name="ExpiryText" Foreground="{StaticResource Accent}" Margin="0,8,0,0"/>
-        <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
-          <Button x:Name="RefreshButton" Content="Check for _updates" Click="Refresh_Click" Margin="0,0,10,0"/>
-          <Button x:Name="BranchButton" Content="Check source branch" Click="Branch_Click"/>
-        </StackPanel>
-        <TextBlock x:Name="BranchStatusText" Foreground="{StaticResource Muted}" Margin="0,8,0,0"/>
-        <Expander Header="Automatic update channel" Foreground="{StaticResource Muted}" Margin="0,18,0,0">
-          <StackPanel Margin="0,12,0,0">
-            <TextBlock Text="The public update channel is built in. Change this only if your host gives you a different channel." Foreground="{StaticResource Muted}" Margin="0,0,0,8"/>
+        <Expander x:Name="SettingsExpander" Header="Settings &amp; help" Style="{StaticResource SettingsExpanderStyle}" Margin="0,16,0,0">
+          <StackPanel>
+            <TextBlock Text="Bannerlord folder" Style="{StaticResource SectionLabel}"/>
+            <TextBlock Text="Usually found automatically. Choose the Steam game folder if you need to change it." Foreground="{StaticResource Muted}" Margin="0,0,0,8"/>
+            <Grid>
+              <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+              <TextBox x:Name="GameRootBox" AutomationProperties.Name="Bannerlord installation folder" ToolTip="The Steam Bannerlord folder containing Modules and bin." LostKeyboardFocus="GameRoot_LostKeyboardFocus"/>
+              <Button x:Name="DetectButton" Grid.Column="1" Content="_Find automatically" Click="Detect_Click" Margin="10,0,0,0"/>
+            </Grid>
+            <TextBlock Text="Troubleshooting" Style="{StaticResource SectionLabel}" Margin="0,24,0,4"/>
+            <TextBlock Text="Check installed files, reinstall Warlords, or open the activity log for your host." Foreground="{StaticResource Muted}" Margin="0,0,0,10"/>
+            <WrapPanel>
+              <Button x:Name="VerifyButton" Content="_Verify files" Click="Verify_Click" Margin="0,0,8,8"/>
+              <Button x:Name="InstallButton" Content="_Reinstall / repair" Click="Install_Click" Margin="0,0,8,8"/>
+              <Button x:Name="LogsButton" Content="Open _logs" Click="OpenLogs_Click" Margin="0,0,8,8"/>
+              <Button x:Name="ChoosePackButton" Content="Choose test _pack" Click="ChoosePack_Click" Margin="0,0,0,8"/>
+            </WrapPanel>
+            <TextBlock Text="When Steam opens, choose Multiplayer and enable Native, Multiplayer, Armory and Warlords, then Play." Foreground="{StaticResource Muted}" Margin="0,2,0,0"/>
+            <TextBlock Text="Build details" Style="{StaticResource SectionLabel}" Margin="0,24,0,4"/>
+            <TextBlock x:Name="SourceText" Foreground="{StaticResource Muted}"/>
+            <TextBlock x:Name="ChannelSourceText" Foreground="{StaticResource Muted}" FontSize="12" Margin="0,4,0,0"/>
+            <TextBlock x:Name="ExpiryText" Foreground="{StaticResource Muted}" Margin="0,4,0,0"/>
+            <Button x:Name="BranchButton" Content="Check source branch" Click="Branch_Click" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+            <TextBlock x:Name="BranchStatusText" Foreground="{StaticResource Muted}" Margin="0,8,0,0"/>
+            <TextBlock Text="Advanced update channel" Style="{StaticResource SectionLabel}" Margin="0,24,0,4"/>
+            <TextBlock Text="Keep the built-in channel unless your host asks you to change it. A channel can install code on your computer." Foreground="{StaticResource Muted}" Margin="0,0,0,8"/>
             <Grid>
               <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
               <TextBox x:Name="ChannelUrlBox" AutomationProperties.Name="HTTPS update channel URL"/>
-              <Button Grid.Column="1" x:Name="ConnectButton" Content="Connect" Click="Connect_Click" Margin="10,0,0,0"/>
+              <Button x:Name="ConnectButton" Grid.Column="1" Content="_Connect" Click="Connect_Click" Margin="10,0,0,0"/>
             </Grid>
+            <TextBlock Text="Activity" Style="{StaticResource SectionLabel}" Margin="0,24,0,6"/>
+            <TextBox x:Name="ActivityBox" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Height="150" VerticalScrollBarVisibility="Auto" FontSize="12" AutomationProperties.Name="Launcher activity log"/>
+            <TextBlock Text="Unsigned testing build. Steam authentication and normal server access are required." Foreground="{StaticResource Muted}" FontSize="12" Margin="0,12,0,0"/>
           </StackPanel>
-        </Expander>
-        <Separator Margin="0,22,0,20" Background="#526052"/>
-        <TextBlock x:Name="OperationText" Text="Checking for the latest build…" Margin="0,0,0,10"/>
-        <ProgressBar x:Name="Progress" Height="5" Minimum="0" Maximum="100" Background="#34453D" Foreground="{StaticResource Accent}" Margin="0,0,0,18"/>
-        <WrapPanel>
-          <Button x:Name="InstallButton" Content="_Install / Update" Click="Install_Click" Background="{StaticResource Accent}" Foreground="#151B19" BorderBrush="{StaticResource Accent}" FontWeight="SemiBold" MinWidth="164" Margin="0,0,10,8"/>
-          <Button x:Name="VerifyButton" Content="_Verify files" Click="Verify_Click" Margin="0,0,10,8"/>
-          <Button x:Name="PlayButton" Content="_Play" Click="Play_Click" MinWidth="95" Margin="0,0,10,8"/>
-          <Button x:Name="CancelButton" Content="Cancel" Click="Cancel_Click" IsEnabled="False" Margin="0,0,0,8"/>
-        </WrapPanel>
-        <TextBlock Text="In Bannerlord's launcher: Multiplayer → Native, Multiplayer, Armory, Warlords → Play." Foreground="{StaticResource Muted}" FontSize="13" Margin="0,6,0,0"/>
-        <Expander Header="Activity" Foreground="{StaticResource Muted}" Margin="0,18,0,0">
-          <TextBox x:Name="ActivityBox" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Height="150" VerticalScrollBarVisibility="Auto" Margin="0,10,0,0" FontSize="12" AutomationProperties.Name="Launcher activity log"/>
         </Expander>
       </StackPanel>
     </ScrollViewer>
+    <Border Grid.Row="2" Background="{StaticResource Surface}" BorderBrush="{StaticResource Line}" BorderThickness="0,1,0,0" Padding="32,20">
+      <Grid>
+        <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+        <TextBlock Text="Updates are checked automatically.&#10;Steam opens when you’re ready to play." Foreground="{StaticResource Muted}" VerticalAlignment="Center" Margin="0,0,24,0"/>
+        <Button x:Name="CancelButton" Grid.Column="1" Content="_Cancel" Click="Cancel_Click" IsEnabled="False" Visibility="Collapsed" VerticalAlignment="Center" Margin="0,0,12,0"/>
+        <Button x:Name="PrimaryButton" Grid.Column="2" Content="Getting ready…" Click="Primary_Click" Style="{StaticResource PrimaryButtonStyle}" VerticalAlignment="Center" AutomationProperties.HelpText="The next step for this Warlords installation"/>
+      </Grid>
+    </Border>
   </Grid>
 </Window>

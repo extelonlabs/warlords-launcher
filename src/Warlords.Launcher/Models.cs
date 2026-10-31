@@ -7,7 +7,7 @@ namespace Warlords.Launcher;
 
 public static class Profile
 {
-    public const string LauncherVersion = "0.2.1";
+    public const string LauncherVersion = "0.3.0";
     public const string DefaultChannelUrl = "https://raw.githubusercontent.com/extelonlabs/warlords-launcher/StratLords/channel.json";
     public const string Repository = "MB-Warlords/The-Last-Concord";
     public const string Branch = "StratLords";
@@ -46,6 +46,16 @@ public sealed record ReleaseChannel
 
 public sealed record ChannelSource(ReleaseChannel Release, string Location);
 public sealed record OperationProgress(string Message, double? Fraction = null);
-public sealed record GameInspection(string GameRoot, string? InstalledVersion, bool CanPlay, IReadOnlyList<string> Messages);
+public sealed record GameInspection(string GameRoot, string? InstalledVersion, bool CanPlay, IReadOnlyList<string> Messages)
+{
+    public bool GameFound { get; init; }
+    public bool GameReady { get; init; }
+    public bool ArmoryReady { get; init; }
+    public bool WarlordsNeedsManualAttention { get; init; }
+    public bool CanInstall => GameReady && ArmoryReady && !WarlordsNeedsManualAttention;
+    public IReadOnlyList<string> GameMessages { get; init; } = [];
+    public IReadOnlyList<string> ArmoryMessages { get; init; } = [];
+    public IReadOnlyList<string> WarlordsMessages { get; init; } = [];
+}
 public sealed record InstallResult(string ModulePath, string? BackupPath);
 public sealed record LauncherPreferences(string GameRoot = "", string Channel = "");
