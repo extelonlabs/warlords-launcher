@@ -1,0 +1,3532 @@
+{
+  "schemaVersion": 1,
+  "branch": "StratLords",
+  "sourceRepository": "MB-Warlords/The-Last-Concord",
+  "sourceCommit": "53e8264ab9eb3fd0303f2e8228fa708c732e92ae",
+  "version": "1.0.61",
+  "requiredGameVersion": "v1.4.8",
+  "requiredArmoryVersion": "v1.0.0.17",
+  "buildId": "dbf46e48b95bad0d976ec8d4b756f2fcb4b0313619e4b7a3b3a34079e39a6fc1",
+  "createdUtc": "2026-10-31T14:02:05.100017+00:00",
+  "expiresUtc": "2026-11-01T13:12:35+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-53e8264ab9eb-a1ea69185769/Warlords-StratLords-1.0.61-53e8264.zip",
+  "packageSha256": "a1ea691857699042fce57fc5c7012e14e3c3ec7110dd03dedd75394b27f79906",
+  "packageSize": 371439051,
+  "files": [
+    {
+      "path": "AssetPackages/banner.tpac",
+      "size": 40355,
+      "sha256": "0c6b259f2481d02d2100287c5e4f4b781653cc93627872e799584abe2d3fbe24"
+    },
+    {
+      "path": "AssetPackages/strategus_ladder_carry.tpac",
+      "size": 8516,
+      "sha256": "371b3c4d2afee328ae517d6f8512ea91915dcd2df854649e61b481f15b3720ee"
+    },
+    {
+      "path": "AssetPackages/strategus_war_horn.tpac",
+      "size": 1265559,
+      "sha256": "b79444c29edf1a66e620501fcc9247ec5d456746ef131833f2c1e66d295b2d3c"
+    },
+    {
+      "path": "AssetPackages/stratlords_horn_commander.tpac",
+      "size": 33584,
+      "sha256": "7284de158cc3bd015612642e300e19a2a782d9213194377728be1bf99fb1ad8b"
+    },
+    {
+      "path": "AssetPackages/stratlords_war_horn_commander.tpac",
+      "size": 9872360,
+      "sha256": "99ed29185a3741d4a3351bb12501c72168c34f18a9ff9489eea0d88b9c1e695a"
+    },
+    {
+      "path": "AssetPackages/stratlords_war_horn_masterwork.tpac",
+      "size": 9870169,
+      "sha256": "6afeedd87aa52091d97c970b20f204c5bfa74aceec5eafdca0ff38cda540c7c9"
+    },
+    {
+      "path": "AssetPackages/wl_banner_icons.tpac",
+      "size": 17446248,
+      "sha256": "d632a062e1f602625f4138bb53af63ea1d4d988b7223e2ef3fcbeb041bcd1275"
+    },
+    {
+      "path": "GUI/Brushes/CharacterDeveloper.xml",
+      "size": 38969,
+      "sha256": "262580427419665693a15ad2f02f9bc16a924aac0148a73eb0d2e935a5ed5f43"
+    },
+    {
+      "path": "GUI/Brushes/Clan.xml",
+      "size": 56497,
+      "sha256": "1a02b6f7a720318aa986a14a1eae746aa1b620ebb53970e353b90b0792894db6"
+    },
+    {
+      "path": "GUI/Brushes/Encyclopedia.xml",
+      "size": 42655,
+      "sha256": "5709f5be08255d5469aa58b5ab3435c14ed7eeab2c48212ae68496b29d9cf70a"
+    },
+    {
+      "path": "GUI/Brushes/Inventory.xml",
+      "size": 55776,
+      "sha256": "0a847ec33de0af88313b92517f84bb4921d610c16f44c2591507d049c317bac7"
+    },
+    {
+      "path": "GUI/Brushes/MapNotification.xml",
+      "size": 16630,
+      "sha256": "1732d2be83aab77ee7a33ee5eb565885891eb16151ca6de26e8400e1667e2115"
+    },
+    {
+      "path": "GUI/Brushes/OmenEditor.xml",
+      "size": 13900,
+      "sha256": "122a8bf7d245dc84fd7b4d08cc434524dfb3935a19c93d6317d3cda4bda61c7e"
+    },
+    {
+      "path": "GUI/Brushes/PartyScreen.xml",
+      "size": 38110,
+      "sha256": "2951ee943c3271c545c65b06bc111259bb8ba713f7f2a6f3c9e20e8f65324d16"
+    },
+    {
+      "path": "GUI/Brushes/StratLordsCommander.xml",
+      "size": 2388,
+      "sha256": "ec5003f7f08a67acd915f858d6737d8a3176258cfec5a66043d36375e0825788"
+    },
+    {
+      "path": "GUI/Brushes/StratLordsPlay.xml",
+      "size": 775,
+      "sha256": "49ae486e6953efecd21393045e44cfcc54b4efa455d22c1450e142243c75bc75"
+    },
+    {
+      "path": "GUI/Brushes/StrategusButtons.xml",
+      "size": 2425,
+      "sha256": "eee052340552a5002d41822e40d97090743be3d8282fc5c50ae5e896983aa6fc"
+    },
+    {
+      "path": "GUI/Brushes/StrategusTicket.xml",
+      "size": 1674,
+      "sha256": "1de03b5cf2953b70ba97062212711350da6e00f2f26e2ff20bb93c0b62e3111c"
+    },
+    {
+      "path": "GUI/Brushes/WLLootcases.xml",
+      "size": 4078,
+      "sha256": "794e42f9b45e31bf6d7f3776310b3fe8daf0f7b7278bdae23f28fd2c619a7de0"
+    },
+    {
+      "path": "GUI/Brushes/WLRanked.xml",
+      "size": 4166,
+      "sha256": "7c3e889fe30d97e4777300f8c001f9da1ca33b109bfc7c42d6758aa9dba5b2b4"
+    },
+    {
+      "path": "GUI/Brushes/WLRealms.xml",
+      "size": 960,
+      "sha256": "b718d029cad6db3c40cb072bb613131fe8bbc6e92ee4208b6159dabf6ba76dee"
+    },
+    {
+      "path": "GUI/Prefabs/BannerBuilder/WLBannerBuilderScreen.xml",
+      "size": 52044,
+      "sha256": "40d270b30abf7f7777d1a8b03fcba7d19a8da3414b21b7cba497bdb9894b5903"
+    },
+    {
+      "path": "GUI/Prefabs/Encyclopedia/EncyclopediaSubPages/EncyclopediaClanSubPageElement.xml",
+      "size": 3629,
+      "sha256": "7863a3865a09089dfb24dd80c50268c83f45dbbe8f91d1a4c620f401bbfd6b63"
+    },
+    {
+      "path": "GUI/Prefabs/Encyclopedia/EncyclopediaSubPages/EncyclopediaDivider.xml",
+      "size": 2430,
+      "sha256": "30de5a75b777366c549b7c919afe90ca60cd42689f4265c59772fb52846ac57b"
+    },
+    {
+      "path": "GUI/Prefabs/Encyclopedia/EncyclopediaSubPages/EncyclopediaSubPageElement.xml",
+      "size": 3914,
+      "sha256": "633cb3091fa6cd5f9fee6b8fd41b8d0a0a372af8b5da10c69473fb3dcdcf9765"
+    },
+    {
+      "path": "GUI/Prefabs/EndOfRound/MultiplayerEndOfRound.MVP.xml",
+      "size": 9036,
+      "sha256": "c0d45801b112191bcbbe56abf50225c84e8f37bac62700b21db422115b4a8204"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/LCLobbyTWAuthVM.xml",
+      "size": 9553,
+      "sha256": "61a2c6d17151a554bfb48c490557f1cd318afe5fd82687747fb9ce779260b30c"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLAccountSigilPopup.xml",
+      "size": 16262,
+      "sha256": "3e63002b6f8c80313b744c61cda82c673160b51e9aa1ce6a963f9b1a658d1d36"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLCharactersCharacterSummary.xml",
+      "size": 7506,
+      "sha256": "b0dbf10850eddd396674d78a03d646f35c20db3441682f9730ecdae129ff1879"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLCharactersSubPage.Inventory.xml",
+      "size": 82247,
+      "sha256": "348ca9cf1c0afb0ee7a381bb58bd6d178c646b8d86620a06db8f4cad430c7f68"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLCharactersSubPage.Nobility.xml",
+      "size": 42583,
+      "sha256": "0ac7fbb57617e0c00dff01580e0849d25dc5b25925dbd1bb4c626d25eb3cc5ab"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLCharactersSubPage.Skills.xml",
+      "size": 36416,
+      "sha256": "69faba50ef367bc501c70b23fbf64cc4c41f4fdb8ed36e7242efdfb899b4c106"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLInventoryTooltip.xml",
+      "size": 5382,
+      "sha256": "ac5c78e3ed96a515af08095b3c4e98ee54be0d754676db265eeb29cb08355b39"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLInventoryTooltipInnerContent.xml",
+      "size": 10167,
+      "sha256": "85c198bccb63a5f4d23323c58c30c61cd5a14d0e5163e3271bb5083bab75e8e0"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLItemInspectPopup.xml",
+      "size": 17333,
+      "sha256": "3cdbec17dea8047016fc7ccb15c2ab6d8f73ed552e6e284904e1ad4caf45bb9d"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobby.xml",
+      "size": 16055,
+      "sha256": "f0a702d4af0fdd2d4629d1125fef72c6dbc031328f58d8e5a450b129533153e6"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Characters.xml",
+      "size": 20641,
+      "sha256": "76f56c30d385e05883cff16dea15dc52a53930986c9d03a32a40996f8856fcaa"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.AchievementsPopup.xml",
+      "size": 18559,
+      "sha256": "02f9cfff0f54f84f16ab290eefa5d2c1b42d939ddbc5fd2cfdc47cada6c72694"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.BankPopup.xml",
+      "size": 17921,
+      "sha256": "b25192f982b1e2334d3cc8f336767d451d90d7b0635239f89138284d96f4c808"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.ClanPopup.ChangeClanBannerPopup.xml",
+      "size": 24084,
+      "sha256": "38ef2294e82062d64e63b78f81a6200ba047c01fa3392f68b9edd9e97f96f359"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.ClanPopup.CreateClanPopup.xml",
+      "size": 17175,
+      "sha256": "b0dc9cf8e499fdde1e4396092347b2c35f7acbbcd003d885bc3c28ea0ce64bcc"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.ClanPopup.DescriptionPopup.xml",
+      "size": 8734,
+      "sha256": "c0b784c5108d7fcbf19ad2643ff1f44b9058d9a885615f550d7f344873933e74"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.ClanPopup.Directory.xml",
+      "size": 30219,
+      "sha256": "7fd30d00e28bab94b112767bd871b9209e17949e1892965025c0df5b266d5699"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.ClanPopup.Inspect.xml",
+      "size": 54785,
+      "sha256": "ed615689f9d54d82f33e6d6e8ab36ca985b97e68f55f82fcba0275d18b646bc4"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.ClanPopup.TreasuryLogsPopup.xml",
+      "size": 17190,
+      "sha256": "0ae4901af7b92d379980b4d1fc9e3ec075d98288cdc27d265dac16749c8ad182"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.ClanPopup.xml",
+      "size": 12385,
+      "sha256": "c014dc2f0ac95e48365ff1956252c5fd98792941efdb74c1f3360b4099993b1f"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.ClanWarsPopup.Directory.xml",
+      "size": 26407,
+      "sha256": "2aa5550f1b0735b7d155f9d9842e385c0eb3763cc327600feb68b36d1effe5e0"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.ClanWarsPopup.Inspect.xml",
+      "size": 60992,
+      "sha256": "81c6ae93c033281c64b5632efaa76128f8915a7f5f17a0664a45af049ddaf18b"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.ClanWarsPopup.xml",
+      "size": 7003,
+      "sha256": "5ecec9ff92a32f5cfa87b990d5c36dee56018ab181562dd4f0632c2e2ce9f3fe"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.LeaderboardPopup.xml",
+      "size": 28406,
+      "sha256": "21a2915b9208c97c1c294eb05e87f89c6445c55942610541f9a4d49032bf0062"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.LootcasesPopup.Inspect.xml",
+      "size": 15186,
+      "sha256": "0fb67db24bb92b0d231feb5720c549c85a6fc0a678271448b11957eb7843daf5"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.LootcasesPopup.xml",
+      "size": 32613,
+      "sha256": "4a35c999a6b0a0d21faa8d885d16cebc543eb41972a918ef43bbd89dde3d557b"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.PlayerPopup.xml",
+      "size": 13134,
+      "sha256": "3b26961600e648e54dcb119e0df364436605c772cf5cb8805b4d137d0990ce42"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Community.xml",
+      "size": 6016,
+      "sha256": "0859ecb8a65d811839e6f46f002ed7a47eef799f1e1c351602aa9f0453aa32cf"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Home.FirstJoinerPopup.xml",
+      "size": 12235,
+      "sha256": "f0c6cb994775edb4c11de9b03f23a8814f0027f3c301fce5b783666a70a054f1"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Home.NewsPopup.xml",
+      "size": 8428,
+      "sha256": "0db1b7ce7a69bd21f51b30b91eb302410f4fb60795eb1a51afdf7682bcff1259"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Home.xml",
+      "size": 76984,
+      "sha256": "72d2c58efeb0a4a6a0bfc6d124efd472dc4b2e5af0f69c4a6bdf937c35a2973f"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Intermission.xml",
+      "size": 19866,
+      "sha256": "54a2e908e15f972062884b98c008c120da30c2a3dc9dc5d50d1fba4e960cf029"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Play.Ranked.xml",
+      "size": 46456,
+      "sha256": "81f4a12cd68f0dafd94351c1a106645e6eb810f845b9a3d9722fe853a9808660"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Play.xml",
+      "size": 38627,
+      "sha256": "9d6cbd174811ca0daf366204bd18c4c1d56315ebfb71866adc543e05bc594319"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.RankedPopup.xml",
+      "size": 11812,
+      "sha256": "b62c89a3182ab83bb6f376007120e36ae6ca2e6f44410919eb1c22a9dc9c5322"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.RankedResult.xml",
+      "size": 11961,
+      "sha256": "4399dc829a352674535422c096da9368b5db9ba2f0dea8bd8e1cfd3581ee6aee"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Shop.xml",
+      "size": 76626,
+      "sha256": "8349cae5d1c234d259088ffea3f1384cfdce7c4f001228714dfcd65c3fea3d97"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPage.Strategus.xml",
+      "size": 31946,
+      "sha256": "193c1eb9baf45c10306a28e6fc5c86fb826e2105eeda66b9f7d19307d59a5d5b"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPageHost.Characters.xml",
+      "size": 313,
+      "sha256": "6b46a669189df755b4e6cb896afac4b74aca76c403250c3b2203e0df1cad814b"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPageHost.Community.xml",
+      "size": 310,
+      "sha256": "749adf7d411988c974ed7b16ac054c6b756ba85f413114d0d97d6340c48614b6"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPageHost.Home.xml",
+      "size": 295,
+      "sha256": "10cab66cdf2a7027c741922463ad85a797657344be4acbf7e2ce8a984230f216"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPageHost.Intermission.xml",
+      "size": 319,
+      "sha256": "069345a678fee1c843bb5eaf637263da1541b12ce94df93a6d5e94bf2479e386"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPageHost.Play.xml",
+      "size": 295,
+      "sha256": "3a17338822d6ebe8b4b1df06bb268eb40a728a6a6841fb634bfce06070f19ef0"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPageHost.Shop.xml",
+      "size": 295,
+      "sha256": "c318c3fe840c73fa82c57ce7feddb048d205bee77253e6bd8e03c3f7c1da428d"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyPageHost.Strategus.xml",
+      "size": 255,
+      "sha256": "4f4481d24c203e3523800fb8c67226869addfcbf3b2fcf4b4c9121e88ef27f8f"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyShell.xml",
+      "size": 13787,
+      "sha256": "265da578bad6ad8e221b425be94258773ff8acfa9309c4433b070499efd9b48d"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLobbyShellBackground.xml",
+      "size": 889,
+      "sha256": "e4e2915ab112f43087d2c37a0c29e9b86fcd9069a99043e89a64b13431638824"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLootcaseChest.xml",
+      "size": 1924,
+      "sha256": "e85d3ea7db15adc5a7f4361621d9eb1fb687bd0d5e7921e71916ed005d3e7eaa"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLLootcaseRewardCard.xml",
+      "size": 2435,
+      "sha256": "9ca4e61650fa21e05ad3add6545b5a93249757af0b959c94da61ea2dfe3607f0"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLMPChatLog.xml",
+      "size": 13156,
+      "sha256": "93aa940e31a3061e067d8f19b3dbbc645284cd62411572437f67d13450b66751"
+    },
+    {
+      "path": "GUI/Prefabs/Lobby/WLSPChatLog.xml",
+      "size": 14764,
+      "sha256": "fbbbf53cc8c227730a60a8ea75292f95636ffe8df33eaf071a2a549f3932629c"
+    },
+    {
+      "path": "GUI/Prefabs/Mission/WLDuelHud.xml",
+      "size": 3229,
+      "sha256": "76fa3dd67f5143aa527d6da9b3e4335c3581a2c19c03b0e93409994c625c0269"
+    },
+    {
+      "path": "GUI/Prefabs/Mission/WLDuelLobbies.xml",
+      "size": 29575,
+      "sha256": "56ca91f1befb3c4eef1787da6a82de5999e553de8e61bd7ea315930e6bca8274"
+    },
+    {
+      "path": "GUI/Prefabs/Mission/WLMissionGauntletAdminPanel.xml",
+      "size": 58723,
+      "sha256": "a4a286706016cb91ccd22adecb5b4f0d9c3afa26bf27fc9690b612716253e7e8"
+    },
+    {
+      "path": "GUI/Prefabs/Mission/WLMissionMarkerPeer.xml",
+      "size": 1629,
+      "sha256": "3a7c70710857a726b33d92749c2171f4cdda9231d593231ea39a5a802f3af800"
+    },
+    {
+      "path": "GUI/Prefabs/Mission/WLMissionMarkers.xml",
+      "size": 2306,
+      "sha256": "d9cffc21cb53e39f0e4cdf97f4f1ea671bdc0e6e02c23c6cf7001e650750066b"
+    },
+    {
+      "path": "GUI/Prefabs/Mission/WLModOptions.xml",
+      "size": 48409,
+      "sha256": "5e89984953a1629b8e6edb1f6afce5880c107c43fc9b9116cdc15ecf375c6540"
+    },
+    {
+      "path": "GUI/Prefabs/Mission/WLMultiplayerClassLoadout.xml",
+      "size": 46007,
+      "sha256": "a63d5c7fb019f55e7683fac86546616b2d07095ca49625db05078a414ee5aaa7"
+    },
+    {
+      "path": "GUI/Prefabs/Mission/WLMultiplayerScoreboard.xml",
+      "size": 57667,
+      "sha256": "58bff49a534d26762ee26dcb7b3444ac614a52db4f93d30546a3eaf991151b68"
+    },
+    {
+      "path": "GUI/Prefabs/Mission/WLPendingRoundGold.xml",
+      "size": 2583,
+      "sha256": "2e28f47fcfc3ad9cb567667875deccd1f5b07cd86213140db9035377a30e2758"
+    },
+    {
+      "path": "GUI/Prefabs/Mission/WLPlayerCard.xml",
+      "size": 20747,
+      "sha256": "da0a303fbf3c532716397097b1e622b4531da5a90be2472942bab1e409837276"
+    },
+    {
+      "path": "GUI/Prefabs/Notification/WarlordsNotificationItem.xml",
+      "size": 6848,
+      "sha256": "1cfccd9f899717a23c92a481c9699630973ad448e545e923891baa5f7759e77f"
+    },
+    {
+      "path": "GUI/Prefabs/Notification/WarlordsNotificationsUI.xml",
+      "size": 1612,
+      "sha256": "999b12a8e8e30d5a184b683039e2633972f85f1f96227f895d5de548f5e460e3"
+    },
+    {
+      "path": "GUI/Prefabs/OmenBannerBuilderBackgroundLayerItem.xml",
+      "size": 5559,
+      "sha256": "68961be373217de164f3f6f8d4dd035bab3aa4e45eda3b3210dac6ae90974b4d"
+    },
+    {
+      "path": "GUI/Prefabs/OmenBannerBuilderControls.xml",
+      "size": 18840,
+      "sha256": "e01810d0ca80c13b3daa5b6662de6e8de469416975975c20f91074c860aea934"
+    },
+    {
+      "path": "GUI/Prefabs/OmenBannerBuilderScreen.xml",
+      "size": 44200,
+      "sha256": "120c69e805118d7c7e3a893f0c517188049d5dea6a80f14f61df93269d3e2dac"
+    },
+    {
+      "path": "GUI/Prefabs/OmenBannerBuilderSigilLayerItem.xml",
+      "size": 10437,
+      "sha256": "ac0a1a5ade2683e3a811d3e04f4f3b41f93481c80447bb4cdc450035cfc53c06"
+    },
+    {
+      "path": "GUI/Prefabs/OmenFloatLayerValueProperty.xml",
+      "size": 2751,
+      "sha256": "dce5e38d0876d62b3f128bc64f3fce34a5be407ee15673e86c5f820031c472bd"
+    },
+    {
+      "path": "GUI/Prefabs/OmenIntLayerValueProperty.xml",
+      "size": 2737,
+      "sha256": "eafd79f8f1e653466b576ba367a428d37459bc9f97ff6c806149bb8a5a23b95b"
+    },
+    {
+      "path": "GUI/Prefabs/Smithy/WLSmithy.xml",
+      "size": 60727,
+      "sha256": "7a530f8b1e78825f9b2bc33a16223e6fe79fdc41b9a7ec857b4d803667ab1ef1"
+    },
+    {
+      "path": "GUI/Prefabs/Stable/WLStable.xml",
+      "size": 35507,
+      "sha256": "61a28c00d8029069167f6bd90ca53bcbe2094d15ddb2cf9946c9694de7225ef3"
+    },
+    {
+      "path": "GUI/Prefabs/StratLordsBattlePayments.xml",
+      "size": 13432,
+      "sha256": "9b1fe6725bb3a7639d3e78dcab1d7758da459df78600ba621a1b6ce066105e39"
+    },
+    {
+      "path": "GUI/Prefabs/StratLordsPlayCampaignCard.xml",
+      "size": 8221,
+      "sha256": "f7468a7e3a95001563a2b5cad31c287d751ba3e644355914890550f1c3fc53fc"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusBattleLoadout.xml",
+      "size": 12966,
+      "sha256": "f7f45ce3dd9bdf7b12a11ce798c72d1b0dc552e6baa2600a2b2a08754a735d46"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusHistory.xml",
+      "size": 25249,
+      "sha256": "160749ffdbb1ed78663ab84b872774e42126a6a682a6767b6fdd2b5c2a904f1f"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusLobbyPage.ActiveBattles.xml",
+      "size": 40377,
+      "sha256": "a9186eb6c6b9216e6e6cc5e54ce2a0e29e076130f21a0fd5f4d1e160eb215f8a"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusLobbyPage.ClanMembership.xml",
+      "size": 4897,
+      "sha256": "eb99e5c920aa7afea56193163baebdd4fbf0f6723ddf82befd5fccf7d0187112"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusLobbyPage.CommanderCard.xml",
+      "size": 18566,
+      "sha256": "a6442e5ca31c0f0b83904e2a9459cd3c188d8a678469c3b60cf5506c790f426f"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusLobbyPage.FactionRoster.xml",
+      "size": 7679,
+      "sha256": "54d20febf3544a5678e2ac7f5a21eaab672d9ce2818ee01c6bfea7e10b23da52"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusLobbyPage.Map.xml",
+      "size": 19394,
+      "sha256": "0d631329a36c7def58a22077e0fece096186b2d41c53f85cfbe303133c3454db"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusLobbyPage.RecentBattles.xml",
+      "size": 5550,
+      "sha256": "8da8f5f6be473fb1e3be980201b3c02e37bd69a14bdfced2f09a7bf225aa47be"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusLobbyPage.ServiceRecord.xml",
+      "size": 15427,
+      "sha256": "85673cf034bcf1ef021723dc64daa5e3dcfdb34a5905255a6e0e7acae06625f9"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusOnboarding.xml",
+      "size": 9101,
+      "sha256": "afe7277692281edeb619a96d8e41cbe7d65080faadf775b5a1c67c1fc8356456"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusOptions.xml",
+      "size": 14043,
+      "sha256": "4505fa5f7594f780874321c1b54d79b7ea5712ac39ebb15c4d33f0384f824d71"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusPing.xml",
+      "size": 10183,
+      "sha256": "e7a5d15e1f095c1f4b483b26fbe49dbcc1ca751305f5510af5ae353804aac673"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusPlacedBannerHealth.xml",
+      "size": 3513,
+      "sha256": "6acc9f188d4bf7d170da8e0f55c0afe8da3a3a1c0ba5013f1d13782f9c5624b4"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusScoreboard.Side.xml",
+      "size": 12410,
+      "sha256": "99a5f68d252b169ba044b2d6d57b7e4f4feeef04f7e3ca7c6fe7bf985b885546"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusScoreboard.xml",
+      "size": 6739,
+      "sha256": "adfba0376c2789685f11d329310a3890170811f477ab4a7cf323ff3e2edbdbb9"
+    },
+    {
+      "path": "GUI/Prefabs/StrategusTicketHud.xml",
+      "size": 9546,
+      "sha256": "7527da76dc1e1ff2ce828d031a7798a947a26d6fb121fec6c375a969f06290a4"
+    },
+    {
+      "path": "GUI/Prefabs/TeamSelection/WLMultiplayerTeamSelection.xml",
+      "size": 6478,
+      "sha256": "b904ce3adcd26e9bacb6701b44a7cc3d159bb1c4f52c9d68b4d22220bb8bd40a"
+    },
+    {
+      "path": "GUI/Prefabs/TeamSelection/WLMultiplayerTeamSelectionItem.xml",
+      "size": 7725,
+      "sha256": "07ac56d963aa72e4dbce95b93bb5d1f3a4dcd42bdab463b9f6e97900ef6be407"
+    },
+    {
+      "path": "GUI/Prefabs/WLRealms.xml",
+      "size": 1320,
+      "sha256": "111a736ac3ba27fd02e7f5d5dd8126b6723369b9a115ddc083314b6a26a21e94"
+    },
+    {
+      "path": "GUI/Prefabs/WarlordsLoadingWindow.xml",
+      "size": 5788,
+      "sha256": "ff31e9c061e321e0dfc8f37fd4e87170c887e9c717e59cc26e851d7a8a8d18f1"
+    },
+    {
+      "path": "GUI/StrategusTicketSpriteData.xml",
+      "size": 694,
+      "sha256": "5ee0c733131b4e51394828c2cc777a93e32aaa8ea28f8100a929066231f2ade5"
+    },
+    {
+      "path": "GUI/WarlordsBannersSpriteData.xml",
+      "size": 23291,
+      "sha256": "f49c03e364db9a75f021e8ac07633690dcf73af678bdf62dc2014a5bb4e8ad06"
+    },
+    {
+      "path": "ModuleData/Languages/CNs/language_data.xml",
+      "size": 265,
+      "sha256": "2a8bfe033846859929902aef30cf9aab67465f46cf01e789a59abdc59686d44d"
+    },
+    {
+      "path": "ModuleData/Languages/CNs/strings-warlords.xml",
+      "size": 136770,
+      "sha256": "5b6d0be3b3e4e624e08e9ff119d50cc6e0a2060dd2621e9b506abff60cefff56"
+    },
+    {
+      "path": "ModuleData/Languages/DE/language_data.xml",
+      "size": 676,
+      "sha256": "e62aaf55f3eafac9dd01f8a38bde0f48535c73d6499aeffb54dd8c879444be87"
+    },
+    {
+      "path": "ModuleData/Languages/DE/strings-warlords.xml",
+      "size": 138504,
+      "sha256": "204d7a703acded677968f678b229b18193d3f9fca973822588e50a81ff1511cf"
+    },
+    {
+      "path": "ModuleData/Languages/FR/language_data.xml",
+      "size": 680,
+      "sha256": "36707f0554b5417936241dddca0f482c88a20251b059ba966ee79520359a0a94"
+    },
+    {
+      "path": "ModuleData/Languages/FR/strings-warlords.xml",
+      "size": 138672,
+      "sha256": "4313d72ef55e890536928345dd919184aac24ab7529f714ac4e5b40be0d4d1ff"
+    },
+    {
+      "path": "ModuleData/Languages/PL/language_data.xml",
+      "size": 664,
+      "sha256": "c26ed883ae30553beab85c0e14cc7a9007465f2beaed85be96d6ad4295983127"
+    },
+    {
+      "path": "ModuleData/Languages/PL/strings-warlords.xml",
+      "size": 131480,
+      "sha256": "60907bbae4447ce9afcc4ec7ab0091bacfecd0ea891683fd7751980398e284ec"
+    },
+    {
+      "path": "ModuleData/Languages/RU/language_data.xml",
+      "size": 670,
+      "sha256": "219da310d33b0509f5e6f12ef1f76805db85c7d8ef50cfba4b1ce63d6918ef5e"
+    },
+    {
+      "path": "ModuleData/Languages/RU/strings-warlords.xml",
+      "size": 133112,
+      "sha256": "80bbdfa95662cf3362f9e119d6b68f826f7565477c3f39534b83fe965b2ddd09"
+    },
+    {
+      "path": "ModuleData/Languages/TR/language_data.xml",
+      "size": 658,
+      "sha256": "fb3d86ebe8259536918d32818bcded60d5b8c970a8edaf062d0ab6cd9afb80e2"
+    },
+    {
+      "path": "ModuleData/Languages/TR/strings-warlords.xml",
+      "size": 127792,
+      "sha256": "e668d9e9e4307014719757eeea9d327fe9996a5caeec93d0dc302f190a1ad90d"
+    },
+    {
+      "path": "ModuleData/UI/strategus-map-v1.png",
+      "size": 7783435,
+      "sha256": "8a640785f37d99f9d48f144c9a7ea1e48dcaf85733be5f75dbc2453ab430f266"
+    },
+    {
+      "path": "ModuleData/UI/strategus_ticket_clan_1.dds",
+      "size": 75588,
+      "sha256": "0d34d90ad5afe5d64e8c33f85cabda38f233f4e0d27029d2c97effcc80c82581"
+    },
+    {
+      "path": "ModuleData/UI/strategus_ticket_gameover_1.dds",
+      "size": 56932,
+      "sha256": "b8e1f2308cc893cae13b309213ea3225ab5b69e361736b8196938b3ee93aca75"
+    },
+    {
+      "path": "ModuleData/UI/warlords-loading-logo.png",
+      "size": 1218157,
+      "sha256": "1805cdf3e00d85b1aa84f1452787a31dacaaf73111d745760a36567b73ef814f"
+    },
+    {
+      "path": "ModuleData/XmlSchemas/Items.xsd",
+      "size": 37367,
+      "sha256": "6140241868440ea8e1371242252968b4a51b31d45bd5f8f94bc11c38e21f1c1f"
+    },
+    {
+      "path": "ModuleData/action_sets.xml",
+      "size": 587,
+      "sha256": "f05bfdd100c186e62429e12a35724ebf90832e840a8a5b85df45bf5d43b1deae"
+    },
+    {
+      "path": "ModuleData/action_types.xml",
+      "size": 197,
+      "sha256": "d39f765458e4f8f44b4a06788f3577d54cef57a9bd0c8e1d54ef9a50bc29eae0"
+    },
+    {
+      "path": "ModuleData/cloth_bodies.xml",
+      "size": 22709,
+      "sha256": "0f0da8da5bfd181d71c7586c0460686dee7b7b747805e1fa67b4f6517c7fb148"
+    },
+    {
+      "path": "ModuleData/cloth_materials.xml",
+      "size": 366,
+      "sha256": "99f39d008a35479221c32ec9893a7228cbc986c0919b754f1ca95e6e009e94c4"
+    },
+    {
+      "path": "ModuleData/crafting_pieces.xml",
+      "size": 344971,
+      "sha256": "7833b3c172a797ab8d90476383c905ed39a5afdcd5df31ce355b40af1d5dc3d3"
+    },
+    {
+      "path": "ModuleData/head_armors_HHC.xslt",
+      "size": 31548,
+      "sha256": "42662607b89918140149631080a964ab39f41b3dc964cfaf257dd62dd1cf896f"
+    },
+    {
+      "path": "ModuleData/item_usage_sets.xml",
+      "size": 4532,
+      "sha256": "486257930e991ba9cd8357a42718e2fe35d5889c0e026853fc1f1b550b93a4e0"
+    },
+    {
+      "path": "ModuleData/items/arm_armors.xml",
+      "size": 19740,
+      "sha256": "a996a934fdce5471aa99d56a052aa5a0e3be4fb0f96c31e158935d1fe6167776"
+    },
+    {
+      "path": "ModuleData/items/ba_items.xml",
+      "size": 28978,
+      "sha256": "70cc4d4eafae9b22f9aadbc348f71a0ad45b9ad04521677a90485efd041b1c59"
+    },
+    {
+      "path": "ModuleData/items/body_armors.xml",
+      "size": 179601,
+      "sha256": "514c05e1ad8bb762fcc609a0fb59dbc92740accf1c2465f35a0961189821873a"
+    },
+    {
+      "path": "ModuleData/items/bua_items.xml",
+      "size": 63312,
+      "sha256": "ef221ae9995272f2a862d8c71239b37ffa90412ef786f3c239cb22ac0457fccd"
+    },
+    {
+      "path": "ModuleData/items/ha_items.xml",
+      "size": 21827,
+      "sha256": "f4d09ed3f5c1fbb197bb341bc4e3a05e0e8a0c5042126c320e9c363ba775b7f5"
+    },
+    {
+      "path": "ModuleData/items/head_armors.xml",
+      "size": 180916,
+      "sha256": "d3bf1e5b0fdb35056ba58abda32670e25d743772a93334b63e251a591a1fa1bb"
+    },
+    {
+      "path": "ModuleData/items/horses_and_others.xml",
+      "size": 158913,
+      "sha256": "f6157520b741171815e6ee8db37670d12d263ae1b6045c25cd3574449933a688"
+    },
+    {
+      "path": "ModuleData/items/leg_armors.xml",
+      "size": 24537,
+      "sha256": "58806903a954df5400751d1fb079414ebf29e4e464e381d9252b601d76a5a900"
+    },
+    {
+      "path": "ModuleData/items/mp_weapons.xml",
+      "size": 259688,
+      "sha256": "237bee3257f8ad8ec5f8f3e5e64b9a6f9f13088083b82a1eacb00bec99ea07ed"
+    },
+    {
+      "path": "ModuleData/items/sa_items.xml",
+      "size": 99606,
+      "sha256": "ed8b88645b95b0a0a4421ba4795c51f3d2272c3ccac9a921e925580f7eb0d58c"
+    },
+    {
+      "path": "ModuleData/items/shields.xml",
+      "size": 120932,
+      "sha256": "848434090b03ca44b491b23201983f347681cf41c1fb5ddeae24fc412d03aa94"
+    },
+    {
+      "path": "ModuleData/items/shoulder_armors.xml",
+      "size": 53399,
+      "sha256": "86e2e1b6cc08bdac4b30227494c30bde88e3ed4522befc814bbbedc8793debeb"
+    },
+    {
+      "path": "ModuleData/items/skye_weapons.xml",
+      "size": 6771,
+      "sha256": "5a80416b904d28c847d86bebdc33e80a9ae3a7f3b59dfac3d96083d1abea27bd"
+    },
+    {
+      "path": "ModuleData/items/weapons.xml",
+      "size": 514369,
+      "sha256": "e06698a2aa6dd86f7c3db39e7e92ff311202fed8e98eb134e634e2869d079f0f"
+    },
+    {
+      "path": "ModuleData/items/wl_weapons.xml",
+      "size": 25980,
+      "sha256": "8ab7f3a2896c7f6c7cccede12b552280c4886810568874a37c58dbad93fcb2d6"
+    },
+    {
+      "path": "ModuleData/items/zwei_weapons.xml",
+      "size": 17439,
+      "sha256": "882af7ef678dcd16f3a39d8955e6e53699f0cdad0280832884f50670d566d9b7"
+    },
+    {
+      "path": "ModuleData/module_sounds.xml",
+      "size": 3049,
+      "sha256": "b3162b2fb4cc6b906b5c6eb3e8dfe00bd256db690e053884c05a1ab89bd6f356"
+    },
+    {
+      "path": "ModuleData/mp_crafting_pieces.xml",
+      "size": 187064,
+      "sha256": "0c68f3d319db91a61cc42e53c8d38f45b4dfca732b7610fad10405eaac0b9589"
+    },
+    {
+      "path": "ModuleData/project.mbproj",
+      "size": 430,
+      "sha256": "16c849221cbb4104168e30cc607282c1233f00c9cab907601f7f926e7e6d2d8b"
+    },
+    {
+      "path": "ModuleData/skye_crafting_pieces.xml",
+      "size": 10472,
+      "sha256": "66a8ea225b2d27767fdd3318040431f100fede782eee134311dad313e98a04f9"
+    },
+    {
+      "path": "ModuleData/skye_crafting_templates.xslt",
+      "size": 1344,
+      "sha256": "60de1b39b150a18af1dafd247813c1b8a65f9bdb4135f00c1d1a61224b7e6e85"
+    },
+    {
+      "path": "ModuleData/skye_weapon_descriptions.xslt",
+      "size": 1306,
+      "sha256": "cd2c2128d287884fdebe8f497398d8a1b76d449382bf87e8d18bb1f59b342756"
+    },
+    {
+      "path": "ModuleData/strategus_api_url.txt",
+      "size": 30,
+      "sha256": "51dc708833b4b7609c9b361968b8d710d131879e73c16d1bf15accfe6f60be62"
+    },
+    {
+      "path": "ModuleData/strategus_horn_items.xml",
+      "size": 781,
+      "sha256": "207e11a556d3ba2d619c2a89dbfcc179d1e856669bbbbe1a8d2334174a8ab8c3"
+    },
+    {
+      "path": "ModuleData/strategus_portable_ladder_items.xml",
+      "size": 2921,
+      "sha256": "d467b4e0cfa37e0855d9ca1758b3055ccbbbbfaca3ade202b27b47c43b13c1b8"
+    },
+    {
+      "path": "ModuleData/strategus_server_prefix.txt",
+      "size": 17,
+      "sha256": "960f4273f5a4927b9cee411f67b929814b0e43a4e65c879029e4914d4d1824ab"
+    },
+    {
+      "path": "ModuleData/strategus_village_characters.xml",
+      "size": 13136,
+      "sha256": "916cb04f2ca64aaa9ec1f684ab3c88f48de119308c5ae4a19d4d7f71116c0b93"
+    },
+    {
+      "path": "ModuleData/strategus_village_classes.xml",
+      "size": 928,
+      "sha256": "22270902a68d0c77638ae8c558efc45a738db98584135d701c0c8a879ed47c1b"
+    },
+    {
+      "path": "ModuleData/stratlords-protocol.json",
+      "size": 107405,
+      "sha256": "9eb3fa988f72822db315eac1a707abefd0d87b75f6049612238933d6c7cc96b7"
+    },
+    {
+      "path": "ModuleData/stratlords-servers.json",
+      "size": 688,
+      "sha256": "1133f2c1990577d94536e080b43aa72fc3ac97e5d1816628423cb4109f06e5fd"
+    },
+    {
+      "path": "ModuleData/wl_badges.xml",
+      "size": 22673,
+      "sha256": "5ae6f554de7e02ee762cdb714b64aad64266532777e122c5035df00d125b7688"
+    },
+    {
+      "path": "ModuleData/wl_banner_icons.xml",
+      "size": 5148,
+      "sha256": "95c97ef7493a55748e49d2c6e5947b835e88083fda0fca607d6f7f4e956d76c6"
+    },
+    {
+      "path": "ModuleData/wl_characters.xml",
+      "size": 28487,
+      "sha256": "5ef19dfc8f6a9d31b571fe516b9a4a6f2016a26c5582f761b1f32a46a0d219be"
+    },
+    {
+      "path": "ModuleData/wl_class_divisions.xml",
+      "size": 1382,
+      "sha256": "b3f6ad6735836dbf657713bf1bca372a6c03ab524da9d9cecb20ec1e36ddc0a7"
+    },
+    {
+      "path": "ModuleData/wl_crafting_pieces.xml",
+      "size": 20428,
+      "sha256": "9f750a287785df0caef26c7dd360ac301752f7f4080fb24980f32e4548fb2d71"
+    },
+    {
+      "path": "ModuleData/wl_crafting_templates.xml",
+      "size": 42310,
+      "sha256": "b1f48f7160678fbf7166566eb03527cf0307f5b0c4d4f58a15170cb4f6574869"
+    },
+    {
+      "path": "ModuleData/wl_item_usage_sets.xml",
+      "size": 4060,
+      "sha256": "6f527a49f9b6aa50ed9c9ea4612e2ebc6fc1583283bcc48113e769c63cccad1e"
+    },
+    {
+      "path": "ModuleData/wl_lootcases.xml",
+      "size": 710,
+      "sha256": "c5ac7fb9d8eb56dd5d03ec3f584ae7821d9082170f005760facab9f2bef5f6ae"
+    },
+    {
+      "path": "ModuleData/wl_nobility.xml",
+      "size": 5393,
+      "sha256": "01d03b37596133ed435f223e2b6102c94de99725d0a97960a7920c8ca9dd1030"
+    },
+    {
+      "path": "ModuleData/wl_sounds.xml",
+      "size": 2751,
+      "sha256": "7d771c54de64fd2413d87020844b7f3b1a5e307b6cd07e6cabbd2731689fb337"
+    },
+    {
+      "path": "ModuleData/wl_story.xml",
+      "size": 16150,
+      "sha256": "1487562cf66cec857d9c900ca82b122780cda1b30167bf9d962b94d9f5e595ea"
+    },
+    {
+      "path": "ModuleData/wl_strings.xml",
+      "size": 46710,
+      "sha256": "918ecd902aa98c5f71b6bee844398e08c8a5c20b609252d6651d5af972890d12"
+    },
+    {
+      "path": "ModuleData/wl_weapon_descriptions.xml",
+      "size": 41602,
+      "sha256": "13363f1bf6f8a8f27ec709022e90f50576702d44b0431b2c968148e8a8d227da"
+    },
+    {
+      "path": "ModuleData/ws_native_mpbodypropertytemplates.xml",
+      "size": 76,
+      "sha256": "3675194e1771c96537d070e822f0a68b7857b8441d38534100ce722b95a627fb"
+    },
+    {
+      "path": "ModuleData/ws_native_mpcharacters.xml",
+      "size": 286391,
+      "sha256": "92da21aa6f09a4db6beec4228c5a1e9d67369f48e9f4a2e92f61a19412aea1c9"
+    },
+    {
+      "path": "ModuleData/ws_native_mpclassdivisions.xml",
+      "size": 224655,
+      "sha256": "55184a450c6255ab0dc31925c1d39b34af90a7392db055d3646cbbf80a96c00f"
+    },
+    {
+      "path": "ModuleData/ws_native_mpcultures.xml",
+      "size": 2835,
+      "sha256": "dca50ebeccef50407c3a484b0f9652a693fec13e10182e0dc416c921f53c1a0d"
+    },
+    {
+      "path": "ModuleData/ws_native_mpitems.xml",
+      "size": 549883,
+      "sha256": "09255cb944a1f5489817b8174946664b44ce83cd4ba5565703378ab1393dde95"
+    },
+    {
+      "path": "ModuleData/ws_native_native_equipment_sets.xml",
+      "size": 80,
+      "sha256": "27e27824316bae33135d88677cbb256e6f5c8421a8fe4707983025c8ad8b8259"
+    },
+    {
+      "path": "ModuleData/ws_native_native_skill_sets.xml",
+      "size": 66,
+      "sha256": "653c918f4789bcc90940239a581e496bd70a7cb76615b659cb42c47744407853"
+    },
+    {
+      "path": "ModuleData/zwei_crafting_pieces.xml",
+      "size": 25659,
+      "sha256": "d7d638f2e852148c37f0a50f7e539ca302394f52f208612721743171bae66bb5"
+    },
+    {
+      "path": "ModuleData/zwei_crafting_templates.xslt",
+      "size": 3655,
+      "sha256": "46b8582c11ee88e5034845a33d903fd6ac8b1aece7b6f1c115899753c71e29d9"
+    },
+    {
+      "path": "ModuleData/zwei_weapon_descriptions.xslt",
+      "size": 3608,
+      "sha256": "b8a0f7baba7b25ab15f891517aa990f78f4f06cd4a688df0102bdb49111af51f"
+    },
+    {
+      "path": "ModuleSounds/handgonne/bulletpass1.wav",
+      "size": 278668,
+      "sha256": "93ec7175a63f727dad6b017f38060d2eeb9fa9590f4f2c59bdba96d1ca39ada0"
+    },
+    {
+      "path": "ModuleSounds/handgonne/bulletpass2.wav",
+      "size": 259256,
+      "sha256": "be87621bcbe09390558e2258d30f42048bc0d472b803a74034340e3e2ebcba98"
+    },
+    {
+      "path": "ModuleSounds/handgonne/bulletpass3.wav",
+      "size": 235484,
+      "sha256": "322a4f36f5932ba573c92449d20c191b7e3202f2aedd53e75c3bd8c0cb91f7c1"
+    },
+    {
+      "path": "ModuleSounds/handgonne/bulletpass4.wav",
+      "size": 268364,
+      "sha256": "b2adb1f14374402a3a1b0dcf3ff5fba71eff4b36966ada1f98dbcdfad17270bd"
+    },
+    {
+      "path": "ModuleSounds/handgonne/m_hand_cannon_shot.wav",
+      "size": 529314,
+      "sha256": "1819f2d03cf2c86d0c9943dcbb85a89dd5c825e5e5cfb7cb5de2c86e852f98b9"
+    },
+    {
+      "path": "ModuleSounds/strategus_horn_heal.wav",
+      "size": 99116,
+      "sha256": "b65d58fd72f068c356555f5a834d61696c4400c039e3b95ecfaab0536fbd3374"
+    },
+    {
+      "path": "ModuleSounds/strategus_war_horn.wav",
+      "size": 528398,
+      "sha256": "d4eade6c3ddcb7fc73e8dcc1035a7c9aabd2036f03b7bae53f2700cf372acbe8"
+    },
+    {
+      "path": "Prefabs/WeaponSpawnerPrefabs/adimi_weaponrack_1h_axes.xml",
+      "size": 3335,
+      "sha256": "a5d70d078224097f78584c1fd218bdb4aeb45dacba746c1afc2e6857574ffd47"
+    },
+    {
+      "path": "Prefabs/WeaponSpawnerPrefabs/adimi_weaponrack_1h_swords.xml",
+      "size": 3825,
+      "sha256": "b1ce21e0d8c466feb0f7a05eb78648826433fcda3586ceea800ce8887b8a2d69"
+    },
+    {
+      "path": "Prefabs/WeaponSpawnerPrefabs/adimi_weaponrack_2h_swords.xml",
+      "size": 3444,
+      "sha256": "d9a47bfd4ecc3f93db65160ce0009c34673ebae02693e113a25ecf1438c1b22b"
+    },
+    {
+      "path": "Prefabs/WeaponSpawnerPrefabs/adimi_weaponrack_bastardswords.xml",
+      "size": 2063,
+      "sha256": "4382b2a8295381e445b5a47b6b92d9a4aa2345b346d4de5681749bf84fe077ea"
+    },
+    {
+      "path": "Prefabs/strategus_carried_banner.xml",
+      "size": 569,
+      "sha256": "f35d7566130b1dc2f6fdbd584244f74b3c962f6d5da936604d4de4248394d491"
+    },
+    {
+      "path": "Prefabs/strategus_placed_banner.xml",
+      "size": 1135,
+      "sha256": "2af1fd114dc42a3a398962be17d65727cba6b349e15d6f5a7608c689fbc49cff"
+    },
+    {
+      "path": "Prefabs/strategus_portable_ladders.xml",
+      "size": 1981,
+      "sha256": "d5396d6d582ed8f7d8fa146c28c2139315cd4393b7716f5835fb902426f89391"
+    },
+    {
+      "path": "Prefabs/wl_pavise_shield_usable.xml",
+      "size": 2785,
+      "sha256": "88ff4afd33a299847d13d8e2697e80bba02928995ec77afe0d385756c2324383"
+    },
+    {
+      "path": "SceneObj/Acre/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 21016,
+      "sha256": "ab09d43a8aabe9dd5d450c6bdd2b1ee1096a2e2ca839a11df21430a7293becf8"
+    },
+    {
+      "path": "SceneObj/Acre/atmosphere.xml",
+      "size": 4854,
+      "sha256": "2e3d584d8fa4d0e6dc0554c1b19435010ed43e44361906a985aea4eaf0b2a7fe"
+    },
+    {
+      "path": "SceneObj/Acre/flora.bin",
+      "size": 288978,
+      "sha256": "44b8d43330619f156c95323c3140b0797f68ffaa972471de5e747a02ab9af9d9"
+    },
+    {
+      "path": "SceneObj/Acre/navmesh.bin",
+      "size": 83562,
+      "sha256": "c7d805e3718dcfeb8c8916cd930d31e16ac0f4338bbccdbca07b4cb5e8a2dec7"
+    },
+    {
+      "path": "SceneObj/Acre/references.txt",
+      "size": 16053,
+      "sha256": "2dcd7a244bed9e8980678a35385cc0c34373ace12bf7edc564b486cae018098c"
+    },
+    {
+      "path": "SceneObj/Acre/scene.xscene",
+      "size": 1140116,
+      "sha256": "3085c8abca1f5f8255731559266cdee2b62dafb6b58fcce3258b7a3c36f1ab10"
+    },
+    {
+      "path": "SceneObj/Acre/terrain.bin",
+      "size": 1995227,
+      "sha256": "a468808c7b8f045728524a277ab76e80b8d8ab8e2e700bae8f15dcd57f973c13"
+    },
+    {
+      "path": "SceneObj/Acre/terrain_ed.bin",
+      "size": 12832038,
+      "sha256": "541c0c3febfe7dfc6e0cded72ce5136ad19dea2758097e771c2f60b7a0665013"
+    },
+    {
+      "path": "SceneObj/BRE_Desfleuves_Siege/atmosphere.xml",
+      "size": 4781,
+      "sha256": "31e9f4b1378caa6fef428a92c600f833eb1360407f9a175b151e5cb84e984bfd"
+    },
+    {
+      "path": "SceneObj/BRE_Desfleuves_Siege/flora.bin",
+      "size": 8128,
+      "sha256": "ae23d01df804d5069458d7d43b25789a0a3f16fff7e32e9425021395dafdaa98"
+    },
+    {
+      "path": "SceneObj/BRE_Desfleuves_Siege/navmesh.bin",
+      "size": 23138732,
+      "sha256": "c88a15387311b6e9ba49a10bec231081187703d4170e06d3c900a6a1accfa76d"
+    },
+    {
+      "path": "SceneObj/BRE_Desfleuves_Siege/references.txt",
+      "size": 19231,
+      "sha256": "60665b3cc90d9f983a2641a83a57a9ca6d233e4ade94f4b9eeccb8e509c9cb15"
+    },
+    {
+      "path": "SceneObj/BRE_Desfleuves_Siege/scene.xscene",
+      "size": 2842004,
+      "sha256": "aac757620cdbe7669709abd2ed3de972c31d28548b5b3d5a5f42e980f92d7611"
+    },
+    {
+      "path": "SceneObj/BRE_Desfleuves_Siege/terrain.bin",
+      "size": 3005737,
+      "sha256": "7917d1d594c7c1be4a516a61f8c0efe509211e7139109294dca6f07d657cfea3"
+    },
+    {
+      "path": "SceneObj/BRE_Desfleuves_Siege_Day/atmosphere.xml",
+      "size": 4796,
+      "sha256": "3e6f71cf2972a6b99a66507bb019e2b932eab6a47ecaaeeb9eb8df77e89e6495"
+    },
+    {
+      "path": "SceneObj/BRE_Desfleuves_Siege_Day/flora.bin",
+      "size": 8128,
+      "sha256": "ae23d01df804d5069458d7d43b25789a0a3f16fff7e32e9425021395dafdaa98"
+    },
+    {
+      "path": "SceneObj/BRE_Desfleuves_Siege_Day/navmesh.bin",
+      "size": 23138732,
+      "sha256": "5651463fa78901d6de3f41064f3b73daff122273e8f270e837e9b213312f918e"
+    },
+    {
+      "path": "SceneObj/BRE_Desfleuves_Siege_Day/references.txt",
+      "size": 19104,
+      "sha256": "535f48490d10d482204715fa1a9739c3ed865c206ba34a271c7ad87047e5d09f"
+    },
+    {
+      "path": "SceneObj/BRE_Desfleuves_Siege_Day/scene.xscene",
+      "size": 2847221,
+      "sha256": "bd398ebff7a1323fbd02269d0de7497c39496688bbaa4f4e5d080ff7faf2aa05"
+    },
+    {
+      "path": "SceneObj/BRE_Desfleuves_Siege_Day/terrain.bin",
+      "size": 3005737,
+      "sha256": "3dc9ffc6db6760763c127988f2ee62053ececc03d2b86ff556b73ea2be1d011d"
+    },
+    {
+      "path": "SceneObj/BRE_Epee_Siege/atmosphere.xml",
+      "size": 4796,
+      "sha256": "2046f5906fe4e0b03003e8b20db2c8b7067cc69a45f6b673078b52b0337aaa75"
+    },
+    {
+      "path": "SceneObj/BRE_Epee_Siege/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/BRE_Epee_Siege/references.txt",
+      "size": 14175,
+      "sha256": "50564490655e898b83519d42962fab591f11a3d297bd3d9eeeeccfbbcfc3c78d"
+    },
+    {
+      "path": "SceneObj/BRE_Epee_Siege/scene.xscene",
+      "size": 1806934,
+      "sha256": "19ab4a6dbbc2ea54109b26b6d78e5c3e61f399162ebd3341cad9483c8cb398ea"
+    },
+    {
+      "path": "SceneObj/BRE_Epee_Siege/terrain.bin",
+      "size": 3202775,
+      "sha256": "ccaa088a6720ba78828ac66f95f0ae30636b2608a5d4846ebae0daff4079df0e"
+    },
+    {
+      "path": "SceneObj/BRE_Hochpointe_Siege/atmosphere.xml",
+      "size": 4809,
+      "sha256": "7435dc66066aad0fff7cb02f6c2b4bb6854c3dcd804c932d293773276e535315"
+    },
+    {
+      "path": "SceneObj/BRE_Hochpointe_Siege/flora.bin",
+      "size": 335,
+      "sha256": "7e7e7ff7603e842ce4b2150d34a0e18bfd75cc3bb9b541cbc14c76bd459e0c8d"
+    },
+    {
+      "path": "SceneObj/BRE_Hochpointe_Siege/references.txt",
+      "size": 25936,
+      "sha256": "82d222bf19b0eefc301c1b1e20032ea61f2e198f70ef28bb05984c6f33bc141e"
+    },
+    {
+      "path": "SceneObj/BRE_Hochpointe_Siege/scene.xscene",
+      "size": 5989158,
+      "sha256": "d7e2bd816313c5c4a5724fd495cba930b15b1bf088df11709f3d2dbc2fd2df9d"
+    },
+    {
+      "path": "SceneObj/BRE_Hochpointe_Siege/terrain.bin",
+      "size": 4001185,
+      "sha256": "093ead3709b4f6a140c28344ab7fdbfd0dcfb021572c6675c5299cbf5c118eb4"
+    },
+    {
+      "path": "SceneObj/Babylon/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 20824,
+      "sha256": "aeb42d1ef09151dd5d44f0544981f3de9cdd162963e75811b4dcb6fc11aeda6e"
+    },
+    {
+      "path": "SceneObj/Babylon/atmosphere.xml",
+      "size": 4854,
+      "sha256": "2e3d584d8fa4d0e6dc0554c1b19435010ed43e44361906a985aea4eaf0b2a7fe"
+    },
+    {
+      "path": "SceneObj/Babylon/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/Babylon/references.txt",
+      "size": 10226,
+      "sha256": "87180be0695185617667cdeffa8f9956929288430e03e060b3afc9c19d7ff4d3"
+    },
+    {
+      "path": "SceneObj/Babylon/scene.xscene",
+      "size": 703324,
+      "sha256": "0eee56ee1784d05d909ad5bc119709960cb036c9133dcfa2172a3eb704909eae"
+    },
+    {
+      "path": "SceneObj/Babylon/terrain.bin",
+      "size": 269339,
+      "sha256": "5c55e700b9bd634c98d610ca53a67064b9c4a8af39e94e40a8c311f0484d0f2a"
+    },
+    {
+      "path": "SceneObj/Babylon/terrain_ed.bin",
+      "size": 2223760,
+      "sha256": "6d33f493af8300063ef1153e248422a1e8116469a8cb90694d48f1f3de4f974d"
+    },
+    {
+      "path": "SceneObj/Baravenos_Encirclement/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 36056,
+      "sha256": "e924a422396b4c8fa2172fa14a93eef456da4ed17b0f2c79f77a4972389d8dee"
+    },
+    {
+      "path": "SceneObj/Baravenos_Encirclement/atmosphere.xml",
+      "size": 4851,
+      "sha256": "8509ce84d0d836c5ab2615e492bac8dc8a1ceb83a9bb0441c446b2a8d25ccbca"
+    },
+    {
+      "path": "SceneObj/Baravenos_Encirclement/flora.bin",
+      "size": 829099,
+      "sha256": "b8599b88a76477ada5183cf55e4eb260ff1b732204e1b73e05d7ca75b46a99cf"
+    },
+    {
+      "path": "SceneObj/Baravenos_Encirclement/navmesh.bin",
+      "size": 220795,
+      "sha256": "9e820368bc85491920c4843e15246e32c46a8e639b40a2d58d5306d1f8abb86b"
+    },
+    {
+      "path": "SceneObj/Baravenos_Encirclement/references.txt",
+      "size": 24842,
+      "sha256": "d477a12c6890a7c306e4810dcc08fa32171ce6d45ef42f22949c249ee25e918d"
+    },
+    {
+      "path": "SceneObj/Baravenos_Encirclement/scene.xscene",
+      "size": 1523785,
+      "sha256": "89e3150ff8caad9eb74afd86774c3a5baad871533fee429bb44a1b7bec42fae7"
+    },
+    {
+      "path": "SceneObj/Baravenos_Encirclement/terrain.bin",
+      "size": 21238108,
+      "sha256": "a37043045e19bd37588bb874e6d5193a1e1e76373fc8fc30c37c77f471c71caa"
+    },
+    {
+      "path": "SceneObj/CarribeanQueenBTL/atmosphere.xml",
+      "size": 4791,
+      "sha256": "810b743d5b58c1e117a0ed30d8beed318d9106631e21a64108046b93f644739d"
+    },
+    {
+      "path": "SceneObj/CarribeanQueenBTL/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/CarribeanQueenBTL/references.txt",
+      "size": 2167,
+      "sha256": "96bdf5d0ebf3f46883bc95187c00d0188f91de12e64c78f3476d5a88f616abe3"
+    },
+    {
+      "path": "SceneObj/CarribeanQueenBTL/scene.xscene",
+      "size": 98267,
+      "sha256": "d04918f3f4e699e1f00d077829610307c22961474d17f4c957bb1c59225d7a32"
+    },
+    {
+      "path": "SceneObj/CarribeanQueenBTL/terrain.bin",
+      "size": 21284,
+      "sha256": "f26e8e7d3ca8c28317c3754cf2f35069df2894744a6bb94c3aef96a34066d642"
+    },
+    {
+      "path": "SceneObj/CarribeanQueenTDM/atmosphere.xml",
+      "size": 4791,
+      "sha256": "810b743d5b58c1e117a0ed30d8beed318d9106631e21a64108046b93f644739d"
+    },
+    {
+      "path": "SceneObj/CarribeanQueenTDM/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/CarribeanQueenTDM/references.txt",
+      "size": 1030,
+      "sha256": "52fb00d192d025f41c39b215c737fcb1cf59e1cfa834f2c019588541c7020378"
+    },
+    {
+      "path": "SceneObj/CarribeanQueenTDM/scene.xscene",
+      "size": 71162,
+      "sha256": "f5622bac0e8846a513f880bb43bf8a4e72ded567c26671fc38f6c3cfb0e090ab"
+    },
+    {
+      "path": "SceneObj/CarribeanQueenTDM/terrain.bin",
+      "size": 21284,
+      "sha256": "d273548c4861c02ca1bb851b6a5b94a865c7563baa602566093ad3b79ff82644"
+    },
+    {
+      "path": "SceneObj/Dertherts_Claim/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 13448,
+      "sha256": "43086cbba40fff093e9ba646a2b0f96122c6838d049b667aee8864de54b6fe60"
+    },
+    {
+      "path": "SceneObj/Dertherts_Claim/atmosphere.xml",
+      "size": 4854,
+      "sha256": "2e3d584d8fa4d0e6dc0554c1b19435010ed43e44361906a985aea4eaf0b2a7fe"
+    },
+    {
+      "path": "SceneObj/Dertherts_Claim/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/Dertherts_Claim/references.txt",
+      "size": 11502,
+      "sha256": "69fbc11f0547b1a8627b4e47c0c8644ab9df63865e27fe35dc8039e6ef5ede47"
+    },
+    {
+      "path": "SceneObj/Dertherts_Claim/scene.xscene",
+      "size": 1575786,
+      "sha256": "a904c9c25c4a2434113bd15500bb86405c1d6458d63524cdabe22989025cecf3"
+    },
+    {
+      "path": "SceneObj/Dertherts_Claim/terrain.bin",
+      "size": 448244,
+      "sha256": "bdacfe3aa054d8dc723afacc3d653ab8fad3a7ab3c3aa574faf8769f76ec714d"
+    },
+    {
+      "path": "SceneObj/Fort_Of_Honour/atmosphere.xml",
+      "size": 4803,
+      "sha256": "563b9d7c9196e98fdf878d8a4055ad70d992ce2b5152cb7dcd1a9f1767c4796b"
+    },
+    {
+      "path": "SceneObj/Fort_Of_Honour/flora.bin",
+      "size": 609142,
+      "sha256": "228446b8a47e35c634f88c39508eecf9880ebb2591a5db57d8eab7299250d52a"
+    },
+    {
+      "path": "SceneObj/Fort_Of_Honour/navmesh.bin",
+      "size": 36565,
+      "sha256": "c8bffe9cdfc04230acef297cc79c94fe71c70a76b891237b7b7e34eae7b224cd"
+    },
+    {
+      "path": "SceneObj/Fort_Of_Honour/references.txt",
+      "size": 15114,
+      "sha256": "e5b961cf315fc9167d17b3edcd40e71ddef1157d2ac0668487b809b2e5baef76"
+    },
+    {
+      "path": "SceneObj/Fort_Of_Honour/scene.xscene",
+      "size": 727894,
+      "sha256": "11b147066fd1dca411017bf924c37addd9a13eee57b5566ee11d9104ab5a7093"
+    },
+    {
+      "path": "SceneObj/Fort_Of_Honour/terrain.bin",
+      "size": 186697,
+      "sha256": "d5d68d88d0540d78221762df3a49eeb236e3f3d22847bcf7aa6a8016fb0c1bf3"
+    },
+    {
+      "path": "SceneObj/Frederiksborg/atmosphere.xml",
+      "size": 4792,
+      "sha256": "273b098ef41b9b87b1c343fdcbfe091e019256af3252c195897838250b43ac01"
+    },
+    {
+      "path": "SceneObj/Frederiksborg/flora.bin",
+      "size": 275751,
+      "sha256": "3169d62c47105de9122676eca70cb626332f0de5b9b2fccca55b221ad566be7f"
+    },
+    {
+      "path": "SceneObj/Frederiksborg/navmesh.bin",
+      "size": 263100,
+      "sha256": "a8bb1c6733e1ec01258c8888f823c923ca2553e8ed4f6559b84ef450d374bdf7"
+    },
+    {
+      "path": "SceneObj/Frederiksborg/references.txt",
+      "size": 20093,
+      "sha256": "897796689ae2cfaf0568974b616b74d82d275777c787d034a5e24a863db32b0b"
+    },
+    {
+      "path": "SceneObj/Frederiksborg/scene.xscene",
+      "size": 3094448,
+      "sha256": "134e1c2afbc08a003e641c950d49370f8ee11a4bad791728c5c66c35f4c488f8"
+    },
+    {
+      "path": "SceneObj/Frederiksborg/terrain.bin",
+      "size": 670892,
+      "sha256": "0e41d62f0c73e9b104ce2dfabb6cf2a1eda5ed162ffb52e201a68e3e4e0ff5ed"
+    },
+    {
+      "path": "SceneObj/Hades/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 33496,
+      "sha256": "23be3214a756e3ac0efe8e46d84aad5b733cce3e4c73d2d2ee0b0d4ece45806b"
+    },
+    {
+      "path": "SceneObj/Hades/atmosphere.xml",
+      "size": 4861,
+      "sha256": "3eecadbf2182d46072de3bf5d56dfd41ef371896afdde38a253a7084dfdc3429"
+    },
+    {
+      "path": "SceneObj/Hades/flora.bin",
+      "size": 502202,
+      "sha256": "1a0fb60a23e43a9c53824f2d14f91a396187726b7b66b0b5d33d581fd19984b8"
+    },
+    {
+      "path": "SceneObj/Hades/navmesh.bin",
+      "size": 168166,
+      "sha256": "6c3e35fe8c513aec348308344f136258676e11981b7e8f9b64b141c9ccf2015d"
+    },
+    {
+      "path": "SceneObj/Hades/references.txt",
+      "size": 11199,
+      "sha256": "8d6fe532a4f5f27ebd75bcf7c14b34db64b300fa1a18c1b02a05b0c1e2c115cc"
+    },
+    {
+      "path": "SceneObj/Hades/scene.xscene",
+      "size": 1613119,
+      "sha256": "3f680d4126f7764654d1d6ebacdec0a5606ff557f2a474c5fb19f3f355b24c0e"
+    },
+    {
+      "path": "SceneObj/Hades/terrain.bin",
+      "size": 1206689,
+      "sha256": "27c66c09a2081a8559c58ff98d5794440d10c3de93d137d4f654964f8200b8ab"
+    },
+    {
+      "path": "SceneObj/Hades/terrain_ed.bin",
+      "size": 10268112,
+      "sha256": "06be8ef97d82043f2417e25253db52c292c66aab318682cbe46b8b82739feb59"
+    },
+    {
+      "path": "SceneObj/HauntedTownBTL/atmosphere.xml",
+      "size": 4827,
+      "sha256": "5f224c51e4061f7357c2efbb224d8659d04b519f7c84c0bf41321aabe9115594"
+    },
+    {
+      "path": "SceneObj/HauntedTownBTL/flora.bin",
+      "size": 14682,
+      "sha256": "68330f9cad28d21292c9d1ac4c8a273fbf8a70a91c690631c3d9764fff7d94cb"
+    },
+    {
+      "path": "SceneObj/HauntedTownBTL/navmesh.bin",
+      "size": 107695,
+      "sha256": "0b21bbe608b1eb60f0a867d45c2803252d6bec8543b786244b2d90846bac5e4c"
+    },
+    {
+      "path": "SceneObj/HauntedTownBTL/references.txt",
+      "size": 13842,
+      "sha256": "5f2c41d9d8aabf1ac4d972507a1d9065f6e22ca90d4d1cd0d8aae3b747e5b321"
+    },
+    {
+      "path": "SceneObj/HauntedTownBTL/scene.xscene",
+      "size": 177921,
+      "sha256": "1b1f13eea56b2535503026d39854ba1f131d6abcd6836993f92ae0b1cd52a822"
+    },
+    {
+      "path": "SceneObj/HauntedTownBTL/terrain.bin",
+      "size": 54689,
+      "sha256": "36ccc1df0dd4c3a6b915da05bb30a6ef6dd6ed01b3e07857a7a498bde5e15e33"
+    },
+    {
+      "path": "SceneObj/HauntedTownTDM/atmosphere.xml",
+      "size": 4827,
+      "sha256": "5f224c51e4061f7357c2efbb224d8659d04b519f7c84c0bf41321aabe9115594"
+    },
+    {
+      "path": "SceneObj/HauntedTownTDM/flora.bin",
+      "size": 14682,
+      "sha256": "68330f9cad28d21292c9d1ac4c8a273fbf8a70a91c690631c3d9764fff7d94cb"
+    },
+    {
+      "path": "SceneObj/HauntedTownTDM/navmesh.bin",
+      "size": 107695,
+      "sha256": "0e2394e940cfe71fe9fa337043b13e095da606b579aed2599434ea0b7c22ddc1"
+    },
+    {
+      "path": "SceneObj/HauntedTownTDM/references.txt",
+      "size": 13571,
+      "sha256": "12f85bc948c4826c641e66372d1516bf8cc86247e3519bbe54f13df90ca553fd"
+    },
+    {
+      "path": "SceneObj/HauntedTownTDM/scene.xscene",
+      "size": 175138,
+      "sha256": "ac8eda1e830ab22882acb2a7d0fac4140c96f2c7ad41c12fec6c6710d55f3fb2"
+    },
+    {
+      "path": "SceneObj/HauntedTownTDM/terrain.bin",
+      "size": 54689,
+      "sha256": "176b96acabbe1838a8c6692c6ad633a57b2af79185f23ccca38a01c2ddbfda6f"
+    },
+    {
+      "path": "SceneObj/Neuenburg/atmosphere.xml",
+      "size": 4854,
+      "sha256": "2e3d584d8fa4d0e6dc0554c1b19435010ed43e44361906a985aea4eaf0b2a7fe"
+    },
+    {
+      "path": "SceneObj/Neuenburg/flora.bin",
+      "size": 66089,
+      "sha256": "c4d5904e96d91b03022007b2bf026cdbfa39eda34d136f25936ce4499e10fc48"
+    },
+    {
+      "path": "SceneObj/Neuenburg/references.txt",
+      "size": 16420,
+      "sha256": "e1383205be47ddaca19d9d74f30b906f74efb5ea7becbbf5fecbc062d8480a4b"
+    },
+    {
+      "path": "SceneObj/Neuenburg/scene.xscene",
+      "size": 1161585,
+      "sha256": "1430ed3c965848bf018e9683cd8afae805edf4eaf1538813f7ee13a98c6b3aaa"
+    },
+    {
+      "path": "SceneObj/Neuenburg/terrain.bin",
+      "size": 1605055,
+      "sha256": "377bde4434eb18f90859e14c8670c88fb8b16243029ebeef70315d459b43f9ff"
+    },
+    {
+      "path": "SceneObj/Sekigahara/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 22408,
+      "sha256": "6e22c41cbf53895fe38107956756b19f4026fb08de5c0b67d2025af276e4f13f"
+    },
+    {
+      "path": "SceneObj/Sekigahara/atmosphere.xml",
+      "size": 4839,
+      "sha256": "c0624f96a232c0e4b27e24e007bf99da7867ea59d1eb0c6cfb36afed07674a18"
+    },
+    {
+      "path": "SceneObj/Sekigahara/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/Sekigahara/references.txt",
+      "size": 19973,
+      "sha256": "3c35bf864145b11050282cb0a5f00528c160c9cfb0ffe83146a909674ec6c3ea"
+    },
+    {
+      "path": "SceneObj/Sekigahara/scene.xscene",
+      "size": 9558828,
+      "sha256": "a211fe5d07ca3327fed86a5c63d271b030f09767bb63fe2851a037e1f641d819"
+    },
+    {
+      "path": "SceneObj/Sekigahara/terrain.bin",
+      "size": 309297,
+      "sha256": "734db7e17b825e5d054b7e74f158649362f6387c2de04ddbbc6bb7bf9a2d2d8c"
+    },
+    {
+      "path": "SceneObj/Strat_T_1/atmosphere.xml",
+      "size": 4900,
+      "sha256": "e3f3ae91ae6e4bd868f96adc26b138566de3ccad7d1a8a8d3724d4845f6e0978"
+    },
+    {
+      "path": "SceneObj/Strat_T_1/flora.bin",
+      "size": 471213,
+      "sha256": "beedb15ad68dfb4ae76c0762539990e8a6ae453512f574fb5655b9a634a7394a"
+    },
+    {
+      "path": "SceneObj/Strat_T_1/navmesh.bin",
+      "size": 4360444,
+      "sha256": "4fb9162630ca60cfb8b3764440544268c2f77bec023c720db53478faa2d91f61"
+    },
+    {
+      "path": "SceneObj/Strat_T_1/scene.xscene",
+      "size": 1491762,
+      "sha256": "10db567e52b571f004c613e6dd3454dbff6f7f65cf025c963e4ca7337cc6eef7"
+    },
+    {
+      "path": "SceneObj/Strat_T_1/terrain.bin",
+      "size": 7639609,
+      "sha256": "42add2a30586b98bd658f54fb10bf353658821bc85ea0e42b6eb2907a320e5f7"
+    },
+    {
+      "path": "SceneObj/Strat_T_2/atmosphere.xml",
+      "size": 4938,
+      "sha256": "fe5f8f26c755479c94988c9f9bf56160c2ec0f7186f36c8d82a5ae40cedd6c66"
+    },
+    {
+      "path": "SceneObj/Strat_T_2/flora.bin",
+      "size": 27235,
+      "sha256": "43f2550763490973683310d5141edb66b7164403fa70a9d2a89fae45739aa02f"
+    },
+    {
+      "path": "SceneObj/Strat_T_2/navmesh.bin",
+      "size": 3593437,
+      "sha256": "53c09b9b051acb2ea34cf6621144d61dd130095ee3e4f40c2b4b3052281856c9"
+    },
+    {
+      "path": "SceneObj/Strat_T_2/scene.xscene",
+      "size": 1624824,
+      "sha256": "816fc399a25bfb25e668b2a33443d52dd69a287f1759821590000d6c864d6bb0"
+    },
+    {
+      "path": "SceneObj/Strat_T_2/terrain.bin",
+      "size": 3684451,
+      "sha256": "1bf2ae876c474f97678e663900cbc0c09beb86398349f014ee4c6744562384ac"
+    },
+    {
+      "path": "SceneObj/Strat_T_3/atmosphere.xml",
+      "size": 4962,
+      "sha256": "2589e6c308542737ce22d583fb0408c1a92e8549eddd907a55b2a34d21e8b844"
+    },
+    {
+      "path": "SceneObj/Strat_T_3/flora.bin",
+      "size": 435101,
+      "sha256": "7779c7c637d796de799c6a62ab9a9fedddffac12b84defd053f7c436ed5c7b5d"
+    },
+    {
+      "path": "SceneObj/Strat_T_3/navmesh.bin",
+      "size": 1405128,
+      "sha256": "e2aa807aea825174bb1ea3bd089adc6eb04fb11eec5dd9bbe5a959157d6e4d0b"
+    },
+    {
+      "path": "SceneObj/Strat_T_3/scene.xscene",
+      "size": 1333061,
+      "sha256": "2d5d013ae300276080b1494e4691d890cd9a06c03a75d281325da16af59530de"
+    },
+    {
+      "path": "SceneObj/Strat_T_3/terrain.bin",
+      "size": 11641798,
+      "sha256": "9068759d7ae7d9b3424f2d615bd5cdea448dc59ca37c936b88e4968fa975ce93"
+    },
+    {
+      "path": "SceneObj/Strat_T_4/atmosphere.xml",
+      "size": 4938,
+      "sha256": "fe5f8f26c755479c94988c9f9bf56160c2ec0f7186f36c8d82a5ae40cedd6c66"
+    },
+    {
+      "path": "SceneObj/Strat_T_4/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/Strat_T_4/navmesh.bin",
+      "size": 4397817,
+      "sha256": "9240e64886b2e2f7ad0efaa5cd6e5c041dcc4604b073ef60ca0b21dc2b52b3ca"
+    },
+    {
+      "path": "SceneObj/Strat_T_4/scene.xscene",
+      "size": 1662710,
+      "sha256": "60f0b1a7d5e931e3ba9a8b8a9bac7075ae863390ee40bae362e203207b75d15b"
+    },
+    {
+      "path": "SceneObj/Strat_T_4/terrain.bin",
+      "size": 4512043,
+      "sha256": "c463ae07979617ecec0b53a5e122de4ca044206fc66a43fc9409da225b098e79"
+    },
+    {
+      "path": "SceneObj/Strat_T_5/atmosphere.xml",
+      "size": 4948,
+      "sha256": "aad6d052e887885c9679037040cf799ea1d2af040a4f61c245faab984dff9f1d"
+    },
+    {
+      "path": "SceneObj/Strat_T_5/flora.bin",
+      "size": 70948,
+      "sha256": "fa86e6131b84b8ae908c6ff4754b54d44d08eaa04d03ea210f3289f206f49ff4"
+    },
+    {
+      "path": "SceneObj/Strat_T_5/navmesh.bin",
+      "size": 2890200,
+      "sha256": "f88af598b526c3ae70900aec403de295685b4aaa76f1b8f47d52db95c0f57cbb"
+    },
+    {
+      "path": "SceneObj/Strat_T_5/scene.xscene",
+      "size": 1023883,
+      "sha256": "1b1dc35335699f90d128c1d984b3fbf027f5b34cd9d3a5e44e11c9f617d3192a"
+    },
+    {
+      "path": "SceneObj/Strat_T_5/terrain.bin",
+      "size": 3872231,
+      "sha256": "7b4cd56f1f816c808050847fa79b8d7ae8b3015579ac311c1f08ce8da8a68c71"
+    },
+    {
+      "path": "SceneObj/SwampBrawlBTL/atmosphere.xml",
+      "size": 4827,
+      "sha256": "5f224c51e4061f7357c2efbb224d8659d04b519f7c84c0bf41321aabe9115594"
+    },
+    {
+      "path": "SceneObj/SwampBrawlBTL/flora.bin",
+      "size": 14781,
+      "sha256": "d68bcc82c942a7566583cec46516d1301ed9c8228af9a116b02993a137011483"
+    },
+    {
+      "path": "SceneObj/SwampBrawlBTL/navmesh.bin",
+      "size": 107695,
+      "sha256": "4a341b103430c3e0a9db7264bdeec8701ce2c51a0ac58ea6d056b63a247bafe0"
+    },
+    {
+      "path": "SceneObj/SwampBrawlBTL/references.txt",
+      "size": 13323,
+      "sha256": "9f74608e827b7e926bc6e57e121739d52035d86cfbff013ca6090d793197784b"
+    },
+    {
+      "path": "SceneObj/SwampBrawlBTL/scene.xscene",
+      "size": 190344,
+      "sha256": "2c920f6b792c13a211bac1f7694f43ecc07b31f793f1ad1f41d3acbafec32e40"
+    },
+    {
+      "path": "SceneObj/SwampBrawlBTL/terrain.bin",
+      "size": 60491,
+      "sha256": "2a80f8867a2bbc42171e4d02c5d7877eb3ce032b4eec7a9043966090135eca1c"
+    },
+    {
+      "path": "SceneObj/SwampBrawlTDM/atmosphere.xml",
+      "size": 4827,
+      "sha256": "5f224c51e4061f7357c2efbb224d8659d04b519f7c84c0bf41321aabe9115594"
+    },
+    {
+      "path": "SceneObj/SwampBrawlTDM/flora.bin",
+      "size": 14682,
+      "sha256": "e727678cf14ea3f3f3a1a09eb6e15092f1e1149622e01d405230a6b56937ad5e"
+    },
+    {
+      "path": "SceneObj/SwampBrawlTDM/navmesh.bin",
+      "size": 107695,
+      "sha256": "bc8d5db84deb57d98386e91a79d9e6525cf71839e1a92bdb4f7d274ac3c85ef7"
+    },
+    {
+      "path": "SceneObj/SwampBrawlTDM/references.txt",
+      "size": 13047,
+      "sha256": "6db13a195b2c38e4c2d85d7f2d6fe23adb118fc9b1de5796d980ee0c0098b2c5"
+    },
+    {
+      "path": "SceneObj/SwampBrawlTDM/scene.xscene",
+      "size": 187558,
+      "sha256": "fe3291117816a846c79f0a490666fefd4df9222ac72fd583f14bd2fe0f8ae91c"
+    },
+    {
+      "path": "SceneObj/SwampBrawlTDM/terrain.bin",
+      "size": 69869,
+      "sha256": "ad68009d420b9c08ef484e06ecbee063042d28c607b8465f4287b7afc1ef6beb"
+    },
+    {
+      "path": "SceneObj/ThunderDomeTDM/atmosphere.xml",
+      "size": 4780,
+      "sha256": "f7d54eba98e22e0128c97d5a604b48fe7cc33de6d9cee07bc70cefea9f598272"
+    },
+    {
+      "path": "SceneObj/ThunderDomeTDM/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/ThunderDomeTDM/references.txt",
+      "size": 2863,
+      "sha256": "e5f30ae72d19545b33296eb3f1f944443d52bfc1b1345a68d8cc3de78274a35f"
+    },
+    {
+      "path": "SceneObj/ThunderDomeTDM/scene.xscene",
+      "size": 147956,
+      "sha256": "4126844aaf2bdceec2cc3bfef1184e7c8be6826e9030f5032651d6364b8eb4c7"
+    },
+    {
+      "path": "SceneObj/ThunderDomeTDM/terrain.bin",
+      "size": 10259,
+      "sha256": "8fc66f6d9b413988070464d19eaf2dad0e2916838e677c566370e904bd38cc83"
+    },
+    {
+      "path": "SceneObj/WL_OldArena_V2/atmosphere.xml",
+      "size": 4846,
+      "sha256": "d9bbf9d39d69c805cd48cafb6e0fabb5acb7654b90016679e1642cc197eb3010"
+    },
+    {
+      "path": "SceneObj/WL_OldArena_V2/flora.bin",
+      "size": 482750,
+      "sha256": "0867dfd3d4184226a517808a7621159cb46add09f99ef8605e0faee1e4fdf755"
+    },
+    {
+      "path": "SceneObj/WL_OldArena_V2/mmd1.mmd",
+      "size": 190738,
+      "sha256": "91f562b79ffcc5347e788caa4a106ce058ff1bd687222ed99eb5c9c227ed14b4"
+    },
+    {
+      "path": "SceneObj/WL_OldArena_V2/references.txt",
+      "size": 10115,
+      "sha256": "845ba9c04ce20764b6bf863dea703fced1983ab24a809e91f0318bf43c0e1109"
+    },
+    {
+      "path": "SceneObj/WL_OldArena_V2/scene.xscene",
+      "size": 288853,
+      "sha256": "1f34c991fa32a85ec2830f91f8d2bbc0696d4d460fd184cf80ca93a558f847a8"
+    },
+    {
+      "path": "SceneObj/WL_OldArena_V2/terrain.bin",
+      "size": 40022,
+      "sha256": "83b6a60b877902894e75db2d54c9961d5a30186fc84974a4036bbd17e94319e1"
+    },
+    {
+      "path": "SceneObj/almo_warlords_akshanoutpost/atmosphere.xml",
+      "size": 4849,
+      "sha256": "fb3f0ba83973a0d06ffe4836c20bd418428cba65a64ab91bd32f922f34001e8f"
+    },
+    {
+      "path": "SceneObj/almo_warlords_akshanoutpost/flora.bin",
+      "size": 766257,
+      "sha256": "22e7ef1acb4f3c1f389e5845ff4404bce4405d2fb059598b392749684e53f367"
+    },
+    {
+      "path": "SceneObj/almo_warlords_akshanoutpost/references.txt",
+      "size": 10909,
+      "sha256": "d7612144d023771331fcdb9bead872c51077e9919fcf022f39b0940396ea240d"
+    },
+    {
+      "path": "SceneObj/almo_warlords_akshanoutpost/scene.xscene",
+      "size": 871366,
+      "sha256": "c5879b01601aa84524b99a874fe7f6ff66ca2beab62b7ecedb4f0878561957e2"
+    },
+    {
+      "path": "SceneObj/almo_warlords_akshanoutpost/terrain.bin",
+      "size": 6646322,
+      "sha256": "d937755937c45a64222accf5f91bbf693b38ce39c12373ce01f6e43215001871"
+    },
+    {
+      "path": "SceneObj/almo_warlords_ironhaven/atmosphere.xml",
+      "size": 4834,
+      "sha256": "fe5138c2ebaae7f35a0c8566c84f07d210209c9dacb6b67318ff91f82252b62a"
+    },
+    {
+      "path": "SceneObj/almo_warlords_ironhaven/flora.bin",
+      "size": 1699455,
+      "sha256": "38768f82e95129ec60c28a65c3328e65173c06de142445bf2ef38d508e38a361"
+    },
+    {
+      "path": "SceneObj/almo_warlords_ironhaven/references.txt",
+      "size": 8504,
+      "sha256": "a32ae30fa5b6954892b7fb51c40bb0ceea820254a4e2d7bd1e1af098ff1e55a8"
+    },
+    {
+      "path": "SceneObj/almo_warlords_ironhaven/scene.xscene",
+      "size": 927277,
+      "sha256": "bf3588e6e4142476bfe2a8ede1695bd1735c4d0603aab6d9f20fb6c2ab979ed0"
+    },
+    {
+      "path": "SceneObj/almo_warlords_ironhaven/terrain.bin",
+      "size": 5485597,
+      "sha256": "3d80d66b51a37589f292540d033bf7036ece68416859503eeac513ce6d2cc905"
+    },
+    {
+      "path": "SceneObj/almo_warlords_kaskarabazaar/atmosphere.xml",
+      "size": 4834,
+      "sha256": "36b7b0941f4be715bb9df5f93a6c7892c396007f7ea40dd7c0dce837f3b153b1"
+    },
+    {
+      "path": "SceneObj/almo_warlords_kaskarabazaar/flora.bin",
+      "size": 2072298,
+      "sha256": "7d7a77ecc2dd23a348e2c3e97b7db7e4e352c7ec262058da0da4a60862e785ca"
+    },
+    {
+      "path": "SceneObj/almo_warlords_kaskarabazaar/references.txt",
+      "size": 15958,
+      "sha256": "d8993b2c5f2b586d873855c8cd5d0114f7bc402271c7d1c7eb86337d490875cf"
+    },
+    {
+      "path": "SceneObj/almo_warlords_kaskarabazaar/scene.xscene",
+      "size": 1321963,
+      "sha256": "a2218e2109c0498fbb0838828bbbafec74383129ac123636c96403d4667ce23e"
+    },
+    {
+      "path": "SceneObj/almo_warlords_kaskarabazaar/terrain.bin",
+      "size": 10759076,
+      "sha256": "49f440a047e6e1afbd2e0f35483038c4fc80e8b4624134253debe12785530de3"
+    },
+    {
+      "path": "SceneObj/crpg_battle_canyon/atmosphere.xml",
+      "size": 4808,
+      "sha256": "7d20a6f9646b794f9a43d03ff63842c8939082b26c4367aa8d4bc1a1d915c869"
+    },
+    {
+      "path": "SceneObj/crpg_battle_canyon/flora.bin",
+      "size": 64078,
+      "sha256": "b94919b88b921fb60fef10ca96faced0e5aab303bd0f01bf7d89a7b0fa6bc93e"
+    },
+    {
+      "path": "SceneObj/crpg_battle_canyon/navmesh.bin",
+      "size": 142036,
+      "sha256": "88f957e04aee62149c905831bcadc66959dbd3bc3dd9bc55fd92ffe461daf199"
+    },
+    {
+      "path": "SceneObj/crpg_battle_canyon/prt_data.bin",
+      "size": 3605633,
+      "sha256": "eccb59648c1643e51dd770b4005b8dcd4fad38d1f1ec7d9fa44c76689eab5a90"
+    },
+    {
+      "path": "SceneObj/crpg_battle_canyon/references.txt",
+      "size": 2655,
+      "sha256": "9f4b264a1d8dc4a7d89327f8b7247ac990e8d9ffa519ee19a52b55b24e00eb59"
+    },
+    {
+      "path": "SceneObj/crpg_battle_canyon/scene.xscene",
+      "size": 401614,
+      "sha256": "f8e4ab2134791fcec698a2d9bb425a0857711804a67954efb0733d1f29ac007f"
+    },
+    {
+      "path": "SceneObj/crpg_battle_canyon/terrain.bin",
+      "size": 91530,
+      "sha256": "3a619c79435cd8df82fa3c2323219dbf2bab390777a568e0edcd5263e2ae7dfe"
+    },
+    {
+      "path": "SceneObj/crpg_battle_drakenburg/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 18184,
+      "sha256": "e72cd450e7b80c86de6ba321ec309bf56810047d45ccddd1bdfa3d1ca83a7675"
+    },
+    {
+      "path": "SceneObj/crpg_battle_drakenburg/atmosphere.xml",
+      "size": 4850,
+      "sha256": "ff2ba127b32d88a764ac1e9f4bd83b0a1ea07fd0a0dfc467ac370577100b9bc5"
+    },
+    {
+      "path": "SceneObj/crpg_battle_drakenburg/flora.bin",
+      "size": 5612,
+      "sha256": "675cf4e61ec3e7312fd88dd7bc4ab690ffb03c7485540f4413d4c85f6f85cb0e"
+    },
+    {
+      "path": "SceneObj/crpg_battle_drakenburg/navmesh.bin",
+      "size": 18916,
+      "sha256": "6cf0c7b0f752aaa115bb4c2f0f3baa9fda350fb7ee275306a6cfc896dbc9647c"
+    },
+    {
+      "path": "SceneObj/crpg_battle_drakenburg/prt_data.bin",
+      "size": 965990,
+      "sha256": "32143031a7e3ec28f3aec7ddfb78c6c27f996314a62cf73a8423261576ac0f72"
+    },
+    {
+      "path": "SceneObj/crpg_battle_drakenburg/references.txt",
+      "size": 18687,
+      "sha256": "01c0f9db045291cbb3881397be03f8eb02edf896577af81693c63978b5dda810"
+    },
+    {
+      "path": "SceneObj/crpg_battle_drakenburg/scene.xscene",
+      "size": 1076342,
+      "sha256": "58e1eb0411959a5bae93d3658ee871dc720185ed63d03f523c6a0f6cee6f23fb"
+    },
+    {
+      "path": "SceneObj/crpg_battle_drakenburg/terrain.bin",
+      "size": 135174,
+      "sha256": "f751102031414a433b026db3e202176c64dabb529f94c610dacd5966768af0b3"
+    },
+    {
+      "path": "SceneObj/crpg_battle_drakenburg/terrain_ed.bin",
+      "size": 697370,
+      "sha256": "bae70376f602b620e41e99c1fa9008e8c32c7a71d4793ac08e46cf8ed136bfea"
+    },
+    {
+      "path": "SceneObj/crpg_battle_fallenaqueduct/atmosphere.xml",
+      "size": 4807,
+      "sha256": "062db1e8150a3864100457316acf80abfe289ded7efc45d58fe80b80aa84d355"
+    },
+    {
+      "path": "SceneObj/crpg_battle_fallenaqueduct/flora.bin",
+      "size": 37272,
+      "sha256": "b237a92068ce19e8306364b572e44ba1919580bcbc6f40a4eb1f559fd7605de7"
+    },
+    {
+      "path": "SceneObj/crpg_battle_fallenaqueduct/navmesh.bin",
+      "size": 134462,
+      "sha256": "497e769f7b26de7c11f279b4c3322dc498cafd47cac1f2009b27232100ef556a"
+    },
+    {
+      "path": "SceneObj/crpg_battle_fallenaqueduct/references.txt",
+      "size": 8313,
+      "sha256": "0848fa31fc0fac7ff49d50668a4c3a32ecf74ba9051a3a91e2ba3877d22bee2d"
+    },
+    {
+      "path": "SceneObj/crpg_battle_fallenaqueduct/scene.xscene",
+      "size": 470921,
+      "sha256": "222bea8ddc277ccf574e52aec01599963e130661cced98ea8f447f458139bde4"
+    },
+    {
+      "path": "SceneObj/crpg_battle_fallenaqueduct/terrain.bin",
+      "size": 279900,
+      "sha256": "8a77c98fab97ecc83150e108a97e27ed984790d2328c1eebb740f66060be7bfb"
+    },
+    {
+      "path": "SceneObj/crpg_battle_festival/atmosphere.xml",
+      "size": 4848,
+      "sha256": "e322f9132aff1a28140514ea8bf0f55ad939bf2e301fd3b6edecb7f8bdc7f3b1"
+    },
+    {
+      "path": "SceneObj/crpg_battle_festival/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/crpg_battle_festival/navmesh.bin",
+      "size": 34654,
+      "sha256": "fb2498090906b798858fe7e951deba1558efbd2eb916c110d8130b9f757f1491"
+    },
+    {
+      "path": "SceneObj/crpg_battle_festival/references.txt",
+      "size": 13293,
+      "sha256": "7c2f75d4c76339038efcb6e1a8550853086d29e8d7f04da03b1ae997d0b24fc6"
+    },
+    {
+      "path": "SceneObj/crpg_battle_festival/scene.xscene",
+      "size": 3043561,
+      "sha256": "398fbf5b1e27341c88559c020b43909a477067fd741b6134e717bfab87a235f6"
+    },
+    {
+      "path": "SceneObj/crpg_battle_festival/terrain.bin",
+      "size": 777587,
+      "sha256": "07c60bb68cbf9afa3801963e19d810e7adb8f5673b0391e41dcd87021d86569f"
+    },
+    {
+      "path": "SceneObj/crpg_battle_fieldbytheriver/atmosphere.xml",
+      "size": 4841,
+      "sha256": "b95544c840d2a6eebc0ea438c67206787be5eb9584f4bd895f63e09b5cf166f2"
+    },
+    {
+      "path": "SceneObj/crpg_battle_fieldbytheriver/flora.bin",
+      "size": 94658,
+      "sha256": "9779bf1cdf43ed762487d8f391c046101b7efe85b76c48085769688fd9092ace"
+    },
+    {
+      "path": "SceneObj/crpg_battle_fieldbytheriver/navmesh.bin",
+      "size": 130201,
+      "sha256": "28c31f823103c5acca31085d30862774969452ef0729d8a3f1c6be6904b9e1ba"
+    },
+    {
+      "path": "SceneObj/crpg_battle_fieldbytheriver/prt_data.bin",
+      "size": 6004133,
+      "sha256": "eea34af19484489cfdfc4e7dc6a013a1eff53ade9142c1ad3dc72a526ea87d35"
+    },
+    {
+      "path": "SceneObj/crpg_battle_fieldbytheriver/references.txt",
+      "size": 10938,
+      "sha256": "3e8c940c574758983032f7d2cee7e3cc5f8a9b888af49571626de5e6a93161bf"
+    },
+    {
+      "path": "SceneObj/crpg_battle_fieldbytheriver/scene.xscene",
+      "size": 675916,
+      "sha256": "25dae8a5b1c00ff2ac6ab1c4e2ac92543d1ada08ac1b5dca9ba220518571c8fa"
+    },
+    {
+      "path": "SceneObj/crpg_battle_fieldbytheriver/terrain.bin",
+      "size": 1298166,
+      "sha256": "62b548de8d3f8e385e13a7f3d932c2d7d8c01508015b4dc556c7d8fb25fe7706"
+    },
+    {
+      "path": "SceneObj/crpg_battle_frosthaven/atmosphere.xml",
+      "size": 4796,
+      "sha256": "6c00f73ba461c6229557c920cbe9cd29ab6020d42d7e4ea66844c0a574f3a822"
+    },
+    {
+      "path": "SceneObj/crpg_battle_frosthaven/flora.bin",
+      "size": 3144,
+      "sha256": "e97e325d89cf50a0b8cec807b39b598d10aba576549b9ccd6d233d0c26d905be"
+    },
+    {
+      "path": "SceneObj/crpg_battle_frosthaven/navmesh.bin",
+      "size": 95125,
+      "sha256": "efac084127e1d7c0c2ab4de8640eb32b58fae08f89a1fda0cb8a28d3b51afb1a"
+    },
+    {
+      "path": "SceneObj/crpg_battle_frosthaven/prt_data.bin",
+      "size": 909814,
+      "sha256": "6b273c80bb1722f3279a3e1ca05af7cb847cd4c99f2c90172e36f5dd1736fadd"
+    },
+    {
+      "path": "SceneObj/crpg_battle_frosthaven/references.txt",
+      "size": 14037,
+      "sha256": "22779c985dbc3af5fb02cdcf9e21ca74b857ef8c9d28367a848d492e46e81d7d"
+    },
+    {
+      "path": "SceneObj/crpg_battle_frosthaven/scene.xscene",
+      "size": 2361251,
+      "sha256": "a09aea1db8cab9980f509ff6079f32cfde79146c680cea8bd0c0a8ffb1427fc2"
+    },
+    {
+      "path": "SceneObj/crpg_battle_frosthaven/terrain.bin",
+      "size": 699279,
+      "sha256": "8f4b5f22590f2ab6453af4abe44728ecc6facd3939457e0f03f28c8ca27d432f"
+    },
+    {
+      "path": "SceneObj/crpg_battle_ghosttown/atmosphere.xml",
+      "size": 4844,
+      "sha256": "efcf1ffefb4a8891c8da1ea240b3cb4eef7378e91721b3a9f19184591a690b41"
+    },
+    {
+      "path": "SceneObj/crpg_battle_ghosttown/flora.bin",
+      "size": 282465,
+      "sha256": "16ba0b9cf91850e39c90f0a53b0fc020ec24a2099bf5501e0e72b5a73565672a"
+    },
+    {
+      "path": "SceneObj/crpg_battle_ghosttown/navmesh.bin",
+      "size": 31787,
+      "sha256": "d83322f406e08aee4be0f62105c841ba1ba9f47f2d4418f95d3b507cec93d887"
+    },
+    {
+      "path": "SceneObj/crpg_battle_ghosttown/references.txt",
+      "size": 8398,
+      "sha256": "adb6d8af36e228930f8fb57f7f4b17b346bb436fbcec9e1991deabaef437f629"
+    },
+    {
+      "path": "SceneObj/crpg_battle_ghosttown/scene.xscene",
+      "size": 274290,
+      "sha256": "caefd81cce90ecc6b0ebd01311a5e9968ac2349f2d227c201dcc56b117de2009"
+    },
+    {
+      "path": "SceneObj/crpg_battle_ghosttown/terrain.bin",
+      "size": 31348,
+      "sha256": "c95a33999257915bf8c879ff1404dbdacd19fc50d40d791f61e951e950953d08"
+    },
+    {
+      "path": "SceneObj/crpg_battle_hadiiqa/atmosphere.xml",
+      "size": 4806,
+      "sha256": "481a29c6e2f347320dcb7f3b191ca7f0268cbd3199af7d803acd92b29aa87fc7"
+    },
+    {
+      "path": "SceneObj/crpg_battle_hadiiqa/flora.bin",
+      "size": 722260,
+      "sha256": "39fb8093d3d27f684f37689b792be4bdbc9739eb97698a6289671d8c1af97d12"
+    },
+    {
+      "path": "SceneObj/crpg_battle_hadiiqa/navmesh.bin",
+      "size": 16763,
+      "sha256": "1cb530cc19a59443a6b238605a15bd4024c5ea950395ccc5d2a12157dda19340"
+    },
+    {
+      "path": "SceneObj/crpg_battle_hadiiqa/prt_data.bin",
+      "size": 458424,
+      "sha256": "67cf63dd55633b437a2fbbdb07fa68dc5e65d666829d75fd55e115439f06af17"
+    },
+    {
+      "path": "SceneObj/crpg_battle_hadiiqa/references.txt",
+      "size": 19018,
+      "sha256": "e5e4937e727d0d9fc745a1f4312f40da665473d22fdcdd38654145e0c673bff9"
+    },
+    {
+      "path": "SceneObj/crpg_battle_hadiiqa/scene.xscene",
+      "size": 790177,
+      "sha256": "2c4a231a348e9e99f87473773fbbf821a36a61a09f93c9d3ab370858c04e8b50"
+    },
+    {
+      "path": "SceneObj/crpg_battle_hadiiqa/terrain.bin",
+      "size": 126701,
+      "sha256": "50fb9c0e82fc4b8ec29ece7884118252c1db8cd1bd0f0a6f64976c555d40222b"
+    },
+    {
+      "path": "SceneObj/crpg_battle_islandvillage/atmosphere.xml",
+      "size": 4792,
+      "sha256": "273b098ef41b9b87b1c343fdcbfe091e019256af3252c195897838250b43ac01"
+    },
+    {
+      "path": "SceneObj/crpg_battle_islandvillage/flora.bin",
+      "size": 10003041,
+      "sha256": "08fdf23e49ed860e6a3c4707b5e7fb8b79c72da5e574ed4e5c7373c4da7fcd31"
+    },
+    {
+      "path": "SceneObj/crpg_battle_islandvillage/mmd1.mmd",
+      "size": 121520,
+      "sha256": "0e40946d58089a4813a77bf876b0ddefcc370bfde1db88b1585d2efe0feaf649"
+    },
+    {
+      "path": "SceneObj/crpg_battle_islandvillage/navmesh.bin",
+      "size": 285624,
+      "sha256": "4deae3142b2dbc01ba1eccfe2ac9050c4f9e00a08855db714dd8e1954b3457ae"
+    },
+    {
+      "path": "SceneObj/crpg_battle_islandvillage/prt_data.bin",
+      "size": 9375672,
+      "sha256": "e5d3b1ec3091715021b5b53a74cf5d66559c392aa550ca18854b9cd8abef63a2"
+    },
+    {
+      "path": "SceneObj/crpg_battle_islandvillage/references.txt",
+      "size": 25586,
+      "sha256": "989f69d4229522b7f0e7be7010a0c524111f6ecac7ef5431b62243da04f0832e"
+    },
+    {
+      "path": "SceneObj/crpg_battle_islandvillage/scene.xscene",
+      "size": 983056,
+      "sha256": "e9264822e9bc3a1aecaf7e24fb84e61881c183693085254adfb044476a9f3a19"
+    },
+    {
+      "path": "SceneObj/crpg_battle_islandvillage/terrain.bin",
+      "size": 9577800,
+      "sha256": "4a453ac0efe599834dce5932f4ec22735858954d9561f67b12fdcf7f932b4100"
+    },
+    {
+      "path": "SceneObj/crpg_battle_ketilsfarm/atmosphere.xml",
+      "size": 4810,
+      "sha256": "d8b086571b32cad1a0c74192c9bf28e9b228c3ce09e9d0f411171483f3b9b3a7"
+    },
+    {
+      "path": "SceneObj/crpg_battle_ketilsfarm/flora.bin",
+      "size": 511919,
+      "sha256": "939219109d4c005a34b06676e6de81c79242ae8436a71f4b018aa8dc82a0d9f1"
+    },
+    {
+      "path": "SceneObj/crpg_battle_ketilsfarm/navmesh.bin",
+      "size": 88131,
+      "sha256": "82a6b692a3807c3b998ae453282dfef5fedd133a769becacc68cf0740f65d2fc"
+    },
+    {
+      "path": "SceneObj/crpg_battle_ketilsfarm/prt_data.bin",
+      "size": 2076896,
+      "sha256": "e3f200432c82fa0272fdbe8c31c42efd23196f3b286598440aa3b46c0568cf16"
+    },
+    {
+      "path": "SceneObj/crpg_battle_ketilsfarm/references.txt",
+      "size": 13626,
+      "sha256": "0b9c7f2528a8dbb42820c00bd9f1e231a07529fc6ac6f28400c238045252b0e7"
+    },
+    {
+      "path": "SceneObj/crpg_battle_ketilsfarm/scene.xscene",
+      "size": 444725,
+      "sha256": "f6721361bf9f03bf9867044557d59702f1d23be2ad3e9051a402bffe8f59a007"
+    },
+    {
+      "path": "SceneObj/crpg_battle_ketilsfarm/terrain.bin",
+      "size": 285729,
+      "sha256": "98379cda496a70d0c3244dc9d2394c2e8b1f1242e000688b4b31c3ddf2d9ebcc"
+    },
+    {
+      "path": "SceneObj/crpg_battle_killington/atmosphere.xml",
+      "size": 4810,
+      "sha256": "4140c094e0236c4d0d4f4d057122a2b0f5bff5be93df734935d926568bf009c4"
+    },
+    {
+      "path": "SceneObj/crpg_battle_killington/flora.bin",
+      "size": 591632,
+      "sha256": "7d8628275181e5769fb1b41400a6c515d11c7c7d96e1d43e7ed18d92a50e6c2e"
+    },
+    {
+      "path": "SceneObj/crpg_battle_killington/navmesh.bin",
+      "size": 238615,
+      "sha256": "895772567070324d39f65586ebee6456a7b2526d0f6b7b2658fe2ad304e6c27e"
+    },
+    {
+      "path": "SceneObj/crpg_battle_killington/prt_data.bin",
+      "size": 4062367,
+      "sha256": "e7f8ffc7ffd33e1748f6814791d7951064c50dbdb9a6688bcef80fa214e121da"
+    },
+    {
+      "path": "SceneObj/crpg_battle_killington/references.txt",
+      "size": 15967,
+      "sha256": "fb1b9cb36eed131ca34eca79748708203e2bbdb7610dfe10f0286224feb84507"
+    },
+    {
+      "path": "SceneObj/crpg_battle_killington/scene.xscene",
+      "size": 458215,
+      "sha256": "88710d13a65e2e060d7694d38d6da691e5def1e423ea935e193960ff10fd0dbe"
+    },
+    {
+      "path": "SceneObj/crpg_battle_killington/terrain.bin",
+      "size": 282453,
+      "sha256": "50f14cd55c5bcc0ad5bf73f1a0b07fd98297465f00bc81354bf43d0cf3a0f90d"
+    },
+    {
+      "path": "SceneObj/crpg_battle_kingsroad/atmosphere.xml",
+      "size": 4779,
+      "sha256": "d9bce160247bf27fc141eb9d8bef46d0b3c8761ef9e29228d7fa7d799ed06009"
+    },
+    {
+      "path": "SceneObj/crpg_battle_kingsroad/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/crpg_battle_kingsroad/navmesh.bin",
+      "size": 169367,
+      "sha256": "52c617bbe10024ad87c39c78f958b74b69911d8182788fe715a6173def4aaf3a"
+    },
+    {
+      "path": "SceneObj/crpg_battle_kingsroad/references.txt",
+      "size": 4245,
+      "sha256": "ce21002dec9504bd558c996b5d1e48f3d440710a41807016d16c6339c575316f"
+    },
+    {
+      "path": "SceneObj/crpg_battle_kingsroad/scene.xscene",
+      "size": 406303,
+      "sha256": "28ee92e9edf29397486ec9fd55db9e2890935098d9c2ffe9b92a6657124fadde"
+    },
+    {
+      "path": "SceneObj/crpg_battle_kingsroad/terrain.bin",
+      "size": 165128,
+      "sha256": "ee5fb60274a568ba404d7736e5d02a1b3d40127551d9e3fcac9ca65849a97438"
+    },
+    {
+      "path": "SceneObj/crpg_battle_moonlittownship/atmosphere.xml",
+      "size": 4797,
+      "sha256": "996749a97bcb7752ad44387a2e7d1f47cf506fd21c4ed48701ee86ed3aa4910f"
+    },
+    {
+      "path": "SceneObj/crpg_battle_moonlittownship/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/crpg_battle_moonlittownship/navmesh.bin",
+      "size": 89918,
+      "sha256": "c0eefec661d7f0e2c15f317d07db4b0e82c0e0e1690d7f8f12b20571dfd5fdec"
+    },
+    {
+      "path": "SceneObj/crpg_battle_moonlittownship/prt_data.bin",
+      "size": 2108807,
+      "sha256": "1f75411aeaed539907b13fd8e91af319fe28820270a09e65d30bfe703aef848f"
+    },
+    {
+      "path": "SceneObj/crpg_battle_moonlittownship/references.txt",
+      "size": 9290,
+      "sha256": "ca320dbf34cc47e4097a9fa4068811d9bf47afd48c8678f472378f71f8d67a3c"
+    },
+    {
+      "path": "SceneObj/crpg_battle_moonlittownship/scene.xscene",
+      "size": 1422234,
+      "sha256": "ddb5478ff8c8149c58f5912c9da8948f12057dfa0bd636adffde3bdb4880eb04"
+    },
+    {
+      "path": "SceneObj/crpg_battle_moonlittownship/terrain.bin",
+      "size": 1000399,
+      "sha256": "ee56cc46e998a7bcc445b807596410254e01f51345c26f52c6d5dd850a0c6d33"
+    },
+    {
+      "path": "SceneObj/crpg_battle_morass/atmosphere.xml",
+      "size": 4814,
+      "sha256": "0b2eda1ad00ecba8a49468d28a5f4ab2312a5173ed9ec5be047bd2ce95096d12"
+    },
+    {
+      "path": "SceneObj/crpg_battle_morass/flora.bin",
+      "size": 26744,
+      "sha256": "47793a8a1d4e4909dce27772f9027f91b0fb388ce4176a46da83aa6f146d04ee"
+    },
+    {
+      "path": "SceneObj/crpg_battle_morass/navmesh.bin",
+      "size": 111466,
+      "sha256": "24fad6f9885391ea948ef910c16df196489b724ef7de77874248493c2f3a3683"
+    },
+    {
+      "path": "SceneObj/crpg_battle_morass/prt_data.bin",
+      "size": 1128212,
+      "sha256": "5df9ef1f4b94a18cb8c786ad089374374978e9a8f0426e088095271c47e2c520"
+    },
+    {
+      "path": "SceneObj/crpg_battle_morass/references.txt",
+      "size": 13338,
+      "sha256": "a04f9e1200a34e976aa06128db6dea0c84d148167bbd9954a6880d9336841962"
+    },
+    {
+      "path": "SceneObj/crpg_battle_morass/scene.xscene",
+      "size": 1098641,
+      "sha256": "61d2d0fba4e8eefaa19dedc342463ce312c3704f8707c0ac2b02ef30cbceab84"
+    },
+    {
+      "path": "SceneObj/crpg_battle_morass/terrain.bin",
+      "size": 826120,
+      "sha256": "7996728a7211cc1cd92ec1d0ea3491de57d42977a621ae3e31a5191c32a87eac"
+    },
+    {
+      "path": "SceneObj/crpg_battle_orsennia/atmosphere.xml",
+      "size": 4844,
+      "sha256": "edabe75189c956f9a1bcfa085184b954d98eca2859a5b0a57c560a38ef336f40"
+    },
+    {
+      "path": "SceneObj/crpg_battle_orsennia/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/crpg_battle_orsennia/navmesh.bin",
+      "size": 69852,
+      "sha256": "e60cc08aa3211f94b62d894693f4dcd64f045bf74bbd35fa5b9b61d2c001aa2a"
+    },
+    {
+      "path": "SceneObj/crpg_battle_orsennia/prt_data.bin",
+      "size": 577348,
+      "sha256": "c0c1a544081aee6571c52afc09bb694e56596ab8b1febf23458264e6536f4179"
+    },
+    {
+      "path": "SceneObj/crpg_battle_orsennia/references.txt",
+      "size": 8551,
+      "sha256": "b821bb3930c2c2ec849a1624cf94998af0db55da987b5676b192a1dbecb9bf6d"
+    },
+    {
+      "path": "SceneObj/crpg_battle_orsennia/scene.xscene",
+      "size": 1919659,
+      "sha256": "5094d53df425ef1e6e39198647abe8b13f4947acda7e7e29c68a662bc9b11783"
+    },
+    {
+      "path": "SceneObj/crpg_battle_orsennia/terrain.bin",
+      "size": 121404,
+      "sha256": "d1ad1457ea79e2f1511227704fc8a571099b3411400680e7b9ce37e0208224db"
+    },
+    {
+      "path": "SceneObj/crpg_battle_sandiboush/atmosphere.xml",
+      "size": 4856,
+      "sha256": "08b8276a67e13a3e969a55ce45e957a1bc96ee16c71a1995d70730d4f749358a"
+    },
+    {
+      "path": "SceneObj/crpg_battle_sandiboush/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/crpg_battle_sandiboush/navmesh.bin",
+      "size": 99651,
+      "sha256": "c10cfdd095620bb8b59dd5ce5be7747cfc4e719f1dc97eda2da9a33fc6f3a2a7"
+    },
+    {
+      "path": "SceneObj/crpg_battle_sandiboush/references.txt",
+      "size": 7153,
+      "sha256": "2934412b9a1d8bb477554a13b64a3b7f29a975b8e61fd7ec5d5326b0f11fe66b"
+    },
+    {
+      "path": "SceneObj/crpg_battle_sandiboush/scene.xscene",
+      "size": 430139,
+      "sha256": "b20e1e36d76a72ef71b3f286b54c9272f8427fe221801c906ab50aa0216801d4"
+    },
+    {
+      "path": "SceneObj/crpg_battle_sandiboush/terrain.bin",
+      "size": 294671,
+      "sha256": "54d412ca4f34e3b422979abba4aa338c29c99249a10938fb8266b6dbb33afb92"
+    },
+    {
+      "path": "SceneObj/crpg_battle_skolderby/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 22408,
+      "sha256": "d180010bdcc2292968b74df1575255c41c884fbe553469cab18a22f2e3d0855e"
+    },
+    {
+      "path": "SceneObj/crpg_battle_skolderby/atmosphere.xml",
+      "size": 4800,
+      "sha256": "d5c89b38279a557f0d0bdc8dd2a8d09d5e7611e23404c7b707cd7f76867aa712"
+    },
+    {
+      "path": "SceneObj/crpg_battle_skolderby/flora.bin",
+      "size": 471631,
+      "sha256": "887f82f7079786b5e0c5437a5083b2489be12beec5750b88adc1ea4d63c934eb"
+    },
+    {
+      "path": "SceneObj/crpg_battle_skolderby/navmesh.bin",
+      "size": 148441,
+      "sha256": "2d409c744dd21e262a65c392ff05fdedb9eeec22a5554cdefd8e7c2fedbca18b"
+    },
+    {
+      "path": "SceneObj/crpg_battle_skolderby/references.txt",
+      "size": 8109,
+      "sha256": "f08ad6a0b432fb2cc499086e14f8db221f68f97b921ce767705e5a62064c93a4"
+    },
+    {
+      "path": "SceneObj/crpg_battle_skolderby/scene.xscene",
+      "size": 359389,
+      "sha256": "efa6ff0f1f99a07179cc764fcf7d9f010638a5e14e8a36c7e54291a5cb9941cb"
+    },
+    {
+      "path": "SceneObj/crpg_battle_skolderby/terrain.bin",
+      "size": 220197,
+      "sha256": "de616d37e253b0a5b39a0ffddaa05bed903e60e851382142f2bea97c466b992c"
+    },
+    {
+      "path": "SceneObj/crpg_battle_skolderby/terrain_ed.bin",
+      "size": 1528149,
+      "sha256": "16ca7f5820d6879a98a781106093bbe1bcde8616283728553d8882f7b83bb834"
+    },
+    {
+      "path": "SceneObj/crpg_battle_verloren/atmosphere.xml",
+      "size": 4802,
+      "sha256": "680fb912a9665e7b0b5ba7a1203bc4d69336759564f7b14a21e52dd02c0e65c6"
+    },
+    {
+      "path": "SceneObj/crpg_battle_verloren/flora.bin",
+      "size": 1723,
+      "sha256": "5c694f332b5f5c9fa8f9d25879a5324051be0e0a29f858526b385e6aac8ca93d"
+    },
+    {
+      "path": "SceneObj/crpg_battle_verloren/navmesh.bin",
+      "size": 24689,
+      "sha256": "9fc9d02cd988c1f5adc29218645fb4e5b383c17bd8aaa6c95cde2fb50bbdec0b"
+    },
+    {
+      "path": "SceneObj/crpg_battle_verloren/prt_data.bin",
+      "size": 1374493,
+      "sha256": "3404b83ccf85c36047501304e9994ae84ddcf7a6ee054d5772fc40239add2896"
+    },
+    {
+      "path": "SceneObj/crpg_battle_verloren/references.txt",
+      "size": 16002,
+      "sha256": "7d30bb03c1cdb4987f4ed9a676406d7945e4b90e2f51a6fc7f4b78bc744b311d"
+    },
+    {
+      "path": "SceneObj/crpg_battle_verloren/scene.xscene",
+      "size": 1066572,
+      "sha256": "13495c4bc756e84637142cbc11f48055aa4094eb068657b9786add9e01de9515"
+    },
+    {
+      "path": "SceneObj/crpg_battle_verloren/terrain.bin",
+      "size": 250983,
+      "sha256": "97060bb3fdabd42bd6cf4d4b53d480e0e4da7bad00aa2009c57ed72f116e1b83"
+    },
+    {
+      "path": "SceneObj/crpg_battle_waterwaytojelkala/atmosphere.xml",
+      "size": 4812,
+      "sha256": "77cdd06142320f15451ef80e4222176edce5db2d16f1a74be1d086af49f7e7f6"
+    },
+    {
+      "path": "SceneObj/crpg_battle_waterwaytojelkala/flora.bin",
+      "size": 183019,
+      "sha256": "72113790f3a780350fa5356d86e7decc680cfec4aaf2069ea3442548feaa73ea"
+    },
+    {
+      "path": "SceneObj/crpg_battle_waterwaytojelkala/navmesh.bin",
+      "size": 1494819,
+      "sha256": "5392b5b9f3ed53cb4e33be55f2256d630c5be01100edc7270500fc2fbde220a6"
+    },
+    {
+      "path": "SceneObj/crpg_battle_waterwaytojelkala/prt_data.bin",
+      "size": 811721,
+      "sha256": "ddc8891c0c486c4fda39256f92b83853f5953e58d58d24c9692fe2655c92c977"
+    },
+    {
+      "path": "SceneObj/crpg_battle_waterwaytojelkala/references.txt",
+      "size": 3384,
+      "sha256": "0e3c73bb5fbe5f879126d26fdd9798ae6407c580d3dd0d1b7bc31c4694245d61"
+    },
+    {
+      "path": "SceneObj/crpg_battle_waterwaytojelkala/scene.xscene",
+      "size": 271906,
+      "sha256": "132a435685928caacab354b98299697f34472c72f3b58f16a211cd5e83e87c50"
+    },
+    {
+      "path": "SceneObj/crpg_battle_waterwaytojelkala/terrain.bin",
+      "size": 4131369,
+      "sha256": "dd166f3382373ccd78858b7ddca466d573631f7a6f28054739a12088bab3fe58"
+    },
+    {
+      "path": "SceneObj/crpg_battle_westveen/atmosphere.xml",
+      "size": 4792,
+      "sha256": "273b098ef41b9b87b1c343fdcbfe091e019256af3252c195897838250b43ac01"
+    },
+    {
+      "path": "SceneObj/crpg_battle_westveen/flora.bin",
+      "size": 253484,
+      "sha256": "2cf558173c5045fbb751eeb74ba31e7db300b441b196f1942126ec877f802ec2"
+    },
+    {
+      "path": "SceneObj/crpg_battle_westveen/navmesh.bin",
+      "size": 190741,
+      "sha256": "137464ea2b918150d98fbffdd34ca3971a2e70ff44dfe635b11e1fee9c6f2307"
+    },
+    {
+      "path": "SceneObj/crpg_battle_westveen/prt_data.bin",
+      "size": 2350537,
+      "sha256": "ad813a15c25a9d93db4a859e547b49f590fddba45052924738643ec127f2516c"
+    },
+    {
+      "path": "SceneObj/crpg_battle_westveen/references.txt",
+      "size": 11043,
+      "sha256": "821ddbc4a6150a29f9c800081310f2b48197e59f4243edb62e7a0cba240aed10"
+    },
+    {
+      "path": "SceneObj/crpg_battle_westveen/scene.xscene",
+      "size": 786123,
+      "sha256": "25af0f9c611df2d5afaee1243a228d3b6509f5322ad283a9dac258ec758330aa"
+    },
+    {
+      "path": "SceneObj/crpg_battle_westveen/terrain.bin",
+      "size": 707768,
+      "sha256": "f10a82888f152f2bd8f61d159d5210a03a4654be8e2c419abf412a94f74da941"
+    },
+    {
+      "path": "SceneObj/crpg_battle_whitebridge/atmosphere.xml",
+      "size": 4789,
+      "sha256": "19ab8a70ce2f1535ebf89a11274d99f16e2242de6108f33a5f8be8ef190d82f6"
+    },
+    {
+      "path": "SceneObj/crpg_battle_whitebridge/flora.bin",
+      "size": 110857,
+      "sha256": "a76746719875ae7bb8aaf5b756a478f98f443b9b3abd4ef5e322be8fe8631fb8"
+    },
+    {
+      "path": "SceneObj/crpg_battle_whitebridge/navmesh.bin",
+      "size": 27913,
+      "sha256": "7f3c5460d63ad650948211ab0d961925019ae1d3e15f258c7d7100a74f3ca44f"
+    },
+    {
+      "path": "SceneObj/crpg_battle_whitebridge/prt_data.bin",
+      "size": 3554991,
+      "sha256": "b42b41fcfc9ca6636f87c1a6c24ab29eddd115c933d1b2b42f4f7b0a1f448263"
+    },
+    {
+      "path": "SceneObj/crpg_battle_whitebridge/references.txt",
+      "size": 4507,
+      "sha256": "58c6ce8ce8f892dcbc3b2c7e53108979bcd4544630586f53889b3cac883b2855"
+    },
+    {
+      "path": "SceneObj/crpg_battle_whitebridge/scene.xscene",
+      "size": 1028098,
+      "sha256": "afdc27db3644d716602bc720da5ecb5d943ebcf8056b5ed848374830356c9aa9"
+    },
+    {
+      "path": "SceneObj/crpg_battle_whitebridge/terrain.bin",
+      "size": 81646,
+      "sha256": "8626f0e2f118ee13590edaf46ae713ceee14c344f15615b9823097b4fab37101"
+    },
+    {
+      "path": "SceneObj/crpg_battle_zemouri/atmosphere.xml",
+      "size": 4793,
+      "sha256": "532380df0aa7af1d511b479deff2e8046ff0f35d85f866eb073b56510cb1386e"
+    },
+    {
+      "path": "SceneObj/crpg_battle_zemouri/flora.bin",
+      "size": 2284286,
+      "sha256": "70f82814de71a31827cf41e2a0b65db283fe020cb62b67194f97f4f5c550e92b"
+    },
+    {
+      "path": "SceneObj/crpg_battle_zemouri/navmesh.bin",
+      "size": 11283,
+      "sha256": "3ad0ef6d0494c8fc19cd5b7bc49596bb07ab6a14d262a27c37c26f60a6c80f47"
+    },
+    {
+      "path": "SceneObj/crpg_battle_zemouri/prt_data.bin",
+      "size": 1036042,
+      "sha256": "4cd217221c0417f46f470481d904b3c68d638eb0ca4840dbaf43c3f23102fac0"
+    },
+    {
+      "path": "SceneObj/crpg_battle_zemouri/references.txt",
+      "size": 18973,
+      "sha256": "7e324c6a7e26b7b1ab864a61143d9c78b2ac012e7ee9c7dfd18f90581b975ed3"
+    },
+    {
+      "path": "SceneObj/crpg_battle_zemouri/scene.xscene",
+      "size": 388111,
+      "sha256": "5aaee0e2fdf5b63164ceb44dd51a45909e2e0d596e60c3a2b615c2c28eead3fc"
+    },
+    {
+      "path": "SceneObj/crpg_battle_zemouri/terrain.bin",
+      "size": 303897,
+      "sha256": "4d45b3d7a1e1885d5bd77635faea81df297b6da5ee97c363645c7eb0bdad1e64"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_fjallborn/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 25240,
+      "sha256": "b0ca4d2b500776f7ec3b979027de543ede833527b44f1a2c38c700bc30a494d9"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_fjallborn/atmosphere.xml",
+      "size": 4803,
+      "sha256": "e8df9c09c3f19ee72c257ae7008ad52596c1380333a274fa249e0a22fc956926"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_fjallborn/flora.bin",
+      "size": 48031,
+      "sha256": "08d3084cd77035595cf2917d9cfed7162e542a2dae1c55b107f3ba772a38c873"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_fjallborn/navmesh.bin",
+      "size": 213140,
+      "sha256": "b09f4e67ce4a150e9370388a998de723c0fecab2667c552c5c120fa692de93a6"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_fjallborn/prt_data.bin",
+      "size": 29393835,
+      "sha256": "27368317ba8883f7d133b4f12d66f1fabf4188cbd187ffb93b78c9c1c9c03db9"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_fjallborn/references.txt",
+      "size": 22758,
+      "sha256": "b49485e3a75a0cfd9906d1e838fb8c1fd6b8a2d6e0f82ee057d92472efd00e6a"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_fjallborn/scene.xscene",
+      "size": 2779046,
+      "sha256": "f16711348df7b592c6cd6ac410b80484a4ac7cbe399a563323644685811491da"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_fjallborn/terrain.bin",
+      "size": 1018656,
+      "sha256": "ed6b250d0c8b26b7879c25d4f5b697c2b3d957609269563894be45d132fdb65f"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_thewhitecity/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 15560,
+      "sha256": "7297bd26ce47bfe3ff292f358a59bf9bfa62828ddccddc5f14d9339d120f8a67"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_thewhitecity/atmosphere.xml",
+      "size": 4841,
+      "sha256": "78b712c25889ab478748f8a4998f25d295c1df72c436088e0a19124ace775e61"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_thewhitecity/flora.bin",
+      "size": 351601,
+      "sha256": "c6f351b8c0ee331abded9ae0b1c026ad28f13ae58bc15c4ed1bb36c95925e274"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_thewhitecity/navmesh.bin",
+      "size": 5546243,
+      "sha256": "9f3abbb62284afdf1f7e9b5d9f3d5fe1413adf3d1a5e85b6e3e18b56059f693e"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_thewhitecity/references.txt",
+      "size": 14901,
+      "sha256": "c654135a37851ed552ba2e3459059f01fc6e296393d81e943d4430c2fa71fdae"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_thewhitecity/scene.xscene",
+      "size": 8312436,
+      "sha256": "e6e57e3a92504fc7c4471a1eb7a37d5697d5bc4fe3a9cb595d847fa4b70288a1"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_thewhitecity/terrain.bin",
+      "size": 343531,
+      "sha256": "513271bcf76c9f7f0dd29e6bad0927edbc3fc8e693f950ff54ce27fc79c72083"
+    },
+    {
+      "path": "SceneObj/crpg_conquest_thewhitecity/terrain_ed.bin",
+      "size": 2624207,
+      "sha256": "d2d970b9d9b370be8f1b9386080b39ddbd58dcce2156e9c5668e41253f9d3b9e"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_empire/atmosphere.xml",
+      "size": 4795,
+      "sha256": "67765d62f101688c6f5fa13279dc0c0f9844c58e3a30f808f205a9f70e22eebf"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_empire/flora.bin",
+      "size": 902,
+      "sha256": "a00082c1861fe5d0535ace7ff04e812e32c95f22c5ba08d46960dfe7f7dd2169"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_empire/navmesh.bin",
+      "size": 11469,
+      "sha256": "389829c0679dd506649ddf15c2dc7f1f342843ecc7148dcdfb6dad88f04a94af"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_empire/prt_data.bin",
+      "size": 2235525,
+      "sha256": "80fb67894280b61fdf781498c14debc212ec623f2a16326caa6fadf89c9fda3a"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_empire/references.txt",
+      "size": 3924,
+      "sha256": "2c4e2e25af2be47ea7e128e7b00d371e4d3a79f7f0ab0bd1d66c9d237e719496"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_empire/scene.xscene",
+      "size": 286505,
+      "sha256": "8f0c3864b60068f7f1435ad711f1a948a3517bd6aa1f0c2ec1cea344bb0ff663"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_empire/terrain.bin",
+      "size": 37460,
+      "sha256": "f727bc553568229acb9a5728b2e33e2719f3fe2c7ac7550ae6a0a34f22cbd882"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_vlandia/atmosphere.xml",
+      "size": 4795,
+      "sha256": "0fb1c0257b22576ce96e86ee881afb50c1268513f0608837e3f769abf8400ef9"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_vlandia/flora.bin",
+      "size": 2720,
+      "sha256": "ae149489484a001baf572726adb23680f451979e34ad154d3a77577cb499ae96"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_vlandia/navmesh.bin",
+      "size": 10442,
+      "sha256": "a489e95d6df55c1a0b2dc95ec09fc310daa30dc7a8f8176e8db631bf247ce791"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_vlandia/prt_data.bin",
+      "size": 1995967,
+      "sha256": "05c26bf372284d522c85eb3ca9cc3c5f5e251a2e288e9340c6691631c514f7af"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_vlandia/references.txt",
+      "size": 4544,
+      "sha256": "e240fafd7e6cd08fa73ace5d221a07862ec7f7296dc8879c244e8053fb770205"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_vlandia/scene.xscene",
+      "size": 271789,
+      "sha256": "1463d458cac77936f16d66e5b4e43d31d83d3abed1f791fc2b29208d9aa73acc"
+    },
+    {
+      "path": "SceneObj/mp_adimiduel_vlandia/terrain.bin",
+      "size": 28756,
+      "sha256": "d4989b86abf7a9bc2859899b63b522896708bc5143969f700b093ce02763d88d"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/atmosphere.xml",
+      "size": 4809,
+      "sha256": "6a1d8f8c2808022a9ccf239e30909baee67106a905f08455b6e9e3ab247dd929"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/flora.bin",
+      "size": 241926,
+      "sha256": "ddd0f8287a6d7d953421d57535e8da4074db58b2cd42e6735cc839f8b5434783"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/mmd1.mmd",
+      "size": 14335,
+      "sha256": "f25e630451a806d6589e8ce6d217e2ba6772771dcc5d193fc8f060afa0a42142"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/mmd10.mmd",
+      "size": 8919,
+      "sha256": "952b943e875d2d6c9e1d3f34e4439e4def082939adf8c298596e09f09c093ea2"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/mmd11.mmd",
+      "size": 4883,
+      "sha256": "6a6930975ec0d2830d670d69a497702ea8f706cd4cc5dc828ca790b539a97fd5"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/mmd2.mmd",
+      "size": 5987,
+      "sha256": "c09c087e051ed3bd6ee11c299ebeee81904476c9d85dbfd4d0420fd246e8955e"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/mmd3.mmd",
+      "size": 7751,
+      "sha256": "2ffa2b5bb82e7709baa3ac847530f0decfae010cd4fcb2390f8c153d6e02f0df"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/mmd4.mmd",
+      "size": 14335,
+      "sha256": "f25e630451a806d6589e8ce6d217e2ba6772771dcc5d193fc8f060afa0a42142"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/mmd5.mmd",
+      "size": 7751,
+      "sha256": "2ffa2b5bb82e7709baa3ac847530f0decfae010cd4fcb2390f8c153d6e02f0df"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/mmd6.mmd",
+      "size": 8919,
+      "sha256": "952b943e875d2d6c9e1d3f34e4439e4def082939adf8c298596e09f09c093ea2"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/mmd7.mmd",
+      "size": 5987,
+      "sha256": "c09c087e051ed3bd6ee11c299ebeee81904476c9d85dbfd4d0420fd246e8955e"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/mmd8.mmd",
+      "size": 7751,
+      "sha256": "2ffa2b5bb82e7709baa3ac847530f0decfae010cd4fcb2390f8c153d6e02f0df"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/mmd9.mmd",
+      "size": 5987,
+      "sha256": "c09c087e051ed3bd6ee11c299ebeee81904476c9d85dbfd4d0420fd246e8955e"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/navmesh.bin",
+      "size": 125932,
+      "sha256": "1e8cb817db8c0279db4543793f1652176bc0ec3b3e718f7989a375fe0973b4cb"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/prt_data.bin",
+      "size": 6709953,
+      "sha256": "053cf3daa0834c2ac2d9206890bbf2ee591941f9c6a047243ec0d24722575a35"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/references.txt",
+      "size": 8652,
+      "sha256": "709c5d4aecb03f40ea1507a0ef9c940ffaf78f12550343f7fdd348dbccb21c55"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/scene.xscene",
+      "size": 1524786,
+      "sha256": "aa8825e9672a66f0160307b6fdf53ec123f9ca6025607190dc585bbdbcb2cd58"
+    },
+    {
+      "path": "SceneObj/mp_bnl_abandoned_v2/terrain.bin",
+      "size": 112603,
+      "sha256": "9ecac598e08f3ad6e9015b46463f1795d1105fafa545a7469bc9a533ed4f8014"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lighthouse/atmosphere.xml",
+      "size": 4849,
+      "sha256": "cbd4346ce0bde613b7b6fb0b2d99be0c9a57ead7208272944e34d39ab32855c7"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lighthouse/flora.bin",
+      "size": 669957,
+      "sha256": "9eb0fcc0510cafccdf125eead2a685a5cd20a42f64930b132344e9f77a3d7357"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lighthouse/flowmap.dds",
+      "size": 1048704,
+      "sha256": "dd59977fd9613af06a78ee7178144079422df3c1a049ae610471b6578ecd3901"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lighthouse/navmesh.bin",
+      "size": 69528,
+      "sha256": "ad1a86be78bb0e9a76b3caefd4f4120a8d583672227ce8b3452e8f3b0d1ffe99"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lighthouse/prt_data.bin",
+      "size": 6442663,
+      "sha256": "31f364a82486b5d5e9c80f49bef05366ed52d2521e4c2124e6ef63622ab5a3b0"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lighthouse/references.txt",
+      "size": 11992,
+      "sha256": "dd6a8f39f6fd0521bf88d5f801960d7567c0d85712716f6855d4c898a4a143c2"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lighthouse/scene.xscene",
+      "size": 633728,
+      "sha256": "f0db4f411bf17b1cec48b79e71c37c3ef29fdcf594e3331d68e81fa9e56ce7ad"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lighthouse/terrain.bin",
+      "size": 409190,
+      "sha256": "b1b55d1a49bdefe99705830482e67090be29aba720aa8093e0946f915c27ba91"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lycaronsdistricts/atmosphere.xml",
+      "size": 4851,
+      "sha256": "eafd30f0a26faa60f9cde4dbcb27192efe94b19c05d24a774b89622db66b3c27"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lycaronsdistricts/flora.bin",
+      "size": 323654,
+      "sha256": "93178a23f6c29b6ac827c88d7b54ea2702c97b1880e928671dcb5b6e07ae2494"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lycaronsdistricts/navmesh.bin",
+      "size": 46748,
+      "sha256": "ffb4e3c9b301c11ea5df1ad74eba26d1f60713a5fdf3fadfdf7ecca077258c7a"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lycaronsdistricts/prt_data.bin",
+      "size": 3429907,
+      "sha256": "cd0ea8a484f1a21ab216a7e3b1f0ed9472aedbfe82b5bfdfbcba5453749aab39"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lycaronsdistricts/references.txt",
+      "size": 17595,
+      "sha256": "1e926ef0b39132c736f313c87d96c821ef01c5478bef9ca6240b7f46ae4322d2"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lycaronsdistricts/scene.xscene",
+      "size": 655486,
+      "sha256": "789273e12377025d083c7f193433352da0e63bd5c38728cd5303a050a95c6076"
+    },
+    {
+      "path": "SceneObj/mp_bnl_lycaronsdistricts/terrain.bin",
+      "size": 195646,
+      "sha256": "4f477e436ac635db2aa7277ac8e4bf2a73da059b69c111c33ab37bbbc6d37d55"
+    },
+    {
+      "path": "SceneObj/mp_bnl_purplehaze/atmosphere.xml",
+      "size": 4792,
+      "sha256": "3edf2f38b77053fe378a125575c4c0f9df9ff0f939b9cf8d8a5409d41a9d735d"
+    },
+    {
+      "path": "SceneObj/mp_bnl_purplehaze/flora.bin",
+      "size": 513564,
+      "sha256": "6c5040e428b8096347de067403679e7cab2c17d265ed4fc3df21b48c45452354"
+    },
+    {
+      "path": "SceneObj/mp_bnl_purplehaze/flowmap.dds",
+      "size": 1048704,
+      "sha256": "d5359a8167efb514cb0ee1121c72f0195084f5c03c3b703cb1c3b2ee48413f11"
+    },
+    {
+      "path": "SceneObj/mp_bnl_purplehaze/navmesh.bin",
+      "size": 43019,
+      "sha256": "b56c82a4b1868059d87e70513f009207e56c62f8373e888fe1871cc6dbccf122"
+    },
+    {
+      "path": "SceneObj/mp_bnl_purplehaze/prt_data.bin",
+      "size": 1927467,
+      "sha256": "1edc6d22294e7dedeeab66d7137a4805037a6872a31a938bbfa85a23f7bce535"
+    },
+    {
+      "path": "SceneObj/mp_bnl_purplehaze/references.txt",
+      "size": 8605,
+      "sha256": "c2da06edc88355dd97f00ccba2cf6444c1dae888ec3e00b7df31dd1ee1f089b2"
+    },
+    {
+      "path": "SceneObj/mp_bnl_purplehaze/scene.xscene",
+      "size": 1122384,
+      "sha256": "0d220b15a5c28c83de297e44769aa2be0751837ec0aee0f7d7feedb63b8ca49f"
+    },
+    {
+      "path": "SceneObj/mp_bnl_purplehaze/terrain.bin",
+      "size": 807587,
+      "sha256": "e364d32dbdd829f0d005992c9ba5bdd8db9d2273cac0cff33f49e8fc076c849b"
+    },
+    {
+      "path": "SceneObj/mp_bnl_quarry/atmosphere.xml",
+      "size": 4842,
+      "sha256": "17ba1b933e5f8fd71b731ad18a9c8539cc93d07de07033788051757ec1580926"
+    },
+    {
+      "path": "SceneObj/mp_bnl_quarry/flora.bin",
+      "size": 231687,
+      "sha256": "d196096fd3a46b8d56f7583789fb82aae9059c23496803b071fcd21952ff419a"
+    },
+    {
+      "path": "SceneObj/mp_bnl_quarry/navmesh.bin",
+      "size": 54212,
+      "sha256": "01958926cf05af1dd61070fbf80be416091c07a2e21023af83de946201058d7a"
+    },
+    {
+      "path": "SceneObj/mp_bnl_quarry/references.txt",
+      "size": 6016,
+      "sha256": "3bf37334b769aefca56c8007068d00c2317fd9fbe75dba96bf0e64585bf21242"
+    },
+    {
+      "path": "SceneObj/mp_bnl_quarry/scene.xscene",
+      "size": 534381,
+      "sha256": "ae31385360dc8b0548cd448cfa1e64550f34afe2c214f7e14ee301de739a9435"
+    },
+    {
+      "path": "SceneObj/mp_bnl_quarry/terrain.bin",
+      "size": 232661,
+      "sha256": "7a942af9a9e01cf6684f19b1efa0089864334f6ad995a2e8635187fb3c1c4689"
+    },
+    {
+      "path": "SceneObj/mp_bnl_vatnborg/atmosphere.xml",
+      "size": 4846,
+      "sha256": "7414f0b6082bef1bcabcff9cde48f8f7d5c30beabce8083973af929fa3e8b83b"
+    },
+    {
+      "path": "SceneObj/mp_bnl_vatnborg/flora.bin",
+      "size": 44959,
+      "sha256": "bd8ede9e55e89f6f97e5885410ead82c0dcd671b2b8e7bd45f9eec6fa20ad957"
+    },
+    {
+      "path": "SceneObj/mp_bnl_vatnborg/navmesh.bin",
+      "size": 47927,
+      "sha256": "f179fb0edce6632deb27bad5d368595280ade6b81988d73cb2532021f35cfbaf"
+    },
+    {
+      "path": "SceneObj/mp_bnl_vatnborg/prt_data.bin",
+      "size": 6143292,
+      "sha256": "0f8596db67969b17a44487fc052932fcd1106efad3355ff2708050746c97fdd6"
+    },
+    {
+      "path": "SceneObj/mp_bnl_vatnborg/references.txt",
+      "size": 14118,
+      "sha256": "55940cd29720dcc6c4c3b8a6118737a55616181b98f185f313c34fe5796f33fd"
+    },
+    {
+      "path": "SceneObj/mp_bnl_vatnborg/scene.xscene",
+      "size": 513188,
+      "sha256": "1e6acc7c64ac43e3241abcc48a9de5425db02ddfe43681ebb4162e698d120994"
+    },
+    {
+      "path": "SceneObj/mp_bnl_vatnborg/terrain.bin",
+      "size": 429218,
+      "sha256": "f8ab160d17396ef2a977d03d1becda425c1855d8fbb3b56f63f37e10b47e980e"
+    },
+    {
+      "path": "SceneObj/mp_contest_ankiniyas/atmosphere.xml",
+      "size": 4805,
+      "sha256": "cb92288ff391fb36c4a906a95af965aaaf26b3301abb42544b4162c8bcfaab8a"
+    },
+    {
+      "path": "SceneObj/mp_contest_ankiniyas/flora.bin",
+      "size": 2063411,
+      "sha256": "5b179c496995f4aa84a6e99289e7afd2ff0abf0b030f2900977979991574f707"
+    },
+    {
+      "path": "SceneObj/mp_contest_ankiniyas/references.txt",
+      "size": 44997,
+      "sha256": "1657db2b7f7c68e937256c3bbd724795eee5dbf3f4b29e03f5c1e213f479eaf4"
+    },
+    {
+      "path": "SceneObj/mp_contest_ankiniyas/scene.xscene",
+      "size": 1968122,
+      "sha256": "85dabfc0c504e1cd50e6734fd1e53ac132ed862eceeb29efcfeac93b449f3093"
+    },
+    {
+      "path": "SceneObj/mp_contest_ankiniyas/terrain.bin",
+      "size": 117622,
+      "sha256": "9ae455cf9269c3cb0ff1a2f6a1517972f131d4f98b7f718e0bad36d99c91452c"
+    },
+    {
+      "path": "SceneObj/mp_groupfight/atmosphere.xml",
+      "size": 4802,
+      "sha256": "532fcb887dc526d5a4d7914512670ea075e15b7520b2c5ff990762fa9d9aa350"
+    },
+    {
+      "path": "SceneObj/mp_groupfight/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/mp_groupfight/references.txt",
+      "size": 1210,
+      "sha256": "c7327cd967635fabee09faf9e531a19076cf031e17067f1127ff4e747924a4b6"
+    },
+    {
+      "path": "SceneObj/mp_groupfight/scene.xscene",
+      "size": 50623,
+      "sha256": "956f50a58575cdb2acabf8e1d71eb61eeeb7b4868152fd2cd3e9222b4db231cf"
+    },
+    {
+      "path": "SceneObj/mp_groupfight/terrain.bin",
+      "size": 1387,
+      "sha256": "67c812363dc4b096153e08183ff14ebdca794d2aa3843853b701a4b830ed2d40"
+    },
+    {
+      "path": "SceneObj/mp_ie_performancearena/atmosphere.xml",
+      "size": 4795,
+      "sha256": "939872990c74f0cc71e977bd1d1cb17fc8d49387d222d8ca737c369d8e59942c"
+    },
+    {
+      "path": "SceneObj/mp_ie_performancearena/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/mp_ie_performancearena/references.txt",
+      "size": 570,
+      "sha256": "0d475db849f9f496ea33d8ffa100ed36252b6fa223a2119a6721ff705a474630"
+    },
+    {
+      "path": "SceneObj/mp_ie_performancearena/scene.xscene",
+      "size": 18568,
+      "sha256": "aeaee5c039e92245a271a19308b2bf2de9d566b1aef83c40a0e051859bc0ac3d"
+    },
+    {
+      "path": "SceneObj/mp_ie_performancearena/terrain.bin",
+      "size": 1016,
+      "sha256": "5df63dd573d4594430949ad65f262389bf7861c223becd0bdd09d05f8b7e7ba1"
+    },
+    {
+      "path": "SceneObj/scn_gratianopoliswarlords/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 28744,
+      "sha256": "4fef1fc4b45dc6d8abb0f9450ab85eaca01d0575a3af1e52966882c43291f606"
+    },
+    {
+      "path": "SceneObj/scn_gratianopoliswarlords/atmosphere.xml",
+      "size": 4835,
+      "sha256": "507d2f80a3b5f4067d89fdc4caf06e7ca729037cf78622d9fe47be4cdf6eba80"
+    },
+    {
+      "path": "SceneObj/scn_gratianopoliswarlords/flora.bin",
+      "size": 2382508,
+      "sha256": "cb316af44b3ce70faa5886910fe8ccb28ccbaeb91c325d50f98aa580db5c41ff"
+    },
+    {
+      "path": "SceneObj/scn_gratianopoliswarlords/references.txt",
+      "size": 31758,
+      "sha256": "6b3cf7dbe40c8bbb10abeeb07d262c181549ea48cac4831d03e26c394d59389d"
+    },
+    {
+      "path": "SceneObj/scn_gratianopoliswarlords/scene.xscene",
+      "size": 3828641,
+      "sha256": "37f85e551dd63dd7e61026327bc3188a325f3157db64ee262deab42e1675f986"
+    },
+    {
+      "path": "SceneObj/scn_gratianopoliswarlords/terrain.bin",
+      "size": 217479,
+      "sha256": "046ad9653c5c58852ef419f81e6d06337868c116908d1c7610b93cf6aa4cb943"
+    },
+    {
+      "path": "SceneObj/scn_nm_ruins/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 14680,
+      "sha256": "c6c56d6575b8884fa59b6fbdbf91c66957427b53301dc98b69760d672ba692cb"
+    },
+    {
+      "path": "SceneObj/scn_nm_ruins/atmosphere.xml",
+      "size": 4849,
+      "sha256": "cb294e540eb1520dac418b467bd8c177635cd31d6431fcd4f1e9aeef6e7ff52c"
+    },
+    {
+      "path": "SceneObj/scn_nm_ruins/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/scn_nm_ruins/references.txt",
+      "size": 3024,
+      "sha256": "1d97f76a61a1a066b72caabe19537d84b313f19c35036d8157cf396480cda457"
+    },
+    {
+      "path": "SceneObj/scn_nm_ruins/scene.xscene",
+      "size": 209379,
+      "sha256": "5195901edac991d48eba0f383618461a9bf5910ed80ccfc004f974ca88f93d6b"
+    },
+    {
+      "path": "SceneObj/scn_nm_ruins/terrain.bin",
+      "size": 297571,
+      "sha256": "bbfe20ffb8f01b46ae3a4742ca37fcd7627bfe0a79b337bb22f44e2195a33744"
+    },
+    {
+      "path": "SceneObj/scn_nm_theoldarena/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 28184,
+      "sha256": "b6ff8696cd0495110b99a2a0618c42b913512496c037bb485cb6dd63a52e1584"
+    },
+    {
+      "path": "SceneObj/scn_nm_theoldarena/atmosphere.xml",
+      "size": 4846,
+      "sha256": "d9bbf9d39d69c805cd48cafb6e0fabb5acb7654b90016679e1642cc197eb3010"
+    },
+    {
+      "path": "SceneObj/scn_nm_theoldarena/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/scn_nm_theoldarena/references.txt",
+      "size": 4656,
+      "sha256": "0b0f88a65dfd4db8af988a961e71299239b41bda0c0c3f1a0373a19e0f6cf9b3"
+    },
+    {
+      "path": "SceneObj/scn_nm_theoldarena/scene.xscene",
+      "size": 401644,
+      "sha256": "fdf12f42cd0dd2171b47b36418b14e912dc9119139dd6cdd0a1074a0c43c9307"
+    },
+    {
+      "path": "SceneObj/scn_nm_theoldarena/terrain.bin",
+      "size": 22821,
+      "sha256": "41f9ef547e3e55e4ca384c66a25ca11320b3b757abb289cf011869de811cb811"
+    },
+    {
+      "path": "SceneObj/scn_nm_turin_castle/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 7624,
+      "sha256": "0230b0f21a90f182166d79c8c02b093084ab24b81e0140393ae27979d851e323"
+    },
+    {
+      "path": "SceneObj/scn_nm_turin_castle/atmosphere.xml",
+      "size": 4852,
+      "sha256": "0bba7c06bf1e078e3d612b02cba96146e5c1af83f0e65c8ea6f37b1d7b72833a"
+    },
+    {
+      "path": "SceneObj/scn_nm_turin_castle/flora.bin",
+      "size": 5097180,
+      "sha256": "c30ab3421bccc338c564bd9ccd05fb1f7024cc9a8e05b00d37b4878e4233544c"
+    },
+    {
+      "path": "SceneObj/scn_nm_turin_castle/references.txt",
+      "size": 13977,
+      "sha256": "c12c97b70ac8ebb30836a0e8212184c94078c2979bf475587f5e07eb24e77e3e"
+    },
+    {
+      "path": "SceneObj/scn_nm_turin_castle/scene.xscene",
+      "size": 1012439,
+      "sha256": "b4b4b1271b151de096b0b0884d153bea53460deab22f30a6b89d9a0a71c1586c"
+    },
+    {
+      "path": "SceneObj/scn_nm_turin_castle/terrain.bin",
+      "size": 259565,
+      "sha256": "050956b4a550f0fa3b0e31a9baa626556747493fbe5f4e1473bcc262e315d92b"
+    },
+    {
+      "path": "SceneObj/scn_oldarena_tdm/atmosphere.xml",
+      "size": 4799,
+      "sha256": "87c8a2ad10bd1b52594d23c8107f3a867860f95f055ba556e7dfd4b4863be4a4"
+    },
+    {
+      "path": "SceneObj/scn_oldarena_tdm/flora.bin",
+      "size": 482750,
+      "sha256": "0889ae9da964a680019e02b6179c6a928a71b17c1f691ba4fc4d1fdd681919f1"
+    },
+    {
+      "path": "SceneObj/scn_oldarena_tdm/mmd1.mmd",
+      "size": 190738,
+      "sha256": "91f562b79ffcc5347e788caa4a106ce058ff1bd687222ed99eb5c9c227ed14b4"
+    },
+    {
+      "path": "SceneObj/scn_oldarena_tdm/navmesh.bin",
+      "size": 196411,
+      "sha256": "03f1d86cf26a2de0f92ed21aad34e6d699efa5e084d7e0251994f33390d5c58b"
+    },
+    {
+      "path": "SceneObj/scn_oldarena_tdm/references.txt",
+      "size": 9919,
+      "sha256": "1e2c9a5e29fc9c7021b4dd7c3c3995aeb57b0ac9ebcaac8fbcb977d7a640a5c3"
+    },
+    {
+      "path": "SceneObj/scn_oldarena_tdm/scene.xscene",
+      "size": 288433,
+      "sha256": "959e44c3389b6d59bc1dc2e683fac750938fdae10840132e58f0907c0875d8d1"
+    },
+    {
+      "path": "SceneObj/scn_oldarena_tdm/terrain.bin",
+      "size": 36167,
+      "sha256": "48c9c5a5b25828c4c11de7596bc55b4c92135bc80071b20f3bd56e9cb0ff2c36"
+    },
+    {
+      "path": "SceneObj/scn_oldstonearena_tdm/atmosphere.xml",
+      "size": 4801,
+      "sha256": "bc4352efbc4e186207bb9a6fa82cef782d85a0be821709244cdca7df86ae41f3"
+    },
+    {
+      "path": "SceneObj/scn_oldstonearena_tdm/flora.bin",
+      "size": 521514,
+      "sha256": "2d4c91661b4189f3b68d92849fbc5c079bcf388d00b53f3a78ba6cdc33b86b2e"
+    },
+    {
+      "path": "SceneObj/scn_oldstonearena_tdm/mmd1.mmd",
+      "size": 190738,
+      "sha256": "91f562b79ffcc5347e788caa4a106ce058ff1bd687222ed99eb5c9c227ed14b4"
+    },
+    {
+      "path": "SceneObj/scn_oldstonearena_tdm/navmesh.bin",
+      "size": 316743,
+      "sha256": "781f7fdb01feeec9b3fa2d14bf728da438e65987ee1fcb07a3abd4d997186809"
+    },
+    {
+      "path": "SceneObj/scn_oldstonearena_tdm/references.txt",
+      "size": 10358,
+      "sha256": "65ba03142abae2816f4f35e60dbe72f6ee654ee029532c2db7c97b5f3d99a0ec"
+    },
+    {
+      "path": "SceneObj/scn_oldstonearena_tdm/scene.xscene",
+      "size": 410433,
+      "sha256": "1876bc117aa86715eeea6d3274c3c79748e9cf51895953c8408ae8946f2cfedc"
+    },
+    {
+      "path": "SceneObj/scn_oldstonearena_tdm/terrain.bin",
+      "size": 42244,
+      "sha256": "8f7a5dbe802faff79597e28788f8520b88a455f473d487fe42b07aa628d04704"
+    },
+    {
+      "path": "SceneObj/strategus_war_council/atmosphere.xml",
+      "size": 4838,
+      "sha256": "5766becf828527735ffcdee68640b0a2fe7756dca3d57c659217a71e95e9f464"
+    },
+    {
+      "path": "SceneObj/strategus_war_council/references.txt",
+      "size": 1238,
+      "sha256": "87f54455175bfc20013c6af8119c11fdc556deca15b3a0f1dc7263ac372ea2f4"
+    },
+    {
+      "path": "SceneObj/strategus_war_council/scene.xscene",
+      "size": 65893,
+      "sha256": "fac841709e47d7981354f83c5ed36999458d440cad3cec6c5766fa2d97801080"
+    },
+    {
+      "path": "SceneObj/wl_Upbourn/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 23128,
+      "sha256": "10a40cdd6289dc9a62b43900eb16351b82b6f818bb11b60127a2f03e30733c7c"
+    },
+    {
+      "path": "SceneObj/wl_Upbourn/atmosphere.xml",
+      "size": 4835,
+      "sha256": "82e6413db748d9b998666c30c346e0a9e25cb2caffab8120caf62a41400a95d7"
+    },
+    {
+      "path": "SceneObj/wl_Upbourn/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/wl_Upbourn/references.txt",
+      "size": 16116,
+      "sha256": "a3a29b3f1c88cf1357a1df8751a767e2c2e581cbfeff49da83f17470abe7d748"
+    },
+    {
+      "path": "SceneObj/wl_Upbourn/scene.xscene",
+      "size": 616390,
+      "sha256": "c965c97ed6ec1c67a40977d34a795b03adfbbc06896e08083f0bf0a19df3de88"
+    },
+    {
+      "path": "SceneObj/wl_Upbourn/terrain.bin",
+      "size": 602559,
+      "sha256": "8d15ccc4dbcdc06da29dfb9c10df90102f4ef724c43f03da4fd064088632b655"
+    },
+    {
+      "path": "SceneObj/wl_Upbourn/terrain_ed.bin",
+      "size": 4792880,
+      "sha256": "1c18b0faa5ee9fb74e1aa3dd652bd9f381cff46ee19ce06ea376ca9c2991759e"
+    },
+    {
+      "path": "SceneObj/wl_banner_editor_scene/atmosphere.xml",
+      "size": 4792,
+      "sha256": "af5919c13aa0eb7271eabfbcfbebd9ee01f9e5b018dd1c1ee11a3c8569e63175"
+    },
+    {
+      "path": "SceneObj/wl_banner_editor_scene/scene.xscene",
+      "size": 12090,
+      "sha256": "8b80fe59a7346579ec014df674d50ef2dc3dc3bc97d6fe733d98e3b20d934851"
+    },
+    {
+      "path": "SceneObj/wl_duel/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 19160,
+      "sha256": "0b899d17b8341fcafc6c77888f45e5435a80be8252d364c5eade1f9e8752e3e1"
+    },
+    {
+      "path": "SceneObj/wl_duel/atmosphere.xml",
+      "size": 4948,
+      "sha256": "a6e7fabc57749b8ca530758c2680381a12cefde6a27fee98be14cc2580f8b6bd"
+    },
+    {
+      "path": "SceneObj/wl_duel/flora.bin",
+      "size": 142588,
+      "sha256": "32fa167d989846f0378963a72b39f3aa4b60b1d314d9116a74a9f8aed3a4c035"
+    },
+    {
+      "path": "SceneObj/wl_duel/navmesh.bin",
+      "size": 11469,
+      "sha256": "d1c44662a44a2c2b8d239710445cfae4fc82c6f803eac5f1342b10add518dd52"
+    },
+    {
+      "path": "SceneObj/wl_duel/references.txt",
+      "size": 8996,
+      "sha256": "6a2bcbf47c3001b1fad0a541e13ef6fb3e988de1eb74ea0c24309e633d443969"
+    },
+    {
+      "path": "SceneObj/wl_duel/scene.xscene",
+      "size": 739416,
+      "sha256": "c3552f625f087018747bc6d9992ae56483e18362eaa17dc3b17953bedc805b11"
+    },
+    {
+      "path": "SceneObj/wl_duel/terrain.bin",
+      "size": 278546,
+      "sha256": "0481072ee0599a2ae0e39a55e0fecfd50bd5d836071e9817d38eaaef208ea0c5"
+    },
+    {
+      "path": "SceneObj/wl_realms_dev/ShaderCache/D3D11/terrain_shaders_header_data.bin",
+      "size": 2200,
+      "sha256": "bf962991255579c80537be6cef8a182e542c345c6d7b7271eb8850c3226baeb1"
+    },
+    {
+      "path": "SceneObj/wl_realms_dev/atmosphere.xml",
+      "size": 4835,
+      "sha256": "82e6413db748d9b998666c30c346e0a9e25cb2caffab8120caf62a41400a95d7"
+    },
+    {
+      "path": "SceneObj/wl_realms_dev/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/wl_realms_dev/references.txt",
+      "size": 766,
+      "sha256": "dcd7276f97f3293f6736e1c634c695d8bb3d4f3c42ee58d5fc718582fe2cba4b"
+    },
+    {
+      "path": "SceneObj/wl_realms_dev/scene.xscene",
+      "size": 30668,
+      "sha256": "1083c9a5c7bd63600ed31a4b03aef0653af65091acfdefddc9ec366c08dc459e"
+    },
+    {
+      "path": "SceneObj/wl_realms_dev/terrain.bin",
+      "size": 1581,
+      "sha256": "97e48b8876122288e8e7f922497367ae22341781bb22980bede1b4888c442bda"
+    },
+    {
+      "path": "SubModule.xml",
+      "size": 7046,
+      "sha256": "ad32c62c882b8ab021d59aaa41cda84f9b8f604087061a249ff4975efddb1ca5"
+    },
+    {
+      "path": "Videos/strategus_intro.ivf",
+      "size": 4935677,
+      "sha256": "7c9cbb2ebddb0969d5850536b023a354c6901cda22466911b0d0cae2376be67a"
+    },
+    {
+      "path": "bin/Win64_Shipping_Client/0Harmony.dll",
+      "size": 2456064,
+      "sha256": "353daafec180bb8e7bbe4da78f2a7cdc78067392e3a4e79dc8e7af295f2371e6"
+    },
+    {
+      "path": "bin/Win64_Shipping_Client/Bannerlord.UIExtenderEx.dll",
+      "size": 268288,
+      "sha256": "489bcf6ce0963cd57be019b3fa7c12ecb7eb786a689b211bd4c23ff1b85d85b0"
+    },
+    {
+      "path": "bin/Win64_Shipping_Client/Concentus.dll",
+      "size": 325120,
+      "sha256": "b536a1e869d447147333864451c51ceab4804957857dd97914751fba32ebe0cc"
+    },
+    {
+      "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.GauntletUI.dll",
+      "size": 1364992,
+      "sha256": "bb2ccbc6faadfb4440992b454b78ca5a79ba0e235062f31065af3298322987cc"
+    },
+    {
+      "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.View.dll",
+      "size": 34304,
+      "sha256": "37a242df655e90dff79e84656d87b201f0a238eee077cb48ca5488f9fb0227dc"
+    },
+    {
+      "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.dll",
+      "size": 2249728,
+      "sha256": "17923b2b7dba23e23d08673acb95d44570a88d6a48dc0970d3e095f7ea0474a1"
+    },
+    {
+      "path": "bin/Win64_Shipping_Client/StrategusBattleBridge.GauntletUI.dll",
+      "size": 504320,
+      "sha256": "44aa41c626d955f566f10eab3c36986c6e509f6ff3e444238d2b50c321ee0b9e"
+    }
+  ]
+}
