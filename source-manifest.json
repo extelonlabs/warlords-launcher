@@ -32,8 +32,8 @@
     },
     {
       "path": "src/Warlords.Launcher/App.xaml",
-      "sha256": "3e814ed4dceef296a8577d3b75e6d0e9104f8a3656925591923cf0ff1297b56e",
-      "size": 8561
+      "sha256": "114089197ec0a7fa19763654ae3fdf9f3725d0ea26d0f78a0359ae0374ce7f7b",
+      "size": 8560
     },
     {
       "path": "src/Warlords.Launcher/App.xaml.cs",
@@ -62,8 +62,8 @@
     },
     {
       "path": "src/Warlords.Launcher/MainWindow.xaml",
-      "sha256": "faa09c1cd9e1f4f25c3f2f3a7f590b1ae92e3a6f9584eabf4b679cdaee3cf02b",
-      "size": 10702
+      "sha256": "f731012d680b23e265401c3181696c48bc8ced9bea77fa9f32ce6c1295fe62d2",
+      "size": 10701
     },
     {
       "path": "src/Warlords.Launcher/MainWindow.xaml.cs",
