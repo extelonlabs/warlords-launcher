@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "9b99d297bd8de98374e8aaf368b3cd04802e428d",
+  "version": "1.0.70",
+  "entries": [
+    {
+      "version": "1.0.70",
+      "date": "2026-11-03",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Prepares campaign road battles to use their own generated battle map, checked by the server before the battle opens. If a map fails the check, the battle falls back to its normal map."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "DEV testers can now be let into campaign field battles and sieges, not only the DEV lobby and battle server. This has not been tried in a real game yet."
+          ]
+        },
+        {
+          "title": "Disabled",
+          "items": [
+            "Generated campaign battle maps are not switched on yet; battles still use their usual maps for now."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.69",
+      "date": "2026-11-02",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "In DEV map trials, an old copy of a battle map is now replaced with the server's version before joining, so you no longer fall from the sky or see flags inside the ground."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "DEV map trials can now use maps generated for real places on the campaign map, each with its own name."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.68",
+      "date": "2026-11-02",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "In DEV map trials, clicking Join now downloads a missing battle map first, shows its progress, and then joins."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "Joining a DEV map trial without its map no longer crashes the game."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.67",
+      "date": "2026-11-01",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added DEV groundwork for inspecting generated woodland, highland and river battlefields with separate map downloads. These trials are not enabled for normal campaign battles."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "Improved checks that prevent a private map trial from opening with missing or mismatched terrain and spawn data."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.64",
+      "date": "2026-10-31",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Keep empty-server reporting up to date between battles and in the lobby, so automatic DEV updates can safely wait for everyone to leave."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.63",
+      "date": "2026-10-31",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Blocked two unsafe admin equipment actions that could crash a dedicated server.",
+            "Fixed equipment-stock updates being held behind other players joining, with better recovery when catalogue updates arrive early or out of order.",
+            "Improved recovery for missing uploaded crests and interrupted banner refreshes.",
+            "Corrected a ladder update-order issue."
+          ]
+        },
+        {
+          "title": "Removed",
+          "items": [
+            "Removed an unused older horn package while keeping the new commander horn and animation."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Spread banner refresh work across frames and reduce repeated ladder, history and cosmetic work. Durable battle accounting is preserved; performance gains and gameplay still need confirmation."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.62",
+      "date": "2026-10-31",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed development lobby player reporting so automatic updates can wait until testers have left."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Prepared automatic tester update delivery when new development changes are pushed. Launcher updates still wait for a matching approved build.",
+            "Added support for tester updates to wait until development servers are empty before restarting them. Gameplay rules are unchanged."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.61",
+      "date": "2026-10-31",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "A detailed ivory war horn with brass fittings and a leather grip is prepared for DEV."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "The new horn animation raises the horn, takes a breath, blows with both hands and lowers it smoothly, with corrected hand grips. In-game playback still needs confirmation."
+          ]
+        }
+      ]
+    }
+  ]
+}
