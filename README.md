@@ -1,69 +1,83 @@
 # Warlords launcher
 
-Open-source Windows launcher for the small StratLords testing group. The original
-launcher app is available under the [MIT license](LICENSE). Current source
-version: **0.3.2**.
+Warlords.exe is a small Windows app. It installs the StratLords mod for
+Mount & Blade II: Bannerlord and keeps it up to date. That is all it does.
 
-[Download Warlords.exe](https://github.com/extelonlabs/warlords-launcher/releases/latest/download/Warlords.exe).
-Players do not need GitHub accounts or the .NET SDK to run the self-contained
-download.
+**[Download Warlords.exe](https://github.com/extelonlabs/warlords-launcher/releases/latest/download/Warlords.exe)**
+(launcher 0.3.2, free, open source, MIT license)
 
-## Play
+![The Warlords launcher window](docs/launcher.png)
 
-Requires Windows x64, Steam Bannerlord **v1.4.8**, and Warlords Armory exactly
-**v1.0.0.17** (Steam Workshop item 3712562953). Steam/TaleWorlds authentication
-and normal server admission remain required. This launcher does not grant access.
+## Is it safe?
 
-Run Warlords.exe and follow the main button: choose your game folder if needed,
-finish the Armory requirement, then install Warlords once. The launcher shows
-Play when setup is complete. Later launches automatically update a module
-already managed by the launcher. It checks again before Play. The launcher
-downloads compiled StratLords builds from the public channel:
+Yes. You do not have to trust us. You can check it yourself:
 
-`https://raw.githubusercontent.com/extelonlabs/warlords-launcher/StratLords/channel.json`
+- **Virus scan:** [VirusTotal scan of Warlords.exe 0.3.2](https://www.virustotal.com/gui/file/fd1c89d37d16da01e0229e97c1c16e3be85c2c0404e529e86a7baa152c7db8da).
+  VirusTotal checks a file with dozens of antivirus programs at once.
+- **Same file:** in PowerShell, run `Get-FileHash .\Warlords.exe`.
+  For launcher 0.3.2 it must show
+  `FD1C89D37D16DA01E0229E97C1C16E3BE85C2C0404E529E86A7BAA152C7DB8DA`.
+  This is the file's fingerprint. It is the same one VirusTotal scanned, and the
+  release page lists it in `SHA256SUMS.txt`.
+- **Open code:** every line of the app is in [src/Warlords.Launcher](src/Warlords.Launcher).
+  Anyone can read it or build it.
 
-Open **What's new** to read player-facing changes for the selected build.
-Release notes load separately when opened; unavailable notes do not block Play
-or updates. The publisher supplies notes from the exact source revision of the
-compiled mod, rather than exposing the private game repository.
+**It is not a hacking or cheat tool.** It does not:
 
-It validates the package and release-file SHA-256 hashes, stages the update,
-preserves player options and retains a recovery backup. Failed or expired
-channels block Play instead of silently selecting an old package. Native,
-Armory and other game modules are not installed by this updater.
+- change the game's program files, Native, Armory or any other mod
+- read your Steam login or passwords
+- skip Steam or TaleWorlds sign-in, or server rules
+- ask for admin rights
+- upload your files or data anywhere
 
-## Build the launcher
+What it does:
 
-On Windows with the **.NET 10 SDK** installed, run from this repository root:
+- downloads only, over HTTPS, from GitHub
+- writes only the StratLords mod (plus a backup of the old copy) in your
+  Bannerlord folder, and its own settings in `%LOCALAPPDATA%\WarlordsLauncherV2`
+- reads the Windows registry only to find where Steam is installed
+- asks Steam to start the game when you press Play
+
+### Windows says "Windows protected your PC"
+
+The app is not code-signed yet. (Code signing is a paid certificate that tells
+Windows who made a file.) So Windows may warn you the first time. Click
+**More info**, then **Run anyway**.
+
+## How it works
+
+You need Windows (64-bit) and Bannerlord **1.4.8** on Steam.
+
+1. **Download** `Warlords.exe` and double-click it. There is nothing to install.
+2. **Bannerlord:** it finds your game folder by itself. If it picks the wrong
+   one, click **Change…** and choose it.
+3. **Armory:** it checks for Warlords Armory **1.0.0.17**. If it is missing, click
+   **Get Armory** and subscribe on the
+   [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3712562953).
+4. **Warlords:** click **Install Warlords**. It downloads the mod, checks the
+   fingerprint of every file, and installs it. If a check fails, it stops and
+   installs nothing.
+5. **Play:** click **Play Warlords**. Steam opens the game.
+
+After that, it checks for updates each time you open it and again before you
+play. Open **What's new** to see what changed. **Settings & help** has
+**Verify files**, **Reinstall / repair** and **Open logs**.
+
+## Build it yourself
+
+With the **.NET 10 SDK** on Windows, run this from the repository root:
 
 ```powershell
 ./src/Warlords.Launcher/Build.ps1
 ```
 
-Output: `artifacts/launcher/Warlords.exe`. Publishing creates a self-contained
-Windows x64 executable. The SDK may restore Microsoft's framework/runtime packs
-on the first build; the app declares no third-party NuGet packages. No game SDK,
-private mod source, owner settings or credentials are needed to compile this app.
+You get `artifacts/launcher/Warlords.exe`. No game files, private code or
+passwords are needed.
 
-This repository contains the launcher app and public release metadata. The
-private StratLords game source, build runner, feed publisher, server operations,
-licensed game resources and owner configuration are outside this source export.
-The game, mod payloads and framework components retain their respective licenses.
-The bundled Warlords crest and icon retain their original artwork rights;
-the MIT code license does not relicense the name or logo. See
-[branding notice](src/Warlords.Launcher/Assets/NOTICE.md).
+## More
 
-## Security limits
-
-The current executable and update catalog are **unsigned testing artifacts**.
-HTTPS and SHA-256 check integrity relative to the downloaded catalog; they do not
-independently authenticate the publisher. Someone who controls the distribution
-account or catalog could replace both a payload and its advertised hashes.
-Install updates only from a publisher you trust, and review the source if you
-build your own launcher. Open source is not a security guarantee.
-Choosing a different channel grants that channel the same update authority.
-The app does not independently pin a minimum release version; expiry is
-enforced when supplied by the channel. The default feed supplies an expiry.
-
-See [SECURITY.md](SECURITY.md) for private vulnerability reporting and
-[SOURCE-EXPORT.md](SOURCE-EXPORT.md) for the exact publication boundary.
+- [SECURITY.md](SECURITY.md): known limits, and how to report a problem privately.
+- [SOURCE-EXPORT.md](SOURCE-EXPORT.md): what this repository contains.
+- The MIT license covers the launcher code only. The game, the mods, and the
+  Warlords name and logo keep their own rights. See the
+  [branding notice](src/Warlords.Launcher/Assets/NOTICE.md).
