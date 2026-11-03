@@ -4,7 +4,7 @@ Warlords.exe is a small Windows app. It installs the StratLords mod for
 Mount & Blade II: Bannerlord and keeps it up to date. That is all it does.
 
 **[Download Warlords.exe](https://github.com/extelonlabs/warlords-launcher/releases/latest/download/Warlords.exe)**
-(launcher 0.3.2, free, open source, MIT license)
+(free, open source, MIT license)
 
 ![The Warlords launcher window](docs/launcher.png)
 

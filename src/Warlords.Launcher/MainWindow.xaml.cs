@@ -6,9 +6,12 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using Microsoft.Win32;
 
 namespace Warlords.Launcher;
@@ -37,6 +40,7 @@ public partial class MainWindow : Window
     private string? _changelogLoadedKey;
     private string? _changelogCachedText;
     private bool _windowClosed;
+    private Storyboard? _splash;
     private const string ChangelogLoadedStatus = "Changes for this build and recent releases. Some features may still be in testing.";
 
     private enum PrimaryAction { ChooseFolder, CheckAgain, GetArmory, Install, Play }
@@ -68,6 +72,12 @@ public partial class MainWindow : Window
             _windowClosed = true;
             CancelChangelogRequest();
         };
+        // Window chrome and the startup animation are visual only. The splash
+        // starts after the setup check above and any click or key skips it.
+        Loaded += (_, _) => StartSplash();
+        PreviewMouseDown += (_, _) => FinishSplash();
+        PreviewKeyDown += (_, _) => FinishSplash();
+        StateChanged += (_, _) => UpdateWindowChrome();
         UpdateButtons();
     }
 
@@ -378,14 +388,18 @@ public partial class MainWindow : Window
         Progress.Visibility = ProgressPercentText.Visibility = _busy ? Visibility.Visible : Visibility.Collapsed;
         DetectButton.IsEnabled = BrowseButton.IsEnabled = ChoosePackButton.IsEnabled = RefreshButton.IsEnabled = BranchButton.IsEnabled = ConnectButton.IsEnabled = !_busy;
         ArmoryButton.IsEnabled = !_busy;
-        ArmoryButton.Visibility = hasGame && inspection?.ArmoryReady != true ? Visibility.Visible : Visibility.Collapsed;
         GameRootBox.IsEnabled = ChannelUrlBox.IsEnabled = !_busy;
         BrowseButton.Content = hasGame ? "_Change…" : "Choose _folder";
         RefreshButton.Content = _hadError ? "Try _again" : "Check _again";
+        // The primary button already says Try again after an error.
+        RefreshButton.Visibility = _hadError ? Visibility.Collapsed : Visibility.Visible;
+        FooterHintText.Visibility = _busy || _hadError || _wasCancelled ? Visibility.Collapsed : Visibility.Visible;
 
         InstallStateText.Text = inspection is { WarlordsNeedsManualAttention: true }
             ? FirstMessage(inspection.WarlordsMessages, "Keep one Warlords copy for this installation.")
             : _releaseReady && inspection?.CanPlay == true ? "Installed and up to date."
+            : !_busy && !_managedInstallation && inspection?.InstalledVersion is { } unmanaged
+                ? $"Warlords {unmanaged.TrimStart('v')} is installed, but not by this launcher."
             : inspection?.InstalledVersion is { } installed ? $"Installed version: {installed.TrimStart('v')}."
             : "Not installed yet. The launcher will keep it updated after setup.";
 
@@ -398,6 +412,30 @@ public partial class MainWindow : Window
             PrimaryAction.Play => "_Play Warlords",
             _ => _hadError || _wasCancelled ? "_Try again" : "_Check again"
         };
+        PrimaryButton.Tag = _busy ? null : next switch
+        {
+            PrimaryAction.Play => "Play",
+            PrimaryAction.Install => "Install",
+            _ => null
+        };
+        // When the primary button is Get Armory, the card button would only repeat it.
+        ArmoryButton.Visibility = hasGame && inspection?.ArmoryReady != true && next != PrimaryAction.GetArmory ? Visibility.Visible : Visibility.Collapsed;
+        // The operation line only repeats the heading in the plain Play and Install states.
+        OperationRow.Visibility = !_busy && !_hadError && !_wasCancelled && !_steamOpened
+            && next is PrimaryAction.Play or PrimaryAction.Install ? Visibility.Collapsed : Visibility.Visible;
+
+        // Badges: "Done" = check, "Action" = needs the player, empty = step number.
+        var playReady = _releaseReady && inspection?.CanPlay == true;
+        GameStepBadge.Tag = inspection?.GameReady == true ? "Done" : inspection is not null || !_busy ? "Action" : null;
+        ArmoryStepBadge.Tag = inspection?.ArmoryReady == true ? "Done" : inspection?.GameReady == true ? "Action" : null;
+        WarlordsStepBadge.Tag = playReady ? "Done"
+            : inspection is { WarlordsNeedsManualAttention: true } || (!_busy && next == PrimaryAction.Install) ? "Action" : null;
+        StatusBadge.Tag = _busy ? "Busy" : _hadError ? "Error" : _steamOpened || playReady ? "Ready" : "Attention";
+        static string StepState(object? tag) => tag switch { "Done" => "done", "Action" => "needs action", _ => "pending" };
+        AutomationProperties.SetName(GameStepBadge, "Step 1 Bannerlord: " + StepState(GameStepBadge.Tag));
+        AutomationProperties.SetName(ArmoryStepBadge, "Step 2 Armory: " + StepState(ArmoryStepBadge.Tag));
+        AutomationProperties.SetName(WarlordsStepBadge, "Step 3 Warlords: " + StepState(WarlordsStepBadge.Tag));
+        AutomationProperties.SetName(StatusBadge, "Status: " + StatusBadge.Tag switch { "Busy" => "working", "Error" => "error", "Ready" => "ready", _ => "attention" });
 
         if (_busy && _operation?.IsCancellationRequested == true)
         {
@@ -407,11 +445,11 @@ public partial class MainWindow : Window
         else if (_busy)
         {
             StatusTitleText.Text = _busyTitle;
-            StatusHintText.Text = "Keep Warlords open while this finishes. You can cancel safely.";
+            StatusHintText.Text = "Keep this window open while this finishes. You can cancel safely.";
         }
         else if (_hadError)
         {
-            StatusTitleText.Text = "Something needs attention";
+            StatusTitleText.Text = "Something went wrong";
             StatusHintText.Text = next == PrimaryAction.ChooseFolder
                 ? "Choose your Bannerlord folder to continue. Details are available in Settings & help."
                 : "Follow the message below, then try again. Details are available in Settings & help.";
@@ -436,12 +474,12 @@ public partial class MainWindow : Window
         else if (!inspection.GameReady)
         {
             StatusTitleText.Text = "Check your Bannerlord setup";
-            StatusHintText.Text = $"Bannerlord {Profile.GameVersion.TrimStart('v')} and its Multiplayer files are required. After fixing the issue below, choose Check again.";
+            StatusHintText.Text = $"Warlords needs Bannerlord {Profile.GameVersion.TrimStart('v')} with its Multiplayer files. Fix the problem shown below, then choose Check again.";
         }
         else if (inspection.ArmoryReady != true)
         {
             StatusTitleText.Text = "Install Armory in Steam";
-            StatusHintText.Text = "Subscribe to Armory, let Steam finish downloading, then choose Check again.";
+            StatusHintText.Text = "Subscribe to Armory in Steam. When it has downloaded, press Check again.";
         }
         else if (!hasRelease)
         {
@@ -450,19 +488,24 @@ public partial class MainWindow : Window
         }
         else if (inspection.WarlordsNeedsManualAttention)
         {
-            StatusTitleText.Text = "Keep one Warlords installation";
-            StatusHintText.Text = "Resolve the Warlords message below, then choose Check again. Workshop files are never removed automatically.";
+            StatusTitleText.Text = "Keep only one Warlords copy";
+            StatusHintText.Text = "Fix the Warlords problem shown below, then choose Check again. Workshop files are never removed for you.";
         }
         else if (_releaseReady && inspection.CanPlay)
         {
             StatusTitleText.Text = "Ready to play";
-            StatusHintText.Text = "You’re up to date. Play opens Steam; future Warlords updates are automatic.";
+            StatusHintText.Text = "Press Play. Steam will open the game.";
+        }
+        else if (!_managedInstallation && inspection.InstalledVersion is not null)
+        {
+            StatusTitleText.Text = "Let the launcher manage Warlords";
+            StatusHintText.Text = "The launcher can only update a copy it installed. Install once and future updates are automatic. Your player options are kept.";
         }
         else
         {
             StatusTitleText.Text = _managedInstallation ? "Repair your Warlords files" : "Install Warlords once";
             StatusHintText.Text = _managedInstallation
-                ? "The launcher will replace changed files and keep a recovery backup."
+                ? "Some files changed or are missing. The launcher replaces them and keeps a backup."
                 : "The launcher downloads the correct version and keeps it updated for you.";
         }
     }
@@ -756,4 +799,56 @@ public partial class MainWindow : Window
             SetStatus("Could not open the Armory page: " + ex.Message);
         }
     }
+
+    private void Minimize_Click(object sender, RoutedEventArgs e) => SystemCommands.MinimizeWindow(this);
+
+    private void Maximize_Click(object sender, RoutedEventArgs e)
+    {
+        if (WindowState == WindowState.Maximized) SystemCommands.RestoreWindow(this);
+        else SystemCommands.MaximizeWindow(this);
+    }
+
+    // Close() keeps the OnClosing path that finishes a file operation first.
+    private void Close_Click(object sender, RoutedEventArgs e) => Close();
+
+    private void UpdateWindowChrome()
+    {
+        var maximized = WindowState == WindowState.Maximized;
+        // A maximized custom-chrome window extends past the screen by its resize
+        // frame plus the padded border; inset the content by the same amount.
+        var frame = SystemParameters.WindowResizeBorderThickness;
+        var padded = GetSystemMetrics(SmCxPaddedBorder) / VisualTreeHelper.GetDpi(this).DpiScaleX;
+        WindowFrame.Margin = maximized
+            ? new Thickness(frame.Left + padded, frame.Top + padded, frame.Right + padded, frame.Bottom + padded)
+            : new Thickness();
+        WindowFrame.BorderThickness = new Thickness(maximized ? 0 : 1);
+        MaximizeGlyph.Visibility = maximized ? Visibility.Collapsed : Visibility.Visible;
+        RestoreGlyph.Visibility = maximized ? Visibility.Visible : Visibility.Collapsed;
+        MaximizeButton.ToolTip = maximized ? "Restore" : "Maximize";
+        AutomationProperties.SetName(MaximizeButton, maximized ? "Restore" : "Maximize");
+    }
+
+    private void StartSplash()
+    {
+        if (!SystemParameters.ClientAreaAnimation) return;
+        var splash = ((Storyboard)FindResource("SplashStoryboard")).Clone();
+        splash.Completed += (_, _) => FinishSplash();
+        _splash = splash;
+        splash.Begin(this, true);
+    }
+
+    // Removing the animation restores the finished layout: overlay collapsed,
+    // not hit-testable, content fully visible.
+    private void FinishSplash()
+    {
+        var splash = _splash;
+        if (splash is null) return;
+        _splash = null;
+        splash.Remove(this);
+    }
+
+    private const int SmCxPaddedBorder = 92;
+
+    [DllImport("user32.dll")]
+    private static extern int GetSystemMetrics(int index);
 }

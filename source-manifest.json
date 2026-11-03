@@ -18,8 +18,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "314beafed35891ae29784626d06933f39db048e10b7e65fe8d35e55c5227f056",
-      "size": 3495
+      "sha256": "c177999f3a3ccbe888979fb4cb4ebd9712a3048f8eabcacb4ef6197a13aec9ff",
+      "size": 3479
     },
     {
       "path": "SECURITY.md",
@@ -38,8 +38,8 @@
     },
     {
       "path": "src/Warlords.Launcher/App.xaml",
-      "sha256": "114089197ec0a7fa19763654ae3fdf9f3725d0ea26d0f78a0359ae0374ce7f7b",
-      "size": 8560
+      "sha256": "2cf6468eb8b5e4eef0d4443fcb5551c536a7e74022107448e4caa82e24d7f77c",
+      "size": 25661
     },
     {
       "path": "src/Warlords.Launcher/App.xaml.cs",
@@ -88,17 +88,17 @@
     },
     {
       "path": "src/Warlords.Launcher/MainWindow.xaml",
-      "sha256": "98721dbdaff919e7931947a69807816c5ba030559f590541412a1705335105a7",
-      "size": 11848
+      "sha256": "186299ed75837396fc1371cc7ca2f3e1ac76179f138380f15959ca1ce26a823f",
+      "size": 25337
     },
     {
       "path": "src/Warlords.Launcher/MainWindow.xaml.cs",
-      "sha256": "fc39e286003af7b0de70d9ce891dbabb35bb39c22fb9a5026b5d89bd785d12c4",
-      "size": 35939
+      "sha256": "a5d27d221100de6e274756811f08a464f8ba6713b9997cf994fc817234d6e801",
+      "size": 41372
     },
     {
       "path": "src/Warlords.Launcher/Models.cs",
-      "sha256": "fe04bc6ddf4bfbc7fc15d17d2dc6fdc2b90323e48d113f60cb6391b4e5b0cb62",
+      "sha256": "d4eed287b2a289900eba0520256dfc07b2518fed094f8f0a7ca9036a6c2c2d45",
       "size": 3358
     },
     {
@@ -108,11 +108,11 @@
     },
     {
       "path": "src/Warlords.Launcher/Warlords.Launcher.csproj",
-      "sha256": "9f626a8aa282b443c05df6fe5a906861322c7a8b0c9f049642134acc0d48f55f",
+      "sha256": "5479a61e8c2420050c4e19328373936997651acea9983402c4b1ad4eadbd96cb",
       "size": 1111
     }
   ],
-  "launcherVersion": "0.3.2",
+  "launcherVersion": "0.4.0",
   "license": "MIT",
   "schemaVersion": 1,
   "scope": "launcher-app-with-named-branding-assets"

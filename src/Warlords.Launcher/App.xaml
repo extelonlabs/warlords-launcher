@@ -11,11 +11,40 @@
     <SolidColorBrush x:Key="InputBorder" Color="#66786B"/>
     <SolidColorBrush x:Key="Success" Color="#B7D8C0"/>
     <SolidColorBrush x:Key="Danger" Color="#FFB5A6"/>
+    <SolidColorBrush x:Key="Warning" Color="#E9B65C"/>
+    <SolidColorBrush x:Key="CardBorder" Color="#34413B"/>
+    <LinearGradientBrush x:Key="CardBackground" StartPoint="0,0" EndPoint="0,1">
+      <GradientStop Color="#232B28" Offset="0"/>
+      <GradientStop Color="#1C2321" Offset="1"/>
+    </LinearGradientBrush>
+    <RadialGradientBrush x:Key="CanvasVignette" Center="0.5,0" GradientOrigin="0.5,0" RadiusX="1" RadiusY="1">
+      <GradientStop Color="#1D2623" Offset="0"/>
+      <GradientStop Color="#151B19" Offset="0.62"/>
+      <GradientStop Color="#111614" Offset="1"/>
+    </RadialGradientBrush>
+    <LinearGradientBrush x:Key="AccentFill" StartPoint="0,0" EndPoint="0,1">
+      <GradientStop Color="#E6CA8E" Offset="0"/>
+      <GradientStop Color="#CFAB63" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="AccentRule" StartPoint="0,0" EndPoint="1,0">
+      <GradientStop Color="#00D8B875" Offset="0"/>
+      <GradientStop Color="#99D8B875" Offset="0.5"/>
+      <GradientStop Color="#00D8B875" Offset="1"/>
+    </LinearGradientBrush>
     <Style x:Key="KeyboardFocus" TargetType="Control">
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate>
             <Rectangle Margin="-3" Stroke="{StaticResource Accent}" StrokeThickness="2" StrokeDashArray="2,2" RadiusX="6" RadiusY="6"/>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style x:Key="CaptionFocus" TargetType="Control">
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate>
+            <Rectangle Margin="3" Stroke="{StaticResource Accent}" StrokeThickness="1.5" StrokeDashArray="2,2"/>
           </ControlTemplate>
         </Setter.Value>
       </Setter>
@@ -31,15 +60,102 @@
       <Setter Property="FontWeight" Value="SemiBold"/>
       <Setter Property="Margin" Value="0,0,0,4"/>
     </Style>
-    <Style x:Key="StepMarker" TargetType="Border">
-      <Setter Property="Width" Value="28"/>
-      <Setter Property="Height" Value="28"/>
-      <Setter Property="CornerRadius" Value="14"/>
-      <Setter Property="Background" Value="{StaticResource Surface}"/>
-      <Setter Property="BorderBrush" Value="{StaticResource Line}"/>
+    <Style x:Key="Card" TargetType="Border">
+      <Setter Property="Background" Value="{StaticResource CardBackground}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource CardBorder}"/>
       <Setter Property="BorderThickness" Value="1"/>
-      <Setter Property="VerticalAlignment" Value="Top"/>
-      <Setter Property="Margin" Value="0,1,14,0"/>
+      <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+    <!-- Step badge. Tag: "Done" = check, "Action" = needs attention, empty = step number. -->
+    <Style x:Key="StepBadge" TargetType="ContentControl">
+      <Setter Property="Width" Value="30"/>
+      <Setter Property="Height" Value="30"/>
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="IsTabStop" Value="False"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ContentControl">
+            <Grid>
+              <Ellipse x:Name="Ring" Fill="{StaticResource Surface}" Stroke="{StaticResource Line}" StrokeThickness="1.5"/>
+              <TextBlock x:Name="Number" Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource Muted}" FontSize="13" FontWeight="SemiBold" LineHeight="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              <Path x:Name="Check" Data="M 0,5 L 4,9 L 12,1" Stroke="#E8F5EC" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+              <Path x:Name="Alert" Data="M 1.5,0 L 1.5,8 M 1.5,12 L 1.5,12.2" Stroke="#F6D59A" StrokeThickness="2.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="Tag" Value="Done">
+                <Setter TargetName="Ring" Property="Fill" Value="#2F5B43"/>
+                <Setter TargetName="Ring" Property="Stroke" Value="#7CC59A"/>
+                <Setter TargetName="Number" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="Check" Property="Visibility" Value="Visible"/>
+              </Trigger>
+              <Trigger Property="Tag" Value="Action">
+                <Setter TargetName="Ring" Property="Fill" Value="#4A3A1C"/>
+                <Setter TargetName="Ring" Property="Stroke" Value="{StaticResource Warning}"/>
+                <Setter TargetName="Number" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="Alert" Property="Visibility" Value="Visible"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <!-- Status icon. Tag: "Ready", "Attention", "Error" or "Busy". -->
+    <Style x:Key="StatusBadge" TargetType="ContentControl">
+      <Setter Property="Width" Value="46"/>
+      <Setter Property="Height" Value="46"/>
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="IsTabStop" Value="False"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ContentControl">
+            <Grid>
+              <Ellipse x:Name="Ring" Fill="#4A3A1C" Stroke="{StaticResource Warning}" StrokeThickness="1.5"/>
+              <Path x:Name="Check" Data="M 0,8 L 6,14 L 18,2" Stroke="#E8F5EC" StrokeThickness="2.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+              <Path x:Name="Alert" Data="M 1.5,0 L 1.5,12 M 1.5,17.5 L 1.5,17.7" Stroke="#F6D59A" StrokeThickness="3" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              <Path x:Name="Cross" Data="M 0,0 L 14,14 M 14,0 L 0,14" Stroke="#FFD5CC" StrokeThickness="2.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+              <Path x:Name="Spinner" Data="M 11,1 A 10,10 0 0 1 21,11" Stroke="{StaticResource Accent}" StrokeThickness="2.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
+                <Path.RenderTransform><RotateTransform Angle="0"/></Path.RenderTransform>
+              </Path>
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="Tag" Value="Ready">
+                <Setter TargetName="Ring" Property="Fill" Value="#2F5B43"/>
+                <Setter TargetName="Ring" Property="Stroke" Value="#7CC59A"/>
+                <Setter TargetName="Alert" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="Check" Property="Visibility" Value="Visible"/>
+              </Trigger>
+              <Trigger Property="Tag" Value="Error">
+                <Setter TargetName="Ring" Property="Fill" Value="#5A2A24"/>
+                <Setter TargetName="Ring" Property="Stroke" Value="#FF8F7A"/>
+                <Setter TargetName="Alert" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="Cross" Property="Visibility" Value="Visible"/>
+              </Trigger>
+              <Trigger Property="Tag" Value="Busy">
+                <Setter TargetName="Ring" Property="Fill" Value="{StaticResource Surface}"/>
+                <Setter TargetName="Ring" Property="Stroke" Value="{StaticResource Line}"/>
+                <Setter TargetName="Alert" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="Spinner" Property="Visibility" Value="Visible"/>
+              </Trigger>
+              <!-- Spin only when Windows animations are on; otherwise the arc stays still. -->
+              <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                  <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="Busy"/>
+                  <Condition Binding="{Binding Source={x:Static SystemParameters.ClientAreaAnimation}}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.EnterActions>
+                  <BeginStoryboard x:Name="SpinStoryboard">
+                    <Storyboard>
+                      <DoubleAnimation Storyboard.TargetName="Spinner" Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" From="0" To="360" Duration="0:0:1" RepeatBehavior="Forever"/>
+                    </Storyboard>
+                  </BeginStoryboard>
+                </MultiDataTrigger.EnterActions>
+                <MultiDataTrigger.ExitActions><StopStoryboard BeginStoryboardName="SpinStoryboard"/></MultiDataTrigger.ExitActions>
+              </MultiDataTrigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
     </Style>
     <Style TargetType="Button">
       <Setter Property="MinHeight" Value="38"/>
@@ -71,20 +187,97 @@
     <Style x:Key="QuietButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
       <Setter Property="Background" Value="Transparent"/>
       <Setter Property="BorderBrush" Value="Transparent"/>
-      <Setter Property="Foreground" Value="{StaticResource Muted}"/>
+      <Setter Property="Foreground" Value="{StaticResource Accent}"/>
+      <Style.Triggers>
+        <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#1FD8B875"/></Trigger>
+      </Style.Triggers>
     </Style>
+    <!-- Primary action. Tag: "Play" or "Install" shows a matching icon. -->
     <Style x:Key="PrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
       <Setter Property="MinHeight" Value="50"/>
       <Setter Property="MinWidth" Value="206"/>
       <Setter Property="Padding" Value="24,12"/>
       <Setter Property="FontSize" Value="16"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
-      <Setter Property="Background" Value="{StaticResource Accent}"/>
+      <Setter Property="Background" Value="{StaticResource AccentFill}"/>
       <Setter Property="BorderBrush" Value="{StaticResource Accent}"/>
       <Setter Property="Foreground" Value="{StaticResource Canvas}"/>
-      <Style.Triggers>
-        <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#E7CB91"/></Trigger>
-      </Style.Triggers>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Grid>
+              <Border x:Name="Glow" CornerRadius="8" Background="{StaticResource Accent}" Margin="2" Opacity="0">
+                <Border.Effect><BlurEffect Radius="18"/></Border.Effect>
+              </Border>
+              <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="7">
+                <StackPanel Margin="{TemplateBinding Padding}" Orientation="Horizontal" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center">
+                  <Path x:Name="PlayIcon" Data="M 0,0 L 11,7 L 0,14 Z" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" Margin="0,0,11,0" Visibility="Collapsed"/>
+                  <Path x:Name="InstallIcon" Data="M 7,0 L 7,10 M 2.5,5.5 L 7,10 L 11.5,5.5 M 0,14 L 14,14" Stroke="{TemplateBinding Foreground}" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" VerticalAlignment="Center" Margin="0,0,11,0" Visibility="Collapsed"/>
+                  <ContentPresenter VerticalAlignment="Center" RecognizesAccessKey="True">
+                    <!-- Labels without an access key ("Working…") become a plain TextBlock; keep the button's dark text. -->
+                    <ContentPresenter.Resources><Style TargetType="TextBlock"/></ContentPresenter.Resources>
+                  </ContentPresenter>
+                </StackPanel>
+              </Border>
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="Tag" Value="Play"><Setter TargetName="PlayIcon" Property="Visibility" Value="Visible"/></Trigger>
+              <Trigger Property="Tag" Value="Install"><Setter TargetName="InstallIcon" Property="Visibility" Value="Visible"/></Trigger>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Glow" Property="Opacity" Value="0.55"/>
+                <Setter TargetName="ButtonBorder" Property="Background" Value="#EDD39C"/>
+              </Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{StaticResource Text}"/></Trigger>
+              <Trigger Property="IsPressed" Value="True"><Setter TargetName="ButtonBorder" Property="Opacity" Value="0.85"/><Setter TargetName="Glow" Property="Opacity" Value="0.3"/></Trigger>
+              <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.7"/><Setter Property="Cursor" Value="Arrow"/><Setter TargetName="Glow" Property="Opacity" Value="0"/></Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <!-- Title bar buttons. Content is a Path that follows Foreground. -->
+    <Style x:Key="CaptionButton" TargetType="Button">
+      <Setter Property="Width" Value="46"/>
+      <Setter Property="Height" Value="34"/>
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="{StaticResource Muted}"/>
+      <Setter Property="VerticalAlignment" Value="Top"/>
+      <Setter Property="FocusVisualStyle" Value="{StaticResource CaptionFocus}"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="CaptionBorder" Background="{TemplateBinding Background}">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="CaptionBorder" Property="Background" Value="#2E3935"/><Setter Property="Foreground" Value="{StaticResource Text}"/></Trigger>
+              <Trigger Property="IsPressed" Value="True"><Setter TargetName="CaptionBorder" Property="Background" Value="#3A4742"/></Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style x:Key="CloseCaptionButton" TargetType="Button" BasedOn="{StaticResource CaptionButton}">
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="CaptionBorder" Background="{TemplateBinding Background}">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="CaptionBorder" Property="Background" Value="#C42B1C"/><Setter Property="Foreground" Value="White"/></Trigger>
+              <Trigger Property="IsPressed" Value="True"><Setter TargetName="CaptionBorder" Property="Background" Value="#A52315"/><Setter Property="Foreground" Value="White"/></Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style x:Key="CaptionGlyph" TargetType="Path">
+      <Setter Property="Width" Value="10"/>
+      <Setter Property="Height" Value="10"/>
+      <Setter Property="StrokeThickness" Value="1"/>
+      <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+      <Setter Property="SnapsToDevicePixels" Value="True"/>
     </Style>
     <Style TargetType="TextBox">
       <Setter Property="FontSize" Value="14"/>
@@ -100,16 +293,80 @@
         <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.55"/></Trigger>
       </Style.Triggers>
     </Style>
+    <!-- Thin themed scroll bars for the page and text boxes. -->
+    <Style x:Key="ScrollBarPage" TargetType="RepeatButton">
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="IsTabStop" Value="False"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="RepeatButton"><Rectangle Fill="Transparent"/></ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style x:Key="ScrollBarThumb" TargetType="Thumb">
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="IsTabStop" Value="False"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Thumb">
+            <Border x:Name="ThumbBorder" Background="#4C5D54" CornerRadius="3" Margin="2"/>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="ThumbBorder" Property="Background" Value="#6E8476"/></Trigger>
+              <Trigger Property="IsDragging" Value="True"><Setter TargetName="ThumbBorder" Property="Background" Value="{StaticResource Accent}"/></Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="ScrollBar">
+      <Setter Property="Width" Value="10"/>
+      <Setter Property="MinWidth" Value="10"/>
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ScrollBar">
+            <Grid Background="{TemplateBinding Background}">
+              <Track x:Name="PART_Track" IsDirectionReversed="True">
+                <Track.DecreaseRepeatButton><RepeatButton Command="ScrollBar.PageUpCommand" Style="{StaticResource ScrollBarPage}"/></Track.DecreaseRepeatButton>
+                <Track.IncreaseRepeatButton><RepeatButton Command="ScrollBar.PageDownCommand" Style="{StaticResource ScrollBarPage}"/></Track.IncreaseRepeatButton>
+                <Track.Thumb><Thumb Style="{StaticResource ScrollBarThumb}"/></Track.Thumb>
+              </Track>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Style.Triggers>
+        <Trigger Property="Orientation" Value="Horizontal">
+          <Setter Property="Width" Value="Auto"/>
+          <Setter Property="MinWidth" Value="0"/>
+          <Setter Property="Height" Value="10"/>
+          <Setter Property="MinHeight" Value="10"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="ScrollBar">
+                <Grid Background="{TemplateBinding Background}">
+                  <Track x:Name="PART_Track" IsDirectionReversed="False">
+                    <Track.DecreaseRepeatButton><RepeatButton Command="ScrollBar.PageLeftCommand" Style="{StaticResource ScrollBarPage}"/></Track.DecreaseRepeatButton>
+                    <Track.IncreaseRepeatButton><RepeatButton Command="ScrollBar.PageRightCommand" Style="{StaticResource ScrollBarPage}"/></Track.IncreaseRepeatButton>
+                    <Track.Thumb><Thumb Style="{StaticResource ScrollBarThumb}"/></Track.Thumb>
+                  </Track>
+                </Grid>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
     <Style x:Key="SettingsExpanderStyle" TargetType="Expander">
       <Setter Property="Foreground" Value="{StaticResource Text}"/>
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate TargetType="Expander">
             <StackPanel>
-              <ToggleButton x:Name="HeaderButton" Content="{TemplateBinding Header}" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Foreground="{TemplateBinding Foreground}" FocusVisualStyle="{StaticResource KeyboardFocus}" Cursor="Hand" HorizontalContentAlignment="Left" AutomationProperties.Name="Settings and help">
+              <ToggleButton x:Name="HeaderButton" Content="{TemplateBinding Header}" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Foreground="{TemplateBinding Foreground}" FocusVisualStyle="{StaticResource KeyboardFocus}" Cursor="Hand" HorizontalContentAlignment="Left" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}">
                 <ToggleButton.Template>
                   <ControlTemplate TargetType="ToggleButton">
-                    <Border x:Name="HeaderBorder" BorderThickness="1" BorderBrush="Transparent" CornerRadius="6" Background="Transparent" Padding="0,10">
+                    <Border x:Name="HeaderBorder" BorderThickness="1" BorderBrush="{StaticResource CardBorder}" CornerRadius="8" Background="#191F1D" Padding="16,9">
                       <Grid>
                         <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
                         <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" RecognizesAccessKey="True"/>
@@ -117,14 +374,17 @@
                       </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                      <Trigger Property="IsChecked" Value="True"><Setter TargetName="Arrow" Property="RenderTransform"><Setter.Value><RotateTransform Angle="180"/></Setter.Value></Setter></Trigger>
-                      <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="HeaderBorder" Property="BorderBrush" Value="{StaticResource Line}"/></Trigger>
+                      <Trigger Property="IsChecked" Value="True">
+                        <Setter TargetName="Arrow" Property="RenderTransform"><Setter.Value><RotateTransform Angle="180"/></Setter.Value></Setter>
+                        <Setter TargetName="Arrow" Property="Stroke" Value="{StaticResource Accent}"/>
+                      </Trigger>
+                      <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="HeaderBorder" Property="BorderBrush" Value="{StaticResource InputBorder}"/><Setter TargetName="HeaderBorder" Property="Background" Value="#1E2522"/></Trigger>
                       <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="HeaderBorder" Property="BorderBrush" Value="{StaticResource Text}"/></Trigger>
                     </ControlTemplate.Triggers>
                   </ControlTemplate>
                 </ToggleButton.Template>
               </ToggleButton>
-              <ContentPresenter x:Name="Body" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="0,10,0,0" Visibility="Collapsed"/>
+              <ContentPresenter x:Name="Body" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="4,14,4,6" Visibility="Collapsed"/>
             </StackPanel>
             <ControlTemplate.Triggers><Trigger Property="IsExpanded" Value="True"><Setter TargetName="Body" Property="Visibility" Value="Visible"/></Trigger></ControlTemplate.Triggers>
           </ControlTemplate>
