@@ -6,12 +6,12 @@
   "version": "1.0.71",
   "requiredGameVersion": "v1.4.8",
   "requiredArmoryVersion": "v1.0.0.17",
-  "buildId": "41f4e2bcb55d64dde74fd22d933692511b565a9532e566b56915cd65675e5943",
-  "createdUtc": "2026-11-03T21:24:15.785567+00:00",
-  "expiresUtc": "2026-11-04T21:22:31+00:00",
-  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-c7c0bd09ee5b-7717e922b1b0/Warlords-StratLords-1.0.71-c7c0bd0.zip",
-  "packageSha256": "7717e922b1b05002856f62a3cb1de9851fba6ffdaca6a29c2b886c7c048f5886",
-  "packageSize": 363889355,
+  "buildId": "81801f493882ed92a9e0115fb12d98c3a2afa6191deafe7b9ebe62a260db07da",
+  "createdUtc": "2026-11-03T21:30:31.846264+00:00",
+  "expiresUtc": "2026-11-04T21:29:37+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-c7c0bd09ee5b-4b2c9bf24960/Warlords-StratLords-1.0.71-c7c0bd0.zip",
+  "packageSha256": "4b2c9bf2496088b0d265ed08c113df00417103311b5ab165235092c29b39495b",
+  "packageSize": 363889267,
   "files": [
     {
       "path": "AssetPackages/banner.tpac",
@@ -881,12 +881,12 @@
     {
       "path": "ModuleData/stratlords-protocol.json",
       "size": 107601,
-      "sha256": "5840f869470bf1148b9d27d64e7e9fdee6ed20b2fc03f2c8044cf73ff848b48b"
+      "sha256": "259f09dbf74b6064788460aa8b158525af3664de61d26a1f4381351bdb0e3c82"
     },
     {
       "path": "ModuleData/stratlords-servers.json",
       "size": 1562,
-      "sha256": "2339b6475dea3c214e91b7dc19375a57febe5d88f129e9966208eeb67e841566"
+      "sha256": "d9ddeffedb490fc174b752066cccdbd7a3b202777b1291ee63d6d917be94e4dc"
     },
     {
       "path": "ModuleData/wl_badges.xml",
@@ -3551,7 +3551,7 @@
     {
       "path": "bin/Win64_Shipping_Client/StrategusBattleBridge.GauntletUI.dll",
       "size": 515584,
-      "sha256": "64783f5311b8b11281ab8841c1be79bdb07a1bf4100b1214706b962a3cf6bc39"
+      "sha256": "408447e843554f51ad5f48783dd707a78ef10aa202f4118d8a030c1f53ee15e9"
     }
   ]
 }
