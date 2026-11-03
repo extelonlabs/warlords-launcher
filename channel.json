@@ -2,16 +2,16 @@
   "schemaVersion": 1,
   "branch": "StratLords",
   "sourceRepository": "MB-Warlords/The-Last-Concord",
-  "sourceCommit": "c7af2e11ead18137ddb3941cac75fc50c73478ff",
+  "sourceCommit": "873191f1d8eee7958cc1a86312d61ebe06abf531",
   "version": "1.0.70",
   "requiredGameVersion": "v1.4.8",
   "requiredArmoryVersion": "v1.0.0.17",
-  "buildId": "2ead426db23aad9ab18b28319b59666b84b4825c9011b41fb8c77209abf076c2",
-  "createdUtc": "2026-11-03T20:07:11.250168+00:00",
-  "expiresUtc": "2026-11-04T20:05:27+00:00",
-  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-c7af2e11ead1-3cb540c5ecd1/Warlords-StratLords-1.0.70-c7af2e1.zip",
-  "packageSha256": "3cb540c5ecd1ba5c220eb760f199af3c337b415b6a3c550261d1210cb9c144cd",
-  "packageSize": 363889050,
+  "buildId": "ede11263cb336b2313778575902600cbc97dc19c0f63eb1788e68b773536d232",
+  "createdUtc": "2026-11-03T20:49:56.266128+00:00",
+  "expiresUtc": "2026-11-04T20:48:57+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-873191f1d8ee-73f3f0999d08/Warlords-StratLords-1.0.70-873191f.zip",
+  "packageSha256": "73f3f0999d08e522a733795d6c3eecb1c8fe2d28e3e68952dce22b7fb559d2d2",
+  "packageSize": 363888981,
   "files": [
     {
       "path": "AssetPackages/banner.tpac",
@@ -881,12 +881,12 @@
     {
       "path": "ModuleData/stratlords-protocol.json",
       "size": 107405,
-      "sha256": "e5af61e2f3fddcb86a7269292b427f08a2742a5e70aef139c564e3f0c94f6a99"
+      "sha256": "3b3f51aec4371e14f4462cc98bad817fa2df9de7e93a95c411d382545779a504"
     },
     {
       "path": "ModuleData/stratlords-servers.json",
-      "size": 1063,
-      "sha256": "c9ff7662ad6c1cffe0a6f1346f0503aae019bbc55ce10cefd186b0ed5b96f7ea"
+      "size": 1562,
+      "sha256": "2cedd99c79abcad1391754ceb7b4c9d07870c144c50a9ad5a78f532a60a2bf42"
     },
     {
       "path": "ModuleData/wl_badges.xml",
@@ -3551,7 +3551,7 @@
     {
       "path": "bin/Win64_Shipping_Client/StrategusBattleBridge.GauntletUI.dll",
       "size": 515584,
-      "sha256": "983c392c92bef44cfae9cc7b94371252475f9b446e29ec24c96971d237c5c911"
+      "sha256": "9ab1aca369984a530e1edfffce7098386dd0ad45a592f7417ad5ff2d816336ee"
     }
   ]
 }
