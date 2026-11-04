@@ -6,11 +6,11 @@
   "version": "1.0.71",
   "requiredGameVersion": "v1.4.8",
   "requiredArmoryVersion": "v1.0.0.17",
-  "buildId": "81801f493882ed92a9e0115fb12d98c3a2afa6191deafe7b9ebe62a260db07da",
-  "createdUtc": "2026-11-03T21:30:31.846264+00:00",
-  "expiresUtc": "2026-11-04T21:29:37+00:00",
-  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-c7c0bd09ee5b-4b2c9bf24960/Warlords-StratLords-1.0.71-c7c0bd0.zip",
-  "packageSha256": "4b2c9bf2496088b0d265ed08c113df00417103311b5ab165235092c29b39495b",
+  "buildId": "2edbeb61a75586c285683b0a1ca2e6b67c22c1f7dc813764620e540d79a03800",
+  "createdUtc": "2026-11-04T01:30:29.353980+00:00",
+  "expiresUtc": "2026-11-05T01:29:49+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-c7c0bd09ee5b-ba9d978206d1/Warlords-StratLords-1.0.71-c7c0bd0.zip",
+  "packageSha256": "ba9d978206d14ee00b3856fa491b5d625972d99b22120f1fcdad36103f2dcf09",
   "packageSize": 363889267,
   "files": [
     {
@@ -886,7 +886,7 @@
     {
       "path": "ModuleData/stratlords-servers.json",
       "size": 1562,
-      "sha256": "d9ddeffedb490fc174b752066cccdbd7a3b202777b1291ee63d6d917be94e4dc"
+      "sha256": "ce583e889bdc3e66a00a3ab3bf4da6522ff6a853973878d5fba4419f72788134"
     },
     {
       "path": "ModuleData/wl_badges.xml",
