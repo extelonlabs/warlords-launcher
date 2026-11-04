@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "d761482a4090c8f95679a534e7915513803da456",
+  "version": "1.1.0",
+  "entries": [
+    {
+      "version": "1.1.0",
+      "date": "2026-11-04",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Safer battle map downloads. When a battle needs a map you don't have yet, the game now checks that the map really comes from our server before it installs it. A fake or changed map is refused, and nothing is written to your game folder."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "The DEV test build is now version 1.1.0. Update once through Warlords.exe to keep joining the servers."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.73",
+      "date": "2026-11-04",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "The lobby now shows the StratLords name in the top-left corner and on the top menu tab.",
+            "Access to the DEV test servers no longer runs out after a day. Update once through Warlords.exe and you stay able to join."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.72",
+      "date": "2026-11-04",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Maintenance only: removed private developer computer details from a battle map data file. Nothing changes in game."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.71",
+      "date": "2026-11-04",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Campaign battles and sieges now give Warlords gold, the same amounts as deathmatch: kills, assists, first blood, kill streaks, killing horses, damage dealt, time in the fight and a reward at the end (more for the winners). Killing a teammate costs gold, like in deathmatch.",
+            "Your campaign army gear, lives and results work the same as before. Campaign battles give no loot, quests or prestige.",
+            "This turns on once the campaign servers are updated. It has not been tried in a real game yet."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.70",
+      "date": "2026-11-03",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Prepares campaign road battles to use their own generated battle map, checked by the server before the battle opens. If a map fails the check, the battle falls back to its normal map."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "DEV testers get a Siege server (\"Dev Warlords Siege\", 250 players) and two more Clan Battle servers (100 players each).",
+            "The DEV lobby now holds up to 1000 players and the DEV battle server up to 100.",
+            "These have not been tried in a real game yet.",
+            "DEV testers get a Clan Battle server (\"Dev Warlords Clan Battle\") next to the DEV lobby and battle server. It shows under Clan Wars. This has not been tried in a real game yet.",
+            "DEV testers can now be let into campaign field battles and sieges, not only the DEV lobby and battle server. This has not been tried in a real game yet."
+          ]
+        },
+        {
+          "title": "Disabled",
+          "items": [
+            "Generated campaign battle maps are not switched on yet; battles still use their usual maps for now."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.69",
+      "date": "2026-11-02",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "In DEV map trials, an old copy of a battle map is now replaced with the server's version before joining, so you no longer fall from the sky or see flags inside the ground."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "DEV map trials can now use maps generated for real places on the campaign map, each with its own name."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.68",
+      "date": "2026-11-02",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "In DEV map trials, clicking Join now downloads a missing battle map first, shows its progress, and then joins."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "Joining a DEV map trial without its map no longer crashes the game."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.67",
+      "date": "2026-11-01",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added DEV groundwork for inspecting generated woodland, highland and river battlefields with separate map downloads. These trials are not enabled for normal campaign battles."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "Improved checks that prevent a private map trial from opening with missing or mismatched terrain and spawn data."
+          ]
+        }
+      ]
+    }
+  ]
+}
