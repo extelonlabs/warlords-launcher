@@ -2,15 +2,15 @@
   "schemaVersion": 1,
   "branch": "StratLords",
   "sourceRepository": "MB-Warlords/The-Last-Concord",
-  "sourceCommit": "d761482a4090c8f95679a534e7915513803da456",
+  "sourceCommit": "50d272690d9168301011ba5217baee086df763ca",
   "version": "1.1.0",
   "requiredGameVersion": "v1.4.8",
   "requiredArmoryVersion": "v1.0.0.17",
-  "buildId": "e8fbbd16cae8ba5cc71fd7b2e63082250f29fc432cc183317514e31214a286e1",
-  "createdUtc": "2026-11-04T11:38:19.308965+00:00",
-  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-d761482a4090-ec7d336520c5-2/Warlords-StratLords-1.1.0-d761482.zip",
-  "packageSha256": "ec7d336520c5039e193f0dd100b76ae67cfde5aba85202b1b7bb198e3ea4cec0",
-  "packageSize": 363894467,
+  "buildId": "8d007c4f42a857be1c2172a0036d19d3e9ae3b79b7141c1c8471bfc0778c403d",
+  "createdUtc": "2026-11-04T15:33:37.826937+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-50d272690d91-312e1f38128e/Warlords-StratLords-1.1.0-50d2726.zip",
+  "packageSha256": "312e1f38128e4a0eca3808812116a121442ed63ee12bf7e711b0e9495cebb422",
+  "packageSize": 363894402,
   "files": [
     {
       "path": "AssetPackages/banner.tpac",
@@ -880,12 +880,12 @@
     {
       "path": "ModuleData/stratlords-protocol.json",
       "size": 107600,
-      "sha256": "82decdb4027ff441a2b96f416c014afaaf13d9e2109a3e741c7e516ae0aa5838"
+      "sha256": "7106bd5fc254c87854420b944797ef0ac62d0d7aff53e4ea3744a676bde4bdbc"
     },
     {
       "path": "ModuleData/stratlords-servers.json",
-      "size": 1561,
-      "sha256": "ccbf5e0d07373b365683a5a14332b83bb1b10ee9890adda3ade015630c22a5af"
+      "size": 2441,
+      "sha256": "8348494d81162cd645be30cdc7db5a7b627fe73b9203f2efded21da0b5e83f37"
     },
     {
       "path": "ModuleData/wl_badges.xml",
@@ -3550,7 +3550,7 @@
     {
       "path": "bin/Win64_Shipping_Client/StrategusBattleBridge.GauntletUI.dll",
       "size": 515584,
-      "sha256": "c04d43b322b9e7dce510516ba323d517b413702c3ee6cf74d904d92c18adc8e3"
+      "sha256": "7ee61c3a82173277e2fd28723539521dc58330327090b1efb40ad74ad659553c"
     }
   ]
 }
