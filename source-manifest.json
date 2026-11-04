@@ -18,7 +18,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "d60f735cdc628d46b64c9ec68b79d368a0b7f570a941263d1d88ea6a8666f618",
+      "sha256": "8fdac23eb699d748e26aaf7f8a1fadfd3dc38d3a4fca864cff0120bc7ee7b300",
       "size": 3479
     },
     {
@@ -33,8 +33,8 @@
     },
     {
       "path": "docs/launcher.png",
-      "sha256": "8c4d17bfeab7b15880fc482edcef2b396de7a04782a1b5e0e06435ae2cdce35c",
-      "size": 62780
+      "sha256": "9631bad2aace5a4ba1af43ee21bdcfa3c05231648c51d493f18ebd604bac98db",
+      "size": 64685
     },
     {
       "path": "src/Warlords.Launcher/App.xaml",
