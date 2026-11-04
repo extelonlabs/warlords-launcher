@@ -242,7 +242,21 @@
             <TextBlock Text="Warlords" FontFamily="Georgia" FontSize="27" LineHeight="34" Foreground="{StaticResource Accent}" VerticalAlignment="Center"/>
             <TextBlock Text="StratLords for Bannerlord" Foreground="{StaticResource Muted}" Margin="18,3,0,0" VerticalAlignment="Center"/>
           </StackPanel>
-          <TextBlock x:Name="LauncherVersionText" Grid.Column="1" Foreground="{StaticResource Muted}" FontSize="12" VerticalAlignment="Center" Margin="20,0,16,0"/>
+          <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0,16,0">
+            <Button x:Name="WebsiteButton" Style="{StaticResource TitleLinkButton}" Click="Website_Click" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Open the StratLords website" AutomationProperties.Name="Open the StratLords website">
+              <StackPanel Orientation="Horizontal">
+                <Path Style="{StaticResource TitleLinkIcon}" Data="M 7,0.5 A 6.5,6.5 0 1 1 6.99,0.5 Z M 0.5,7 L 13.5,7 M 7,0.5 C 3.6,4 3.6,10 7,13.5 M 7,0.5 C 10.4,4 10.4,10 7,13.5"/>
+                <TextBlock Text="Website" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" FontSize="13" LineHeight="18" VerticalAlignment="Center"/>
+              </StackPanel>
+            </Button>
+            <Button x:Name="DiscordButton" Style="{StaticResource TitleLinkButton}" Click="Discord_Click" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Join the StratLords Discord" AutomationProperties.Name="Join the StratLords Discord" Margin="4,0,0,0">
+              <StackPanel Orientation="Horizontal">
+                <Path Style="{StaticResource TitleLinkIcon}" Data="M 2.5,1 L 11.5,1 Q 13,1 13,2.5 L 13,8 Q 13,9.5 11.5,9.5 L 6.5,9.5 L 3.5,12.5 L 3.5,9.5 L 2.5,9.5 Q 1,9.5 1,8 L 1,2.5 Q 1,1 2.5,1 Z"/>
+                <TextBlock Text="Discord" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" FontSize="13" LineHeight="18" VerticalAlignment="Center"/>
+              </StackPanel>
+            </Button>
+            <TextBlock x:Name="LauncherVersionText" Foreground="{StaticResource Muted}" FontSize="12" VerticalAlignment="Center" Margin="14,0,0,0"/>
+          </StackPanel>
           <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Top">
             <Button x:Name="MinimizeButton" Style="{StaticResource CaptionButton}" Click="Minimize_Click" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize" AutomationProperties.Name="Minimize">
               <Path Style="{StaticResource CaptionGlyph}" Data="M 0,5.5 L 10,5.5"/>

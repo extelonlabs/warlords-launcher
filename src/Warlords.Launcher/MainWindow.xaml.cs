@@ -784,6 +784,17 @@ public partial class MainWindow : Window
         catch (Exception ex) { SetStatus("Could not open the logs folder: " + ex.Message); }
     }
 
+    // Fixed addresses from Profile only; never built from channel or remote data.
+    private void Website_Click(object sender, RoutedEventArgs e) => OpenLink(Profile.WebsiteUrl, "the StratLords website");
+
+    private void Discord_Click(object sender, RoutedEventArgs e) => OpenLink(Profile.DiscordUrl, "the StratLords Discord");
+
+    private void OpenLink(string url, string name)
+    {
+        try { Process.Start(new ProcessStartInfo(url) { UseShellExecute = true }); }
+        catch (Exception ex) { SetStatus("Could not open " + name + ": " + ex.Message); }
+    }
+
     private void Armory_Click(object sender, RoutedEventArgs e) => OpenArmoryPage();
 
     private void OpenArmoryPage()
