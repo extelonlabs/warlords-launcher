@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "6a51be51c2e2b836938883f27477a94cdf8cdb37",
+  "version": "1.1.1",
+  "entries": [
+    {
+      "version": "1.1.1",
+      "date": "2026-11-05",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Coming soon to campaign battles: Tent Kits and Cart Kits. Your army will buy them in town markets next to the ladders, and any soldier can carry one into battle. They are not for sale yet.",
+            "A deployed tent slowly heals your teammates standing near it, up to 90% health.",
+            "A deployed cart becomes a forward spawn point for your team. Pick Base or Cart on the spawn screen. You can't spawn there while enemies are close, and a cart must stay well away from the enemy base.",
+            "Each team can have one tent and one cart standing at a time, and enemies can destroy them. Press B to place one (you can change the key in the options)."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "The DEV test build is now version 1.1.1. Update once through Warlords.exe to keep joining the servers."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-11-05",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Maintenance only, no game changes: update notes like this one now post more reliably. Two earlier notes got stuck and will follow in a separate post."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Missed notes from November 3: DEV testers got a Clan Battle server (\"Dev Warlords Clan Battle\"). It shows under Clan Wars.",
+            "DEV testers also got a Siege server (\"Dev Warlords Siege\", 250 players) and two more Clan Battle servers (100 players each).",
+            "The DEV lobby now holds up to 1000 players and the DEV battle server up to 100.",
+            "These have not been tried in a real game yet."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-11-04",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Every tester can now join our test battles. Before, only the host's own PC could join them and everyone else got an \"address or port does not match\" message. Update once through Warlords.exe.",
+            "Safer battle map downloads. When a battle needs a map you don't have yet, the game now checks that the map really comes from our server before it installs it. A fake or changed map is refused, and nothing is written to your game folder."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "The DEV test build is now version 1.1.0. Update once through Warlords.exe to keep joining the servers."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.73",
+      "date": "2026-11-04",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "The lobby now shows the StratLords name in the top-left corner and on the top menu tab.",
+            "Access to the DEV test servers no longer runs out after a day. Update once through Warlords.exe and you stay able to join."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.72",
+      "date": "2026-11-04",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Maintenance only: removed private developer computer details from a battle map data file. Nothing changes in game."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.71",
+      "date": "2026-11-04",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Campaign battles and sieges now give Warlords gold, the same amounts as deathmatch: kills, assists, first blood, kill streaks, killing horses, damage dealt, time in the fight and a reward at the end (more for the winners). Killing a teammate costs gold, like in deathmatch.",
+            "Your campaign army gear, lives and results work the same as before. Campaign battles give no loot, quests or prestige.",
+            "This turns on once the campaign servers are updated. It has not been tried in a real game yet."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.70",
+      "date": "2026-11-03",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Prepares campaign road battles to use their own generated battle map, checked by the server before the battle opens. If a map fails the check, the battle falls back to its normal map."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "DEV testers get a Siege server (\"Dev Warlords Siege\", 250 players) and two more Clan Battle servers (100 players each).",
+            "The DEV lobby now holds up to 1000 players and the DEV battle server up to 100.",
+            "These have not been tried in a real game yet.",
+            "DEV testers get a Clan Battle server (\"Dev Warlords Clan Battle\") next to the DEV lobby and battle server. It shows under Clan Wars. This has not been tried in a real game yet.",
+            "DEV testers can now be let into campaign field battles and sieges, not only the DEV lobby and battle server. This has not been tried in a real game yet."
+          ]
+        },
+        {
+          "title": "Disabled",
+          "items": [
+            "Generated campaign battle maps are not switched on yet; battles still use their usual maps for now."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.69",
+      "date": "2026-11-02",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "In DEV map trials, an old copy of a battle map is now replaced with the server's version before joining, so you no longer fall from the sky or see flags inside the ground."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "DEV map trials can now use maps generated for real places on the campaign map, each with its own name."
+          ]
+        }
+      ]
+    }
+  ]
+}
