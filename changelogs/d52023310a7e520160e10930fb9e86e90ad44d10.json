@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "d52023310a7e520160e10930fb9e86e90ad44d10",
+  "version": "1.1.2",
+  "entries": [
+    {
+      "version": "1.1.2",
+      "date": "2026-11-06",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Soldiers now come from playing. Each 5 minutes on a team in campaign battles and sieges or on the Warlords Battle and Siege servers earns a ticket. Tickets turn into soldiers for your campaign army the next day, up to about 24 a day. You need a verified Steam link on your account page.",
+            "Gold you send to other players now shows in both players' gold history."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "Confirming an attack or siege no longer fails with an error.",
+            "Putting gold or gear into a clan-mate's fief now counts toward your daily sending limit, just like sending it to them directly. It also needs a verified Steam link. Your own fief is not affected.",
+            "An army that is chasing an enemy can no longer give away, sell or garrison its soldiers. Cancel the attack first.",
+            "Leaving a battle by disconnecting no longer saves your gear. It counts as a death."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "The servers now show their public names: Warlords EU Lobby 1, Warlords EU Battle, Warlords EU Siege and Warlords EU Clan War 1 to 3.",
+            "Standing still in a battle for about 2 minutes stops your playtime from counting.",
+            "Free-for-all servers no longer earn tickets.",
+            "Caravans, town work, sending gifts and buying soldiers need a Steam link that is at least 3 days old.",
+            "You can send other players at most 1,000 gold worth of gold, soldiers and gear per day, and nothing at all while an enemy army is chasing you.",
+            "Attacks need at least 20 soldiers. Skipping your own attack costs at least a fifth of your army.",
+            "Raids take 30% of a fief's treasury instead of 50%. Fiefs can only be given to your own clan, once a week.",
+            "Officers can take at most 2,000 gold a day from clan fiefs, and the fief owner is told.",
+            "Big trade loads keep slowing your army, and grouped armies move at the speed their full size allows.",
+            "Coming next: bought soldiers will cost 40 gold, gear will cost a bit more and sell back for half price, caravans will earn less, and very large armies will pay a small daily upkeep.",
+            "The DEV test build is now version 1.1.2. Update once through Warlords.exe to keep joining the servers."
+          ]
+        },
+        {
+          "title": "Activated",
+          "items": [
+            "Warlords is open to everyone. You no longer need to be on the tester list to play.",
+            "Get the game with the Warlords launcher from stratlords.online. Still have the old Steam Workshop Warlords? The launcher shows a \"Remove old Workshop copy\" button. Press it and unsubscribe in Steam.",
+            "Attacks, sieges and village raids are back on in the campaign. Battles are booked at least a day ahead.",
+            "The new prices are live now. Bought soldiers cost 40 gold.",
+            "Gear and horses cost about half again as much, and everything sells back for half its price. That includes ladders, tents and carts.",
+            "Caravans earn 35 gold per stop instead of 75.",
+            "Armies with more than 50 soldiers pay half a gold per extra soldier each day, starting tomorrow. If you can't pay, some of the extra soldiers leave.",
+            "Playtime tickets now count on the Dev Warlords Battle and Siege servers and in campaign battles and sieges."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.1",
+      "date": "2026-11-05",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Coming soon to campaign battles: Tent Kits and Cart Kits. Your army will buy them in town markets next to the ladders, and any soldier can carry one into battle. They are not for sale yet.",
+            "A deployed tent slowly heals your teammates standing near it, up to 90% health.",
+            "A deployed cart becomes a forward spawn point for your team. Pick Base or Cart on the spawn screen. You can't spawn there while enemies are close, and a cart must stay well away from the enemy base.",
+            "Each team can have one tent and one cart standing at a time, and enemies can destroy them. Press B to place one (you can change the key in the options)."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "The DEV test build is now version 1.1.1. Update once through Warlords.exe to keep joining the servers."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-11-05",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Maintenance only, no game changes: update notes like this one now post more reliably. Two earlier notes got stuck and will follow in a separate post."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Missed notes from November 3: DEV testers got a Clan Battle server (\"Dev Warlords Clan Battle\"). It shows under Clan Wars.",
+            "DEV testers also got a Siege server (\"Dev Warlords Siege\", 250 players) and two more Clan Battle servers (100 players each).",
+            "The DEV lobby now holds up to 1000 players and the DEV battle server up to 100.",
+            "These have not been tried in a real game yet."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-11-04",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Every tester can now join our test battles. Before, only the host's own PC could join them and everyone else got an \"address or port does not match\" message. Update once through Warlords.exe.",
+            "Safer battle map downloads. When a battle needs a map you don't have yet, the game now checks that the map really comes from our server before it installs it. A fake or changed map is refused, and nothing is written to your game folder."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "The DEV test build is now version 1.1.0. Update once through Warlords.exe to keep joining the servers."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.73",
+      "date": "2026-11-04",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "The lobby now shows the StratLords name in the top-left corner and on the top menu tab.",
+            "Access to the DEV test servers no longer runs out after a day. Update once through Warlords.exe and you stay able to join."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.72",
+      "date": "2026-11-04",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Maintenance only: removed private developer computer details from a battle map data file. Nothing changes in game."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.71",
+      "date": "2026-11-04",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Campaign battles and sieges now give Warlords gold, the same amounts as deathmatch: kills, assists, first blood, kill streaks, killing horses, damage dealt, time in the fight and a reward at the end (more for the winners). Killing a teammate costs gold, like in deathmatch.",
+            "Your campaign army gear, lives and results work the same as before. Campaign battles give no loot, quests or prestige.",
+            "This turns on once the campaign servers are updated. It has not been tried in a real game yet."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.70",
+      "date": "2026-11-03",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Prepares campaign road battles to use their own generated battle map, checked by the server before the battle opens. If a map fails the check, the battle falls back to its normal map."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "DEV testers get a Siege server (\"Dev Warlords Siege\", 250 players) and two more Clan Battle servers (100 players each).",
+            "The DEV lobby now holds up to 1000 players and the DEV battle server up to 100.",
+            "These have not been tried in a real game yet.",
+            "DEV testers get a Clan Battle server (\"Dev Warlords Clan Battle\") next to the DEV lobby and battle server. It shows under Clan Wars. This has not been tried in a real game yet.",
+            "DEV testers can now be let into campaign field battles and sieges, not only the DEV lobby and battle server. This has not been tried in a real game yet."
+          ]
+        },
+        {
+          "title": "Disabled",
+          "items": [
+            "Generated campaign battle maps are not switched on yet; battles still use their usual maps for now."
+          ]
+        }
+      ]
+    }
+  ]
+}
