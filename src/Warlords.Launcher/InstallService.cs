@@ -38,7 +38,7 @@ public sealed class InstallService
     public static void ValidateRelease(ReleaseChannel release)
     {
         ArgumentNullException.ThrowIfNull(release);
-        if (release.SchemaVersion != 1 || release.Branch != Profile.Branch || release.SourceRepository != Profile.Repository
+        if (release.SchemaVersion != 1 || (release.Branch != Profile.Branch && release.Branch != Profile.PreviousBranch) || release.SourceRepository != Profile.Repository
             || release.RequiredGameVersion != Profile.GameVersion || release.RequiredArmoryVersion != Profile.ArmoryVersion)
             throw new InvalidDataException("This test channel is not for the supported StratLords profile.");
         if (release.SourceCommit is null || !Commit.IsMatch(release.SourceCommit) || release.Version is null || !ModuleVersion.IsMatch(release.Version)

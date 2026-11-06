@@ -7,7 +7,7 @@ namespace Warlords.Launcher;
 
 public static class Profile
 {
-    public const string LauncherVersion = "0.4.3";
+    public const string LauncherVersion = "0.4.4";
     public const string DefaultChannelUrl = "https://raw.githubusercontent.com/extelonlabs/warlords-launcher/StratLords/channel.json";
     // Launcher self-update: a manifest signed by the owner's offline key. Only this
     // pinned public key is trusted; it never comes from the feed.
@@ -17,7 +17,9 @@ public static class Profile
     public const string WebsiteUrl = "https://stratlords.online/";
     public const string DiscordUrl = "https://discord.gg/W6ZEx2DqXF";
     public const string Repository = "MB-Warlords/The-Last-Concord";
-    public const string Branch = "StratLords";
+    // Mod source branch the launcher follows. The feed may still name the previous branch while it moves.
+    public const string Branch = "main";
+    public const string PreviousBranch = "StratLords";
     public const string ModuleId = "MBWarlords.LastConcord";
     public const string GameVersion = "v1.4.8";
     public const string ArmoryVersion = "v1.0.0.17";

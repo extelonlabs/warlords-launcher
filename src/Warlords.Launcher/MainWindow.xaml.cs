@@ -85,7 +85,7 @@ public partial class MainWindow : Window
 
     private async Task InitializeAsync(CancellationToken token)
     {
-        Append("Warlords " + Profile.LauncherVersion + ". Automatic updates: StratLords.");
+        Append("Warlords " + Profile.LauncherVersion + ". Automatic updates: " + Profile.Branch + ".");
         if (!_localChannelMode) _ = CheckLauncherUpdateAsync();
         if (string.IsNullOrWhiteSpace(GameRootBox.Text))
             GameRootBox.Text = await Task.Run(_game.Discover, token) ?? "";
@@ -153,7 +153,7 @@ public partial class MainWindow : Window
         _channelLocation = loaded.Location;
         var release = loaded.Release;
         ReleaseText.Text = $"Latest version: {release.Version}";
-        SourceText.Text = $"Built from {Profile.Branch} / {release.SourceCommit[..12]}";
+        SourceText.Text = $"Built from {release.Branch} / {release.SourceCommit[..12]}";
         SourceText.ToolTip = release.SourceCommit;
         if (Uri.TryCreate(location, UriKind.Absolute, out var channelUri) && channelUri.Scheme == "https")
         {
@@ -707,7 +707,7 @@ public partial class MainWindow : Window
         {
             var head = await _channels.ReadBranchHeadAsync(token);
             BranchStatusText.Text = _source?.Release.SourceCommit == head
-                ? $"This test pack matches the current StratLords source ({head[..12]})."
+                ? $"This build matches the current {Profile.Branch} source ({head[..12]})."
                 : $"Source is at {head[..12]}. Ask the host for a matched build of that commit; source files cannot be installed as a playable client.";
             Append(BranchStatusText.Text);
         }
