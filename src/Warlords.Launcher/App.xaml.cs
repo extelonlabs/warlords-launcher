@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 
@@ -10,6 +11,11 @@ public partial class App : Application
     private Mutex? _instance;
     public static string DataDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "WarlordsLauncherV2");
     public static string LogPath => Path.Combine(DataDirectory, "launcher.log");
+    public const string AfterUpdateArgument = "--after-update";
+    // Environment.ProcessPath: Assembly.Location is empty in a single-file exe.
+    public static string LauncherPath => Environment.ProcessPath ?? throw new InvalidOperationException("The launcher path is unknown.");
+    public static string NewLauncherPath => Path.Combine(Path.GetDirectoryName(LauncherPath)!, "Warlords.new.exe");
+    public static string OldLauncherPath => Path.Combine(Path.GetDirectoryName(LauncherPath)!, "Warlords.old.exe");
 
     public static void Log(string message)
     {
@@ -27,7 +33,14 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+        var args = e.Args.Where(arg => arg != AfterUpdateArgument).ToArray();
         _instance = new Mutex(true, @"Local\WarlordsClosedTestLauncherV2", out var created);
+        // A self-update starts the new launcher while the old one is still closing.
+        if (!created && args.Length != e.Args.Length)
+        {
+            try { created = _instance.WaitOne(TimeSpan.FromSeconds(15)); }
+            catch (AbandonedMutexException) { created = true; }
+        }
         if (!created)
         {
             MessageBox.Show("Warlords is already open.", "Warlords", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -44,10 +57,12 @@ public partial class App : Application
             args.Handled = true;
             Shutdown(1);
         };
+        try { File.Delete(OldLauncherPath); }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException) { }
         try
         {
             string? channel = null;
-            if (e.Args.Length == 2 && e.Args[0] == "--channel") channel = e.Args[1];
+            if (args.Length == 2 && args[0] == "--channel") channel = args[1];
             MainWindow = new MainWindow(channel);
             MainWindow.Show();
         }
@@ -57,6 +72,14 @@ public partial class App : Application
             MessageBox.Show(ex.Message + "\n\nDetails: " + LogPath, "Warlords could not open", MessageBoxButton.OK, MessageBoxImage.Error);
             Shutdown(1);
         }
+    }
+
+    /// <summary>Lets the updated launcher take the single-instance lock before this one closes.</summary>
+    public void ReleaseSingleInstance()
+    {
+        _instance?.ReleaseMutex();
+        _instance?.Dispose();
+        _instance = null;
     }
 
     protected override void OnExit(ExitEventArgs e)

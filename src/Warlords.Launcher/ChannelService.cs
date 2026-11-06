@@ -1,7 +1,9 @@
 using System;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +13,17 @@ namespace Warlords.Launcher;
 public sealed class ChannelService
 {
     private const int MaximumChannelBytes = 8 * 1024 * 1024;
+    private const long MaximumLauncherBytes = 512L * 1024 * 1024;
     private static readonly HttpClient Http = CreateClient();
+    // Same redirect rules, but long enough for the launcher exe itself.
+    private static readonly HttpClient Downloads = CreateDownloadClient();
+
+    private static HttpClient CreateDownloadClient()
+    {
+        var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { Timeout = TimeSpan.FromMinutes(20) };
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("Warlords-Launcher/" + Profile.LauncherVersion);
+        return client;
+    }
 
     private static HttpClient CreateClient()
     {
@@ -82,18 +94,88 @@ public sealed class ChannelService
         return sha;
     }
 
+    /// <summary>Reads the signed launcher manifest. Returns it only when it names a newer launcher.</summary>
+    public async Task<LauncherUpdate?> CheckLauncherUpdateAsync(CancellationToken cancellationToken)
+    {
+        using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeout.CancelAfter(TimeSpan.FromSeconds(30));
+        using var response = await GetHttpsAsync(new Uri(Profile.LauncherUpdateUrl + "?warlords=" + Guid.NewGuid().ToString("N")), timeout.Token);
+        if (response.StatusCode == HttpStatusCode.NotFound) return null;
+        response.EnsureSuccessStatusCode();
+        await using var stream = await response.Content.ReadAsStreamAsync(timeout.Token);
+        var envelope = JsonSerializer.Deserialize<LauncherUpdateEnvelope>(await ReadBoundedAsync(stream, timeout.Token), Profile.Json)
+            ?? throw new InvalidDataException("The launcher update manifest is empty.");
+        // Check the signature on the exact bytes before reading anything inside them.
+        var manifest = Convert.FromBase64String(envelope.Manifest);
+        using (var rsa = RSA.Create())
+        {
+            rsa.ImportParameters(new RSAParameters { Modulus = Convert.FromBase64String(Profile.LauncherUpdateKeyModulus), Exponent = [1, 0, 1] });
+            if (!rsa.VerifyData(manifest, Convert.FromBase64String(envelope.Signature), HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1))
+                throw new InvalidDataException("The launcher update is not signed by the Warlords key.");
+        }
+        var update = JsonSerializer.Deserialize<LauncherUpdate>(manifest, Profile.Json)
+            ?? throw new InvalidDataException("The launcher update manifest is empty.");
+        if (update.SchemaVersion != 1 || !Version.TryParse(update.Version, out var version)
+            || update.Size is <= 0 or > MaximumLauncherBytes
+            || !System.Text.RegularExpressions.Regex.IsMatch(update.Sha256, "^[0-9a-f]{64}$")
+            || !Uri.TryCreate(update.Url, UriKind.Absolute, out var url))
+            throw new InvalidDataException("The launcher update manifest is invalid.");
+        RequireHttps(url);
+        // Strictly newer only: an old signed manifest can never roll a launcher back.
+        return version > Version.Parse(Profile.LauncherVersion) ? update : null;
+    }
+
+    /// <summary>Downloads the signed launcher to destination and checks its size and SHA-256.</summary>
+    public async Task DownloadLauncherAsync(LauncherUpdate update, string destination, IProgress<OperationProgress> progress, CancellationToken cancellationToken)
+    {
+        if (File.Exists(destination)) File.Delete(destination);
+        try
+        {
+            using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            timeout.CancelAfter(TimeSpan.FromMinutes(20));
+            using var response = await GetHttpsAsync(new Uri(update.Url), timeout.Token, Downloads);
+            response.EnsureSuccessStatusCode();
+            if (response.Content.Headers.ContentLength is { } length && length != update.Size)
+                throw new InvalidDataException("The launcher download size does not match the signed manifest.");
+            await using (var input = await response.Content.ReadAsStreamAsync(timeout.Token))
+            await using (var output = new FileStream(destination, FileMode.CreateNew, FileAccess.Write, FileShare.None, 131072, FileOptions.Asynchronous))
+            {
+                using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+                var buffer = new byte[131072];
+                long total = 0;
+                int read;
+                while ((read = await input.ReadAsync(buffer, timeout.Token)) > 0)
+                {
+                    total += read;
+                    if (total > update.Size) throw new InvalidDataException("The server sent more data than the signed launcher.");
+                    hash.AppendData(buffer, 0, read);
+                    await output.WriteAsync(buffer.AsMemory(0, read), timeout.Token);
+                    progress.Report(new("Downloading launcher " + update.Version, (double)total / update.Size));
+                }
+                if (total != update.Size) throw new InvalidDataException("The launcher download ended early.");
+                if (Convert.ToHexString(hash.GetHashAndReset()).ToLowerInvariant() != update.Sha256)
+                    throw new InvalidDataException("The launcher download does not match the signed fingerprint.");
+            }
+        }
+        catch
+        {
+            if (File.Exists(destination)) File.Delete(destination);
+            throw;
+        }
+    }
+
     private static void RequireHttps(Uri uri)
     {
         if (uri.Scheme != Uri.UriSchemeHttps || !string.IsNullOrEmpty(uri.UserInfo) || !string.IsNullOrEmpty(uri.Fragment))
             throw new InvalidDataException("Online channels and packages must use HTTPS without embedded credentials.");
     }
 
-    private static async Task<HttpResponseMessage> GetHttpsAsync(Uri uri, CancellationToken cancellationToken)
+    private static async Task<HttpResponseMessage> GetHttpsAsync(Uri uri, CancellationToken cancellationToken, HttpClient? client = null)
     {
         for (var redirects = 0; redirects <= 5; redirects++)
         {
             RequireHttps(uri);
-            var response = await Http.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+            var response = await (client ?? Http).GetAsync(uri, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
             var status = (int)response.StatusCode;
             if (status is not (301 or 302 or 303 or 307 or 308)) return response;
             var destination = response.Headers.Location;

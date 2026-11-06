@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -21,6 +22,7 @@ public partial class MainWindow : Window
     private readonly GameService _game = new();
     private readonly InstallService _installer = new();
     private readonly ChannelService _channels = new();
+    private LauncherUpdate? _launcherUpdate;
     private readonly ChangelogService _changelogs = new();
     private readonly string _preferencesPath = Path.Combine(App.DataDirectory, "settings.json");
     private ChannelSource? _source;
@@ -84,6 +86,7 @@ public partial class MainWindow : Window
     private async Task InitializeAsync(CancellationToken token)
     {
         Append("Warlords " + Profile.LauncherVersion + ". Automatic updates: StratLords.");
+        if (!_localChannelMode) _ = CheckLauncherUpdateAsync();
         if (string.IsNullOrWhiteSpace(GameRootBox.Text))
             GameRootBox.Text = await Task.Run(_game.Discover, token) ?? "";
         await InspectGameAsync(token);
@@ -387,7 +390,7 @@ public partial class MainWindow : Window
         CancelButton.Visibility = _busy ? Visibility.Visible : Visibility.Collapsed;
         Progress.Visibility = ProgressPercentText.Visibility = _busy ? Visibility.Visible : Visibility.Collapsed;
         DetectButton.IsEnabled = BrowseButton.IsEnabled = ChoosePackButton.IsEnabled = RefreshButton.IsEnabled = BranchButton.IsEnabled = ConnectButton.IsEnabled = !_busy;
-        ArmoryButton.IsEnabled = !_busy;
+        ArmoryButton.IsEnabled = LauncherUpdateButton.IsEnabled = !_busy;
         GameRootBox.IsEnabled = ChannelUrlBox.IsEnabled = !_busy;
         BrowseButton.Content = hasGame ? "_Change…" : "Choose _folder";
         RefreshButton.Content = _hadError ? "Try _again" : "Check _again";
@@ -801,6 +804,74 @@ public partial class MainWindow : Window
     {
         try { Process.Start(new ProcessStartInfo(url) { UseShellExecute = true }); }
         catch (Exception ex) { SetStatus("Could not open " + name + ": " + ex.Message); }
+    }
+
+    // Never blocks the mod update or Play: any failure only hides the button.
+    private async Task CheckLauncherUpdateAsync()
+    {
+        try
+        {
+            _launcherUpdate = await _channels.CheckLauncherUpdateAsync(CancellationToken.None);
+            if (_launcherUpdate is null) return;
+            LauncherUpdateText.Text = "Update launcher " + _launcherUpdate.Version;
+            LauncherUpdateButton.Visibility = Visibility.Visible;
+            Append("Launcher " + _launcherUpdate.Version + " is available. Choose Update launcher at the top.");
+        }
+        catch (Exception ex)
+        {
+            App.Log("Launcher update check skipped: " + ex.Message);
+        }
+    }
+
+    private async void UpdateLauncher_Click(object sender, RoutedEventArgs e) => await RunAsync(UpdateLauncherAsync);
+
+    // Swaps this exe for the signed newer one, then restarts. Mod files are not touched.
+    private async Task UpdateLauncherAsync(CancellationToken token)
+    {
+        var update = _launcherUpdate ?? throw new InvalidOperationException("No launcher update is available.");
+        if (MessageBox.Show(this,
+            $"Update the Warlords launcher from {Profile.LauncherVersion} to {update.Version}?\n\n"
+            + "The launcher downloads the new version, checks its signature and fingerprint, and restarts. Your Warlords mod files are not touched.",
+            "Update launcher", MessageBoxButton.OKCancel, MessageBoxImage.Question) != MessageBoxResult.OK)
+            return;
+        SetStatus("Downloading launcher " + update.Version + "…", "Updating the launcher");
+        var current = App.LauncherPath;
+        try
+        {
+            await _channels.DownloadLauncherAsync(update, App.NewLauncherPath, Reporter(), token);
+            if (File.Exists(App.OldLauncherPath)) File.Delete(App.OldLauncherPath);
+            // Windows lets a running exe be renamed, not overwritten.
+            File.Move(current, App.OldLauncherPath);
+            try
+            {
+                // Antivirus often holds a freshly written exe for a moment.
+                for (var attempt = 1; ; attempt++)
+                {
+                    try { File.Move(App.NewLauncherPath, current); break; }
+                    catch (IOException) when (attempt < 5) { await Task.Delay(1000, token); }
+                }
+            }
+            catch
+            {
+                File.Move(App.OldLauncherPath, current);
+                throw;
+            }
+        }
+        catch (UnauthorizedAccessException)
+        {
+            if (File.Exists(App.NewLauncherPath)) File.Delete(App.NewLauncherPath);
+            OpenLink(Profile.LauncherReleasesUrl, "the launcher download page");
+            SetStatus("The launcher's folder can't be changed. Download the new Warlords.exe from the page that just opened.");
+            return;
+        }
+        var restart = new ProcessStartInfo(current) { UseShellExecute = false };
+        foreach (var arg in Environment.GetCommandLineArgs().Skip(1).Where(arg => arg != App.AfterUpdateArgument))
+            restart.ArgumentList.Add(arg);
+        restart.ArgumentList.Add(App.AfterUpdateArgument);
+        ((App)Application.Current).ReleaseSingleInstance();
+        Process.Start(restart);
+        SetStatus("Launcher " + update.Version + " installed. Restarting…");
+        _closeAfterOperation = true;
     }
 
     // The old Workshop item shares the Warlords module Id, so Bannerlord would see two copies.

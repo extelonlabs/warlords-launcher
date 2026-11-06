@@ -255,6 +255,12 @@
                 <TextBlock Text="Discord" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" FontSize="13" LineHeight="18" VerticalAlignment="Center"/>
               </StackPanel>
             </Button>
+            <Button x:Name="LauncherUpdateButton" Style="{StaticResource TitleLinkButton}" Click="UpdateLauncher_Click" Visibility="Collapsed" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Download, check and install the newer Warlords launcher" AutomationProperties.Name="Update the Warlords launcher" Margin="4,0,0,0">
+              <StackPanel Orientation="Horizontal">
+                <Path Style="{StaticResource TitleLinkIcon}" Data="M 7,0.5 L 7,9.5 M 3,5.5 L 7,9.5 L 11,5.5 M 1,13.5 L 13,13.5"/>
+                <TextBlock x:Name="LauncherUpdateText" Text="Update launcher" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" FontSize="13" LineHeight="18" VerticalAlignment="Center"/>
+              </StackPanel>
+            </Button>
             <TextBlock x:Name="LauncherVersionText" Foreground="{StaticResource Muted}" FontSize="12" VerticalAlignment="Center" Margin="14,0,0,0"/>
           </StackPanel>
           <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Top">
