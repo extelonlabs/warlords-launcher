@@ -7,7 +7,7 @@ namespace Warlords.Launcher;
 
 public static class Profile
 {
-    public const string LauncherVersion = "0.4.1";
+    public const string LauncherVersion = "0.4.2";
     public const string DefaultChannelUrl = "https://raw.githubusercontent.com/extelonlabs/warlords-launcher/StratLords/channel.json";
     public const string WebsiteUrl = "https://stratlords.online/";
     public const string DiscordUrl = "https://discord.gg/W6ZEx2DqXF";
@@ -76,6 +76,8 @@ public sealed record GameInspection(string GameRoot, string? InstalledVersion, b
     public IReadOnlyList<string> GameMessages { get; init; } = [];
     public IReadOnlyList<string> ArmoryMessages { get; init; } = [];
     public IReadOnlyList<string> WarlordsMessages { get; init; } = [];
+    // Full folder paths of Warlords copies that Steam Workshop installed for Bannerlord.
+    public IReadOnlyList<string> OldWorkshopCopies { get; init; } = [];
 }
 public sealed record InstallResult(string ModulePath, string? BackupPath);
 public sealed record LauncherPreferences(string GameRoot = "", string Channel = "");

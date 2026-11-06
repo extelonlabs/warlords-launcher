@@ -167,6 +167,13 @@ public sealed class GameService
         }
         if (ready)
             messages.Add("Game and required modules are compatible. In Bannerlord, select the Multiplayer tab and the four modules shown below.");
+        // A Warlords copy directly inside a Bannerlord Workshop folder is the old Workshop item.
+        var workshopContainers = new HashSet<string>(ModuleContainers(root).Select(c => Path.TrimEndingDirectorySeparator(Path.GetFullPath(c))), StringComparer.OrdinalIgnoreCase);
+        workshopContainers.Remove(Path.TrimEndingDirectorySeparator(Path.Combine(root, "Modules")));
+        var oldWorkshopCopies = inventory.TryGetValue(Profile.ModuleId, out List<ModuleDescriptor>? warlordsCopies)
+            ? warlordsCopies.Select(m => Path.GetDirectoryName(Path.GetFullPath(m.File))!)
+                .Where(folder => workshopContainers.Contains(Path.GetDirectoryName(folder)!)).ToList()
+            : [];
         return new GameInspection(root, installedVersion, ready, messages)
         {
             GameFound = true,
@@ -175,8 +182,27 @@ public sealed class GameService
             WarlordsNeedsManualAttention = warlordsNeedsManualAttention,
             GameMessages = gameMessages,
             ArmoryMessages = armoryMessages,
-            WarlordsMessages = warlordsMessages
+            WarlordsMessages = warlordsMessages,
+            OldWorkshopCopies = oldWorkshopCopies
         };
+    }
+
+    /// <summary>Moves an old Workshop copy of Warlords to a backup folder in the same Steam library, after the player agreed.</summary>
+    /// <returns>The backup folder, or null when Steam already removed the copy.</returns>
+    public string? MoveOldWorkshopCopy(string gameRoot, string folder)
+    {
+        using IDisposable updateLock = InstallService.AcquireLock(gameRoot);
+        EnsureClosed();
+        if (!Directory.Exists(folder)) return null;
+        if (!Inspect(gameRoot).OldWorkshopCopies.Contains(folder, StringComparer.OrdinalIgnoreCase))
+            throw new InvalidOperationException("That folder is no longer an old Workshop copy of Warlords. Choose Check again.");
+        AssertNotLink(folder);
+        // ...\steamapps\workshop\content\261550\<item>: the backup stays on the same drive, outside every module folder.
+        string steamapps = Directory.GetParent(folder)!.Parent!.Parent!.Parent!.FullName;
+        string backup = Path.Combine(steamapps, "warlords-workshop-backup", Path.GetFileName(folder) + "-" + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss"));
+        Directory.CreateDirectory(Path.GetDirectoryName(backup)!);
+        Directory.Move(folder, backup);
+        return backup;
     }
 
     public void Play(string gameRoot)
