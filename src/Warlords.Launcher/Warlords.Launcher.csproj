@@ -1,26 +1,36 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0-windows</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AssemblyName>Warlords</AssemblyName>
-    <Version>0.4.4</Version>
+    <Version>0.5.0</Version>
     <ApplicationIcon>Assets/warlords.ico</ApplicationIcon>
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <PublishSingleFile>true</PublishSingleFile>
-    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>none</DebugType>
-    <SelfContained>true</SelfContained>
+    <GenerateSupportedRuntime>false</GenerateSupportedRuntime>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Assets/warlords-logo.png;Assets/warlords.ico;Assets/NOTICE.md" />
+    <None Remove="Assets/warlords-logo.png;Assets/warlords.ico;Assets/NOTICE.md;Assets/hero.jpg" />
     <Resource Include="Assets/warlords-logo.png" />
     <Resource Include="Assets/warlords.ico" />
     <Resource Include="Assets/NOTICE.md" />
+    <Resource Include="Assets/hero.jpg" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <PackageReference Include="System.Text.Json" Version="10.0.14" />
   </ItemGroup>
+  <!-- Keep one exe: self-update swaps exactly one file. Net48.cs loads these at run time. -->
+  <Target Name="EmbedLibraries" AfterTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <EmbeddedResource Include="@(ReferenceCopyLocalPaths)" Condition="'%(Extension)' == '.dll'" LogicalName="lib/%(Filename)%(Extension)" />
+      <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" />
+    </ItemGroup>
+  </Target>
 </Project>

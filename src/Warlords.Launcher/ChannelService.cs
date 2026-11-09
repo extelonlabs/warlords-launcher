@@ -46,14 +46,14 @@ public sealed class ChannelService
             // The stable channel is intentionally mutable. Use a fresh request at the
             // CDN as well as no-cache headers; do not alter immutable package URLs.
             var requestUri = new UriBuilder(uri);
-            requestUri.Query = (string.IsNullOrEmpty(uri.Query) ? "" : uri.Query[1..] + "&")
+            requestUri.Query = (string.IsNullOrEmpty(uri.Query) ? "" : uri.Query.Substring(1) + "&")
                 + "warlords=" + Guid.NewGuid().ToString("N");
             using var response = await GetHttpsAsync(requestUri.Uri, cancellationToken);
             response.EnsureSuccessStatusCode();
             RequireHttps(response.RequestMessage!.RequestUri!);
             if (response.Content.Headers.ContentLength > MaximumChannelBytes)
                 throw new InvalidDataException("The update channel is larger than the supported limit.");
-            await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
+            using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
             bytes = await ReadBoundedAsync(stream, cancellationToken);
             location = uri.AbsoluteUri;
         }
@@ -65,7 +65,7 @@ public sealed class ChannelService
                 throw new FileNotFoundException("Choose channel.json from the extracted Warlords test pack.", location);
             if (info.Length > MaximumChannelBytes)
                 throw new InvalidDataException("The update channel is larger than the supported limit.");
-            await using var stream = File.OpenRead(location);
+            using var stream = File.OpenRead(location);
             bytes = await ReadBoundedAsync(stream, cancellationToken);
         }
 
@@ -81,19 +81,6 @@ public sealed class ChannelService
         return new ChannelSource(release, location);
     }
 
-    public async Task<string> ReadBranchHeadAsync(CancellationToken cancellationToken)
-    {
-        using var response = await GetHttpsAsync(new Uri(
-            $"https://api.github.com/repos/{Profile.Repository}/git/ref/heads/{Profile.Branch}"), cancellationToken);
-        response.EnsureSuccessStatusCode();
-        await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
-        using var document = JsonDocument.Parse(await ReadBoundedAsync(stream, cancellationToken));
-        var sha = document.RootElement.GetProperty("object").GetProperty("sha").GetString() ?? "";
-        if (sha.Length != 40 || !System.Text.RegularExpressions.Regex.IsMatch(sha, "^[0-9a-f]{40}$"))
-            throw new InvalidDataException("GitHub returned an invalid branch identity.");
-        return sha;
-    }
-
     /// <summary>Reads the signed launcher manifest. Returns it only when it names a newer launcher.</summary>
     public async Task<LauncherUpdate?> CheckLauncherUpdateAsync(CancellationToken cancellationToken)
     {
@@ -102,7 +89,7 @@ public sealed class ChannelService
         using var response = await GetHttpsAsync(new Uri(Profile.LauncherUpdateUrl + "?warlords=" + Guid.NewGuid().ToString("N")), timeout.Token);
         if (response.StatusCode == HttpStatusCode.NotFound) return null;
         response.EnsureSuccessStatusCode();
-        await using var stream = await response.Content.ReadAsStreamAsync(timeout.Token);
+        using var stream = await response.Content.ReadAsStreamAsync(timeout.Token);
         var envelope = JsonSerializer.Deserialize<LauncherUpdateEnvelope>(await ReadBoundedAsync(stream, timeout.Token), Profile.Json)
             ?? throw new InvalidDataException("The launcher update manifest is empty.");
         // Check the signature on the exact bytes before reading anything inside them.
@@ -137,8 +124,8 @@ public sealed class ChannelService
             response.EnsureSuccessStatusCode();
             if (response.Content.Headers.ContentLength is { } length && length != update.Size)
                 throw new InvalidDataException("The launcher download size does not match the signed manifest.");
-            await using (var input = await response.Content.ReadAsStreamAsync(timeout.Token))
-            await using (var output = new FileStream(destination, FileMode.CreateNew, FileAccess.Write, FileShare.None, 131072, FileOptions.Asynchronous))
+            using (var input = await response.Content.ReadAsStreamAsync(timeout.Token))
+            using (var output = new FileStream(destination, FileMode.CreateNew, FileAccess.Write, FileShare.None, 131072, FileOptions.Asynchronous))
             {
                 using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
                 var buffer = new byte[131072];
@@ -149,11 +136,11 @@ public sealed class ChannelService
                     total += read;
                     if (total > update.Size) throw new InvalidDataException("The server sent more data than the signed launcher.");
                     hash.AppendData(buffer, 0, read);
-                    await output.WriteAsync(buffer.AsMemory(0, read), timeout.Token);
+                    await output.WriteAsync(buffer, 0, read, timeout.Token);
                     progress.Report(new("Downloading launcher " + update.Version, (double)total / update.Size));
                 }
                 if (total != update.Size) throw new InvalidDataException("The launcher download ended early.");
-                if (Convert.ToHexString(hash.GetHashAndReset()).ToLowerInvariant() != update.Sha256)
+                if (Net48.ToHex(hash.GetHashAndReset()).ToLowerInvariant() != update.Sha256)
                     throw new InvalidDataException("The launcher download does not match the signed fingerprint.");
             }
         }

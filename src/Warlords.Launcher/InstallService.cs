@@ -37,16 +37,16 @@ public sealed class InstallService
 
     public static void ValidateRelease(ReleaseChannel release)
     {
-        ArgumentNullException.ThrowIfNull(release);
+        if (release is null) throw new ArgumentNullException(nameof(release));
         if (release.SchemaVersion != 1 || (release.Branch != Profile.Branch && release.Branch != Profile.PreviousBranch) || release.SourceRepository != Profile.Repository
             || release.RequiredGameVersion != Profile.GameVersion || release.RequiredArmoryVersion != Profile.ArmoryVersion)
-            throw new InvalidDataException("This test channel is not for the supported StratLords profile.");
+            throw new InvalidDataException("This update is not for your version of the game. Check for a newer launcher.");
         if (release.SourceCommit is null || !Commit.IsMatch(release.SourceCommit) || release.Version is null || !ModuleVersion.IsMatch(release.Version)
             || string.IsNullOrWhiteSpace(release.BuildId) || release.BuildId.Length > 200 || release.BuildId.Any(char.IsControl))
-            throw new InvalidDataException("The test channel has invalid build identity metadata.");
+            throw new InvalidDataException("The update information is damaged. Try again later.");
         if (release.CreatedUtc == default || release.CreatedUtc > DateTimeOffset.UtcNow.AddMinutes(10)
             || (release.ExpiresUtc is { } expiry && (expiry <= DateTimeOffset.UtcNow || expiry <= release.CreatedUtc)))
-            throw new InvalidDataException("This test pack has expired or has invalid dates. Ask the owner for a fresh matched pack.");
+            throw new InvalidDataException("This update has expired. Try again later.");
         if (release.PackageSize <= 0 || release.PackageSize > MaximumPackage || release.PackageSha256 is null || !Hash.IsMatch(release.PackageSha256)
             || string.IsNullOrWhiteSpace(release.Package))
             throw new InvalidDataException("The package size, address or SHA-256 is invalid.");
@@ -61,7 +61,7 @@ public sealed class InstallService
             if (release.Package.Contains('/')) throw new InvalidDataException("A local package must be beside its channel file.");
         }
         if (release.Files is null || release.Files.Count == 0 || release.Files.Count > 50000)
-            throw new InvalidDataException("The test channel has no complete file inventory.");
+            throw new InvalidDataException("The update information is incomplete. Try again later.");
         HashSet<string> paths = new(StringComparer.OrdinalIgnoreCase);
         long total = 0;
         foreach (ReleaseFile? file in release.Files)
@@ -78,7 +78,7 @@ public sealed class InstallService
         {
             string[] segments = path.Split('/');
             for (int index = 1; index < segments.Length; index++)
-                if (paths.Contains(string.Join('/', segments.Take(index))))
+                if (paths.Contains(string.Join("/", segments.Take(index))))
                     throw new InvalidDataException("The package treats a file as a folder.");
         }
         if (RequiredFiles.Any(path => !paths.Contains(path) || release.Files.Single(file => file.Path.Equals(path, StringComparison.OrdinalIgnoreCase)).Size == 0))
@@ -87,18 +87,23 @@ public sealed class InstallService
 
     public static IDisposable AcquireLock(string gameRoot)
     {
-        string modules = SafeFiles.Modules(gameRoot);
+        string modules = SafeFiles.Extended(SafeFiles.Modules(gameRoot));
         string lockPath = Path.Combine(modules, ".StratLords.warlords-update.lock");
         SafeFiles.NoLinks(lockPath);
         try { return new FileStream(lockPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None); }
         catch (IOException error) { throw new IOException("Another Warlords launcher is updating or starting this installation. Close it and try again.", error); }
     }
 
-    public static void Recover(string gameRoot)
+    /// <summary>Finishes cleaning up after a killed update. Returns false when there was nothing to do.</summary>
+    public static bool Recover(string gameRoot)
     {
+        string modules = SafeFiles.Extended(SafeFiles.Modules(gameRoot));
+        // Checked first, so a running game is no reason to stop when nothing needs recovery.
+        if (!File.Exists(Path.Combine(modules, JournalName))) return false;
         using IDisposable exclusive = AcquireLock(gameRoot);
         GameService.EnsureClosed();
-        RecoverCore(SafeFiles.Modules(gameRoot));
+        RecoverCore(modules);
+        return true;
     }
 
     public async Task<InstallResult> InstallAsync(string gameRoot, ChannelSource source, IProgress<OperationProgress> progress, CancellationToken cancellationToken)
@@ -106,7 +111,7 @@ public sealed class InstallService
         ValidateRelease(source.Release);
         using IDisposable exclusive = AcquireLock(gameRoot);
         GameService.EnsureClosed();
-        string modules = SafeFiles.Modules(gameRoot);
+        string modules = SafeFiles.Extended(SafeFiles.Modules(gameRoot));
         RecoverCore(modules);
         string target = Path.Combine(modules, "StratLords");
         ValidateExistingTarget(target);
@@ -124,9 +129,9 @@ public sealed class InstallService
             PackageLocation packageLocation = await GetPackageAsync(source, progress, cancellationToken).ConfigureAwait(false);
             string package = packageLocation.Path;
             if (packageLocation.Temporary) downloadedPackage = package;
-            progress.Report(new("Checking the complete test package", 0.25));
+            progress.Report(new("Checking the download", 0.82));
             if (!await SafeFiles.MatchesAsync(package, source.Release.PackageSize, source.Release.PackageSha256, cancellationToken).ConfigureAwait(false))
-                throw new InvalidDataException("The test package is incomplete or its SHA-256 does not match. Download a fresh copy.");
+                throw new InvalidDataException("The download is damaged or incomplete. Choose Try again to download it again.");
             await ExtractAsync(package, stage, source.Release, progress, cancellationToken).ConfigureAwait(false);
             ValidateDescriptor(stage, source.Release);
             string oldOptions = SafeFiles.Under(target, OptionsPath);
@@ -144,7 +149,7 @@ public sealed class InstallService
             GameService.EnsureClosed();
             ValidateRelease(source.Release);
             ValidateExistingTarget(target);
-            progress.Report(new("Installing the verified build; keeping the previous module as a backup", 0.95));
+            progress.Report(new("Installing Warlords", 0.98));
             string backup = Path.Combine(recovery, journal.BackupName);
             SafeFiles.NoLinks(backup);
             if (File.Exists(backup) || Directory.Exists(backup)) throw new IOException("The backup destination already exists. Nothing was replaced.");
@@ -153,8 +158,9 @@ public sealed class InstallService
             Directory.Move(stage, target);
             WriteJournal(modules, journal with { Phase = "committed" });
             File.Delete(Path.Combine(modules, JournalName));
-            progress.Report(new("Installed and verified. The previous module is retained as a backup.", 1));
-            return new InstallResult(target, journal.TargetWasPresent ? backup : null);
+            if (journal.TargetWasPresent) RemoveOlderBackups(recovery, journal.BackupName);
+            progress.Report(new("Installed", 1));
+            return new InstallResult(SafeFiles.Long(target), journal.TargetWasPresent ? SafeFiles.Long(backup) : null);
         }
         catch
         {
@@ -182,7 +188,7 @@ public sealed class InstallService
 
     public async Task<bool> VerifyAndRunAsync(string gameRoot, ReleaseChannel release, IProgress<OperationProgress> progress, CancellationToken cancellationToken, Action whenValid)
     {
-        ArgumentNullException.ThrowIfNull(whenValid);
+        if (whenValid is null) throw new ArgumentNullException(nameof(whenValid));
         ValidateRelease(release);
         using IDisposable exclusive = AcquireLock(gameRoot);
         if (!await VerifyCoreAsync(gameRoot, release, progress, cancellationToken).ConfigureAwait(false)) return false;
@@ -195,9 +201,9 @@ public sealed class InstallService
     private static async Task<bool> VerifyCoreAsync(string gameRoot, ReleaseChannel release, IProgress<OperationProgress> progress, CancellationToken cancellationToken)
     {
         GameService.EnsureClosed();
-        string modules = SafeFiles.Modules(gameRoot);
+        string modules = SafeFiles.Extended(SafeFiles.Modules(gameRoot));
         SafeFiles.NoLinks(Path.Combine(modules, JournalName));
-        if (File.Exists(Path.Combine(modules, JournalName))) throw new IOException("An interrupted update needs recovery. Choose Install / Update before playing.");
+        if (File.Exists(Path.Combine(modules, JournalName))) throw new IOException("An interrupted update needs recovery. Choose Check again.");
         string target = Path.Combine(modules, "StratLords");
         if (!Directory.Exists(target)) return false;
         ValidateExistingTarget(target);
@@ -205,7 +211,7 @@ public sealed class InstallService
         HashSet<string> actual = new(StringComparer.OrdinalIgnoreCase);
         foreach (string path in SafeFiles.TreeFiles(target))
         {
-            string relative = Path.GetRelativePath(target, path).Replace('\\', '/');
+            string relative = SafeFiles.RelativeTo(target, path).Replace('\\', '/');
             if (!actual.Add(relative)) return false;
             if (relative.Equals(StateName, StringComparison.OrdinalIgnoreCase) || relative.Equals(OptionsPath, StringComparison.OrdinalIgnoreCase)) continue;
             if (!expected.ContainsKey(relative)) return false;
@@ -216,7 +222,7 @@ public sealed class InstallService
             cancellationToken.ThrowIfCancellationRequested();
             if (!file.Path.Equals(OptionsPath, StringComparison.OrdinalIgnoreCase)
                 && !await SafeFiles.MatchesAsync(SafeFiles.Under(target, file.Path), file.Size, file.Sha256, cancellationToken).ConfigureAwait(false)) return false;
-            progress.Report(new("Verifying installed files (" + (++count) + " / " + release.Files.Count + ")", (double)count / release.Files.Count));
+            progress.Report(new("Checking your files (" + (++count) + " / " + release.Files.Count + ")", (double)count / release.Files.Count));
         }
         ValidateDescriptor(target, release);
         return true;
@@ -234,7 +240,7 @@ public sealed class InstallService
             string name = Path.GetFileName(path);
             if (name.EndsWith(".csproj", StringComparison.OrdinalIgnoreCase) || name.EndsWith(".sln", StringComparison.OrdinalIgnoreCase)
                 || name.EndsWith(".slnx", StringComparison.OrdinalIgnoreCase) || name.Equals(".git", StringComparison.OrdinalIgnoreCase)
-                || Path.GetRelativePath(target, path).Split(Path.DirectorySeparatorChar).Any(part => part.Equals(".git", StringComparison.OrdinalIgnoreCase)))
+                || SafeFiles.RelativeTo(target, path).Split(Path.DirectorySeparatorChar).Any(part => part.Equals(".git", StringComparison.OrdinalIgnoreCase)))
                 throw new IOException("The selected target contains source files. A developer checkout cannot be replaced by the launcher.");
         }
         string descriptor = Path.Combine(target, "SubModule.xml");
@@ -287,7 +293,7 @@ public sealed class InstallService
             for (int redirects = 0; redirects < 6; redirects++)
             {
                 using HttpResponseMessage response = await client.GetAsync(address, HttpCompletionOption.ResponseHeadersRead, downloadToken).ConfigureAwait(false);
-                if (response.StatusCode is HttpStatusCode.MovedPermanently or HttpStatusCode.Redirect or HttpStatusCode.RedirectMethod or HttpStatusCode.TemporaryRedirect or HttpStatusCode.PermanentRedirect)
+                if (response.StatusCode is HttpStatusCode.MovedPermanently or HttpStatusCode.Redirect or HttpStatusCode.RedirectMethod or HttpStatusCode.TemporaryRedirect or (HttpStatusCode)308)
                 {
                     Uri next = response.Headers.Location is { } location ? new Uri(address, location) : throw new IOException("The download server returned an empty redirect.");
                     if (next.Scheme != Uri.UriSchemeHttps || !string.IsNullOrEmpty(next.UserInfo)) throw new IOException("The download redirected away from a safe HTTPS address.");
@@ -297,8 +303,8 @@ public sealed class InstallService
                 response.EnsureSuccessStatusCode();
                 if (response.Content.Headers.ContentLength is { } length && length != source.Release.PackageSize)
                     throw new InvalidDataException("The server package length does not match the channel.");
-                await using Stream input = await response.Content.ReadAsStreamAsync(downloadToken).ConfigureAwait(false);
-                await using FileStream output = new(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None, 131072, FileOptions.Asynchronous);
+                using Stream input = await response.Content.ReadAsStreamAsync(downloadToken).ConfigureAwait(false);
+                using FileStream output = new(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None, 131072, FileOptions.Asynchronous);
                 byte[] buffer = new byte[131072];
                 long total = 0;
                 int read;
@@ -306,8 +312,8 @@ public sealed class InstallService
                 {
                     total += read;
                     if (total > source.Release.PackageSize) throw new InvalidDataException("The server sent more data than the approved package.");
-                    await output.WriteAsync(buffer.AsMemory(0, read), downloadToken).ConfigureAwait(false);
-                    progress.Report(new("Downloading the matched test build", 0.25 * total / source.Release.PackageSize));
+                    await output.WriteAsync(buffer, 0, read, downloadToken).ConfigureAwait(false);
+                    progress.Report(new("Downloading Warlords", 0.8 * total / source.Release.PackageSize, total, source.Release.PackageSize));
                 }
                 if (total != source.Release.PackageSize) throw new InvalidDataException("The package download ended early.");
                 return new PackageLocation(temporary, true);
@@ -334,9 +340,9 @@ public sealed class InstallService
             string full = entry.FullName;
             if (full == "StratLords/") continue;
             if (!full.StartsWith("StratLords/", StringComparison.Ordinal)) throw new InvalidDataException("The ZIP must contain only the StratLords module folder.");
-            string relative = full["StratLords/".Length..];
+            string relative = full.Substring("StratLords/".Length);
             bool directory = relative.EndsWith('/');
-            if (directory) relative = relative[..^1];
+            if (directory) relative = relative.Substring(0, relative.Length - 1);
             SafeFiles.Relative(relative);
             int unixType = (entry.ExternalAttributes >> 16) & 0xF000;
             if (unixType is not (0 or 0x8000 or 0x4000) || (entry.ExternalAttributes & (int)FileAttributes.ReparsePoint) != 0)
@@ -352,26 +358,54 @@ public sealed class InstallService
                 throw new InvalidDataException("The ZIP does not match its approved file inventory: " + relative);
             string destination = SafeFiles.Under(stage, relative);
             Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
-            await using Stream input = entry.Open();
-            await using (FileStream output = new(destination, FileMode.CreateNew, FileAccess.Write, FileShare.None, 131072, FileOptions.Asynchronous))
+            using Stream input = entry.Open();
+            using (FileStream output = new(destination, FileMode.CreateNew, FileAccess.Write, FileShare.None, 131072, FileOptions.Asynchronous))
             {
                 using IncrementalHash hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
                 byte[] buffer = new byte[131072];
                 long total = 0;
                 int read;
-                while ((read = await input.ReadAsync(buffer, cancellationToken).ConfigureAwait(false)) > 0)
+                // The token is checked at each read. A read must never be abandoned here: disposing
+                // the ZIP stream during one would free native memory it is still using.
+                while ((read = await input.ReadAsync(buffer, 0, buffer.Length, cancellationToken).ConfigureAwait(false)) > 0)
                 {
                     total += read;
                     if (total > file.Size) throw new InvalidDataException("A ZIP entry expands beyond its approved length.");
                     hash.AppendData(buffer, 0, read);
-                    await output.WriteAsync(buffer.AsMemory(0, read), cancellationToken).ConfigureAwait(false);
+                    await output.WriteAsync(buffer, 0, read, cancellationToken).ConfigureAwait(false);
                 }
-                if (total != file.Size || !CryptographicOperations.FixedTimeEquals(hash.GetHashAndReset(), Convert.FromHexString(file.Sha256)))
+                if (total != file.Size || !Net48.FixedTimeEquals(hash.GetHashAndReset(), Net48.FromHex(file.Sha256)))
                     throw new InvalidDataException("A ZIP file failed SHA-256 verification: " + relative);
             }
-            progress.Report(new("Preparing verified files (" + (++completed) + " / " + release.Files.Count + ")", 0.25 + 0.65 * completed / release.Files.Count));
+            progress.Report(new("Preparing files (" + (++completed) + " / " + release.Files.Count + ")", 0.82 + 0.15 * completed / release.Files.Count));
         }
         if (completed != release.Files.Count) throw new InvalidDataException("The ZIP is missing approved files.");
+    }
+
+    // A backup is a full copy of the module, so only the newest stays. The update already worked, so
+    // a failure here must not undo it: whatever can't be removed now goes at the next update.
+    private static void RemoveOlderBackups(string recovery, string keep)
+    {
+        string[] folders;
+        try { folders = Directory.GetDirectories(recovery, ".StratLords.warlords-backup-*"); }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            App.Log("Older backups could not be listed: " + ex.Message);
+            return;
+        }
+        foreach (string folder in folders)
+        {
+            if (Path.GetFileName(folder).Equals(keep, StringComparison.OrdinalIgnoreCase)) continue;
+            try
+            {
+                _ = SafeFiles.TreeFiles(folder); // Refuses a folder with links inside.
+                Directory.Delete(SafeFiles.Extended(folder), true);
+            }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+            {
+                App.Log("An older backup could not be removed: " + ex.Message);
+            }
+        }
     }
 
     private static void WriteJournal(string modules, Journal journal)
@@ -381,7 +415,7 @@ public sealed class InstallService
         SafeFiles.NoLinks(path);
         SafeFiles.NoLinks(temporary);
         File.WriteAllText(temporary, JsonSerializer.Serialize(journal, Profile.Json));
-        File.Move(temporary, path, true);
+        SafeFiles.MoveReplacing(temporary, path);
     }
 
     private static void RecoverCore(string modules)
@@ -417,9 +451,11 @@ public sealed class InstallService
             string owner = Path.Combine(stage, OwnerName);
             SafeFiles.NoLinks(owner);
             bool owned = File.Exists(owner) && new FileInfo(owner).Length <= 100 && File.ReadAllText(owner) == journal.Transaction;
-            if (!owned && !StateOwns(stage, journal.Transaction)) throw new IOException("The staging folder is not owned by this update. Keep it intact and contact the owner.");
+            // Empty: stopped before the owner file was written, and there is nothing to lose.
+            bool empty = !Directory.EnumerateFileSystemEntries(stage).Any();
+            if (!owned && !empty && !StateOwns(stage, journal.Transaction)) throw new IOException("The staging folder is not owned by this update. Keep it intact and contact the owner.");
             _ = SafeFiles.TreeFiles(stage);
-            Directory.Delete(stage, true);
+            Directory.Delete(SafeFiles.Extended(stage), true);
         }
         File.Delete(path);
     }

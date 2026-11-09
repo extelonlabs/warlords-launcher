@@ -55,6 +55,14 @@
       <Setter Property="FontSize" Value="14"/>
       <Setter Property="LineHeight" Value="21"/>
     </Style>
+    <!-- Text above is light, so tooltips need a dark box too; Windows' own box is white. -->
+    <Style TargetType="ToolTip">
+      <Setter Property="Background" Value="{StaticResource Surface}"/>
+      <Setter Property="Foreground" Value="{StaticResource Text}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource Line}"/>
+      <Setter Property="Padding" Value="8,4"/>
+      <Setter Property="FontSize" Value="13"/>
+    </Style>
     <Style x:Key="SectionLabel" TargetType="TextBlock">
       <Setter Property="FontSize" Value="16"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
@@ -251,6 +259,28 @@
       <Setter Property="StrokeLineJoin" Value="Round"/>
       <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
     </Style>
+    <!-- Icon-only links in the title bar. -->
+    <Style x:Key="TitleIconButton" TargetType="Button" BasedOn="{StaticResource QuietButton}">
+      <Setter Property="Width" Value="36"/>
+      <Setter Property="MinHeight" Value="36"/>
+      <Setter Property="Height" Value="36"/>
+      <Setter Property="Padding" Value="0"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+    <Style x:Key="TitleIconFill" TargetType="Path">
+      <Setter Property="Width" Value="18"/>
+      <Setter Property="Height" Value="18"/>
+      <Setter Property="Stretch" Value="Uniform"/>
+      <Setter Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+    </Style>
+    <Style x:Key="TitleIconLine" TargetType="Path">
+      <Setter Property="Width" Value="18"/>
+      <Setter Property="Height" Value="18"/>
+      <Setter Property="Stretch" Value="Uniform"/>
+      <Setter Property="StrokeThickness" Value="1.2"/>
+      <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+    </Style>
     <!-- Title bar buttons. Content is a Path that follows Foreground. -->
     <Style x:Key="CaptionButton" TargetType="Button">
       <Setter Property="Width" Value="46"/>
@@ -379,17 +409,21 @@
         <Setter.Value>
           <ControlTemplate TargetType="Expander">
             <StackPanel>
-              <ToggleButton x:Name="HeaderButton" Content="{TemplateBinding Header}" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Foreground="{TemplateBinding Foreground}" FocusVisualStyle="{StaticResource KeyboardFocus}" Cursor="Hand" HorizontalContentAlignment="Left" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}">
+              <ToggleButton x:Name="HeaderButton" Tag="{TemplateBinding Tag}" Content="{TemplateBinding Header}" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Foreground="{TemplateBinding Foreground}" FocusVisualStyle="{StaticResource KeyboardFocus}" Cursor="Hand" HorizontalContentAlignment="Left" AutomationProperties.Name="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}">
                 <ToggleButton.Template>
                   <ControlTemplate TargetType="ToggleButton">
                     <Border x:Name="HeaderBorder" BorderThickness="1" BorderBrush="{StaticResource CardBorder}" CornerRadius="8" Background="#191F1D" Padding="16,9">
                       <Grid>
-                        <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" RecognizesAccessKey="True"/>
-                        <Path x:Name="Arrow" Grid.Column="1" Margin="16,0,3,0" Data="M 0,0 L 5,5 L 10,0" Stroke="{StaticResource Muted}" StrokeThickness="1.5" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                        <Path x:Name="DoneIcon" Data="M 0,5 L 4,9 L 12,1" Stroke="#7CC59A" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" VerticalAlignment="Center" Margin="0,0,10,0" Visibility="Collapsed"/>
+                        <Path x:Name="ActionIcon" Data="M 1.5,0 L 1.5,8 M 1.5,12 L 1.5,12.2" Stroke="{StaticResource Warning}" StrokeThickness="2.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" VerticalAlignment="Center" Margin="2,0,12,0" Visibility="Collapsed"/>
+                        <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+                        <Path x:Name="Arrow" Grid.Column="2" Margin="16,0,3,0" Data="M 0,0 L 5,5 L 10,0" Stroke="{StaticResource Muted}" StrokeThickness="1.5" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
                       </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                      <Trigger Property="Tag" Value="Done"><Setter TargetName="DoneIcon" Property="Visibility" Value="Visible"/></Trigger>
+                      <Trigger Property="Tag" Value="Action"><Setter TargetName="ActionIcon" Property="Visibility" Value="Visible"/></Trigger>
                       <Trigger Property="IsChecked" Value="True">
                         <Setter TargetName="Arrow" Property="RenderTransform"><Setter.Value><RotateTransform Angle="180"/></Setter.Value></Setter>
                         <Setter TargetName="Arrow" Property="Stroke" Value="{StaticResource Accent}"/>

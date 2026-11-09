@@ -37,12 +37,17 @@ public partial class MainWindow : Window
     private bool _hadError;
     private bool _wasCancelled;
     private bool _steamOpened;
+    private bool _showVerifyResult;
     private string _busyTitle = "Checking your setup";
     private CancellationTokenSource? _changelogOperation;
     private string? _changelogLoadedKey;
     private string? _changelogCachedText;
     private bool _windowClosed;
     private Storyboard? _splash;
+    private bool? _setupFoldedFor;
+    private readonly Stopwatch _speedClock = new();
+    private long _speedBytes;
+    private double _bytesPerSecond;
     private const string ChangelogLoadedStatus = "Changes for this build and recent releases. Some features may still be in testing.";
 
     private enum PrimaryAction { ChooseFolder, CheckAgain, GetArmory, RemoveWorkshopCopy, Install, Play }
@@ -60,13 +65,10 @@ public partial class MainWindow : Window
         Height = Math.Min(Height, availableHeight);
         var preferences = ReadPreferences();
         GameRootBox.Text = preferences.GameRoot ?? "";
-        var preferredChannel = preferences.Channel ?? "";
-        var savedOnlineChannel = preferredChannel.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
-        _channelLocation = channelOverride ?? (savedOnlineChannel ? preferredChannel : Profile.DefaultChannelUrl);
+        // Players always use the official feed, even when an old settings file names another one.
+        _channelLocation = channelOverride ?? Profile.DefaultChannelUrl;
         _localChannelMode = channelOverride is not null && !channelOverride.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
         ChoosePackButton.Visibility = _localChannelMode ? Visibility.Visible : Visibility.Collapsed;
-        if (Uri.TryCreate(_channelLocation, UriKind.Absolute, out var uri) && uri.Scheme == "https")
-            ChannelUrlBox.Text = _channelLocation;
         Loaded += async (_, _) => await RunAsync(InitializeAsync);
         Closing += OnClosing;
         Closed += (_, _) =>
@@ -80,6 +82,8 @@ public partial class MainWindow : Window
         PreviewMouseDown += (_, _) => FinishSplash();
         PreviewKeyDown += (_, _) => FinishSplash();
         StateChanged += (_, _) => UpdateWindowChrome();
+        SetupExpander.Expanded += (_, _) => HeroBlock.MinHeight = 180;
+        SetupExpander.Collapsed += (_, _) => HeroBlock.MinHeight = 320;
         UpdateButtons();
     }
 
@@ -93,7 +97,6 @@ public partial class MainWindow : Window
         if (string.IsNullOrWhiteSpace(_channelLocation))
         {
             ReleaseText.Text = "No automatic update channel is configured.";
-            SourceText.Text = "Enter the owner's published HTTPS channel below.";
             SetStatus("Connect an update channel to get started.");
             return;
         }
@@ -120,13 +123,8 @@ public partial class MainWindow : Window
         try
         {
             Directory.CreateDirectory(App.DataDirectory);
-            // A temporary signed/channel URL can contain credentials in its query.
-            // Use it for this session only; do not persist that query to preferences.
-            var savedChannel = _channelLocation;
-            if (Uri.TryCreate(savedChannel, UriKind.Absolute, out var uri) && uri.Scheme == "https" && uri.Query.Length != 0)
-                savedChannel = "";
             File.WriteAllText(_preferencesPath,
-                JsonSerializer.Serialize(new LauncherPreferences(GameRootBox.Text.Trim(), savedChannel), Profile.Json));
+                JsonSerializer.Serialize(new LauncherPreferences(GameRootBox.Text.Trim()), Profile.Json));
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
@@ -144,37 +142,16 @@ public partial class MainWindow : Window
         _releaseReady = false;
         _channelLocation = location;
         ReleaseText.Text = "Checking the latest version…";
-        SourceText.Text = "";
-        ChannelSourceText.Text = "";
-        ExpiryText.Text = "";
         SetStatus("Checking for the latest Warlords update…", "Checking for updates");
         var loaded = await _channels.LoadAsync(location, token);
         _source = loaded;
         _channelLocation = loaded.Location;
         var release = loaded.Release;
         ReleaseText.Text = $"Latest version: {release.Version}";
-        SourceText.Text = $"Built from {release.Branch} / {release.SourceCommit[..12]}";
-        SourceText.ToolTip = release.SourceCommit;
-        if (Uri.TryCreate(location, UriKind.Absolute, out var channelUri) && channelUri.Scheme == "https")
-        {
-            ChannelSourceText.Text = "Channel: " + channelUri.Host + channelUri.AbsolutePath;
-            ChannelSourceText.ToolTip = channelUri.GetLeftPart(UriPartial.Path);
-        }
-        else
-        {
-            ChannelSourceText.Text = "Test pack: " + Path.GetFileName(Path.GetDirectoryName(location));
-            ChannelSourceText.ToolTip = location;
-        }
-        ExpiryText.Text = release.ExpiresUtc is { } expiry
-            ? $"Server connection proof expires {expiry.ToLocalTime():d MMM yyyy, HH:mm zzz}. Request a fresh pack after that time."
-            : "Use the test server selected by the host.";
-        BranchStatusText.Text = location.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
-            ? "Automatic updates are checked whenever Warlords opens and before Play."
-            : "Local test mode. Online updates are disabled for this explicitly selected pack.";
         SavePreferences();
-        Append($"Loaded module {release.Version}, source {release.SourceCommit[..12]}, {release.Files.Count} verified inventory entries.");
+        Append($"Loaded module {release.Version}, source {release.SourceCommit.Substring(0, 12)}, {release.Files.Count} verified inventory entries.");
         SetStatus("Latest version found. Checking your installation…", "Checking your files");
-        if (ChangelogExpander.IsExpanded) _ = RefreshChangelogAsync();
+        _ = RefreshChangelogAsync();
     }
 
     private async Task RefreshAndSynchronizeAsync(CancellationToken token)
@@ -196,9 +173,15 @@ public partial class MainWindow : Window
             return false;
         }
         var root = GameRootBox.Text.Trim();
+        // A killed update leaves a record behind. Put the last good copy back before judging the files.
+        if (_inspection?.GameReady == true && await Task.Run(() => InstallService.Recover(root), token))
+            await InspectGameAsync(token);
         if (!IsManagedInstallation(root))
         {
-            SetStatus("Choose Install Warlords to set up automatic updates.");
+            // Install is the next step only once the game and Armory are ready.
+            SetStatus(_inspection?.GameFound != true ? "Choose your Bannerlord folder to continue."
+                : _inspection.CanInstall ? "Choose Install Warlords to set up automatic updates."
+                : "Finish the setup steps below, then choose Check again.");
             return false;
         }
         if (_inspection?.CanPlay != true)
@@ -262,7 +245,7 @@ public partial class MainWindow : Window
             return module?.Name == "Module" && module.Element("Id")?.Attribute("value")?.Value == Profile.ModuleId
                 && module.Element("Version")?.Attribute("value")?.Value.TrimStart('v') == version.GetString();
         }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or System.Xml.XmlException or ArgumentException or InvalidOperationException)
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or System.Xml.XmlException or ArgumentException or NotSupportedException or InvalidOperationException)
         {
             return false;
         }
@@ -285,7 +268,7 @@ public partial class MainWindow : Window
         GameStatusText.Text = _inspection.GameReady
             ? $"Bannerlord {Profile.GameVersion.TrimStart('v')} found."
             : FirstMessage(_inspection.GameMessages,
-                _inspection.GameFound ? "The required game files need attention. See Settings & help for details." : FirstMessage(_inspection.Messages, "Choose a valid Bannerlord folder."));
+                _inspection.GameFound ? "The required game files need attention. Open logs in Settings & help has the details." : FirstMessage(_inspection.Messages, "Choose a valid Bannerlord folder."));
         ArmoryStatusText.Text = _inspection.ArmoryReady
             ? $"Armory {Profile.ArmoryVersion.TrimStart('v')} is installed."
             : _inspection.GameFound
@@ -304,14 +287,49 @@ public partial class MainWindow : Window
         {
             if (!_busy || !ReferenceEquals(_operation, operation) || operation?.IsCancellationRequested == true) return;
             OperationText.Text = value.Message;
+            ShowDownloadDetail(value);
             Progress.IsIndeterminate = value.Fraction is null;
             if (value.Fraction is { } fraction)
             {
-                Progress.Value = Math.Clamp(fraction, 0, 1) * 100;
+                Progress.Value = Math.Max(0, Math.Min(fraction, 1)) * 100;
                 ProgressPercentText.Text = $"{Progress.Value:0}%";
             }
             else ProgressPercentText.Text = "Working…";
         });
+    }
+
+    private void ShowDownloadDetail(OperationProgress value)
+    {
+        if (value.DoneBytes is not { } done || value.TotalBytes is not { } total)
+        {
+            _speedClock.Reset();
+            _bytesPerSecond = 0;
+            ProgressDetailText.Visibility = Visibility.Collapsed;
+            return;
+        }
+        if (!_speedClock.IsRunning)
+        {
+            _speedClock.Start();
+            _speedBytes = done;
+        }
+        else if (_speedClock.Elapsed.TotalSeconds >= 1)
+        {
+            // Smoothed, so the time left doesn't jump around.
+            var latest = (done - _speedBytes) / _speedClock.Elapsed.TotalSeconds;
+            _bytesPerSecond = _bytesPerSecond == 0 ? latest : _bytesPerSecond * 0.7 + latest * 0.3;
+            _speedBytes = done;
+            _speedClock.Restart();
+        }
+        const double Megabyte = 1024 * 1024;
+        var text = $"{done / Megabyte:0} MB of {total / Megabyte:0} MB";
+        if (_bytesPerSecond > 0)
+        {
+            var seconds = (total - done) / _bytesPerSecond;
+            text += $"  ·  {_bytesPerSecond / Megabyte:0.0} MB/s  ·  about "
+                + (seconds < 60 ? $"{Math.Ceiling(seconds):0} s left" : $"{Math.Ceiling(seconds / 60):0} min left");
+        }
+        ProgressDetailText.Text = text;
+        ProgressDetailText.Visibility = Visibility.Visible;
     }
 
     private async Task RunAsync(Func<CancellationToken, Task> action)
@@ -321,6 +339,7 @@ public partial class MainWindow : Window
         _hadError = false;
         _wasCancelled = false;
         _steamOpened = false;
+        _showVerifyResult = false;
         _busyTitle = "Checking your setup";
         _operation = new CancellationTokenSource();
         OperationText.Foreground = (Brush)FindResource("Text");
@@ -373,8 +392,6 @@ public partial class MainWindow : Window
 
     private void Append(string message)
     {
-        ActivityBox.AppendText($"{DateTime.Now:HH:mm:ss}  {message}{Environment.NewLine}");
-        ActivityBox.ScrollToEnd();
         App.Log(message);
     }
 
@@ -389,14 +406,14 @@ public partial class MainWindow : Window
         CancelButton.IsEnabled = _busy && _operation?.IsCancellationRequested != true;
         CancelButton.Visibility = _busy ? Visibility.Visible : Visibility.Collapsed;
         Progress.Visibility = ProgressPercentText.Visibility = _busy ? Visibility.Visible : Visibility.Collapsed;
-        DetectButton.IsEnabled = BrowseButton.IsEnabled = ChoosePackButton.IsEnabled = RefreshButton.IsEnabled = BranchButton.IsEnabled = ConnectButton.IsEnabled = !_busy;
+        if (!_busy) ProgressDetailText.Visibility = Visibility.Collapsed;
+        DetectButton.IsEnabled = BrowseButton.IsEnabled = ChoosePackButton.IsEnabled = RefreshButton.IsEnabled = !_busy;
         ArmoryButton.IsEnabled = LauncherUpdateButton.IsEnabled = !_busy;
-        GameRootBox.IsEnabled = ChannelUrlBox.IsEnabled = !_busy;
+        GameRootBox.IsEnabled = !_busy;
         BrowseButton.Content = hasGame ? "_Change…" : "Choose _folder";
         RefreshButton.Content = _hadError ? "Try _again" : "Check _again";
         // The primary button already says Try again after an error.
         RefreshButton.Visibility = _hadError ? Visibility.Collapsed : Visibility.Visible;
-        FooterHintText.Visibility = _busy || _hadError || _wasCancelled ? Visibility.Collapsed : Visibility.Visible;
 
         InstallStateText.Text = inspection is { WarlordsNeedsManualAttention: true }
             ? FirstMessage(inspection.WarlordsMessages, "Keep one Warlords copy for this installation.")
@@ -424,12 +441,26 @@ public partial class MainWindow : Window
         };
         // When the primary button is Get Armory, the card button would only repeat it.
         ArmoryButton.Visibility = hasGame && inspection?.ArmoryReady != true && next != PrimaryAction.GetArmory ? Visibility.Visible : Visibility.Collapsed;
-        // The operation line only repeats the heading in the plain Play and Install states.
-        OperationRow.Visibility = !_busy && !_hadError && !_wasCancelled && !_steamOpened
-            && next is PrimaryAction.Play or PrimaryAction.Install ? Visibility.Collapsed : Visibility.Visible;
+        // The operation line only repeats the heading in these states. Verify files keeps it, as the answer the player asked for.
+        OperationRow.Visibility = !_busy && !_hadError && !_wasCancelled && !_showVerifyResult
+            && next is PrimaryAction.Play or PrimaryAction.Install or PrimaryAction.ChooseFolder or PrimaryAction.CheckAgain or PrimaryAction.GetArmory ? Visibility.Collapsed : Visibility.Visible;
 
         // Badges: "Done" = check, "Action" = needs the player, empty = step number.
         var playReady = _releaseReady && inspection?.CanPlay == true;
+        var gameVersion = Profile.GameVersion.TrimStart('v');
+        var armoryVersion = Profile.ArmoryVersion.TrimStart('v');
+        var setupDone = inspection is { CanInstall: true, OldWorkshopCopies.Count: 0 };
+        SetupExpander.Tag = setupDone ? "Done" : _busy ? null : "Action";
+        SetupExpander.Header = playReady ? $"Everything is ready  ·  Bannerlord {gameVersion}  ·  Armory {armoryVersion}  ·  Warlords {_source?.Release.Version}"
+            : setupDone ? $"Bannerlord {gameVersion} and Armory {armoryVersion} are ready"
+            : inspection is null ? "Checking your setup" : "Setup steps";
+        // Only when the answer changes, so a player's own open or close stays as they left it.
+        if (!_busy && _setupFoldedFor != setupDone)
+        {
+            _setupFoldedFor = setupDone;
+            SetupExpander.IsExpanded = !setupDone;
+        }
+        HeroBlock.MinHeight = SetupExpander.IsExpanded ? 180 : 320;
         GameStepBadge.Tag = inspection?.GameReady == true ? "Done" : inspection is not null || !_busy ? "Action" : null;
         ArmoryStepBadge.Tag = inspection?.ArmoryReady == true ? "Done" : inspection?.GameReady == true ? "Action" : null;
         WarlordsStepBadge.Tag = playReady ? "Done"
@@ -455,8 +486,8 @@ public partial class MainWindow : Window
         {
             StatusTitleText.Text = "Something went wrong";
             StatusHintText.Text = next == PrimaryAction.ChooseFolder
-                ? "Choose your Bannerlord folder to continue. Details are available in Settings & help."
-                : "Follow the message below, then try again. Details are available in Settings & help.";
+                ? "Choose your Bannerlord folder to continue. Open logs in Settings & help has the details."
+                : "Follow the message below, then try again. Open logs in Settings & help has the details.";
         }
         else if (_wasCancelled)
         {
@@ -555,6 +586,25 @@ public partial class MainWindow : Window
         QueueChangelogIntoView();
     }
 
+    // The notes are plain text: a "Warlords 1.1.3 · date" line, then "• " items, for each release.
+    private void ShowNews(string notes)
+    {
+        var lines = notes.Split('\n').Select(line => line.Trim()).ToList();
+        var items = lines.Skip(1).TakeWhile(line => !line.StartsWith("Warlords ", StringComparison.Ordinal))
+            .Where(line => line.StartsWith("• ", StringComparison.Ordinal)).Take(3)
+            .Select(line => line.Length > 120 ? line.Substring(0, 117).TrimEnd() + "…" : line).ToList();
+        NewsCard.Visibility = items.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+        NewsTitleText.Text = "New in " + lines[0];
+        NewsItemsText.Text = string.Join("\n", items);
+    }
+
+    private void NewsAll_Click(object sender, RoutedEventArgs e)
+    {
+        ChangelogExpander.Visibility = Visibility.Visible;
+        ChangelogExpander.IsExpanded = true;
+        QueueChangelogIntoView();
+    }
+
     private async void ChangelogRetry_Click(object sender, RoutedEventArgs e)
     {
         await RefreshChangelogAsync();
@@ -597,7 +647,7 @@ public partial class MainWindow : Window
 
     private async Task RefreshChangelogAsync()
     {
-        if (_windowClosed || !ChangelogExpander.IsExpanded) return;
+        if (_windowClosed) return;
         var source = _source;
         if (source is null)
         {
@@ -608,6 +658,7 @@ public partial class MainWindow : Window
         if (_changelogLoadedKey == key && _changelogCachedText is { } cached)
         {
             ChangelogText.Text = cached;
+            ShowNews(cached);
             ChangelogStatusText.Text = ChangelogLoadedStatus;
             ChangelogRetryButton.Visibility = Visibility.Collapsed;
             return;
@@ -627,16 +678,18 @@ public partial class MainWindow : Window
             _changelogLoadedKey = key;
             _changelogCachedText = notes;
             ChangelogText.Text = notes;
+            ShowNews(notes);
             ChangelogStatusText.Text = ChangelogLoadedStatus;
         }
         catch (Exception ex)
         {
             if (!IsCurrentChangelogRequest(request, key)) return;
             ChangelogText.Clear();
+            NewsCard.Visibility = Visibility.Collapsed;
+            ChangelogExpander.Visibility = Visibility.Visible;
             ChangelogStatusText.Text = ex switch
             {
                 FileNotFoundException or DirectoryNotFoundException => "Release notes are not available for this build yet. You can still play.",
-                System.Net.Http.HttpRequestException { StatusCode: System.Net.HttpStatusCode.NotFound } => "Release notes are not available for this build yet. You can still play.",
                 InvalidDataException => "Release notes could not be read for this build. You can still play.",
                 OperationCanceledException => "Release notes took too long to load. You can still play.",
                 _ => "Could not load release notes. You can still play."
@@ -662,9 +715,8 @@ public partial class MainWindow : Window
 
     private async Task ChooseGameFolderAsync()
     {
-        var dialog = new OpenFolderDialog { Title = "Select Mount & Blade II Bannerlord", Multiselect = false };
-        if (dialog.ShowDialog(this) != true) return;
-        GameRootBox.Text = dialog.FolderName;
+        if (Net48.PickFolder(this, "Select Mount & Blade II Bannerlord") is not { } folder) return;
+        GameRootBox.Text = folder;
         await RunAsync(RefreshAndSynchronizeAsync);
     }
 
@@ -689,34 +741,6 @@ public partial class MainWindow : Window
     private async void Refresh_Click(object sender, RoutedEventArgs e) => await RunAsync(async token =>
     {
         await RefreshAndSynchronizeAsync(token);
-    });
-
-    private async void Connect_Click(object sender, RoutedEventArgs e) => await RunAsync(async token =>
-    {
-        if (!Uri.TryCreate(ChannelUrlBox.Text.Trim(), UriKind.Absolute, out var uri) || uri.Scheme != "https")
-            throw new InvalidOperationException("Enter the owner's HTTPS channel.json URL.");
-        _localChannelMode = false;
-        ChoosePackButton.Visibility = Visibility.Collapsed;
-        await LoadChannelAsync(uri.AbsoluteUri, token);
-        await SynchronizeCurrentAsync(token);
-    });
-
-    private async void Branch_Click(object sender, RoutedEventArgs e) => await RunAsync(async token =>
-    {
-        try
-        {
-            var head = await _channels.ReadBranchHeadAsync(token);
-            BranchStatusText.Text = _source?.Release.SourceCommit == head
-                ? $"This build matches the current {Profile.Branch} source ({head[..12]})."
-                : $"Source is at {head[..12]}. Ask the host for a matched build of that commit; source files cannot be installed as a playable client.";
-            Append(BranchStatusText.Text);
-        }
-        catch (Exception ex) when (ex is System.Net.Http.HttpRequestException or TaskCanceledException)
-        {
-            if (token.IsCancellationRequested) throw;
-            BranchStatusText.Text = "GitHub source status is unavailable. A private repository needs owner access; the packaged build can still be used.";
-            Append(BranchStatusText.Text);
-        }
     });
 
     private async void Install_Click(object sender, RoutedEventArgs e) => await RunAsync(InstallWithConsentAsync);
@@ -752,6 +776,7 @@ public partial class MainWindow : Window
         var valid = await _installer.VerifyAsync(GameRootBox.Text.Trim(), _source.Release, Reporter(), token);
         await InspectGameAsync(token);
         _releaseReady = valid && _inspection?.CanPlay == true && IsManagedInstallation(GameRootBox.Text.Trim());
+        _showVerifyResult = true;
         SetStatus(_releaseReady ? "Your Warlords files are up to date."
             : valid ? "Files are up to date. Choose Install Warlords once to enable automatic updates."
             : "Some Warlords files need updating. Choose Repair Warlords to replace them.");
@@ -790,7 +815,7 @@ public partial class MainWindow : Window
         try
         {
             Directory.CreateDirectory(App.DataDirectory);
-            Process.Start(new ProcessStartInfo("explorer.exe") { ArgumentList = { App.DataDirectory }, UseShellExecute = true });
+            Process.Start(new ProcessStartInfo("explorer.exe") { Arguments = Net48.QuoteArgument(App.DataDirectory), UseShellExecute = true });
         }
         catch (Exception ex) { SetStatus("Could not open the logs folder: " + ex.Message); }
     }
@@ -799,6 +824,8 @@ public partial class MainWindow : Window
     private void Website_Click(object sender, RoutedEventArgs e) => OpenLink(Profile.WebsiteUrl, "the StratLords website");
 
     private void Discord_Click(object sender, RoutedEventArgs e) => OpenLink(Profile.DiscordUrl, "the StratLords Discord");
+
+    private void GitHub_Click(object sender, RoutedEventArgs e) => OpenLink(Profile.GitHubUrl, "the Warlords GitHub page");
 
     private void OpenLink(string url, string name)
     {
@@ -864,10 +891,8 @@ public partial class MainWindow : Window
             SetStatus("The launcher's folder can't be changed. Download the new Warlords.exe from the page that just opened.");
             return;
         }
-        var restart = new ProcessStartInfo(current) { UseShellExecute = false };
-        foreach (var arg in Environment.GetCommandLineArgs().Skip(1).Where(arg => arg != App.AfterUpdateArgument))
-            restart.ArgumentList.Add(arg);
-        restart.ArgumentList.Add(App.AfterUpdateArgument);
+        var arguments = Environment.GetCommandLineArgs().Skip(1).Where(arg => arg != App.AfterUpdateArgument).Append(App.AfterUpdateArgument);
+        var restart = new ProcessStartInfo(current) { Arguments = string.Join(" ", arguments.Select(Net48.QuoteArgument)), UseShellExecute = false };
         ((App)Application.Current).ReleaseSingleInstance();
         Process.Start(restart);
         SetStatus("Launcher " + update.Version + " installed. Restarting…");
@@ -956,6 +981,7 @@ public partial class MainWindow : Window
     private void StartSplash()
     {
         if (!SystemParameters.ClientAreaAnimation) return;
+        ((Storyboard)FindResource("HeroDrift")).Begin(this, true);
         var splash = ((Storyboard)FindResource("SplashStoryboard")).Clone();
         splash.Completed += (_, _) => FinishSplash();
         _splash = splash;

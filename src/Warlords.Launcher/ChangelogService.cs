@@ -55,10 +55,12 @@ public sealed class ChangelogService
             var address = new Uri(location, "changelogs/" + release.SourceCommit + ".json");
             var request = new UriBuilder(address) { Query = "warlords=" + Guid.NewGuid().ToString("N") };
             using var response = await GetHttpsAsync(request.Uri, token).ConfigureAwait(false);
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                throw new FileNotFoundException("Release notes are not available for this build.");
             response.EnsureSuccessStatusCode();
             if (response.Content.Headers.ContentLength > MaximumBytes)
                 throw new InvalidDataException("Release notes exceed the supported limit.");
-            await using var stream = await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false);
+            using var stream = await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false);
             bytes = await ReadBoundedAsync(stream, token).ConfigureAwait(false);
         }
         else
@@ -70,7 +72,7 @@ public sealed class ChangelogService
             var file = new FileInfo(path);
             if (!file.Exists) throw new FileNotFoundException("Release notes are not available for this local build.");
             if (file.Length > MaximumBytes) throw new InvalidDataException("Release notes exceed the supported limit.");
-            await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 16384,
+            using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 16384,
                 FileOptions.Asynchronous | FileOptions.SequentialScan);
             bytes = await ReadBoundedAsync(stream, token).ConfigureAwait(false);
         }
@@ -92,7 +94,7 @@ public sealed class ChangelogService
         {
             if (entry is null || !ValidVersion(entry.Version) || Version.Parse(entry.Version) > currentVersion
                 || entry.Date is not { Length: 10 }
-                || !DateOnly.TryParseExact(entry.Date, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _)
+                || !DateTime.TryParseExact(entry.Date, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _)
                 || entry.Sections is not { Count: > 0 and <= 6 })
                 throw new InvalidDataException("Release notes contain an invalid release entry.");
             foreach (var section in entry.Sections)
@@ -109,7 +111,7 @@ public sealed class ChangelogService
         && ReleaseVersion.IsMatch(value) && Version.TryParse(value, out _);
 
     private static bool PlainText(string? value, int maximum) => !string.IsNullOrWhiteSpace(value)
-        && value.Length <= maximum && !value.Any(char.IsControl);
+        && value!.Length <= maximum && !value.Any(char.IsControl);
 
     private static string Format(ReleaseChangelog feed)
     {
@@ -117,7 +119,7 @@ public sealed class ChangelogService
         foreach (var entry in feed.Entries)
         {
             if (text.Length != 0) text.AppendLine().AppendLine();
-            var date = DateOnly.ParseExact(entry.Date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            var date = DateTime.ParseExact(entry.Date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             text.Append("Warlords ").Append(entry.Version).Append(" · ")
                 .AppendLine(date.ToString("d MMM yyyy", CultureInfo.CurrentCulture));
             foreach (var section in entry.Sections)

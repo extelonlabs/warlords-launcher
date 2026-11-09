@@ -7,15 +7,17 @@ namespace Warlords.Launcher;
 
 public static class Profile
 {
-    public const string LauncherVersion = "0.4.4";
+    public const string LauncherVersion = "0.5.0";
     public const string DefaultChannelUrl = "https://raw.githubusercontent.com/extelonlabs/warlords-launcher/StratLords/channel.json";
     // Launcher self-update: a manifest signed by the owner's offline key. Only this
     // pinned public key is trusted; it never comes from the feed.
     public const string LauncherUpdateUrl = "https://raw.githubusercontent.com/extelonlabs/warlords-launcher/StratLords/launcher.json";
     public const string LauncherReleasesUrl = "https://github.com/extelonlabs/warlords-launcher/releases/latest";
     public const string LauncherUpdateKeyModulus = "uC5OAKE+v5jiL3qbWviECsMqTT8LFHRRAlQqZojefAz3QGIx1aczF7zCQlypwistOe65kg01/t6ScFHQ/yTymZjcb44f6hf6890U+quMoCMKfixPONxgKStx18vlsYtIxdcSQ229TqnP+c49JPfldQGPDEb0U6JLjoWvQ//i2tDHPKFm43D0WtzVQTZtuWfAiaX3vSxOXZKZ8zpauRhQeST9DPbpQMwnKdEg/P0nRtrTjY5HCkCzkOrW6EMhkXJp6BwN5AD8SusnxowJziYznvuKO502pEd2fAti6qYdNX2pqITFN8GoHF3Y2cDINx0BYKfffV0jQ1aOYxSDY1ONVyyVfw9yamggOt8c6l1E5PTo9Yy6WqMZKT0El0uj8XZMzSTs2ZXUO9TE6ONfhavQ738babtMjnPd4Nnxs1SQKRFBYHNKuCW62PIl9v4kr4Cf4jUD6uZJXgcKLpLnUcCE2rum6Bq1RzsBrG+W+WnUFUiYHvCxgOqJATuCXN1kltgZ";
+    public const string Net48DownloadUrl = "https://dotnet.microsoft.com/download/dotnet-framework/net48";
     public const string WebsiteUrl = "https://stratlords.online/";
     public const string DiscordUrl = "https://discord.gg/W6ZEx2DqXF";
+    public const string GitHubUrl = "https://github.com/extelonlabs/warlords-launcher";
     public const string Repository = "MB-Warlords/The-Last-Concord";
     // Mod source branch the launcher follows. The feed may still name the previous branch while it moves.
     public const string Branch = "main";
@@ -76,7 +78,7 @@ public sealed record ChangelogSection
     public string Title { get; init; } = "";
     public List<string> Items { get; init; } = [];
 }
-public sealed record OperationProgress(string Message, double? Fraction = null);
+public sealed record OperationProgress(string Message, double? Fraction = null, long? DoneBytes = null, long? TotalBytes = null);
 public sealed record GameInspection(string GameRoot, string? InstalledVersion, bool CanPlay, IReadOnlyList<string> Messages)
 {
     public bool GameFound { get; init; }
@@ -91,4 +93,5 @@ public sealed record GameInspection(string GameRoot, string? InstalledVersion, b
     public IReadOnlyList<string> OldWorkshopCopies { get; init; } = [];
 }
 public sealed record InstallResult(string ModulePath, string? BackupPath);
+// Channel is ignored. It stays because older settings files have it and unknown fields are refused.
 public sealed record LauncherPreferences(string GameRoot = "", string Channel = "");

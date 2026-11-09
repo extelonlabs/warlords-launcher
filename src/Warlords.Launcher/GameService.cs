@@ -168,8 +168,8 @@ public sealed class GameService
         if (ready)
             messages.Add("Game and required modules are compatible. In Bannerlord, select the Multiplayer tab and the four modules shown below.");
         // A Warlords copy directly inside a Bannerlord Workshop folder is the old Workshop item.
-        var workshopContainers = new HashSet<string>(ModuleContainers(root).Select(c => Path.TrimEndingDirectorySeparator(Path.GetFullPath(c))), StringComparer.OrdinalIgnoreCase);
-        workshopContainers.Remove(Path.TrimEndingDirectorySeparator(Path.Combine(root, "Modules")));
+        var workshopContainers = new HashSet<string>(ModuleContainers(root).Select(c => Net48.TrimEndingSeparator(Path.GetFullPath(c))), StringComparer.OrdinalIgnoreCase);
+        workshopContainers.Remove(Net48.TrimEndingSeparator(Path.Combine(root, "Modules")));
         var oldWorkshopCopies = inventory.TryGetValue(Profile.ModuleId, out List<ModuleDescriptor>? warlordsCopies)
             ? warlordsCopies.Select(m => Path.GetDirectoryName(Path.GetFullPath(m.File))!)
                 .Where(folder => workshopContainers.Contains(Path.GetDirectoryName(folder)!)).ToList()
@@ -218,12 +218,12 @@ public sealed class GameService
         // Recovery changes the installation and belongs to the install operation, never to Play.
         string modules = Path.Combine(Path.GetFullPath(gameRoot), "Modules");
         if (File.Exists(Path.Combine(modules, ".StratLords.warlords-update.json")))
-            throw new InvalidOperationException("An interrupted update needs recovery. Choose Install / Update before playing.");
+            throw new InvalidOperationException("An interrupted update needs recovery. Choose Check again.");
         GameInspection inspection = Inspect(gameRoot);
         if (!inspection.CanPlay)
             throw new InvalidOperationException(string.Join(Environment.NewLine, inspection.Messages));
-        string root = Path.TrimEndingDirectorySeparator(Path.GetFullPath(gameRoot));
-        bool registered = SteamGameRoots().Any(candidate => Path.TrimEndingDirectorySeparator(candidate).Equals(root, StringComparison.OrdinalIgnoreCase));
+        string root = Net48.TrimEndingSeparator(Path.GetFullPath(gameRoot));
+        bool registered = SteamGameRoots().Any(candidate => Net48.TrimEndingSeparator(candidate).Equals(root, StringComparison.OrdinalIgnoreCase));
         if (!registered)
             throw new InvalidOperationException("Select the Bannerlord folder installed by Steam. Play opens Steam's registered game, so a separate copied game folder cannot be launched here.");
         EnsureClosed();
@@ -295,7 +295,7 @@ public sealed class GameService
                     if (match.Success)
                     {
                         string candidate = UnescapeVdf(match.Groups["value"].Value);
-                        if (candidate.Length > 0 && !candidate.Contains('/') && !candidate.Contains('\\') && candidate is not "." and not "..")
+                        if (candidate.Length > 0 && candidate.IndexOfAny(Path.GetInvalidFileNameChars()) < 0 && candidate is not "." and not "..")
                             installName = candidate;
                     }
                 }
@@ -331,10 +331,10 @@ public sealed class GameService
             try
             {
                 if (!File.Exists(vdf) || new FileInfo(vdf).Length > 4 * 1024 * 1024) continue;
-                foreach (Match match in VdfPath.Matches(File.ReadAllText(vdf)).Take(32))
+                foreach (Match match in VdfPath.Matches(File.ReadAllText(vdf)).Cast<Match>().Take(32))
                 {
                     string path = UnescapeVdf(match.Groups["value"].Value);
-                    if (Path.IsPathFullyQualified(path) && Directory.Exists(path)) libraries.Add(Path.GetFullPath(path));
+                    if (Net48.IsPathFullyQualified(path) && Directory.Exists(path)) libraries.Add(Path.GetFullPath(path));
                 }
             }
             catch (Exception ex) when (IsPathError(ex)) { }
@@ -342,7 +342,7 @@ public sealed class GameService
         return libraries;
     }
 
-    private static string UnescapeVdf(string value) => value.Replace("\\\\", "\\", StringComparison.Ordinal).Replace("\\\"", "\"", StringComparison.Ordinal);
+    private static string UnescapeVdf(string value) => value.Replace("\\\\", "\\").Replace("\\\"", "\"");
 
     private static ModuleDescriptor ReadModule(string path)
     {

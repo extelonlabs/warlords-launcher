@@ -12,11 +12,11 @@ Mount & Blade II: Bannerlord and keeps it up to date. That is all it does.
 
 Yes. You do not have to trust us. You can check it yourself:
 
-- **Virus scan:** [VirusTotal scan of Warlords.exe 0.4.4](https://www.virustotal.com/gui/file/b10001427f47c88bf7061c241040475f1aa836de31f55f06595eb58862e91526).
+- **Virus scan:** [VirusTotal scan of Warlords.exe 0.5.0](https://www.virustotal.com/gui/file/185d7afb7d53502632b3e1404ad54a0bd42f8e8aec74370e665936e96b710e81).
   VirusTotal checks a file with dozens of antivirus programs at once.
 - **Same file:** in PowerShell, run `Get-FileHash .\Warlords.exe`.
-  For launcher 0.4.4 it must show
-  `B10001427F47C88BF7061C241040475F1AA836DE31F55F06595EB58862E91526`.
+  For launcher 0.5.0 it must show
+  `185D7AFB7D53502632B3E1404AD54A0BD42F8E8AEC74370E665936E96B710E81`.
   This is the file's fingerprint. It is the same one VirusTotal scanned, and the
   release page lists it in `SHA256SUMS.txt`.
 - **Open code:** every line of the app is in [src/Warlords.Launcher](src/Warlords.Launcher).
@@ -35,7 +35,8 @@ What it does:
 - downloads only, over HTTPS, from GitHub
 - writes only the StratLords mod (plus a backup of the old copy) in your
   Bannerlord folder, and its own settings in `%LOCALAPPDATA%\WarlordsLauncherV2`
-- reads the Windows registry only to find where Steam is installed
+- reads the Windows registry only to find where Steam is installed and to check
+  that .NET Framework 4.8 is there
 - asks Steam to start the game when you press Play
 
 ### Windows says "Windows protected your PC"
@@ -46,7 +47,9 @@ Windows who made a file.) So Windows may warn you the first time. Click
 
 ## How it works
 
-You need Windows (64-bit) and Bannerlord **1.4.8** on Steam.
+You need Windows 10 or 11 (64-bit) and Bannerlord **1.4.8** on Steam. Windows
+normally has .NET Framework 4.8 already. If yours does not, the launcher tells
+you and opens Microsoft's download page.
 
 1. **Download** `Warlords.exe` and double-click it. There is nothing to install.
 2. **Bannerlord:** it finds your game folder by itself. If it picks the wrong
@@ -60,8 +63,9 @@ You need Windows (64-bit) and Bannerlord **1.4.8** on Steam.
 5. **Play:** click **Play Warlords**. Steam opens the game.
 
 After that, it checks for updates each time you open it and again before you
-play. Open **What's new** to see what changed. **Settings & help** has
-**Verify files**, **Reinstall / repair** and **Open logs**.
+play. The newest notes show on the main screen, and **Read all** opens the full
+list. **Settings & help** has **Verify files**, **Reinstall / repair** and
+**Open logs**.
 
 ## Build it yourself
 
@@ -79,5 +83,5 @@ passwords are needed.
 - [SECURITY.md](SECURITY.md): known limits, and how to report a problem privately.
 - [SOURCE-EXPORT.md](SOURCE-EXPORT.md): what this repository contains.
 - The MIT license covers the launcher code only. The game, the mods, and the
-  Warlords name and logo keep their own rights. See the
+  Warlords name, logo and artwork keep their own rights. See the
   [branding notice](src/Warlords.Launcher/Assets/NOTICE.md).

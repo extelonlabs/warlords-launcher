@@ -56,113 +56,136 @@
         <DiscreteDoubleKeyFrame KeyTime="0:0:0.75" Value="14"/>
         <EasingDoubleKeyFrame KeyTime="0:0:1.05" Value="0"><EasingDoubleKeyFrame.EasingFunction><CubicEase EasingMode="EaseOut"/></EasingDoubleKeyFrame.EasingFunction></EasingDoubleKeyFrame>
       </DoubleAnimationUsingKeyFrames>
-      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GameStepCard" Storyboard.TargetProperty="Opacity">
-        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-        <DiscreteDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
-        <EasingDoubleKeyFrame KeyTime="0:0:1.08" Value="1"><EasingDoubleKeyFrame.EasingFunction><CubicEase EasingMode="EaseOut"/></EasingDoubleKeyFrame.EasingFunction></EasingDoubleKeyFrame>
-      </DoubleAnimationUsingKeyFrames>
-      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GameStepCard" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)">
-        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="10"/>
-        <DiscreteDoubleKeyFrame KeyTime="0:0:0.8" Value="10"/>
-        <EasingDoubleKeyFrame KeyTime="0:0:1.08" Value="0"><EasingDoubleKeyFrame.EasingFunction><CubicEase EasingMode="EaseOut"/></EasingDoubleKeyFrame.EasingFunction></EasingDoubleKeyFrame>
-      </DoubleAnimationUsingKeyFrames>
-      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ArmoryStepCard" Storyboard.TargetProperty="Opacity">
-        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-        <DiscreteDoubleKeyFrame KeyTime="0:0:0.87" Value="0"/>
-        <EasingDoubleKeyFrame KeyTime="0:0:1.15" Value="1"><EasingDoubleKeyFrame.EasingFunction><CubicEase EasingMode="EaseOut"/></EasingDoubleKeyFrame.EasingFunction></EasingDoubleKeyFrame>
-      </DoubleAnimationUsingKeyFrames>
-      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ArmoryStepCard" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)">
-        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="10"/>
-        <DiscreteDoubleKeyFrame KeyTime="0:0:0.87" Value="10"/>
-        <EasingDoubleKeyFrame KeyTime="0:0:1.15" Value="0"><EasingDoubleKeyFrame.EasingFunction><CubicEase EasingMode="EaseOut"/></EasingDoubleKeyFrame.EasingFunction></EasingDoubleKeyFrame>
-      </DoubleAnimationUsingKeyFrames>
-      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="WarlordsStepCard" Storyboard.TargetProperty="Opacity">
-        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-        <DiscreteDoubleKeyFrame KeyTime="0:0:0.94" Value="0"/>
-        <EasingDoubleKeyFrame KeyTime="0:0:1.22" Value="1"><EasingDoubleKeyFrame.EasingFunction><CubicEase EasingMode="EaseOut"/></EasingDoubleKeyFrame.EasingFunction></EasingDoubleKeyFrame>
-      </DoubleAnimationUsingKeyFrames>
-      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="WarlordsStepCard" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)">
-        <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="10"/>
-        <DiscreteDoubleKeyFrame KeyTime="0:0:0.94" Value="10"/>
-        <EasingDoubleKeyFrame KeyTime="0:0:1.22" Value="0"><EasingDoubleKeyFrame.EasingFunction><CubicEase EasingMode="EaseOut"/></EasingDoubleKeyFrame.EasingFunction></EasingDoubleKeyFrame>
-      </DoubleAnimationUsingKeyFrames>
       <DoubleAnimationUsingKeyFrames Storyboard.TargetName="TitleBrand" Storyboard.TargetProperty="Opacity">
         <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
         <DiscreteDoubleKeyFrame KeyTime="0:0:0.75" Value="0"/>
         <EasingDoubleKeyFrame KeyTime="0:0:1.05" Value="1"><EasingDoubleKeyFrame.EasingFunction><CubicEase EasingMode="EaseOut"/></EasingDoubleKeyFrame.EasingFunction></EasingDoubleKeyFrame>
       </DoubleAnimationUsingKeyFrames>
     </Storyboard>
+    <!-- Very slow drift on the art. Low frame rate: it should not cost anything while the game runs. -->
+    <Storyboard x:Key="HeroDrift" Timeline.DesiredFrameRate="15">
+      <DoubleAnimation Storyboard.TargetName="HeroScale" Storyboard.TargetProperty="ScaleX" From="1" To="1.07" Duration="0:0:40" AutoReverse="True" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="HeroScale" Storyboard.TargetProperty="ScaleY" From="1" To="1.07" Duration="0:0:40" AutoReverse="True" RepeatBehavior="Forever"/>
+    </Storyboard>
   </Window.Resources>
   <Border x:Name="WindowFrame" Background="{StaticResource CanvasVignette}" BorderBrush="#2C3833" BorderThickness="1">
     <Grid>
-      <Grid.RowDefinitions><RowDefinition Height="68"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+      <Grid.RowDefinitions><RowDefinition Height="68"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+      <!-- The art sits behind the title bar and the top of the page, and fades into the window colour. -->
+      <Grid x:Name="HeroLayer" Grid.RowSpan="2" Height="500" VerticalAlignment="Top" ClipToBounds="True" IsHitTestVisible="False">
+        <Image x:Name="HeroArt" Source="Assets/hero.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5" AutomationProperties.Name="Warlords art">
+          <Image.RenderTransform><ScaleTransform x:Name="HeroScale"/></Image.RenderTransform>
+        </Image>
+        <Rectangle>
+          <Rectangle.Fill>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+              <GradientStop Color="#66111614" Offset="0"/>
+              <GradientStop Color="#18111614" Offset="0.55"/>
+              <GradientStop Color="#00111614" Offset="1"/>
+            </LinearGradientBrush>
+          </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle>
+          <Rectangle.Fill>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+              <GradientStop Color="#99111614" Offset="0"/>
+              <GradientStop Color="#00151B19" Offset="0.22"/>
+              <GradientStop Color="#00151B19" Offset="0.42"/>
+              <GradientStop Color="#99151B19" Offset="0.72"/>
+              <GradientStop Color="#FF151B19" Offset="1"/>
+            </LinearGradientBrush>
+          </Rectangle.Fill>
+        </Rectangle>
+      </Grid>
       <ScrollViewer x:Name="MainScroll" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" PanningMode="VerticalOnly">
-        <StackPanel x:Name="MainContent" Margin="28,20,28,20">
+        <StackPanel x:Name="MainContent" Margin="28,0,28,20">
           <StackPanel.RenderTransform><TranslateTransform/></StackPanel.RenderTransform>
-          <Border x:Name="StatusCard" Style="{StaticResource Card}" Padding="18,12">
-            <Grid>
-              <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-              <ContentControl x:Name="StatusBadge" Style="{StaticResource StatusBadge}" VerticalAlignment="Top" Margin="0,2,18,0" AutomationProperties.Name="Status icon"/>
-              <StackPanel Grid.Column="1">
-                <TextBlock x:Name="StatusTitleText" Text="Getting things ready" FontSize="26" LineHeight="34" FontWeight="SemiBold"/>
-                <TextBlock x:Name="StatusHintText" Text="We’ll find your game and check for the latest Warlords update." Foreground="{StaticResource Muted}" Margin="0,2,0,0"/>
-                <Border x:Name="OperationRow" BorderBrush="{StaticResource CardBorder}" BorderThickness="0,1,0,0" Margin="0,12,0,0" Padding="0,10,0,0">
-                  <Grid>
-                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-                    <TextBlock x:Name="OperationText" Text="Checking the latest build…" Margin="0,0,16,0" AutomationProperties.LiveSetting="Polite"/>
-                    <TextBlock x:Name="ProgressPercentText" Grid.Column="1" Foreground="{StaticResource Accent}" FontWeight="SemiBold"/>
-                  </Grid>
-                </Border>
-                <ProgressBar x:Name="Progress" Height="5" Minimum="0" Maximum="100" Background="#2A3330" Foreground="{StaticResource Accent}" BorderThickness="0" Margin="0,10,0,2" AutomationProperties.Name="Current operation progress"/>
+          <!-- Hero: what is happening on the left, the one thing to press on the right. -->
+          <Grid x:Name="HeroBlock" MinHeight="320">
+            <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Margin="0,0,24,0">
+              <StackPanel Orientation="Horizontal">
+                <ContentControl x:Name="StatusBadge" Style="{StaticResource StatusBadge}" VerticalAlignment="Center" Margin="0,0,16,0" AutomationProperties.Name="Status icon"/>
+                <TextBlock x:Name="StatusTitleText" Text="Getting things ready" FontFamily="Georgia" FontSize="36" LineHeight="44" VerticalAlignment="Center" TextWrapping="NoWrap">
+                  <TextBlock.Effect><DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="0.9" Color="#000000"/></TextBlock.Effect>
+                </TextBlock>
               </StackPanel>
+              <TextBlock x:Name="StatusHintText" Text="We’ll find your game and check for the latest Warlords update." Margin="0,8,0,0">
+                <TextBlock.Effect><DropShadowEffect BlurRadius="6" ShadowDepth="0" Opacity="0.9" Color="#000000"/></TextBlock.Effect>
+              </TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
+              <Button x:Name="CancelButton" Content="_Cancel" Click="Cancel_Click" IsEnabled="False" Visibility="Collapsed" VerticalAlignment="Center" Margin="0,0,12,0"/>
+              <Button x:Name="PrimaryButton" Content="Getting ready…" Click="Primary_Click" Style="{StaticResource PrimaryButtonStyle}" MinHeight="58" MinWidth="224" FontSize="18" VerticalAlignment="Center" AutomationProperties.HelpText="The next step for this Warlords installation"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+              <Border x:Name="OperationRow" Margin="0,14,0,0">
+                <Grid>
+                  <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                  <TextBlock x:Name="OperationText" Text="Checking the latest build…" Margin="0,0,16,0" AutomationProperties.LiveSetting="Polite"/>
+                  <TextBlock x:Name="ProgressPercentText" Grid.Column="1" Foreground="{StaticResource Accent}" FontWeight="SemiBold"/>
+                </Grid>
+              </Border>
+              <ProgressBar x:Name="Progress" Height="6" Minimum="0" Maximum="100" Background="#2A3330" Foreground="{StaticResource Accent}" BorderThickness="0" Margin="0,8,0,0" AutomationProperties.Name="Current operation progress"/>
+              <TextBlock x:Name="ProgressDetailText" Foreground="{StaticResource Muted}" FontSize="13" Margin="0,6,0,0" Visibility="Collapsed"/>
+            </StackPanel>
+          </Grid>
+          <Expander x:Name="SetupExpander" Header="Checking your setup" Style="{StaticResource SettingsExpanderStyle}" Margin="0,18,0,0">
+            <Grid Margin="-4,0">
+              <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+              <Border x:Name="GameStepCard" Style="{StaticResource Card}" Padding="16,14">
+                <Grid>
+                  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                  <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <ContentControl x:Name="GameStepBadge" Style="{StaticResource StepBadge}" Content="1" Margin="0,0,10,0" AutomationProperties.Name="Step 1"/>
+                    <TextBlock Text="Bannerlord" Style="{StaticResource SectionLabel}" Margin="0" VerticalAlignment="Center"/>
+                  </StackPanel>
+                  <StackPanel Grid.Row="1">
+                    <TextBlock x:Name="GameStatusText" Text="Looking for your Steam installation…" Foreground="{StaticResource Muted}"/>
+                    <TextBlock Text="{Binding Text, ElementName=GameRootBox}" ToolTip="{Binding Text, ElementName=GameRootBox}" Foreground="{StaticResource Muted}" Opacity="0.8" FontSize="12" Margin="0,4,0,0"/>
+                  </StackPanel>
+                  <Button x:Name="BrowseButton" Grid.Row="2" Content="Choose _folder" Click="Browse_Click" HorizontalAlignment="Left" Margin="-14,8,0,-6" Style="{StaticResource QuietButton}" AutomationProperties.Name="Choose Bannerlord folder"/>
+                </Grid>
+              </Border>
+              <Border x:Name="ArmoryStepCard" Grid.Column="2" Style="{StaticResource Card}" Padding="16,14">
+                <Grid>
+                  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                  <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <ContentControl x:Name="ArmoryStepBadge" Style="{StaticResource StepBadge}" Content="2" Margin="0,0,10,0" AutomationProperties.Name="Step 2"/>
+                    <TextBlock Text="Armory" Style="{StaticResource SectionLabel}" Margin="0" VerticalAlignment="Center"/>
+                  </StackPanel>
+                  <TextBlock x:Name="ArmoryStatusText" Grid.Row="1" Text="Checking the required Workshop mod…" Foreground="{StaticResource Muted}"/>
+                  <Button x:Name="ArmoryButton" Grid.Row="2" Content="Get _Armory" Click="Armory_Click" HorizontalAlignment="Left" Margin="-14,8,0,-6" Style="{StaticResource QuietButton}" AutomationProperties.Name="Open Warlords Armory in Steam Workshop"/>
+                </Grid>
+              </Border>
+              <Border x:Name="WarlordsStepCard" Grid.Column="4" Style="{StaticResource Card}" Padding="16,14">
+                <Grid>
+                  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                  <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <ContentControl x:Name="WarlordsStepBadge" Style="{StaticResource StepBadge}" Content="3" Margin="0,0,10,0" AutomationProperties.Name="Step 3"/>
+                    <TextBlock Text="Warlords" Style="{StaticResource SectionLabel}" Margin="0" VerticalAlignment="Center"/>
+                  </StackPanel>
+                  <StackPanel Grid.Row="1">
+                    <TextBlock x:Name="ReleaseText" Text="Checking for updates…"/>
+                    <TextBlock x:Name="InstallStateText" Text="Your installation will stay up to date automatically." Foreground="{StaticResource Muted}" Margin="0,3,0,0"/>
+                  </StackPanel>
+                  <Button x:Name="RefreshButton" Grid.Row="2" Content="Check _again" Click="Refresh_Click" HorizontalAlignment="Left" Margin="-14,8,0,-6" Style="{StaticResource QuietButton}" AutomationProperties.Name="Check the game and update again"/>
+                </Grid>
+              </Border>
+            </Grid>
+          </Expander>
+          <!-- News: the newest changes, shown without opening anything. Hidden when notes can't be loaded. -->
+          <Border x:Name="NewsCard" Style="{StaticResource Card}" Padding="18,14" Margin="0,10,0,0" Visibility="Collapsed">
+            <Grid>
+              <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+              <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+              <TextBlock x:Name="NewsTitleText" Style="{StaticResource SectionLabel}" Foreground="{StaticResource Accent}" VerticalAlignment="Center" Margin="0"/>
+              <Button x:Name="NewsAllButton" Grid.Column="1" Content="Read _all" Click="NewsAll_Click" Style="{StaticResource QuietButton}" MinHeight="30" Padding="10,4" Margin="0,-4,-8,-4" AutomationProperties.Name="Read all release notes"/>
+              <TextBlock x:Name="NewsItemsText" Grid.Row="1" Grid.ColumnSpan="2" Foreground="{StaticResource Muted}" Margin="0,8,0,0"/>
             </Grid>
           </Border>
-          <Grid Margin="0,14,0,0">
-            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-            <Border x:Name="GameStepCard" Style="{StaticResource Card}" Padding="16,14">
-              <Border.RenderTransform><TranslateTransform/></Border.RenderTransform>
-              <Grid>
-                <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                  <ContentControl x:Name="GameStepBadge" Style="{StaticResource StepBadge}" Content="1" Margin="0,0,10,0" AutomationProperties.Name="Step 1"/>
-                  <TextBlock Text="Bannerlord" Style="{StaticResource SectionLabel}" Margin="0" VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Grid.Row="1">
-                  <TextBlock x:Name="GameStatusText" Text="Looking for your Steam installation…" Foreground="{StaticResource Muted}"/>
-                  <TextBlock Text="{Binding Text, ElementName=GameRootBox}" ToolTip="{Binding Text, ElementName=GameRootBox}" Foreground="{StaticResource Muted}" Opacity="0.8" FontSize="12" Margin="0,4,0,0"/>
-                </StackPanel>
-                <Button x:Name="BrowseButton" Grid.Row="2" Content="Choose _folder" Click="Browse_Click" HorizontalAlignment="Left" Margin="-14,8,0,-6" Style="{StaticResource QuietButton}" AutomationProperties.Name="Choose Bannerlord folder"/>
-              </Grid>
-            </Border>
-            <Border x:Name="ArmoryStepCard" Grid.Column="2" Style="{StaticResource Card}" Padding="16,14">
-              <Border.RenderTransform><TranslateTransform/></Border.RenderTransform>
-              <Grid>
-                <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                  <ContentControl x:Name="ArmoryStepBadge" Style="{StaticResource StepBadge}" Content="2" Margin="0,0,10,0" AutomationProperties.Name="Step 2"/>
-                  <TextBlock Text="Armory" Style="{StaticResource SectionLabel}" Margin="0" VerticalAlignment="Center"/>
-                </StackPanel>
-                <TextBlock x:Name="ArmoryStatusText" Grid.Row="1" Text="Checking the required Workshop mod…" Foreground="{StaticResource Muted}"/>
-                <Button x:Name="ArmoryButton" Grid.Row="2" Content="Get _Armory" Click="Armory_Click" HorizontalAlignment="Left" Margin="-14,8,0,-6" Style="{StaticResource QuietButton}" AutomationProperties.Name="Open Warlords Armory in Steam Workshop"/>
-              </Grid>
-            </Border>
-            <Border x:Name="WarlordsStepCard" Grid.Column="4" Style="{StaticResource Card}" Padding="16,14">
-              <Border.RenderTransform><TranslateTransform/></Border.RenderTransform>
-              <Grid>
-                <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                  <ContentControl x:Name="WarlordsStepBadge" Style="{StaticResource StepBadge}" Content="3" Margin="0,0,10,0" AutomationProperties.Name="Step 3"/>
-                  <TextBlock Text="Warlords" Style="{StaticResource SectionLabel}" Margin="0" VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Grid.Row="1">
-                  <TextBlock x:Name="ReleaseText" Text="Checking for updates…"/>
-                  <TextBlock x:Name="InstallStateText" Text="Your installation will stay up to date automatically." Foreground="{StaticResource Muted}" Margin="0,3,0,0"/>
-                </StackPanel>
-                <Button x:Name="RefreshButton" Grid.Row="2" Content="Check _again" Click="Refresh_Click" HorizontalAlignment="Left" Margin="-14,8,0,-6" Style="{StaticResource QuietButton}" AutomationProperties.Name="Check the game and update again"/>
-              </Grid>
-            </Border>
-          </Grid>
-          <Expander x:Name="ChangelogExpander" Header="What’s new" Expanded="Changelog_Expanded" Style="{StaticResource SettingsExpanderStyle}" Margin="0,14,0,0">
+          <Expander x:Name="ChangelogExpander" Header="All release notes" Expanded="Changelog_Expanded" Style="{StaticResource SettingsExpanderStyle}" Margin="0,10,0,0" Visibility="Collapsed">
             <StackPanel>
               <TextBlock x:Name="ChangelogStatusText" Text="Open this section to read the latest changes." Foreground="{StaticResource Muted}" Margin="0,0,0,8" AutomationProperties.LiveSetting="Polite"/>
               <TextBox x:Name="ChangelogText" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Background="Transparent" BorderThickness="0" Padding="0" AutomationProperties.Name="Warlords release notes">
@@ -186,7 +209,7 @@
                 <Button x:Name="DetectButton" Grid.Column="1" Content="_Find automatically" Click="Detect_Click" Margin="10,0,0,0"/>
               </Grid>
               <TextBlock Text="Troubleshooting" Style="{StaticResource SectionLabel}" Margin="0,24,0,4"/>
-              <TextBlock Text="Check installed files, reinstall Warlords, or open the activity log for your host." Foreground="{StaticResource Muted}" Margin="0,0,0,10"/>
+              <TextBlock Text="Check your files, reinstall Warlords, or open the logs to share when you report a problem." Foreground="{StaticResource Muted}" Margin="0,0,0,10"/>
               <WrapPanel>
                 <Button x:Name="VerifyButton" Content="_Verify files" Click="Verify_Click" Margin="0,0,8,8"/>
                 <Button x:Name="InstallButton" Content="_Reinstall / repair" Click="Install_Click" Margin="0,0,8,8"/>
@@ -194,35 +217,11 @@
                 <Button x:Name="ChoosePackButton" Content="Choose test _pack" Click="ChoosePack_Click" Margin="0,0,0,8"/>
               </WrapPanel>
               <TextBlock Text="When Steam opens, choose Multiplayer and enable Native, Multiplayer, Armory and Warlords, then Play." Foreground="{StaticResource Muted}" Margin="0,2,0,0"/>
-              <TextBlock Text="Build details" Style="{StaticResource SectionLabel}" Margin="0,24,0,4"/>
-              <TextBlock x:Name="SourceText" Foreground="{StaticResource Muted}"/>
-              <TextBlock x:Name="ChannelSourceText" Foreground="{StaticResource Muted}" FontSize="12" Margin="0,4,0,0"/>
-              <TextBlock x:Name="ExpiryText" Foreground="{StaticResource Muted}" Margin="0,4,0,0"/>
-              <Button x:Name="BranchButton" Content="Check source branch" Click="Branch_Click" HorizontalAlignment="Left" Margin="0,10,0,0"/>
-              <TextBlock x:Name="BranchStatusText" Foreground="{StaticResource Muted}" Margin="0,8,0,0"/>
-              <TextBlock Text="Advanced update channel" Style="{StaticResource SectionLabel}" Margin="0,24,0,4"/>
-              <TextBlock Text="Keep the built-in channel unless your host asks you to change it. A channel can install code on your computer." Foreground="{StaticResource Muted}" Margin="0,0,0,8"/>
-              <Grid>
-                <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-                <TextBox x:Name="ChannelUrlBox" AutomationProperties.Name="HTTPS update channel URL"/>
-                <Button x:Name="ConnectButton" Grid.Column="1" Content="_Connect" Click="Connect_Click" Margin="10,0,0,0"/>
-              </Grid>
-              <TextBlock Text="Activity" Style="{StaticResource SectionLabel}" Margin="0,24,0,6"/>
-              <TextBox x:Name="ActivityBox" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Height="150" VerticalScrollBarVisibility="Auto" FontSize="12" AutomationProperties.Name="Launcher activity log"/>
-              <TextBlock Text="Unsigned testing build. Steam authentication and normal server access are required." Foreground="{StaticResource Muted}" FontSize="12" Margin="0,12,0,0"/>
             </StackPanel>
           </Expander>
         </StackPanel>
       </ScrollViewer>
-      <Border x:Name="FooterBar" Grid.Row="2" Background="#1B2220" BorderBrush="{StaticResource CardBorder}" BorderThickness="0,1,0,0" Padding="28,16">
-        <Grid>
-          <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-          <TextBlock x:Name="FooterHintText" Text="Updates are checked automatically.&#10;Steam opens when you’re ready to play." Foreground="{StaticResource Muted}" VerticalAlignment="Center" Margin="0,0,24,0"/>
-          <Button x:Name="CancelButton" Grid.Column="1" Content="_Cancel" Click="Cancel_Click" IsEnabled="False" Visibility="Collapsed" VerticalAlignment="Center" Margin="0,0,12,0"/>
-          <Button x:Name="PrimaryButton" Grid.Column="2" Content="Getting ready…" Click="Primary_Click" Style="{StaticResource PrimaryButtonStyle}" VerticalAlignment="Center" AutomationProperties.HelpText="The next step for this Warlords installation"/>
-        </Grid>
-      </Border>
-      <Grid x:Name="SplashOverlay" Grid.Row="1" Grid.RowSpan="2" Background="{StaticResource CanvasVignette}" Visibility="Collapsed" IsHitTestVisible="False">
+      <Grid x:Name="SplashOverlay" Grid.Row="1" Background="{StaticResource CanvasVignette}" Visibility="Collapsed" IsHitTestVisible="False">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,40">
           <Image x:Name="SplashCrest" Source="Assets/warlords-logo.png" Width="112" Height="112" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5" AutomationProperties.Name="Warlords crest">
             <Image.RenderTransform><ScaleTransform/></Image.RenderTransform>
@@ -234,26 +233,22 @@
         </StackPanel>
       </Grid>
       <!-- Title bar. Declared last so caption buttons come last in Tab order. -->
-      <Border x:Name="TitleBar" Background="#1C2321">
+      <Border x:Name="TitleBar" Background="Transparent">
         <Grid>
           <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
           <StackPanel x:Name="TitleBrand" Orientation="Horizontal" VerticalAlignment="Center" Margin="22,0,0,0">
             <Image Source="Assets/warlords-logo.png" Width="44" Height="44" Stretch="Uniform" Margin="0,0,12,0" RenderOptions.BitmapScalingMode="HighQuality" AutomationProperties.Name="Warlords crest"/>
             <TextBlock Text="Warlords" FontFamily="Georgia" FontSize="27" LineHeight="34" Foreground="{StaticResource Accent}" VerticalAlignment="Center"/>
-            <TextBlock Text="StratLords for Bannerlord" Foreground="{StaticResource Muted}" Margin="18,3,0,0" VerticalAlignment="Center"/>
           </StackPanel>
           <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0,16,0">
-            <Button x:Name="WebsiteButton" Style="{StaticResource TitleLinkButton}" Click="Website_Click" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Open the StratLords website" AutomationProperties.Name="Open the StratLords website">
-              <StackPanel Orientation="Horizontal">
-                <Path Style="{StaticResource TitleLinkIcon}" Data="M 7,0.5 A 6.5,6.5 0 1 1 6.99,0.5 Z M 0.5,7 L 13.5,7 M 7,0.5 C 3.6,4 3.6,10 7,13.5 M 7,0.5 C 10.4,4 10.4,10 7,13.5"/>
-                <TextBlock Text="Website" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" FontSize="13" LineHeight="18" VerticalAlignment="Center"/>
-              </StackPanel>
+            <Button x:Name="WebsiteButton" Style="{StaticResource TitleIconButton}" Click="Website_Click" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Website" AutomationProperties.Name="Open the StratLords website">
+              <Path Style="{StaticResource TitleIconLine}" Data="M 7,0.5 A 6.5,6.5 0 1 1 6.99,0.5 Z M 0.5,7 L 13.5,7 M 7,0.5 C 3.6,4 3.6,10 7,13.5 M 7,0.5 C 10.4,4 10.4,10 7,13.5"/>
             </Button>
-            <Button x:Name="DiscordButton" Style="{StaticResource TitleLinkButton}" Click="Discord_Click" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Join the StratLords Discord" AutomationProperties.Name="Join the StratLords Discord" Margin="4,0,0,0">
-              <StackPanel Orientation="Horizontal">
-                <Path Style="{StaticResource TitleLinkIcon}" Data="M 2.5,1 L 11.5,1 Q 13,1 13,2.5 L 13,8 Q 13,9.5 11.5,9.5 L 6.5,9.5 L 3.5,12.5 L 3.5,9.5 L 2.5,9.5 Q 1,9.5 1,8 L 1,2.5 Q 1,1 2.5,1 Z"/>
-                <TextBlock Text="Discord" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" FontSize="13" LineHeight="18" VerticalAlignment="Center"/>
-              </StackPanel>
+            <Button x:Name="DiscordButton" Style="{StaticResource TitleIconButton}" Click="Discord_Click" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Discord" AutomationProperties.Name="Join the StratLords Discord" Margin="4,0,0,0">
+              <Path Style="{StaticResource TitleIconFill}" Data="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
+            </Button>
+            <Button x:Name="GitHubButton" Style="{StaticResource TitleIconButton}" Click="GitHub_Click" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="GitHub" AutomationProperties.Name="Open the Warlords launcher on GitHub" Margin="4,0,0,0">
+              <Path Style="{StaticResource TitleIconFill}" Data="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
             </Button>
             <Button x:Name="LauncherUpdateButton" Style="{StaticResource TitleLinkButton}" Click="UpdateLauncher_Click" Visibility="Collapsed" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Download, check and install the newer Warlords launcher" AutomationProperties.Name="Update the Warlords launcher" Margin="4,0,0,0">
               <StackPanel Orientation="Horizontal">
@@ -277,8 +272,6 @@
               <Path Style="{StaticResource CaptionGlyph}" Data="M 0,0 L 10,10 M 10,0 L 0,10"/>
             </Button>
           </StackPanel>
-          <Rectangle Grid.ColumnSpan="3" Height="1" VerticalAlignment="Bottom" Fill="{StaticResource CardBorder}"/>
-          <Rectangle Grid.ColumnSpan="3" Height="1" VerticalAlignment="Bottom" Fill="{StaticResource AccentRule}" Margin="80,0" Opacity="0.7"/>
         </Grid>
       </Border>
     </Grid>
