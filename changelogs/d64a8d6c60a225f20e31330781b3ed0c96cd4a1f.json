@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "d64a8d6c60a225f20e31330781b3ed0c96cd4a1f",
+  "version": "1.1.10",
+  "entries": [
+    {
+      "version": "1.1.10",
+      "date": "2026-11-11",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Updated multiplayer support for Bannerlord 1.5.7.",
+            "The battle loadout panel initializes its equipment slots and character preview before it opens."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Armoury stock updates do less work while the loadout panel is closed.",
+            "Campaign servers reuse roster checks when updating team counts and pings."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.9",
+      "date": "2026-11-11",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Campaign battles check that lives and equipment can be tracked before the fight opens.",
+            "Improved cleanup on disconnects and round resets, including lingering horn and banner effects.",
+            "Spawning now records the life spent and the equipment issued together before updating players."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Base capture and hits on scenery do less work on the server."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.8",
+      "date": "2026-11-10",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Ten more battlefields are ready for staged battles: Cypegos Blockade, Osrac Insurrection, Skolder Hideout, Druimmor Forest, Cliffs of Akkalat, Pendaric, Isle of Deriad, Streets of Syllianon, Zendyar and Urikskalaar.",
+            "The server checks each side's base and spawn area before the fight starts. If a map fails that check, the battle waits instead of starting badly.",
+            "Staged battles can now use generated campaign battlefields too. Admins pick the spot on the campaign map, and the battlefield is built for that spot."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.7",
+      "date": "2026-11-10",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "After a server restart, rewards and gold no longer stay switched off. Servers now keep trying until rewards work again.",
+            "Servers now use the current game service address instead of an old one."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.6",
+      "date": "2026-11-10",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Army commanders can now pick extra commanders from their own side: one more for every 20 fighters on the roster, up to four commanders in total.",
+            "Pick them on the battle page until a few minutes before the battle starts, or during the battle with Esc → Commanders.",
+            "Extra commanders can use team pings, blow the war horn and see the team numbers. Their scoreboard row turns gold.",
+            "Extra commanders cannot call a retreat or pick other commanders."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.5",
+      "date": "2026-11-10",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "The Tent Kit is now called the Healing Tent, and the Cart Kit is now called the Forward Spawn, everywhere in battle.",
+            "On the spawn screen, the Base and Forward Spawn choice now sits right next to Autospawn."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.4",
+      "date": "2026-11-09",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Hold Alt to see your team's tent and cart, with their health and how far away they are.",
+            "Aim at a tent or cart up close to see its health bar, in the same style as castle gates.",
+            "A deployed cart now flies your team's banner.",
+            "Base flags in campaign battles now show how many metres away they are.",
+            "The Stratlords lobby page has an eye button in the bottom left. Click it to hide the panels and enjoy the war council view, and click it again to bring them back.",
+            "Tavern music now plays while the Stratlords lobby page is open."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Tents and carts now show their damage as they get hit, so you can see when one is about to break.",
+            "Deploying a new tent or cart now replaces your team's old one, so you are never stuck carrying a kit you cannot use.",
+            "The Tent Kit and Cart Kit now look like crates you carry in both hands.",
+            "Carrying a Tent Kit or Cart Kit makes you 25% slower.",
+            "Menus and messages now say Stratlords instead of Strategus."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.3",
+      "date": "2026-11-09",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Launcher 0.5.0 has a new look: castle art, one clear status and one big Play button. The newest update notes now show right on the main screen.",
+            "Installs and updates now show how many MB are done, the download speed and the time left."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "If an update was cut off half-way, for example by a crash, the launcher now repairs it by itself next time you open it.",
+            "Very long game folder paths now install correctly.",
+            "The launcher's tooltips were blank; they are readable now."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "The launcher is now about 3 MB instead of 67 MB. It needs .NET Framework 4.8, which Windows normally already has. If yours does not, the launcher tells you where to get it.",
+            "After an update the launcher keeps only one backup of your old Warlords files, so it uses much less disk space.",
+            "Launcher 0.4.3 and 0.4.4 show an Update launcher button at the top. Older launchers: download the new Warlords.exe once from the website.",
+            "Battle cards now show a Steam sign-in message until you are signed in, then the Join buttons appear."
+          ]
+        }
+      ]
+    }
+  ]
+}
