@@ -18,7 +18,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "419175752019bad38974dd730683ddda52a4cae0cad1e666e91d5a971e00e437",
+      "sha256": "4cab9e3380606df8d5809bcfcf18b2a4530d98ad756f278555f44db5f9084676",
       "size": 3712
     },
     {
@@ -103,7 +103,7 @@
     },
     {
       "path": "src/Warlords.Launcher/Models.cs",
-      "sha256": "cd17c5531d0357a19b6f883e5dc0ea6ab76828691d19a49d38aebe62bd323057",
+      "sha256": "d381157738376e9ba68ac7d49db97aa699ea2fe14c2aa2278f1c824f4c71f90a",
       "size": 5403
     },
     {
@@ -118,11 +118,11 @@
     },
     {
       "path": "src/Warlords.Launcher/Warlords.Launcher.csproj",
-      "sha256": "df150041c79390f2fef3ea6d01d7b29aa3a6c7fee69422aa8bb9e6036f2ff782",
+      "sha256": "e453e1263aa8464c71834696456ee8e478272d081f76f9f54f68395afbf7eede",
       "size": 1702
     }
   ],
-  "launcherVersion": "0.5.0",
+  "launcherVersion": "0.5.1",
   "license": "MIT",
   "schemaVersion": 1,
   "scope": "launcher-app-with-named-branding-assets"

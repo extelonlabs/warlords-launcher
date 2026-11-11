@@ -7,7 +7,7 @@ namespace Warlords.Launcher;
 
 public static class Profile
 {
-    public const string LauncherVersion = "0.5.0";
+    public const string LauncherVersion = "0.5.1";
     public const string DefaultChannelUrl = "https://raw.githubusercontent.com/extelonlabs/warlords-launcher/StratLords/channel.json";
     // Launcher self-update: a manifest signed by the owner's offline key. Only this
     // pinned public key is trusted; it never comes from the feed.
@@ -23,7 +23,7 @@ public static class Profile
     public const string Branch = "main";
     public const string PreviousBranch = "StratLords";
     public const string ModuleId = "MBWarlords.LastConcord";
-    public const string GameVersion = "v1.4.8";
+    public const string GameVersion = "v1.5.7";
     public const string ArmoryVersion = "v1.0.0.17";
     public static readonly string[] Modules = ["Native", "Multiplayer", "MBWarlords.Armory", ModuleId];
     public static readonly JsonSerializerOptions Json = new()

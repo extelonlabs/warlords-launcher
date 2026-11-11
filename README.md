@@ -12,11 +12,11 @@ Mount & Blade II: Bannerlord and keeps it up to date. That is all it does.
 
 Yes. You do not have to trust us. You can check it yourself:
 
-- **Virus scan:** [VirusTotal scan of Warlords.exe 0.5.0](https://www.virustotal.com/gui/file/185d7afb7d53502632b3e1404ad54a0bd42f8e8aec74370e665936e96b710e81).
+- **Virus scan:** [VirusTotal scan of Warlords.exe 0.5.1](https://www.virustotal.com/gui/file/a343ec504ba67743c880d76a1226107755cfa275f89429be3ffea38f91f6edc1).
   VirusTotal checks a file with dozens of antivirus programs at once.
 - **Same file:** in PowerShell, run `Get-FileHash .\Warlords.exe`.
-  For launcher 0.5.0 it must show
-  `185D7AFB7D53502632B3E1404AD54A0BD42F8E8AEC74370E665936E96B710E81`.
+  For launcher 0.5.1 it must show
+  `A343EC504BA67743C880D76A1226107755CFA275F89429BE3FFEA38F91F6EDC1`.
   This is the file's fingerprint. It is the same one VirusTotal scanned, and the
   release page lists it in `SHA256SUMS.txt`.
 - **Open code:** every line of the app is in [src/Warlords.Launcher](src/Warlords.Launcher).
@@ -47,7 +47,7 @@ Windows who made a file.) So Windows may warn you the first time. Click
 
 ## How it works
 
-You need Windows 10 or 11 (64-bit) and Bannerlord **1.4.8** on Steam. Windows
+You need Windows 10 or 11 (64-bit) and Bannerlord **1.5.7** on Steam. Windows
 normally has .NET Framework 4.8 already. If yours does not, the launcher tells
 you and opens Microsoft's download page.
 
