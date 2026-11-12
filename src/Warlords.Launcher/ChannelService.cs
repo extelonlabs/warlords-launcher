@@ -137,9 +137,10 @@ public sealed class ChannelService
                     if (total > update.Size) throw new InvalidDataException("The server sent more data than the signed launcher.");
                     hash.AppendData(buffer, 0, read);
                     await output.WriteAsync(buffer, 0, read, timeout.Token);
-                    progress.Report(new("Downloading launcher " + update.Version, (double)total / update.Size));
+                    progress.Report(new("Downloading launcher " + update.Version, (double)total / update.Size, Step: "download"));
                 }
                 if (total != update.Size) throw new InvalidDataException("The launcher download ended early.");
+                progress.Report(new("Checking the fingerprint", 1, Step: "check"));
                 if (Net48.ToHex(hash.GetHashAndReset()).ToLowerInvariant() != update.Sha256)
                     throw new InvalidDataException("The launcher download does not match the signed fingerprint.");
             }

@@ -12,11 +12,11 @@ Mount & Blade II: Bannerlord and keeps it up to date. That is all it does.
 
 Yes. You do not have to trust us. You can check it yourself:
 
-- **Virus scan:** [VirusTotal scan of Warlords.exe 0.5.1](https://www.virustotal.com/gui/file/a343ec504ba67743c880d76a1226107755cfa275f89429be3ffea38f91f6edc1).
+- **Virus scan:** [VirusTotal scan of Warlords.exe 0.5.2](https://www.virustotal.com/gui/file/0ff0af1640825c809f435aa51dc1ad1c5fef10b65104fe086a1711c0aa1aca86).
   VirusTotal checks a file with dozens of antivirus programs at once.
 - **Same file:** in PowerShell, run `Get-FileHash .\Warlords.exe`.
-  For launcher 0.5.1 it must show
-  `A343EC504BA67743C880D76A1226107755CFA275F89429BE3FFEA38F91F6EDC1`.
+  For launcher 0.5.2 it must show
+  `0FF0AF1640825C809F435AA51DC1AD1C5FEF10B65104FE086A1711C0AA1ACA86`.
   This is the file's fingerprint. It is the same one VirusTotal scanned, and the
   release page lists it in `SHA256SUMS.txt`.
 - **Open code:** every line of the app is in [src/Warlords.Launcher](src/Warlords.Launcher).

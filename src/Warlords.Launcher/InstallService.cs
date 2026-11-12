@@ -110,6 +110,7 @@ public sealed class InstallService
     {
         ValidateRelease(source.Release);
         using IDisposable exclusive = AcquireLock(gameRoot);
+        progress.Report(new("Making sure Bannerlord is closed", Step: "closed"));
         GameService.EnsureClosed();
         string modules = SafeFiles.Extended(SafeFiles.Modules(gameRoot));
         RecoverCore(modules);
@@ -129,7 +130,7 @@ public sealed class InstallService
             PackageLocation packageLocation = await GetPackageAsync(source, progress, cancellationToken).ConfigureAwait(false);
             string package = packageLocation.Path;
             if (packageLocation.Temporary) downloadedPackage = package;
-            progress.Report(new("Checking the download", 0.82));
+            progress.Report(new("Checking the download", 0.82, Step: "check"));
             if (!await SafeFiles.MatchesAsync(package, source.Release.PackageSize, source.Release.PackageSha256, cancellationToken).ConfigureAwait(false))
                 throw new InvalidDataException("The download is damaged or incomplete. Choose Try again to download it again.");
             await ExtractAsync(package, stage, source.Release, progress, cancellationToken).ConfigureAwait(false);
@@ -137,6 +138,7 @@ public sealed class InstallService
             string oldOptions = SafeFiles.Under(target, OptionsPath);
             if (File.Exists(oldOptions))
             {
+                progress.Report(new("Keeping your settings", 0.97, Step: "settings"));
                 if (new FileInfo(oldOptions).Length > 4 * 1024 * 1024) throw new IOException("Player options are unexpectedly large; keep the current installation and contact the owner.");
                 string options = SafeFiles.Under(stage, OptionsPath);
                 Directory.CreateDirectory(Path.GetDirectoryName(options)!);
@@ -149,12 +151,16 @@ public sealed class InstallService
             GameService.EnsureClosed();
             ValidateRelease(source.Release);
             ValidateExistingTarget(target);
-            progress.Report(new("Installing Warlords", 0.98));
             string backup = Path.Combine(recovery, journal.BackupName);
             SafeFiles.NoLinks(backup);
             if (File.Exists(backup) || Directory.Exists(backup)) throw new IOException("The backup destination already exists. Nothing was replaced.");
-            if (Directory.Exists(target)) Directory.Move(target, backup);
+            if (Directory.Exists(target))
+            {
+                progress.Report(new("Saving a backup of the old version", 0.98, Step: "backup"));
+                Directory.Move(target, backup);
+            }
             WriteJournal(modules, journal with { Phase = "backedUp" });
+            progress.Report(new("Installing Warlords", 0.99, Step: "swap"));
             Directory.Move(stage, target);
             WriteJournal(modules, journal with { Phase = "committed" });
             File.Delete(Path.Combine(modules, JournalName));
@@ -313,7 +319,7 @@ public sealed class InstallService
                     total += read;
                     if (total > source.Release.PackageSize) throw new InvalidDataException("The server sent more data than the approved package.");
                     await output.WriteAsync(buffer, 0, read, downloadToken).ConfigureAwait(false);
-                    progress.Report(new("Downloading Warlords", 0.8 * total / source.Release.PackageSize, total, source.Release.PackageSize));
+                    progress.Report(new("Downloading Warlords", 0.8 * total / source.Release.PackageSize, total, source.Release.PackageSize, "download"));
                 }
                 if (total != source.Release.PackageSize) throw new InvalidDataException("The package download ended early.");
                 return new PackageLocation(temporary, true);
@@ -377,7 +383,7 @@ public sealed class InstallService
                 if (total != file.Size || !Net48.FixedTimeEquals(hash.GetHashAndReset(), Net48.FromHex(file.Sha256)))
                     throw new InvalidDataException("A ZIP file failed SHA-256 verification: " + relative);
             }
-            progress.Report(new("Preparing files (" + (++completed) + " / " + release.Files.Count + ")", 0.82 + 0.15 * completed / release.Files.Count));
+            progress.Report(new("Unpacking files (" + (++completed) + " / " + release.Files.Count + ")", 0.82 + 0.15 * completed / release.Files.Count, Step: "unpack"));
         }
         if (completed != release.Files.Count) throw new InvalidDataException("The ZIP is missing approved files.");
     }

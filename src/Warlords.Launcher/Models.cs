@@ -7,7 +7,7 @@ namespace Warlords.Launcher;
 
 public static class Profile
 {
-    public const string LauncherVersion = "0.5.1";
+    public const string LauncherVersion = "0.5.2";
     public const string DefaultChannelUrl = "https://raw.githubusercontent.com/extelonlabs/warlords-launcher/StratLords/channel.json";
     // Launcher self-update: a manifest signed by the owner's offline key. Only this
     // pinned public key is trusted; it never comes from the feed.
@@ -78,7 +78,8 @@ public sealed record ChangelogSection
     public string Title { get; init; } = "";
     public List<string> Items { get; init; } = [];
 }
-public sealed record OperationProgress(string Message, double? Fraction = null, long? DoneBytes = null, long? TotalBytes = null);
+// Step names one line of the live steps box; reports without one only move the bar.
+public sealed record OperationProgress(string Message, double? Fraction = null, long? DoneBytes = null, long? TotalBytes = null, string? Step = null);
 public sealed record GameInspection(string GameRoot, string? InstalledVersion, bool CanPlay, IReadOnlyList<string> Messages)
 {
     public bool GameFound { get; init; }

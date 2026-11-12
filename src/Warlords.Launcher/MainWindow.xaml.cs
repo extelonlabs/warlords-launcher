@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Automation;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -48,6 +50,28 @@ public partial class MainWindow : Window
     private readonly Stopwatch _speedClock = new();
     private long _speedBytes;
     private double _bytesPerSecond;
+    private readonly List<(string Key, string Label, DockPanel Line)> _steps = new();
+    private int _activeStep = -1;
+    private bool _stepsOpen;
+    // Steps of each operation, in order. A step that does not apply this time is dropped.
+    private static readonly (string Key, string Label)[] InstallSteps =
+    {
+        ("version", "Check your Bannerlord version"),
+        ("closed", "Make sure Bannerlord is closed"),
+        ("download", "Download Warlords"),
+        ("check", "Check the download is safe"),
+        ("unpack", "Unpack and check every file"),
+        ("settings", "Keep your settings"),
+        ("backup", "Save a backup of the old version"),
+        ("swap", "Put the new version in place"),
+    };
+    private static readonly (string Key, string Label)[] LauncherSteps =
+    {
+        ("download", "Download the new launcher"),
+        ("check", "Check it is the real, signed file"),
+        ("swap", "Swap the old launcher for the new one"),
+        ("restart", "Restart the launcher"),
+    };
     private const string ChangelogLoadedStatus = "Changes for this build and recent releases. Some features may still be in testing.";
 
     private enum PrimaryAction { ChooseFolder, CheckAgain, GetArmory, RemoveWorkshopCopy, Install, Play }
@@ -208,6 +232,8 @@ public partial class MainWindow : Window
         var source = _source ?? throw new InvalidOperationException("Refresh the update channel before installing.");
         var root = GameRootBox.Text.Trim();
         SetStatus($"Preparing Warlords {source.Release.Version}…", _managedInstallation ? "Updating Warlords" : "Installing Warlords");
+        StartSteps(InstallSteps);
+        ShowStep("version", "Checking your Bannerlord version");
         // Check the actual game descriptors before writing a new module, including
         // first installations where the managed module does not yet exist.
         var modules = SafeFiles.Modules(root);
@@ -215,6 +241,7 @@ public partial class MainWindow : Window
             if (SafeFiles.ReadXml(Path.Combine(modules, id, "SubModule.xml")).Root?.Element("Version")?.Attribute("value")?.Value != Profile.GameVersion)
                 throw new InvalidOperationException("This build requires Bannerlord " + Profile.GameVersion + ". Select the matching Steam installation.");
         var result = await _installer.InstallAsync(root, source, Reporter(), token);
+        EndSteps(true);
         if (result.BackupPath is not null) Append("Previous module retained at " + result.BackupPath);
         await InspectGameAsync(token);
         _releaseReady = _inspection?.CanPlay == true && IsManagedInstallation(root);
@@ -283,11 +310,15 @@ public partial class MainWindow : Window
     private IProgress<OperationProgress> Reporter()
     {
         var operation = _operation;
-        return new Progress<OperationProgress>(value =>
+        return new UiProgress(Dispatcher, value =>
         {
             if (!_busy || !ReferenceEquals(_operation, operation) || operation?.IsCancellationRequested == true) return;
             OperationText.Text = value.Message;
             ShowDownloadDetail(value);
+            if (value.Step is { } step)
+                ShowStep(step, value.DoneBytes is { } done && value.TotalBytes is { } total
+                    ? $"{value.Message}  {done / (1024.0 * 1024):0} / {total / (1024.0 * 1024):0} MB"
+                    : value.Message);
             Progress.IsIndeterminate = value.Fraction is null;
             if (value.Fraction is { } fraction)
             {
@@ -332,6 +363,85 @@ public partial class MainWindow : Window
         ProgressDetailText.Visibility = Visibility.Visible;
     }
 
+    // Like Progress<T>, but a report made on the UI thread shows at once. Otherwise a step
+    // reported just before a sudden failure would arrive after the failure was shown.
+    private sealed class UiProgress(System.Windows.Threading.Dispatcher dispatcher, Action<OperationProgress> handler) : IProgress<OperationProgress>
+    {
+        public void Report(OperationProgress value)
+        {
+            if (dispatcher.CheckAccess()) handler(value);
+            else dispatcher.BeginInvoke(handler, value);
+        }
+    }
+
+    private void StartSteps((string Key, string Label)[] steps)
+    {
+        StepsList.Children.Clear();
+        _steps.Clear();
+        _activeStep = -1;
+        _stepsOpen = true;
+        foreach (var (key, label) in steps)
+        {
+            // Mark in a fixed column: ✓ comes from a fallback font with a different width.
+            var line = new DockPanel { Margin = new Thickness(0, 2, 0, 0) };
+            line.Children.Add(new TextBlock { Width = 22 });
+            line.Children.Add(new TextBlock { TextWrapping = TextWrapping.Wrap });
+            StepsList.Children.Add(line);
+            _steps.Add((key, label, line));
+            SetStepLine(line, "○", label, "Muted");
+        }
+        StepsBox.Visibility = Visibility.Visible;
+    }
+
+    // Ticks the current step and lights up the named one. Steps never go backwards.
+    private void ShowStep(string key, string text)
+    {
+        var index = _steps.FindIndex(step => step.Key == key);
+        if (!_stepsOpen || index < 0 || index < _activeStep) return;
+        if (index > _activeStep)
+        {
+            if (_activeStep >= 0) SetStepLine(_steps[_activeStep].Line, "✓", _steps[_activeStep].Label, "Success");
+            // Steps passed over did not apply this time (no old version, no saved settings).
+            for (var skipped = index - 1; skipped > _activeStep; skipped--)
+            {
+                StepsList.Children.Remove(_steps[skipped].Line);
+                _steps.RemoveAt(skipped);
+                index--;
+            }
+            _activeStep = index;
+        }
+        SetStepLine(_steps[index].Line, "●", text, "Accent");
+    }
+
+    private void EndSteps(bool success, bool cancelled = false, string reason = "failed")
+    {
+        if (!_stepsOpen) return;
+        _stepsOpen = false;
+        if (_activeStep < 0) return;
+        var (_, label, line) = _steps[_activeStep];
+        if (!success)
+        {
+            SetStepLine(line, cancelled ? "■" : "✗", label + " — " + (cancelled ? "cancelled" : reason), cancelled ? "Muted" : "Danger");
+            return;
+        }
+        SetStepLine(line, "✓", label, "Success");
+        for (var unused = _steps.Count - 1; unused > _activeStep; unused--)
+        {
+            StepsList.Children.Remove(_steps[unused].Line);
+            _steps.RemoveAt(unused);
+        }
+    }
+
+    private void SetStepLine(DockPanel line, string mark, string text, string brush)
+    {
+        var markText = (TextBlock)line.Children[0];
+        var lineText = (TextBlock)line.Children[1];
+        markText.Text = mark;
+        markText.Foreground = (Brush)FindResource(brush);
+        lineText.Text = text;
+        lineText.Foreground = (Brush)FindResource(brush == "Muted" ? "Muted" : "Text");
+    }
+
     private async Task RunAsync(Func<CancellationToken, Task> action)
     {
         if (_busy) return;
@@ -347,6 +457,8 @@ public partial class MainWindow : Window
         Progress.Value = 0;
         Progress.IsIndeterminate = true;
         ProgressPercentText.Text = "Working…";
+        StepsBox.Visibility = Visibility.Collapsed;
+        _stepsOpen = false;
         UpdateButtons();
         try { await action(_operation.Token); }
         catch (OperationCanceledException)
@@ -354,6 +466,7 @@ public partial class MainWindow : Window
             _releaseReady = false;
             _wasCancelled = _operation.IsCancellationRequested;
             _hadError = !_wasCancelled;
+            EndSteps(false, _wasCancelled, "timed out");
             if (_source is null) ReleaseText.Text = _wasCancelled ? "Update check cancelled." : "Latest version unavailable.";
             SetStatus(_operation.IsCancellationRequested
                 ? "Cancelled. Any interrupted installation will be recovered before the next update."
@@ -363,6 +476,7 @@ public partial class MainWindow : Window
         {
             _releaseReady = false;
             _hadError = true;
+            EndSteps(false, reason: ex is System.Net.Http.HttpRequestException ? "could not reach the server" : ex.Message);
             if (_source is null) ReleaseText.Text = "Latest version unavailable.";
             OperationText.Foreground = new SolidColorBrush(Color.FromRgb(255, 181, 166));
             SetStatus(ex is System.Net.Http.HttpRequestException
@@ -862,10 +976,12 @@ public partial class MainWindow : Window
             "Update launcher", MessageBoxButton.OKCancel, MessageBoxImage.Question) != MessageBoxResult.OK)
             return;
         SetStatus("Downloading launcher " + update.Version + "…", "Updating the launcher");
+        StartSteps(LauncherSteps);
         var current = App.LauncherPath;
         try
         {
             await _channels.DownloadLauncherAsync(update, App.NewLauncherPath, Reporter(), token);
+            ShowStep("swap", "Swapping the old launcher for the new one");
             if (File.Exists(App.OldLauncherPath)) File.Delete(App.OldLauncherPath);
             // Windows lets a running exe be renamed, not overwritten.
             File.Move(current, App.OldLauncherPath);
@@ -887,14 +1003,17 @@ public partial class MainWindow : Window
         catch (UnauthorizedAccessException)
         {
             if (File.Exists(App.NewLauncherPath)) File.Delete(App.NewLauncherPath);
+            EndSteps(false, reason: "the launcher folder can't be changed");
             OpenLink(Profile.LauncherReleasesUrl, "the launcher download page");
             SetStatus("The launcher's folder can't be changed. Download the new Warlords.exe from the page that just opened.");
             return;
         }
         var arguments = Environment.GetCommandLineArgs().Skip(1).Where(arg => arg != App.AfterUpdateArgument).Append(App.AfterUpdateArgument);
         var restart = new ProcessStartInfo(current) { Arguments = string.Join(" ", arguments.Select(Net48.QuoteArgument)), UseShellExecute = false };
+        ShowStep("restart", "Restarting the launcher");
         ((App)Application.Current).ReleaseSingleInstance();
         Process.Start(restart);
+        EndSteps(true);
         SetStatus("Launcher " + update.Version + " installed. Restarting…");
         _closeAfterOperation = true;
     }

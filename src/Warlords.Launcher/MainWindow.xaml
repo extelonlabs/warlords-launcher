@@ -129,6 +129,13 @@
               </Border>
               <ProgressBar x:Name="Progress" Height="6" Minimum="0" Maximum="100" Background="#2A3330" Foreground="{StaticResource Accent}" BorderThickness="0" Margin="0,8,0,0" AutomationProperties.Name="Current operation progress"/>
               <TextBlock x:Name="ProgressDetailText" Foreground="{StaticResource Muted}" FontSize="13" Margin="0,6,0,0" Visibility="Collapsed"/>
+              <!-- Live steps of an install or launcher update, in plain words. Stays until the next action. -->
+              <Border x:Name="StepsBox" Background="#D90E1311" BorderBrush="{StaticResource CardBorder}" BorderThickness="1" CornerRadius="6" Padding="14,10,14,12" Margin="0,12,0,0" Visibility="Collapsed">
+                <StackPanel>
+                  <TextBlock Text="What the launcher is doing" Style="{StaticResource SectionLabel}" Margin="0,0,0,6"/>
+                  <StackPanel x:Name="StepsList" TextElement.FontFamily="Consolas" TextElement.FontSize="13" AutomationProperties.Name="Install steps"/>
+                </StackPanel>
+              </Border>
             </StackPanel>
           </Grid>
           <Expander x:Name="SetupExpander" Header="Checking your setup" Style="{StaticResource SettingsExpanderStyle}" Margin="0,18,0,0">
@@ -250,7 +257,7 @@
             <Button x:Name="GitHubButton" Style="{StaticResource TitleIconButton}" Click="GitHub_Click" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="GitHub" AutomationProperties.Name="Open the Warlords launcher on GitHub" Margin="4,0,0,0">
               <Path Style="{StaticResource TitleIconFill}" Data="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
             </Button>
-            <Button x:Name="LauncherUpdateButton" Style="{StaticResource TitleLinkButton}" Click="UpdateLauncher_Click" Visibility="Collapsed" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Download, check and install the newer Warlords launcher" AutomationProperties.Name="Update the Warlords launcher" Margin="4,0,0,0">
+            <Button x:Name="LauncherUpdateButton" Style="{StaticResource LauncherUpdateButton}" Click="UpdateLauncher_Click" Visibility="Collapsed" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Download, check and install the newer Warlords launcher" AutomationProperties.Name="Update the Warlords launcher" Margin="10,0,0,0">
               <StackPanel Orientation="Horizontal">
                 <Path Style="{StaticResource TitleLinkIcon}" Data="M 7,0.5 L 7,9.5 M 3,5.5 L 7,9.5 L 11,5.5 M 1,13.5 L 13,13.5"/>
                 <TextBlock x:Name="LauncherUpdateText" Text="Update launcher" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" FontSize="13" LineHeight="18" VerticalAlignment="Center"/>

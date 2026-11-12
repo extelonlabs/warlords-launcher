@@ -243,12 +243,67 @@
         </Setter.Value>
       </Setter>
     </Style>
-    <!-- Small website/Discord links in the title bar. -->
-    <Style x:Key="TitleLinkButton" TargetType="Button" BasedOn="{StaticResource QuietButton}">
-      <Setter Property="MinHeight" Value="30"/>
-      <Setter Property="Padding" Value="10,5"/>
+    <!-- Launcher update in the title bar: a gold pill with a breathing glow and a light sweep, so players notice it. -->
+    <Style x:Key="LauncherUpdateButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+      <Setter Property="MinHeight" Value="32"/>
+      <Setter Property="Padding" Value="14,5"/>
       <Setter Property="FontSize" Value="13"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
       <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="Background" Value="{StaticResource AccentFill}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource Accent}"/>
+      <Setter Property="Foreground" Value="{StaticResource Canvas}"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Grid>
+              <Border x:Name="Glow" CornerRadius="16" Background="{StaticResource Accent}" Margin="-2" Opacity="0.45">
+                <Border.Effect><BlurEffect Radius="14"/></Border.Effect>
+              </Border>
+              <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="16">
+                <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+              </Border>
+              <!-- The shine: a soft white band moved across the pill. -->
+              <Border x:Name="Shine" CornerRadius="16" IsHitTestVisible="False">
+                <Border.Background>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <LinearGradientBrush.RelativeTransform><TranslateTransform X="-1"/></LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#00FFFFFF" Offset="0.35"/>
+                    <GradientStop Color="#99FFFFFF" Offset="0.5"/>
+                    <GradientStop Color="#00FFFFFF" Offset="0.65"/>
+                  </LinearGradientBrush>
+                </Border.Background>
+              </Border>
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="ButtonBorder" Property="Background" Value="#EDD39C"/></Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{StaticResource Text}"/></Trigger>
+              <Trigger Property="IsPressed" Value="True"><Setter TargetName="ButtonBorder" Property="Opacity" Value="0.85"/></Trigger>
+              <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.7"/><Setter Property="Cursor" Value="Arrow"/><Setter TargetName="Glow" Property="Opacity" Value="0"/></Trigger>
+              <!-- Shine only while it can be pressed, and only when Windows animations are on. -->
+              <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                  <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="True"/>
+                  <Condition Binding="{Binding Source={x:Static SystemParameters.ClientAreaAnimation}}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.EnterActions>
+                  <BeginStoryboard x:Name="ShineStoryboard">
+                    <Storyboard>
+                      <DoubleAnimation Storyboard.TargetName="Glow" Storyboard.TargetProperty="Opacity" From="0.3" To="0.9" Duration="0:0:1.2" AutoReverse="True" RepeatBehavior="Forever"/>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Shine" Storyboard.TargetProperty="(Border.Background).(Brush.RelativeTransform).(TranslateTransform.X)" Duration="0:0:3.5" RepeatBehavior="Forever">
+                        <LinearDoubleKeyFrame KeyTime="0:0:0" Value="-1"/>
+                        <LinearDoubleKeyFrame KeyTime="0:0:0.9" Value="1"/>
+                        <DiscreteDoubleKeyFrame KeyTime="0:0:3.5" Value="1"/>
+                      </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </BeginStoryboard>
+                </MultiDataTrigger.EnterActions>
+                <MultiDataTrigger.ExitActions><StopStoryboard BeginStoryboardName="ShineStoryboard"/></MultiDataTrigger.ExitActions>
+              </MultiDataTrigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
     </Style>
     <Style x:Key="TitleLinkIcon" TargetType="Path">
       <Setter Property="Width" Value="14"/>
