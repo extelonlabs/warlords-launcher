@@ -6,11 +6,11 @@
   "version": "1.1.12",
   "requiredGameVersion": "v1.5.7",
   "requiredArmoryVersion": "v1.0.0.17",
-  "buildId": "6c949c5729af22739a2f2307b674bb90f37eca49a6d2a478e0b6de31d06517d3",
-  "createdUtc": "2026-11-12T11:50:25.335895+00:00",
-  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-851c5a28cd2c-bcff8ac88eb3/Warlords-StratLords-1.1.12-851c5a2.zip",
-  "packageSha256": "bcff8ac88eb3dccc48b541e29a706d45a630cea57c89e8bd7af36625ca31b0e6",
-  "packageSize": 363922056,
+  "buildId": "5fdc215e60cd3b8c7eb6d2541e93136ad0ea5f45f7210c52c1ebdf522cc15235",
+  "createdUtc": "2026-11-12T18:43:32.841023+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-851c5a28cd2c-686c43757bf4/Warlords-StratLords-1.1.12-851c5a2-campaign-approval.zip",
+  "packageSha256": "686c43757bf41a9f219d1ce807f1f706474b8e72a0f8f8f334fcbe999acb86c6",
+  "packageSize": 365807484,
   "files": [
     {
       "path": "AssetPackages/banner.tpac",
@@ -904,8 +904,8 @@
     },
     {
       "path": "ModuleData/stratlords-servers.json",
-      "size": 2607,
-      "sha256": "c7d305674e32bb7b5d649b9f7365a422f12abce5dca24468bd0da660526bb7a9"
+      "size": 2545,
+      "sha256": "7929d57961ce81d757c89d508c706f88481a97ed2a6197219e987cdc8736097c"
     },
     {
       "path": "ModuleData/wl_badges.xml",
