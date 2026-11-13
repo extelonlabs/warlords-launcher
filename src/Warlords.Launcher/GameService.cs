@@ -197,12 +197,26 @@ public sealed class GameService
         if (!Inspect(gameRoot).OldWorkshopCopies.Contains(folder, StringComparer.OrdinalIgnoreCase))
             throw new InvalidOperationException("That folder is no longer an old Workshop copy of Warlords. Choose Check again.");
         AssertNotLink(folder);
+        // Moving the files of a subscribed item makes Bannerlord's own launcher fail on the missing folder.
+        if (IsWorkshopItemSubscribed(folder))
+            throw new InvalidOperationException("Steam still lists the old Warlords as subscribed. Unsubscribe in Steam first, then choose Check again.");
         // ...\steamapps\workshop\content\261550\<item>: the backup stays on the same drive, outside every module folder.
         string steamapps = Directory.GetParent(folder)!.Parent!.Parent!.Parent!.FullName;
         string backup = Path.Combine(steamapps, "warlords-workshop-backup", Path.GetFileName(folder) + "-" + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss"));
         Directory.CreateDirectory(Path.GetDirectoryName(backup)!);
         Directory.Move(folder, backup);
         return backup;
+    }
+
+    /// <summary>True while Steam's manifest for this library still lists the Workshop item (a missing manifest means not subscribed).</summary>
+    public static bool IsWorkshopItemSubscribed(string folder)
+    {
+        // ...\steamapps\workshop\content\261550\<item> -> ...\steamapps\workshop\appworkshop_261550.acf
+        string workshop = Directory.GetParent(folder)!.Parent!.Parent!.FullName;
+        string manifest = Path.Combine(workshop, "appworkshop_" + SteamAppId + ".acf");
+        if (!File.Exists(manifest)) return false;
+        string key = "\"" + Path.GetFileName(folder) + "\"";
+        return File.ReadLines(manifest).Any(line => line.Trim() == key);
     }
 
     public void Play(string gameRoot)

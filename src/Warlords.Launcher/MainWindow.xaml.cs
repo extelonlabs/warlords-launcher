@@ -633,7 +633,7 @@ public partial class MainWindow : Window
         else if (inspection.OldWorkshopCopies.Count > 0)
         {
             StatusTitleText.Text = "Remove the old Workshop copy";
-            StatusHintText.Text = "An old Warlords from Steam Workshop is in the way. Choose Remove old Workshop copy: unsubscribe in Steam, and the launcher moves the old files to a backup.";
+            StatusHintText.Text = "An old Warlords from Steam Workshop is in the way. Choose Remove old Workshop copy and unsubscribe in Steam. The launcher waits, then clears any old files Steam leaves.";
         }
         else if (!hasRelease)
         {
@@ -1030,8 +1030,8 @@ public partial class MainWindow : Window
         }
         if (MessageBox.Show(this,
             "An old Warlords copy from Steam Workshop clashes with the launcher's copy.\n\n"
-            + "1. Steam opens the old Workshop page. Choose Unsubscribe there, or Steam downloads it again.\n"
-            + "2. The launcher moves the old files to a backup folder in your Steam library. Nothing is deleted.\n\n"
+            + "1. Steam opens the old Workshop page. Choose Unsubscribe there.\n"
+            + "2. The launcher waits until Steam lets go of it. Steam then removes the old files itself. Any it leaves are moved to a backup folder in your Steam library.\n\n"
             + string.Join("\n", copies),
             "Remove old Workshop copy", MessageBoxButton.OKCancel, MessageBoxImage.Question) != MessageBoxResult.OK)
         {
@@ -1040,6 +1040,17 @@ public partial class MainWindow : Window
         }
         foreach (var folder in copies)
             Process.Start(new ProcessStartInfo("steam://url/CommunityFilePage/" + Path.GetFileName(folder)) { UseShellExecute = true });
+        // Moving the files while Steam still lists the item breaks Bannerlord's own launcher, so wait for the unsubscribe.
+        SetStatus("Waiting for you to unsubscribe from the old Warlords in Steam…");
+        for (var waited = 0; copies.Any(GameService.IsWorkshopItemSubscribed); waited += 2)
+        {
+            if (waited >= 120)
+            {
+                SetStatus("Steam still lists the old Warlords. Nothing was moved. Unsubscribe in Steam, then choose Check again.");
+                return;
+            }
+            await Task.Delay(2000, token);
+        }
         var moved = await Task.Run(() =>
         {
             var backups = new System.Collections.Generic.List<string>();
@@ -1048,8 +1059,8 @@ public partial class MainWindow : Window
             return backups;
         }, token);
         SetStatus(moved.Count > 0
-            ? "Old Workshop files moved to " + string.Join(", ", moved) + ". Unsubscribe in Steam so they don't come back."
-            : "Steam already removed the old Workshop files.");
+            ? "Old Workshop files moved to " + string.Join(", ", moved) + "."
+            : "Steam removed the old Workshop files.");
         await RefreshAndSynchronizeAsync(token);
     }
 

@@ -8,7 +8,7 @@
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AssemblyName>Warlords</AssemblyName>
-    <Version>0.5.2</Version>
+    <Version>0.5.3</Version>
     <ApplicationIcon>Assets/warlords.ico</ApplicationIcon>
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
     <PlatformTarget>x64</PlatformTarget>
