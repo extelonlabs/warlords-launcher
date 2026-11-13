@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "04d547e49f2e6e911bf5b3ac888f7b4f44bba6de",
+  "version": "1.1.13",
+  "entries": [
+    {
+      "version": "1.1.13",
+      "date": "2026-11-13",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Cancel Application is hidden for battle owners. Volunteers can still withdraw while applications are open."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Prepared launcher support for a third campaign battle server and backend support for clearing cancelled battles."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.12",
+      "date": "2026-11-12",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "When the battlefield is full, reinforcements wait for room without spending a life or equipment.",
+            "Old riderless horses are cleared when a battle gets close to the agent limit."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "The Strategus scoreboard shows nobility badges in the Rank column. Player and commander names use Warlords-style clan tags when enabled.",
+            "Scoreboard text is two points smaller."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.11",
+      "date": "2026-11-12",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed a collision buffer that could crash the server during Forward Spawn, equipment placement, or map checks.",
+            "After a failed spawn, the server checks that the soldier is still in the battle before removing it."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.10",
+      "date": "2026-11-11",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Updated multiplayer support for Bannerlord 1.5.7.",
+            "The battle loadout panel initializes its equipment slots and character preview before it opens."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Armoury stock updates do less work while the loadout panel is closed.",
+            "Campaign servers reuse roster checks when updating team counts and pings."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.9",
+      "date": "2026-11-11",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Campaign battles check that lives and equipment can be tracked before the fight opens.",
+            "Improved cleanup on disconnects and round resets, including lingering horn and banner effects.",
+            "Spawning now records the life spent and the equipment issued together before updating players."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Base capture and hits on scenery do less work on the server."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.8",
+      "date": "2026-11-10",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Ten more battlefields are ready for staged battles: Cypegos Blockade, Osrac Insurrection, Skolder Hideout, Druimmor Forest, Cliffs of Akkalat, Pendaric, Isle of Deriad, Streets of Syllianon, Zendyar and Urikskalaar.",
+            "The server checks each side's base and spawn area before the fight starts. If a map fails that check, the battle waits instead of starting badly.",
+            "Staged battles can now use generated campaign battlefields too. Admins pick the spot on the campaign map, and the battlefield is built for that spot."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.7",
+      "date": "2026-11-10",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "After a server restart, rewards and gold no longer stay switched off. Servers now keep trying until rewards work again.",
+            "Servers now use the current game service address instead of an old one."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.6",
+      "date": "2026-11-10",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Army commanders can now pick extra commanders from their own side: one more for every 20 fighters on the roster, up to four commanders in total.",
+            "Pick them on the battle page until a few minutes before the battle starts, or during the battle with Esc → Commanders.",
+            "Extra commanders can use team pings, blow the war horn and see the team numbers. Their scoreboard row turns gold.",
+            "Extra commanders cannot call a retreat or pick other commanders."
+          ]
+        }
+      ]
+    }
+  ]
+}
