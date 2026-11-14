@@ -7,7 +7,7 @@ namespace Warlords.Launcher;
 
 public static class Profile
 {
-    public const string LauncherVersion = "0.5.3";
+    public const string LauncherVersion = "0.5.4";
     public const string DefaultChannelUrl = "https://raw.githubusercontent.com/extelonlabs/warlords-launcher/StratLords/channel.json";
     // Launcher self-update: a manifest signed by the owner's offline key. Only this
     // pinned public key is trusted; it never comes from the feed.

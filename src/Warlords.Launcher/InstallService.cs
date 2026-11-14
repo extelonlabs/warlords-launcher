@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -185,11 +186,11 @@ public sealed class InstallService
         }
     }
 
-    public async Task<bool> VerifyAsync(string gameRoot, ReleaseChannel release, IProgress<OperationProgress> progress, CancellationToken cancellationToken)
+    public async Task<bool> VerifyAsync(string gameRoot, ReleaseChannel release, IProgress<OperationProgress> progress, CancellationToken cancellationToken, bool fullCheck)
     {
         ValidateRelease(release);
         using IDisposable exclusive = AcquireLock(gameRoot);
-        return await VerifyCoreAsync(gameRoot, release, progress, cancellationToken).ConfigureAwait(false);
+        return await VerifyCoreAsync(gameRoot, release, progress, cancellationToken, fullCheck).ConfigureAwait(false);
     }
 
     public async Task<bool> VerifyAndRunAsync(string gameRoot, ReleaseChannel release, IProgress<OperationProgress> progress, CancellationToken cancellationToken, Action whenValid)
@@ -197,14 +198,16 @@ public sealed class InstallService
         if (whenValid is null) throw new ArgumentNullException(nameof(whenValid));
         ValidateRelease(release);
         using IDisposable exclusive = AcquireLock(gameRoot);
-        if (!await VerifyCoreAsync(gameRoot, release, progress, cancellationToken).ConfigureAwait(false)) return false;
+        if (!await VerifyCoreAsync(gameRoot, release, progress, cancellationToken, false).ConfigureAwait(false)) return false;
         cancellationToken.ThrowIfCancellationRequested();
         ValidateRelease(release);
         whenValid();
         return true;
     }
 
-    private static async Task<bool> VerifyCoreAsync(string gameRoot, ReleaseChannel release, IProgress<OperationProgress> progress, CancellationToken cancellationToken)
+    // A quick check compares sizes and dates with the stamp of the last full check. It can only pass
+    // or fall through to the full check, never fail on its own: a failed check starts a reinstall.
+    private static async Task<bool> VerifyCoreAsync(string gameRoot, ReleaseChannel release, IProgress<OperationProgress> progress, CancellationToken cancellationToken, bool fullCheck)
     {
         GameService.EnsureClosed();
         string modules = SafeFiles.Extended(SafeFiles.Modules(gameRoot));
@@ -222,6 +225,15 @@ public sealed class InstallService
             if (relative.Equals(StateName, StringComparison.OrdinalIgnoreCase) || relative.Equals(OptionsPath, StringComparison.OrdinalIgnoreCase)) continue;
             if (!expected.ContainsKey(relative)) return false;
         }
+        // Read before any hashing, so a file that changes during the check is never stamped as good.
+        string? stamp = Stamp(target, release);
+        if (!fullCheck && stamp is not null && ReadStamp() == stamp)
+        {
+            ValidateDescriptor(target, release);
+            progress.Report(new("Your files have not changed since the last full check", 1));
+            return true;
+        }
+        DeleteStamp();
         int count = 0;
         foreach (ReleaseFile file in release.Files)
         {
@@ -231,7 +243,54 @@ public sealed class InstallService
             progress.Report(new("Checking your files (" + (++count) + " / " + release.Files.Count + ")", (double)count / release.Files.Count));
         }
         ValidateDescriptor(target, release);
+        if (stamp is not null) WriteStamp(stamp);
         return true;
+    }
+
+    private static string StampPath => Path.Combine(App.DataDirectory, "verified-files.txt");
+
+    // One line that changes when the folder, the build, or any file's size or date changes.
+    private static string? Stamp(string target, ReleaseChannel release)
+    {
+        StringBuilder text = new();
+        text.Append(SafeFiles.Long(target)).Append('\n').Append(release.SourceCommit).Append('\n').Append(release.BuildId).Append('\n');
+        foreach (ReleaseFile file in release.Files.OrderBy(file => file.Path, StringComparer.OrdinalIgnoreCase))
+        {
+            if (file.Path.Equals(OptionsPath, StringComparison.OrdinalIgnoreCase)) continue;
+            FileInfo info = new(SafeFiles.Under(target, file.Path));
+            if (!info.Exists || info.Length != file.Size) return null;
+            text.Append(file.Path).Append('|').Append(file.Size).Append('|').Append(file.Sha256).Append('|').Append(info.LastWriteTimeUtc.Ticks).Append('\n');
+        }
+        using SHA256 sha = SHA256.Create();
+        return Net48.ToHex(sha.ComputeHash(Encoding.UTF8.GetBytes(text.ToString())));
+    }
+
+    private static string? ReadStamp()
+    {
+        try { return File.Exists(StampPath) ? File.ReadAllText(StampPath).Trim() : null; }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException) { return null; }
+    }
+
+    private static void WriteStamp(string stamp)
+    {
+        try
+        {
+            Directory.CreateDirectory(App.DataDirectory);
+            File.WriteAllText(StampPath, stamp);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            App.Log("The file check stamp could not be saved: " + ex.Message);
+        }
+    }
+
+    private static void DeleteStamp()
+    {
+        try { File.Delete(StampPath); }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            App.Log("The file check stamp could not be removed: " + ex.Message);
+        }
     }
 
     private static void ValidateExistingTarget(string target)

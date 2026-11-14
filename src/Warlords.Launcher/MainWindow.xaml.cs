@@ -178,15 +178,18 @@ public partial class MainWindow : Window
         _ = RefreshChangelogAsync();
     }
 
-    private async Task RefreshAndSynchronizeAsync(CancellationToken token)
+    private Task RefreshAndSynchronizeAsync(CancellationToken token) => RefreshAndSynchronizeAsync(token, false);
+
+    // fullCheck hashes every file. Otherwise an unchanged folder since the last full check passes at once.
+    private async Task RefreshAndSynchronizeAsync(CancellationToken token, bool fullCheck)
     {
         if (string.IsNullOrWhiteSpace(_channelLocation))
             throw new InvalidOperationException("Connect the owner's HTTPS update channel first.");
         await LoadChannelAsync(_channelLocation, token);
-        await SynchronizeCurrentAsync(token);
+        await SynchronizeCurrentAsync(token, fullCheck);
     }
 
-    private async Task<bool> SynchronizeCurrentAsync(CancellationToken token)
+    private async Task<bool> SynchronizeCurrentAsync(CancellationToken token, bool fullCheck = false)
     {
         _releaseReady = false;
         var source = _source ?? throw new InvalidOperationException("The update channel has not been loaded.");
@@ -214,7 +217,7 @@ public partial class MainWindow : Window
             return false;
         }
         SetStatus("Checking your installed files…", "Checking your files");
-        if (await _installer.VerifyAsync(root, source.Release, Reporter(), token))
+        if (await _installer.VerifyAsync(root, source.Release, Reporter(), token, fullCheck))
         {
             _releaseReady = true;
             Progress.Value = 100;
@@ -688,7 +691,11 @@ public partial class MainWindow : Window
             case PrimaryAction.RemoveWorkshopCopy: await RunAsync(RemoveOldWorkshopCopyAsync); break;
             case PrimaryAction.Install: await RunAsync(InstallWithConsentAsync); break;
             case PrimaryAction.Play: await RunAsync(PlayCurrentAsync); break;
-            default: await RunAsync(RefreshAndSynchronizeAsync); break;
+            default:
+                // "Check again" hashes every file. "Try again" after an error or cancel is a quick retry.
+                var fullCheck = !_hadError && !_wasCancelled;
+                await RunAsync(token => RefreshAndSynchronizeAsync(token, fullCheck));
+                break;
         }
     }
 
@@ -854,7 +861,7 @@ public partial class MainWindow : Window
 
     private async void Refresh_Click(object sender, RoutedEventArgs e) => await RunAsync(async token =>
     {
-        await RefreshAndSynchronizeAsync(token);
+        await RefreshAndSynchronizeAsync(token, true);
     });
 
     private async void Install_Click(object sender, RoutedEventArgs e) => await RunAsync(InstallWithConsentAsync);
@@ -887,7 +894,7 @@ public partial class MainWindow : Window
     {
         await LoadChannelAsync(_channelLocation, token);
         if (_source is null) return;
-        var valid = await _installer.VerifyAsync(GameRootBox.Text.Trim(), _source.Release, Reporter(), token);
+        var valid = await _installer.VerifyAsync(GameRootBox.Text.Trim(), _source.Release, Reporter(), token, true);
         await InspectGameAsync(token);
         _releaseReady = valid && _inspection?.CanPlay == true && IsManagedInstallation(GameRootBox.Text.Trim());
         _showVerifyResult = true;
