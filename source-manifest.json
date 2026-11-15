@@ -18,7 +18,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "13b1b9f7c2381d8476a658e4a07d0c5e8177c92b6499912a6e05b5c71bcc73e4",
+      "sha256": "497073e1a1524d24a8aeaa7ac9bb4f0b7f2c70e93f713c05cfaa06c908b27800",
       "size": 3712
     },
     {
@@ -98,12 +98,12 @@
     },
     {
       "path": "src/Warlords.Launcher/MainWindow.xaml.cs",
-      "sha256": "d41cdfde586d3fb728ce2fe871b7ccf9d201ca1989e470cd2f98427b38beba9e",
-      "size": 53197
+      "sha256": "13271f081d912abf9522858121b6815a2389dde4014444cdf1fe9543e2f151d1",
+      "size": 53654
     },
     {
       "path": "src/Warlords.Launcher/Models.cs",
-      "sha256": "74b62ad67f26f9e69c3e290eafd1352c34d95476059c7edf5ccb82bc187e6acb",
+      "sha256": "04f01edbcceef6288c175f9f2d8bfe5e9bab923c79327b9b4ea738540129af7c",
       "size": 5524
     },
     {
@@ -118,11 +118,11 @@
     },
     {
       "path": "src/Warlords.Launcher/Warlords.Launcher.csproj",
-      "sha256": "8ed92324a5f9183055c404410d475a6a6b15ebcb938357b69d1f912e921e6085",
+      "sha256": "bba5a16c7cca797e576319a485bed8995cbcbf13758b8c0bfd98990785f2f64e",
       "size": 1825
     }
   ],
-  "launcherVersion": "0.5.7",
+  "launcherVersion": "0.5.8",
   "license": "MIT",
   "schemaVersion": 1,
   "scope": "launcher-app-with-named-branding-assets"

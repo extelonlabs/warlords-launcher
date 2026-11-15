@@ -118,7 +118,20 @@ public partial class MainWindow : Window
         if (!_localChannelMode) _ = CheckLauncherUpdateAsync();
 #endif
         if (string.IsNullOrWhiteSpace(GameRootBox.Text))
-            GameRootBox.Text = await Task.Run(_game.Discover, token) ?? "";
+        {
+            const int maxAttempts = 3;
+            for (int attempt = 1; attempt <= maxAttempts; attempt++)
+            {
+                if (attempt > 1)
+                    await Task.Delay(TimeSpan.FromSeconds(1), token);
+
+                if (await Task.Run(_game.Discover, token) is { } root)
+                {
+                    GameRootBox.Text = root;
+                    break;
+                }
+            }
+        }
         await InspectGameAsync(token);
         if (string.IsNullOrWhiteSpace(_channelLocation))
         {
@@ -531,6 +544,7 @@ public partial class MainWindow : Window
         ArmoryButton.IsEnabled = LauncherUpdateButton.IsEnabled = !_busy;
         GameRootBox.IsEnabled = !_busy;
         BrowseButton.Content = hasGame ? "_Change…" : "Choose _folder";
+        BrowseButton.Visibility = _busy && !hasGame ? Visibility.Hidden : Visibility.Visible;
         RefreshButton.Content = _hadError ? "Try _again" : "Check _again";
         // The primary button already says Try again after an error.
         RefreshButton.Visibility = _hadError ? Visibility.Collapsed : Visibility.Visible;
