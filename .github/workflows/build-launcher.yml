@@ -35,13 +35,15 @@ jobs:
 
       - name: Build Warlords.exe
         id: launcher
+        env:
+          IncludeSourceRevisionInInformationalVersion: 'false'
         run: |
           $output = Join-Path $env:RUNNER_TEMP 'warlords-unsigned'
           ./src/Warlords.Launcher/Build.ps1 -Output $output
           $exe = Get-Item -LiteralPath (Join-Path $output 'Warlords.exe')
           $version = $exe.VersionInfo.ProductVersion
           if ($exe.VersionInfo.ProductName -ne 'Warlords' -or $version -notmatch '^\d+\.\d+\.\d+$') {
-            throw 'Warlords.exe has unexpected product metadata.'
+            throw "Unexpected product metadata: $($exe.VersionInfo.ProductName) $version"
           }
           "version=$version" >> $env:GITHUB_OUTPUT
 
