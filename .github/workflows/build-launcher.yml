@@ -1,0 +1,97 @@
+name: Build Warlords Launcher
+
+on:
+  push:
+    branches: [StratLords]
+    paths:
+      - 'src/Warlords.Launcher/**'
+      - '.github/workflows/build-launcher.yml'
+  workflow_dispatch:
+    inputs:
+      sign_release:
+        description: Submit Warlords.exe to SignPath for release approval
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  build:
+    runs-on: windows-2025
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          dotnet-version: '10.0.401'
+
+      - name: Build Warlords.exe
+        id: launcher
+        run: |
+          $output = Join-Path $env:RUNNER_TEMP 'warlords-unsigned'
+          ./src/Warlords.Launcher/Build.ps1 -Output $output
+          $exe = Get-Item -LiteralPath (Join-Path $output 'Warlords.exe')
+          $version = $exe.VersionInfo.ProductVersion
+          if ($exe.VersionInfo.ProductName -ne 'Warlords' -or $version -notmatch '^\d+\.\d+\.\d+$') {
+            throw 'Warlords.exe has unexpected product metadata.'
+          }
+          "version=$version" >> $env:GITHUB_OUTPUT
+
+      - name: Upload unsigned launcher
+        id: unsigned
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: Warlords-${{ steps.launcher.outputs.version }}-unsigned
+          path: ${{ runner.temp }}/warlords-unsigned/Warlords.exe
+          if-no-files-found: error
+
+      - name: Request SignPath approval and signing
+        if: github.event_name == 'workflow_dispatch' && inputs.sign_release && github.ref == 'refs/heads/StratLords'
+        uses: signpath/github-action-submit-signing-request@f6d04783b4569d051e0c80105fe66e82819d0092 # v3
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG }}
+          artifact-configuration-slug: ${{ vars.SIGNPATH_ARTIFACT_CONFIGURATION_SLUG }}
+          github-artifact-id: ${{ steps.unsigned.outputs.artifact-id }}
+          parameters: |
+            version: ${{ toJSON(steps.launcher.outputs.version) }}
+          wait-for-completion: true
+          wait-for-completion-timeout-in-seconds: 1800
+          output-artifact-directory: ${{ runner.temp }}/warlords-signed
+
+      - name: Verify the signed launcher and write its checksum
+        if: github.event_name == 'workflow_dispatch' && inputs.sign_release && github.ref == 'refs/heads/StratLords'
+        env:
+          LAUNCHER_VERSION: ${{ steps.launcher.outputs.version }}
+        run: |
+          $output = Join-Path $env:RUNNER_TEMP 'warlords-signed'
+          $exe = Get-Item -LiteralPath (Join-Path $output 'Warlords.exe')
+          $signature = Get-AuthenticodeSignature -LiteralPath $exe.FullName
+          if ($signature.Status -ne 'Valid' -or $null -eq $signature.TimeStamperCertificate) {
+            throw "Expected a valid timestamped Authenticode signature. Status: $($signature.Status)"
+          }
+          if ($exe.VersionInfo.ProductName -ne 'Warlords' -or $exe.VersionInfo.ProductVersion -ne $env:LAUNCHER_VERSION) {
+            throw 'Signed launcher product or version differs from the approved build.'
+          }
+          $hash = (Get-FileHash -LiteralPath $exe.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  Warlords.exe" | Set-Content -LiteralPath (Join-Path $output 'SHA256SUMS.txt') -Encoding ascii
+
+      - name: Upload signed launcher and checksum
+        if: github.event_name == 'workflow_dispatch' && inputs.sign_release && github.ref == 'refs/heads/StratLords'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: Warlords-${{ steps.launcher.outputs.version }}-signed
+          path: |
+            ${{ runner.temp }}/warlords-signed/Warlords.exe
+            ${{ runner.temp }}/warlords-signed/SHA256SUMS.txt
+          if-no-files-found: error
