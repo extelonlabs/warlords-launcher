@@ -74,7 +74,7 @@ public partial class MainWindow : Window
     };
     private const string ChangelogLoadedStatus = "Changes for this build and recent releases. Some features may still be in testing.";
 
-    private enum PrimaryAction { ChooseFolder, CheckAgain, GetArmory, RemoveWorkshopCopy, Install, Play }
+    private enum PrimaryAction { ChooseFolder, CheckAgain, GetArmory, Install, Play }
 
     public MainWindow(string? channelOverride)
     {
@@ -522,6 +522,7 @@ public partial class MainWindow : Window
         PrimaryButton.IsEnabled = !_busy;
         CancelButton.IsEnabled = _busy && _operation?.IsCancellationRequested != true;
         CancelButton.Visibility = _busy ? Visibility.Visible : Visibility.Collapsed;
+        GameStartHelpButton.Visibility = !_busy && _steamOpened ? Visibility.Visible : Visibility.Collapsed;
         Progress.Visibility = ProgressPercentText.Visibility = _busy ? Visibility.Visible : Visibility.Collapsed;
         if (!_busy) ProgressDetailText.Visibility = Visibility.Collapsed;
         DetectButton.IsEnabled = BrowseButton.IsEnabled = ChoosePackButton.IsEnabled = RefreshButton.IsEnabled = !_busy;
@@ -545,7 +546,6 @@ public partial class MainWindow : Window
         {
             PrimaryAction.ChooseFolder => "Choose game _folder",
             PrimaryAction.GetArmory => "Get _Armory",
-            PrimaryAction.RemoveWorkshopCopy => "_Remove old Workshop copy",
             PrimaryAction.Install => _managedInstallation ? "_Repair Warlords" : "_Install Warlords",
             PrimaryAction.Play => "_Play Warlords",
             _ => _hadError || _wasCancelled ? "_Try again" : "_Check again"
@@ -566,7 +566,7 @@ public partial class MainWindow : Window
         var playReady = _releaseReady && inspection?.CanPlay == true;
         var gameVersion = Profile.GameVersion.TrimStart('v');
         var armoryVersion = Profile.ArmoryVersion.TrimStart('v');
-        var setupDone = inspection is { CanInstall: true, OldWorkshopCopies.Count: 0 };
+        var setupDone = inspection is { CanInstall: true };
         SetupExpander.Tag = setupDone ? "Done" : _busy ? null : "Action";
         SetupExpander.Header = playReady ? $"Everything is ready  ·  Bannerlord {gameVersion}  ·  Armory {armoryVersion}  ·  Warlords {_source?.Release.Version}"
             : setupDone ? $"Bannerlord {gameVersion} and Armory {armoryVersion} are ready"
@@ -616,7 +616,7 @@ public partial class MainWindow : Window
         else if (_steamOpened)
         {
             StatusTitleText.Text = "Continue in Steam";
-            StatusHintText.Text = "In Bannerlord’s launcher, select Multiplayer and enable Native, Multiplayer, Armory and Warlords.";
+            StatusHintText.Text = $"In Bannerlord’s launcher, select Multiplayer and enable Native, Multiplayer, Armory and Warlords {_source?.Release.Version}.";
         }
         else if (inspection is not { GameFound: true })
         {
@@ -632,11 +632,6 @@ public partial class MainWindow : Window
         {
             StatusTitleText.Text = "Install Armory in Steam";
             StatusHintText.Text = "Subscribe to Armory in Steam. When it has downloaded, press Check again.";
-        }
-        else if (inspection.OldWorkshopCopies.Count > 0)
-        {
-            StatusTitleText.Text = "Remove the old Workshop copy";
-            StatusHintText.Text = "An old Warlords from Steam Workshop is in the way. Choose Remove old Workshop copy and unsubscribe in Steam. The launcher waits, then clears any old files Steam leaves.";
         }
         else if (!hasRelease)
         {
@@ -673,7 +668,6 @@ public partial class MainWindow : Window
         if (inspection is not { GameFound: true }) return PrimaryAction.ChooseFolder;
         if (_hadError || _wasCancelled || !inspection.GameReady) return PrimaryAction.CheckAgain;
         if (!inspection.ArmoryReady) return PrimaryAction.GetArmory;
-        if (inspection.OldWorkshopCopies.Count > 0) return PrimaryAction.RemoveWorkshopCopy;
         if (_source is null || inspection.WarlordsNeedsManualAttention) return PrimaryAction.CheckAgain;
         return _releaseReady && inspection.CanPlay ? PrimaryAction.Play : PrimaryAction.Install;
     }
@@ -688,7 +682,6 @@ public partial class MainWindow : Window
         {
             case PrimaryAction.ChooseFolder: await ChooseGameFolderAsync(); break;
             case PrimaryAction.GetArmory: OpenArmoryPage(); break;
-            case PrimaryAction.RemoveWorkshopCopy: await RunAsync(RemoveOldWorkshopCopyAsync); break;
             case PrimaryAction.Install: await RunAsync(InstallWithConsentAsync); break;
             case PrimaryAction.Play: await RunAsync(PlayCurrentAsync); break;
             default:
@@ -912,7 +905,7 @@ public partial class MainWindow : Window
         _releaseReady = valid;
         _steamOpened = valid;
         SetStatus(valid
-            ? "Steam opened. In Bannerlord's launcher, select Multiplayer and the four required modules, then Play."
+            ? $"Steam opened. In Bannerlord's launcher, enable Native, Multiplayer, Armory and Warlords {_source.Release.Version}, then Play."
             : "Some Warlords files need updating. Choose Repair Warlords before playing.");
     }
 
@@ -940,6 +933,27 @@ public partial class MainWindow : Window
         }
         catch (Exception ex) { SetStatus("Could not open the logs folder: " + ex.Message); }
     }
+
+    private void GameStartHelp_Click(object sender, RoutedEventArgs e)
+    {
+        SettingsExpander.IsExpanded = true;
+        SettingsExpander.UpdateLayout();
+        GameLogsButton.Focus();
+        GameStartHelp.BringIntoView();
+    }
+
+    private void OpenGameLogs_Click(object sender, RoutedEventArgs e)
+    {
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+            "Mount and Blade II Bannerlord", "logs");
+        if (Directory.Exists(path))
+            OpenLink(path, "the Bannerlord logs folder");
+        else
+            MessageBox.Show(this, "Bannerlord’s logs folder is missing. Try starting Bannerlord, then open the game logs again.",
+                "Bannerlord logs", MessageBoxButton.OK, MessageBoxImage.Information);
+    }
+
+    private void SmartAppControlGuide_Click(object sender, RoutedEventArgs e) => OpenLink(Profile.SmartAppControlGuideUrl, "Microsoft’s Smart App Control guide");
 
     // Fixed addresses from Profile only; never built from channel or remote data.
     private void Website_Click(object sender, RoutedEventArgs e) => OpenLink(Profile.WebsiteUrl, "the StratLords website");
@@ -1023,52 +1037,6 @@ public partial class MainWindow : Window
         EndSteps(true);
         SetStatus("Launcher " + update.Version + " installed. Restarting…");
         _closeAfterOperation = true;
-    }
-
-    // The old Workshop item shares the Warlords module Id, so Bannerlord would see two copies.
-    private async Task RemoveOldWorkshopCopyAsync(CancellationToken token)
-    {
-        var root = GameRootBox.Text.Trim();
-        var copies = new System.Collections.Generic.List<string>(_inspection?.OldWorkshopCopies ?? []);
-        if (copies.Count == 0)
-        {
-            await InspectGameAsync(token);
-            return;
-        }
-        if (MessageBox.Show(this,
-            "An old Warlords copy from Steam Workshop clashes with the launcher's copy.\n\n"
-            + "1. Steam opens the old Workshop page. Choose Unsubscribe there.\n"
-            + "2. The launcher waits until Steam lets go of it. Steam then removes the old files itself. Any it leaves are moved to a backup folder in your Steam library.\n\n"
-            + string.Join("\n", copies),
-            "Remove old Workshop copy", MessageBoxButton.OKCancel, MessageBoxImage.Question) != MessageBoxResult.OK)
-        {
-            SetStatus("Nothing was changed. The old Workshop copy must go before Warlords can be installed.");
-            return;
-        }
-        foreach (var folder in copies)
-            Process.Start(new ProcessStartInfo("steam://url/CommunityFilePage/" + Path.GetFileName(folder)) { UseShellExecute = true });
-        // Moving the files while Steam still lists the item breaks Bannerlord's own launcher, so wait for the unsubscribe.
-        SetStatus("Waiting for you to unsubscribe from the old Warlords in Steam…");
-        for (var waited = 0; copies.Any(GameService.IsWorkshopItemSubscribed); waited += 2)
-        {
-            if (waited >= 120)
-            {
-                SetStatus("Steam still lists the old Warlords. Nothing was moved. Unsubscribe in Steam, then choose Check again.");
-                return;
-            }
-            await Task.Delay(2000, token);
-        }
-        var moved = await Task.Run(() =>
-        {
-            var backups = new System.Collections.Generic.List<string>();
-            foreach (var folder in copies)
-                if (_game.MoveOldWorkshopCopy(root, folder) is { } backup) backups.Add(backup);
-            return backups;
-        }, token);
-        SetStatus(moved.Count > 0
-            ? "Old Workshop files moved to " + string.Join(", ", moved) + "."
-            : "Steam removed the old Workshop files.");
-        await RefreshAndSynchronizeAsync(token);
     }
 
     private void Armory_Click(object sender, RoutedEventArgs e) => OpenArmoryPage();

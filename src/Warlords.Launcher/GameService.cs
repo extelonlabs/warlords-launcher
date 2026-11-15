@@ -15,6 +15,7 @@ public sealed class GameService
 {
     private const string GameName = "Mount & Blade II Bannerlord";
     private const string SteamAppId = "261550";
+    private const string LegacyWarlordsWorkshopId = "3716004111";
     private const string ArmoryId = "MBWarlords.Armory";
     private const int MaximumFolders = 2048;
     private static readonly Regex VdfPath = new("\\\"path\\\"\\s*\\\"(?<value>(?:\\\\.|[^\\\"])*)\\\"", RegexOptions.CultureInvariant);
@@ -44,6 +45,7 @@ public sealed class GameService
 
         var inventory = new Dictionary<string, List<ModuleDescriptor>>(StringComparer.OrdinalIgnoreCase);
         var folders = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        string localModules = Path.Combine(root, "Modules");
         bool ready = true;
         bool inventoryReadable = true;
         foreach (string container in ModuleContainers(root))
@@ -68,6 +70,12 @@ public sealed class GameService
                         AssertNotLink(folder);
                         AssertNotLink(descriptor);
                         ModuleDescriptor module = ReadModule(descriptor);
+                        // Bannerlord 1.5.7 resolves selected IDs from physical modules before
+                        // Workshop modules. Steam can keep this legacy subscription and its files.
+                        if (module.Id.Equals(Profile.ModuleId, StringComparison.OrdinalIgnoreCase)
+                            && Path.GetFileName(folder) == LegacyWarlordsWorkshopId
+                            && !container.Equals(localModules, StringComparison.OrdinalIgnoreCase))
+                            continue;
                         if (!Profile.Modules.Contains(module.Id, StringComparer.OrdinalIgnoreCase)) continue;
                         if (!inventory.TryGetValue(module.Id, out List<ModuleDescriptor>? modules))
                         {
@@ -167,13 +175,6 @@ public sealed class GameService
         }
         if (ready)
             messages.Add("Game and required modules are compatible. In Bannerlord, select the Multiplayer tab and the four modules shown below.");
-        // A Warlords copy directly inside a Bannerlord Workshop folder is the old Workshop item.
-        var workshopContainers = new HashSet<string>(ModuleContainers(root).Select(c => Net48.TrimEndingSeparator(Path.GetFullPath(c))), StringComparer.OrdinalIgnoreCase);
-        workshopContainers.Remove(Net48.TrimEndingSeparator(Path.Combine(root, "Modules")));
-        var oldWorkshopCopies = inventory.TryGetValue(Profile.ModuleId, out List<ModuleDescriptor>? warlordsCopies)
-            ? warlordsCopies.Select(m => Path.GetDirectoryName(Path.GetFullPath(m.File))!)
-                .Where(folder => workshopContainers.Contains(Path.GetDirectoryName(folder)!)).ToList()
-            : [];
         return new GameInspection(root, installedVersion, ready, messages)
         {
             GameFound = true,
@@ -182,41 +183,8 @@ public sealed class GameService
             WarlordsNeedsManualAttention = warlordsNeedsManualAttention,
             GameMessages = gameMessages,
             ArmoryMessages = armoryMessages,
-            WarlordsMessages = warlordsMessages,
-            OldWorkshopCopies = oldWorkshopCopies
+            WarlordsMessages = warlordsMessages
         };
-    }
-
-    /// <summary>Moves an old Workshop copy of Warlords to a backup folder in the same Steam library, after the player agreed.</summary>
-    /// <returns>The backup folder, or null when Steam already removed the copy.</returns>
-    public string? MoveOldWorkshopCopy(string gameRoot, string folder)
-    {
-        using IDisposable updateLock = InstallService.AcquireLock(gameRoot);
-        EnsureClosed();
-        if (!Directory.Exists(folder)) return null;
-        if (!Inspect(gameRoot).OldWorkshopCopies.Contains(folder, StringComparer.OrdinalIgnoreCase))
-            throw new InvalidOperationException("That folder is no longer an old Workshop copy of Warlords. Choose Check again.");
-        AssertNotLink(folder);
-        // Moving the files of a subscribed item makes Bannerlord's own launcher fail on the missing folder.
-        if (IsWorkshopItemSubscribed(folder))
-            throw new InvalidOperationException("Steam still lists the old Warlords as subscribed. Unsubscribe in Steam first, then choose Check again.");
-        // ...\steamapps\workshop\content\261550\<item>: the backup stays on the same drive, outside every module folder.
-        string steamapps = Directory.GetParent(folder)!.Parent!.Parent!.Parent!.FullName;
-        string backup = Path.Combine(steamapps, "warlords-workshop-backup", Path.GetFileName(folder) + "-" + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss"));
-        Directory.CreateDirectory(Path.GetDirectoryName(backup)!);
-        Directory.Move(folder, backup);
-        return backup;
-    }
-
-    /// <summary>True while Steam's manifest for this library still lists the Workshop item (a missing manifest means not subscribed).</summary>
-    public static bool IsWorkshopItemSubscribed(string folder)
-    {
-        // ...\steamapps\workshop\content\261550\<item> -> ...\steamapps\workshop\appworkshop_261550.acf
-        string workshop = Directory.GetParent(folder)!.Parent!.Parent!.FullName;
-        string manifest = Path.Combine(workshop, "appworkshop_" + SteamAppId + ".acf");
-        if (!File.Exists(manifest)) return false;
-        string key = "\"" + Path.GetFileName(folder) + "\"";
-        return File.ReadLines(manifest).Any(line => line.Trim() == key);
     }
 
     public void Play(string gameRoot)

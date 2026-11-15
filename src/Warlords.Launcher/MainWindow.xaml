@@ -114,6 +114,7 @@
               <TextBlock x:Name="StatusHintText" Text="We’ll find your game and check for the latest Warlords update." Margin="0,8,0,0">
                 <TextBlock.Effect><DropShadowEffect BlurRadius="6" ShadowDepth="0" Opacity="0.9" Color="#000000"/></TextBlock.Effect>
               </TextBlock>
+              <Button x:Name="GameStartHelpButton" Content="Game won’t _start?" Click="GameStartHelp_Click" Style="{StaticResource QuietButton}" HorizontalAlignment="Left" Margin="-14,4,0,0" Visibility="Collapsed"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
               <Button x:Name="CancelButton" Content="_Cancel" Click="Cancel_Click" IsEnabled="False" Visibility="Collapsed" VerticalAlignment="Center" Margin="0,0,12,0"/>
@@ -224,6 +225,15 @@
                 <Button x:Name="ChoosePackButton" Content="Choose test _pack" Click="ChoosePack_Click" Margin="0,0,0,8"/>
               </WrapPanel>
               <TextBlock Text="When Steam opens, choose Multiplayer and enable Native, Multiplayer, Armory and Warlords, then Play." Foreground="{StaticResource Muted}" Margin="0,2,0,0"/>
+              <StackPanel x:Name="GameStartHelp" Margin="0,18,0,0">
+                <TextBlock Text="Smart App Control and game startup" Style="{StaticResource SectionLabel}" Margin="0,0,0,4"/>
+                <TextBlock Foreground="{StaticResource Muted}" TextWrapping="Wrap" Text="Windows 11 Smart App Control can block an unsigned Warlords DLL even when Verify files passes. Bannerlord may show “Cannot load” or “missing or conflicting dependency.” Error 0x800711C7 in the game log means Windows App Control blocked a file."/>
+                <TextBlock Foreground="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,6,0,8" Text="If this happens, share the newest rgl_log file when reporting the problem. Smart App Control has no per-app exception."/>
+                <WrapPanel>
+                  <Button x:Name="GameLogsButton" Content="Open _game logs" Click="OpenGameLogs_Click" Margin="0,0,8,8"/>
+                  <Button Content="Microsoft’s Smart App Control _guide" Click="SmartAppControlGuide_Click" Margin="0,0,0,8"/>
+                </WrapPanel>
+              </StackPanel>
             </StackPanel>
           </Expander>
         </StackPanel>
