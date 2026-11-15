@@ -2,15 +2,15 @@
   "schemaVersion": 1,
   "branch": "StratLords",
   "sourceRepository": "MB-Warlords/The-Last-Concord",
-  "sourceCommit": "41b5054f5c88fcd8c9971c7629152608637bf018",
+  "sourceCommit": "51ef1aabb1ff4c52c904073fd54e6e9b8429428a",
   "version": "1.1.14",
   "requiredGameVersion": "v1.5.7",
   "requiredArmoryVersion": "v1.0.0.17",
-  "buildId": "21b46eeba9418880f3bf13f7fda674f7e46f81b7c7b0ab5061ae088a1f870788",
-  "createdUtc": "2026-11-15T12:22:22.556745+00:00",
-  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-41b5054f5c88-12bc95f0b29e/Warlords-StratLords-1.1.14-41b5054.zip",
-  "packageSha256": "12bc95f0b29ec9aaac955957858ee32da282d0fa447def91021670c02fbc5c7a",
-  "packageSize": 363931704,
+  "buildId": "fe6318ae7533db8adb0d58a41202191afe52302805d020b875d0827bbda2a0ab",
+  "createdUtc": "2026-11-15T16:50:45.107876+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-51ef1aabb1ff-32c240c6d9d8/Warlords-StratLords-1.1.14-51ef1aa.zip",
+  "packageSha256": "32c240c6d9d8bb62df4f8309da9fdc9500a0d9e2e9096f6154f5654c3880ed48",
+  "packageSize": 365827172,
   "files": [
     {
       "path": "AssetPackages/banner.tpac",
@@ -910,7 +910,7 @@
     {
       "path": "ModuleData/stratlords-servers.json",
       "size": 2868,
-      "sha256": "f9bd01d08323acfb4469977c646c5438a4368317019309eaa2bdf19f68714d4c"
+      "sha256": "750f4082f6d3bd763c549012e459ed436e9d809be0301756fb22386e90819163"
     },
     {
       "path": "ModuleData/wl_badges.xml",
