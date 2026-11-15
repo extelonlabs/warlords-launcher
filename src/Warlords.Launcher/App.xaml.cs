@@ -81,8 +81,10 @@ public partial class App : Application
             args.Handled = true;
             Shutdown(1);
         };
+#if !WARLORDS_STORE
         try { File.Delete(OldLauncherPath); }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException) { }
+#endif
         try
         {
             string? channel = null;

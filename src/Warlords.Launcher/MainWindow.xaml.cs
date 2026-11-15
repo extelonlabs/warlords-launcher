@@ -114,7 +114,9 @@ public partial class MainWindow : Window
     private async Task InitializeAsync(CancellationToken token)
     {
         Append("Warlords " + Profile.LauncherVersion + ". Automatic updates: " + Profile.Branch + ".");
+#if !WARLORDS_STORE
         if (!_localChannelMode) _ = CheckLauncherUpdateAsync();
+#endif
         if (string.IsNullOrWhiteSpace(GameRootBox.Text))
             GameRootBox.Text = await Task.Run(_game.Discover, token) ?? "";
         await InspectGameAsync(token);
