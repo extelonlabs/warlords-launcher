@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "f09980ba8b98f30097e4f8af57fc032a25b8a41f",
+  "version": "1.1.23",
+  "entries": [
+    {
+      "version": "1.1.23",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added server support for the approved village maps in campaign battles. Campaign battles can use the scene assigned to the village when the campaign map routing is enabled."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.22",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "If a generated village spawn is blocked, the server finds safe spawn positions near that side's flag. The approved flag positions stay fixed."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.21",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Corrected how the village server checks map files in Battle Lab so it can read the approved village package from its mounted folders."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.20",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed a server startup error that prevented the approved village maps from loading. Map files and reviewed flag layouts are unchanged."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.19",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added 77 approved village maps to the normal client download, bringing the village test selection to 82 maps. Four rejected villages are left out."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Admins can choose from the full approved village selection in Change Map. Village names appear in the map picker and battle interface.",
+            "New village layouts keep the reviewed flag positions at least 250 metres apart. Each switch keeps the attacker roster, AI defenders and 15-second warmup.",
+            "The new villages are ready for in-game review once this release is delivered."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.18",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed the missing Change Map option for admins in village siege rehearsals."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.17",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Admins in private village siege rehearsals can switch maps from the Escape menu. Each map keeps the attacker roster, has AI defenders, and starts with a 15-second warmup."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.16",
+      "date": "2026-11-15",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Barricades use Bannerlord's wooden siege barricade. Barricades and stakes have 200 HP and show the standard health bar when targeted after taking damage.",
+            "Carry up to four Barricade or Stakes Kits in any mix. Each side can have up to 15 barricades and 15 stake barriers standing at once.",
+            "Teammates can damage and destroy their side's deployables."
+          ]
+        }
+      ]
+    }
+  ]
+}
