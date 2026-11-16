@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "7e155ef322a4f9a2ece1df1833624d8fd716bd3d",
+  "version": "1.1.17",
+  "entries": [
+    {
+      "version": "1.1.17",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Admins in private village siege rehearsals can switch maps from the Escape menu. Each map keeps the attacker roster, has AI defenders, and starts with a 15-second warmup."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.16",
+      "date": "2026-11-15",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Barricades use Bannerlord's wooden siege barricade. Barricades and stakes have 200 HP and show the standard health bar when targeted after taking damage.",
+            "Carry up to four Barricade or Stakes Kits in any mix. Each side can have up to 15 barricades and 15 stake barriers standing at once.",
+            "Teammates can damage and destroy their side's deployables."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.15",
+      "date": "2026-11-15",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added support for test sieges on Praven, Quyaz, Hongard, Husn Fulq, and Galend.",
+            "Test sieges can use human defenders or the castle's AI garrison."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.14",
+      "date": "2026-11-15",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added Barricade and Stake Barrier kits for Strategus battles."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "Portable ladders can be destroyed. Placing one ladder on top of another is blocked.",
+            "Restored the marker above the last fighter when their team runs out of reserve tickets.",
+            "The Strategus scoreboard stays visible when the battle ends.",
+            "Fixed the in-game toggle for hiding the combat log."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Healing Tents and Forward Spawns have a five-minute relocation cooldown.",
+            "Five or more nearby enemies are required to block a Forward Spawn."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.13",
+      "date": "2026-11-13",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Cancel Application is hidden for battle owners. Volunteers can still withdraw while applications are open."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Prepared launcher support for a third campaign battle server and backend support for clearing cancelled battles."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.12",
+      "date": "2026-11-12",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "When the battlefield is full, reinforcements wait for room without spending a life or equipment.",
+            "Old riderless horses are cleared when a battle gets close to the agent limit."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "The Strategus scoreboard shows nobility badges in the Rank column. Player and commander names use Warlords-style clan tags when enabled.",
+            "Scoreboard text is two points smaller."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.11",
+      "date": "2026-11-12",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed a collision buffer that could crash the server during Forward Spawn, equipment placement, or map checks.",
+            "After a failed spawn, the server checks that the soldier is still in the battle before removing it."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.10",
+      "date": "2026-11-11",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Updated multiplayer support for Bannerlord 1.5.7.",
+            "The battle loadout panel initializes its equipment slots and character preview before it opens."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Armoury stock updates do less work while the loadout panel is closed.",
+            "Campaign servers reuse roster checks when updating team counts and pings."
+          ]
+        }
+      ]
+    }
+  ]
+}
