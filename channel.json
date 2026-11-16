@@ -2,15 +2,15 @@
   "schemaVersion": 1,
   "branch": "StratLords",
   "sourceRepository": "MB-Warlords/The-Last-Concord",
-  "sourceCommit": "6f1aa927d4aa847236506374074332a669fd75d1",
-  "version": "1.1.18",
+  "sourceCommit": "4392e59dbb36bf508e8639dfdd197b4dab243004",
+  "version": "1.1.19",
   "requiredGameVersion": "v1.5.7",
   "requiredArmoryVersion": "v1.0.0.17",
-  "buildId": "71088faf75788616fb928524a8b734f01d0621a11e322a6aed317a3fdb11f3cd",
-  "createdUtc": "2026-11-16T11:56:29.921943+00:00",
-  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-6f1aa927d4aa-9b26db19832e/Warlords-StratLords-1.1.18-6f1aa92.zip",
-  "packageSha256": "9b26db19832ed0ba5824e7d8ef50500daa9fa5434a00cee492e3b82d795d2eff",
-  "packageSize": 363936882,
+  "buildId": "49524880bdb81f80fb990df32b4c5417735a5e1fbf9b4c2f43dd6da3084a082a",
+  "createdUtc": "2026-11-16T16:57:49.470753+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-4392e59dbb36-a3f118af4832/Warlords-StratLords-1.1.19-4392e59.zip",
+  "packageSha256": "a3f118af48324d719c496564bd1fb03bfe43df0fe75d1449ba500c56d307ff69",
+  "packageSize": 782891609,
   "files": [
     {
       "path": "AssetPackages/banner.tpac",
@@ -904,13 +904,18 @@
     },
     {
       "path": "ModuleData/stratlords-protocol.json",
-      "size": 107325,
-      "sha256": "a72bdcb70c9f01c1c7c3e2f760ff7cfee2950528bd6d7b9df8713f3f41962a2d"
+      "size": 107493,
+      "sha256": "47a19abdb4c46ce5a6ed7e9cc6f1d9d01ec667e7261743c9fb5f0848dbffda40"
     },
     {
       "path": "ModuleData/stratlords-servers.json",
       "size": 2740,
-      "sha256": "b05b2d587a5965e646e07ce3bf060e49c76c3661a5710f380ed1c8e21ee2e93a"
+      "sha256": "1f0e45ae9f7ca7c383a342f55ec1847d1da68d7a392778353e4720cbec5a2324"
+    },
+    {
+      "path": "ModuleData/stratlords-village-playlist.json",
+      "size": 81074,
+      "sha256": "f67af93adc2897fa7d56c392196b9a7dab78ef8d092ce33234afb1fc6eab8672"
     },
     {
       "path": "ModuleData/wl_badges.xml",
@@ -3413,6 +3418,2056 @@
       "sha256": "6bf260ec2a49944f015bfbd104de2373cd9a8abcf5251b00bb8a2d3b6f8cf9b5"
     },
     {
+      "path": "SceneObj/strat_site_village_pilot_aeoria_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_aeoria_01/flora.bin",
+      "size": 5769729,
+      "sha256": "d125349ee4481aa5ecb7efc11b8d2099633f30864675e90a8e6ff9cb32dcbdfb"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_aeoria_01/navmesh.bin",
+      "size": 1631926,
+      "sha256": "6132d670bd4d9583105231e91715815eb745a662691d1148a3228cdce2f35886"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_aeoria_01/scene.xscene",
+      "size": 849189,
+      "sha256": "9caf8361d3639ee6c886c603112ea3b24d4eb36e18a18d86c92691175aedf52d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_aeoria_01/terrain.bin",
+      "size": 6151555,
+      "sha256": "69c0af7e5d762a28396e84a59880a729e868231e795298a838d9f487e795b734"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_agalmon_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_agalmon_01/flora.bin",
+      "size": 966401,
+      "sha256": "68031864a4f3186569271f2c9c626ea918af78a23132e85ef265c2923ab44df0"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_agalmon_01/navmesh.bin",
+      "size": 648706,
+      "sha256": "d3d16bccdf057c760de0e73d23d1e34f2aa93114666cc4abe1835e7eda4eb7fa"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_agalmon_01/scene.xscene",
+      "size": 308374,
+      "sha256": "6d810cf32a145299af15ef3b65c226898953a20809de26ff6405ee75965c9ba5"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_agalmon_01/terrain.bin",
+      "size": 3181722,
+      "sha256": "b23543c3e58c94c8f77c388dc49aaa36711316ff45e2be5f6368c635655d1ca0"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ain_baliq_01/atmosphere.xml",
+      "size": 4942,
+      "sha256": "34d0efc4ee2534383fa84722abe3a887955a416dabc64527aaff61e6788ef795"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ain_baliq_01/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ain_baliq_01/navmesh.bin",
+      "size": 437162,
+      "sha256": "677e3a202c03d0c06b4e909f0689153994541356a67cef0b1da39212d6e16c5d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ain_baliq_01/scene.xscene",
+      "size": 463085,
+      "sha256": "14043038996ccc4ead508407f63e96c20c85faa6bc4cc55fe9dc695b75d21c82"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ain_baliq_01/terrain.bin",
+      "size": 14306750,
+      "sha256": "cf9d0d27bb6e1b3b397e7936f1aeaf86a9b28ae227f5d3bc4bdde3ef497c87f6"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_alision_01/atmosphere.xml",
+      "size": 4958,
+      "sha256": "79244e38deea6dcfeed2a004881c713038b78fc682dbbfdbf57b1fa7b9c24dba"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_alision_01/flora.bin",
+      "size": 70775,
+      "sha256": "f34fa7798149b3986f95eb7f45ed23ee43415de2faae3bf6a196d257864b2e5e"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_alision_01/navmesh.bin",
+      "size": 588109,
+      "sha256": "eaac3e89160142a27da06e07e3bd6bc1d3b4a92244a4ca87b9eec69ff7cfd3e0"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_alision_01/scene.xscene",
+      "size": 316270,
+      "sha256": "0ae18d4961e7fc077d70fab5c76e9f6a3f13cf71d22ca4d689d8670d565e9854"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_alision_01/terrain.bin",
+      "size": 1603365,
+      "sha256": "0e828eed60305f9efc2e7a4e6a34416b3e2e9fdac1087e6525fd29ca0a46d4a5"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_asalig_01/atmosphere.xml",
+      "size": 4912,
+      "sha256": "a3c760fe896f79b917d6f1c0363641207ae1b6370c161f712d88548b7afcb0bf"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_asalig_01/flora.bin",
+      "size": 2976481,
+      "sha256": "f2220bbd5bdc42a34ecfbe6ed2316539d10ec2a504d0b4d46960f9451e63a638"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_asalig_01/navmesh.bin",
+      "size": 233469,
+      "sha256": "3aecb5ab099b63d93584e80bb33442fcc66aa0347ecb9ffbe8e83e77aaa93cd5"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_asalig_01/scene.xscene",
+      "size": 339468,
+      "sha256": "3af6798192ff415ba5ae2606cbfb0dd8aa6b4be6f153b2f06a0b67e792c150c3"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_asalig_01/terrain.bin",
+      "size": 7591025,
+      "sha256": "0ab8099e18c49d2a75c87eaa2613224e7f63aa65f4b36182d82b7dbd664a6e42"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_asmait_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_asmait_01/flora.bin",
+      "size": 5282,
+      "sha256": "0441b151895fd92b6d7bff329432fbcd7d5e5540b4a9c8ce2febc0b98ede6a68"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_asmait_01/navmesh.bin",
+      "size": 466028,
+      "sha256": "0c38d64de0d5516ca4b41ca238540cf296ad63838ca86dd99587d92bdf1ca7d1"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_asmait_01/scene.xscene",
+      "size": 625840,
+      "sha256": "7bc2d10f69e512812e959b2b74cdd22bd20e07d8c56348393c97a21fbc4a88e1"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_asmait_01/terrain.bin",
+      "size": 1925002,
+      "sha256": "02d07537099176eef45fec1e1f9f5cebbefc4a79f67c79226895a29e6dcadfae"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ath_cafal_01/atmosphere.xml",
+      "size": 4916,
+      "sha256": "7a6d2653685493b3ff24947c0af4c5675fab72e061162060bca27c0640a76f0b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ath_cafal_01/flora.bin",
+      "size": 44308,
+      "sha256": "eb7eb8f63c7d712c6516a1ddb53b2da11ce891feb265c0e64f3aa3e174ecfca8"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ath_cafal_01/navmesh.bin",
+      "size": 860397,
+      "sha256": "04b3732bc0390c54275284dc8c7003a4cbf22e365683f95721e41e0bb94c276b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ath_cafal_01/scene.xscene",
+      "size": 471665,
+      "sha256": "e931c69b0d0f0d8186952331fb85339731b3056c44fda6b623a22106b1d05c23"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ath_cafal_01/terrain.bin",
+      "size": 2548990,
+      "sha256": "8d9db756bcb401aa305a61c2594bd264a103404ccc5cefb8c7bf5d681e347d63"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_avalyps_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "b50f3f19789b5823f503b6a994f293a529a12e740eaeeb33836f1d516ae0ee4a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_avalyps_01/flora.bin",
+      "size": 2016466,
+      "sha256": "be09b97b206903b979f9b82425d306bfce5e48f7d50d9e59a221095386ff85db"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_avalyps_01/navmesh.bin",
+      "size": 1515206,
+      "sha256": "0cad472df9891ba71eb7dd7e0c9cded655ee364df27a1bd1351278573c2f27fa"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_avalyps_01/scene.xscene",
+      "size": 700630,
+      "sha256": "23c4c84d8a8f2861f070cf4cb0f5ec550031f7d6473acf220cd87b5737afa029"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_avalyps_01/terrain.bin",
+      "size": 3077005,
+      "sha256": "14c1ee1f8944aab157fe61f918dc5fefdbb6515a511a3611b5851b9cc136f923"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bergum_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bergum_01/flora.bin",
+      "size": 198796,
+      "sha256": "b7e5d17940a1cd02a0b57faf7e87013458fab2fda8c15f9204be040e5ad6b1ee"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bergum_01/navmesh.bin",
+      "size": 917030,
+      "sha256": "891d73f7d620666408940fe6abb49f2e906b6c6e8457e181cbf057ae98736a2a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bergum_01/scene.xscene",
+      "size": 454313,
+      "sha256": "aad31c3b9b61a894139481d512ccb95257c33406400a666ee4d01a1bcf82e61a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bergum_01/terrain.bin",
+      "size": 2981812,
+      "sha256": "b7e450a0c8347b5c185c02d5e93e7059898596e714eeb56220c191442d65e40d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bir_seif_01/atmosphere.xml",
+      "size": 4900,
+      "sha256": "2f33092c92a16eb4014d51de74b16081a9a7dfdf362caf8a6cdb543bb8c4bc0d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bir_seif_01/flora.bin",
+      "size": 1123234,
+      "sha256": "7a63f5e6ced074bfa531365306366dcd0300007ea4b5b3be506d3e6669d87e07"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bir_seif_01/navmesh.bin",
+      "size": 706918,
+      "sha256": "6f7dcf8368a7d7f2ce674bcd828c2b6403804ca1374250c98e7c2c0f86ce788a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bir_seif_01/scene.xscene",
+      "size": 594236,
+      "sha256": "2eaa0a880becdb58bf4a6d1a791d7ae84bc652407c2b42158db276ad750c7729"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bir_seif_01/terrain.bin",
+      "size": 1849547,
+      "sha256": "7ae48006aeec460700627af7b6e868525eb73113ae9a97b09d0514b5289f2377"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bog_beth_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bog_beth_01/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bog_beth_01/navmesh.bin",
+      "size": 501992,
+      "sha256": "fce3263d455382eef1e0eba6c754d172ab82c061228ec73eb11b4de3075071b4"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bog_beth_01/scene.xscene",
+      "size": 432403,
+      "sha256": "0ed87db9069b4e33375447c775b1bdbd83cd40bdc78dafffc98f31cb54e75362"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bog_beth_01/terrain.bin",
+      "size": 3777890,
+      "sha256": "b21a6081a3cda7894208112864e0145264156f961bd47943fa13d2827047780a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bryn_glas_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bryn_glas_01/flora.bin",
+      "size": 6582,
+      "sha256": "61d2d384862ee2eca29dc2912eb0022bbba4e29849ed3e44f18d42d10cbec941"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bryn_glas_01/navmesh.bin",
+      "size": 556118,
+      "sha256": "9938798b324999cd8998ee5b72753d81deed139f6f2f8525e2663ec46eaa6d63"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bryn_glas_01/scene.xscene",
+      "size": 479966,
+      "sha256": "41efafb5396c1b7d868d2d6f1cf425a9a9cef67f9cc532f9b4773de66a43f937"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bryn_glas_01/terrain.bin",
+      "size": 262030,
+      "sha256": "4ddb61378a12f1f9b86f469bc3350ee727fecb00c19d403f18a2373cbc17180a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bukits_01/atmosphere.xml",
+      "size": 4911,
+      "sha256": "949898f381da7016ae1f11b8a3d5390e6463cc21e846c834efe078622c168718"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bukits_01/flora.bin",
+      "size": 210964,
+      "sha256": "8eb970c3a29edc43aedca44179c1cb17b7cc50468cee15eaffda24b737fd44f7"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bukits_01/navmesh.bin",
+      "size": 775710,
+      "sha256": "85b8ec5248196c76ba1127db629c01ad7ae1e38d364c3674a006eab317d0c887"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bukits_01/scene.xscene",
+      "size": 273869,
+      "sha256": "f63266529252870dbc0eef8751ede17d889a32d79aec674b3fd3519bfa564e51"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_bukits_01/terrain.bin",
+      "size": 4153529,
+      "sha256": "8841dc2fa989c692287b69524f576f14c95ac5c30e482ebffdccf7ff979431da"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_canterion_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_canterion_01/flora.bin",
+      "size": 5312,
+      "sha256": "5d299a189cc339e2ae3bb04b73a33bef4810e69e0f9ac18e72a89bde689bf85f"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_canterion_01/navmesh.bin",
+      "size": 632190,
+      "sha256": "dfbfc8ed070f20428811394593816de2c954ff3ee1766c9d60e5387eedab96cd"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_canterion_01/scene.xscene",
+      "size": 275392,
+      "sha256": "3518b86de77a633460af35f97b8a18c1029d47b2171027903dfe49f861d9ae2c"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_canterion_01/terrain.bin",
+      "size": 472202,
+      "sha256": "5389842ca8b28f86d05146912d8e781d03b519e948772f858f2ea283263c7299"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_carphenion_01/atmosphere.xml",
+      "size": 4942,
+      "sha256": "34d0efc4ee2534383fa84722abe3a887955a416dabc64527aaff61e6788ef795"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_carphenion_01/flora.bin",
+      "size": 692326,
+      "sha256": "16a106a0618c8c56ceac7764b5e54091bca43802981761335249ba7d2418aca2"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_carphenion_01/navmesh.bin",
+      "size": 617809,
+      "sha256": "6b9d1d529b7c6006f474eafa0fb3ca60e59dc2fd24ed33911061ee0b7991bc04"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_carphenion_01/scene.xscene",
+      "size": 361979,
+      "sha256": "cc06248adbf3416909bcbd4886d978ed4201af494ebd4a545f6866951fc25346"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_carphenion_01/terrain.bin",
+      "size": 13535933,
+      "sha256": "ed0f518a272601035f5698ae55d98b5f9381f0128631740315a97eaf6dad70f1"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_chornobas_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_chornobas_01/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_chornobas_01/navmesh.bin",
+      "size": 1410906,
+      "sha256": "bfdd26fff842b551f35cf3df9f67cb170863adf3cea5379fca98e6647204aebe"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_chornobas_01/scene.xscene",
+      "size": 337717,
+      "sha256": "350b1b0391fc5561736fabbb0ce1e76ad0a6cd5449cae8a98e05680da3d34559"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_chornobas_01/terrain.bin",
+      "size": 7232875,
+      "sha256": "fb4fed8c89c5b6dc1f822d1c36d32eb7e0146e70c170f1ac8c86da0afc57142b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_crios_01/atmosphere.xml",
+      "size": 4914,
+      "sha256": "1bd236aba680a86b31e09b97b8be2ab92fd576d5f30c7e2cbea8fdaf433d5934"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_crios_01/flora.bin",
+      "size": 681657,
+      "sha256": "a420d04bba06a17c66cf60974f8fc8236c8f4e5eff0b5e585d71ea4ef564c598"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_crios_01/navmesh.bin",
+      "size": 1283627,
+      "sha256": "7468e4d90725744113196e5f9c9c5fad2c42466c3d119734196d2b1d34b8e8f5"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_crios_01/scene.xscene",
+      "size": 391470,
+      "sha256": "18d30adc716446462abd55a051129ef72ffe1b3618f03b7cf7ed0da0351e0377"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_crios_01/terrain.bin",
+      "size": 2827817,
+      "sha256": "6e0fea73defbe69e1f2085006a12a04f6f550219296c34020fd9609c568a2756"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_dinar_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_dinar_01/flora.bin",
+      "size": 7216,
+      "sha256": "6ea2b2f48b0fa4f837fbcea848160ed8fd07b419c7949fd0dbe3b12f2846cd3c"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_dinar_01/navmesh.bin",
+      "size": 899104,
+      "sha256": "6f0bb606513cb9c519ced01e6120694dfa87545a582dae86817a202a533bdc3f"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_dinar_01/scene.xscene",
+      "size": 405073,
+      "sha256": "7cd6ed002b145c1afab1603824b48f13b6db0399b69c7d6775bf07b4d9c4787d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_dinar_01/terrain.bin",
+      "size": 5928184,
+      "sha256": "acf7e614c55df4fee7ddc712f122b583d5cc4d47f549b6b6b328cecda96c2362"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_drapand_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_drapand_01/flora.bin",
+      "size": 47603,
+      "sha256": "f29e187423076385b53739dfe43098bdb2e0ac34891b31511be1706fb1a1b501"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_drapand_01/navmesh.bin",
+      "size": 927661,
+      "sha256": "3885f050fdd9e411cd164696da2fd222042a1465b21db0941e2f9f0a1fb366ff"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_drapand_01/scene.xscene",
+      "size": 457951,
+      "sha256": "0fe30495980583643b83b585f8ed8c076bc3d750f5ab702ec8c5a97510c1631b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_drapand_01/terrain.bin",
+      "size": 3694485,
+      "sha256": "2c5ba7aba07f254a2f138a0857ee1256f84129a4a561d204d82ba44805cb1440"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_dyopalis_01/atmosphere.xml",
+      "size": 4942,
+      "sha256": "34d0efc4ee2534383fa84722abe3a887955a416dabc64527aaff61e6788ef795"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_dyopalis_01/flora.bin",
+      "size": 3834,
+      "sha256": "f7d915bbd76c380d7d507d6417677beade1d649078c2ec6b59575219f8c795a3"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_dyopalis_01/navmesh.bin",
+      "size": 1165417,
+      "sha256": "f2c510f1356e7847957f91e387e4c67932eeaebe1c22ba85fd181b1f559d2f07"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_dyopalis_01/scene.xscene",
+      "size": 428839,
+      "sha256": "d240babac2b68a6b8ff81753cff4b985f7116b966d25447b3def6e102da8e50c"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_dyopalis_01/terrain.bin",
+      "size": 3567561,
+      "sha256": "c08b1ec8a9048848f4ba599981efb743b4ba422aecb8addbded4ffd0bf6ac610"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_epinosa_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_epinosa_01/flora.bin",
+      "size": 8853,
+      "sha256": "8fc47530e6a2227816e753f165ca302e6607601daa1840e0bd9e7e608ef4237b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_epinosa_01/navmesh.bin",
+      "size": 821382,
+      "sha256": "95e9d810622f3f85625ed6b0bdab882d837457d49025fa9164f7153a7572baa8"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_epinosa_01/scene.xscene",
+      "size": 359842,
+      "sha256": "03416b3e8c1ac4f47fcb7acf437badd954257c5a1b21400e628883220c34744a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_epinosa_01/terrain.bin",
+      "size": 3012823,
+      "sha256": "95a95eac51ade818c0f2d7e0097b615c02e4324fa9c794902a33df29fc98ff0b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_erzenur_01/atmosphere.xml",
+      "size": 4909,
+      "sha256": "06739e5a4ca348689ede0b9c1bb5433b4627a00e6fe4de98e2b0c08c4a2b8c8f"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_erzenur_01/flora.bin",
+      "size": 14878,
+      "sha256": "e886744057b9985a0b2f9d3ac949b810e1ca99458a1b04409a60c8e6586b957f"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_erzenur_01/navmesh.bin",
+      "size": 930915,
+      "sha256": "edc923d5beec07e3767df1add84092744f4888e0d23113a84248434f543871ba"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_erzenur_01/scene.xscene",
+      "size": 302262,
+      "sha256": "5a6febb8bfcfe72fd40b661a88dc6e8e066037bf8a73cdb1f74c0bc756f8bf0b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_erzenur_01/terrain.bin",
+      "size": 3523344,
+      "sha256": "bff8c5bf7f6e941e5f28c5bc3b163ad9528f5965ff49681d383f8363e84b44de"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_etirfurd_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_etirfurd_01/flora.bin",
+      "size": 147491,
+      "sha256": "3b75cd10b6df2ad638c67692db7046c10407d21ca058f19db60af267991df014"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_etirfurd_01/navmesh.bin",
+      "size": 577239,
+      "sha256": "97dfe00e57c392342ddaad36ded9f9073c0763ee757ca608d1821fef546204e9"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_etirfurd_01/scene.xscene",
+      "size": 357346,
+      "sha256": "10ce40036dcc95fb82a3196f4bf617775d296773bc68c455a787426ebef9d309"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_etirfurd_01/terrain.bin",
+      "size": 635858,
+      "sha256": "c83ab99474b6e595cd353e49f7a091333aadcecfc7ddf746c3516a4951927206"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_forin_01/atmosphere.xml",
+      "size": 4912,
+      "sha256": "a3c760fe896f79b917d6f1c0363641207ae1b6370c161f712d88548b7afcb0bf"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_forin_01/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_forin_01/navmesh.bin",
+      "size": 463427,
+      "sha256": "b6acddf34f05513165d5d0218494dcda59cf79ea528300ad4d5805dd0937528e"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_forin_01/scene.xscene",
+      "size": 349647,
+      "sha256": "7f20b6ea61bc95d629db11cc8c24783c391514dac21771d9ef3ef9965024eb22"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_forin_01/terrain.bin",
+      "size": 385941,
+      "sha256": "dbe3ec11fd81c6874b8b126d097eeecde963f60e5b53816e59c2206676ce42a4"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_fregian_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_fregian_01/flora.bin",
+      "size": 1542704,
+      "sha256": "0c009bea16df97019a25ce89332653b49f821d5d3614d6f1d5067e97ffe9699a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_fregian_01/navmesh.bin",
+      "size": 894230,
+      "sha256": "4e9cd38226c5541c65049ce7d696da8447807b1948ddac5dced87826cd443b0f"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_fregian_01/scene.xscene",
+      "size": 438111,
+      "sha256": "ac8e70ea8f245c40c1a2eb75923ed7d30239cc2c7c1cb0cca415238151b72db9"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_fregian_01/terrain.bin",
+      "size": 3115994,
+      "sha256": "3d247e0a05769fed12e4d6364f1e09a6c8eb6a833daf7f3f3ba6c3dc92ef692c"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gamardan_01/atmosphere.xml",
+      "size": 4960,
+      "sha256": "37179cfff7f2d448fb235dc3502db8228193895d7afe2e2324b364f248c8a221"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gamardan_01/flora.bin",
+      "size": 2511340,
+      "sha256": "ea10bf7c7cc04104e063b442f59fe65344f52eae92ff352d632561262922f365"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gamardan_01/navmesh.bin",
+      "size": 673234,
+      "sha256": "0beab663d0da3c9cba852adc6efff3ca12c33b3806565e06d5b6665ae20827a9"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gamardan_01/scene.xscene",
+      "size": 973424,
+      "sha256": "0672f658fd3905b771f4a912f385eecee5ac0e7a5b061a7c91261587be160e60"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gamardan_01/terrain.bin",
+      "size": 4877641,
+      "sha256": "67e7c57cf76664d05668723a351be3f92ef47fd1959c6a68eb9ae735f7619b24"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gaos_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gaos_01/flora.bin",
+      "size": 781836,
+      "sha256": "aacca10726f635fa23d9fdf6647b77ffd53e442896f22d27808cb0613502546b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gaos_01/navmesh.bin",
+      "size": 224001,
+      "sha256": "311381ec0629120dc2558f07725c951cc25c7320c1872cafcb88153ab8965607"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gaos_01/scene.xscene",
+      "size": 670905,
+      "sha256": "256ca2be23153d567e3aeece9c69187a8473c95fd22d674c3d2bb7c6197c006e"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gaos_01/terrain.bin",
+      "size": 2211647,
+      "sha256": "0d37cc521f7e1648c3dc373a4e2beeb2a5979c3b3807561acc6e8745ab33cf10"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gersegos_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gersegos_01/flora.bin",
+      "size": 1952,
+      "sha256": "725ced71d13beeadcff87d692d625dd0acce154dd8e44d678be7cd7d9ff5c332"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gersegos_01/navmesh.bin",
+      "size": 641940,
+      "sha256": "546fcfde7b5c013a71a2937f4043a85db2f3692ac262bb905dd8035e709bb103"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gersegos_01/scene.xscene",
+      "size": 753659,
+      "sha256": "e1ff3ab1a76bf25bfc64896ce2e76e4383824865bf4003a74ec50a0f4afe8389"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_gersegos_01/terrain.bin",
+      "size": 3857429,
+      "sha256": "2d5adc730a98ae19bb8d5c1c581add6a8c08681011c6d030de6732dccf9c6b36"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_geunat_nal_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_geunat_nal_01/flora.bin",
+      "size": 738811,
+      "sha256": "8241cb818c1e47b578294059b3785c8c629968d1d2322a2a9ff472f9d0710bf0"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_geunat_nal_01/navmesh.bin",
+      "size": 1159207,
+      "sha256": "aa29b6ee9ebe05f33901144ae60c15d1d0856863a40eb0717d44ee6d954e1c0a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_geunat_nal_01/scene.xscene",
+      "size": 683586,
+      "sha256": "86468e04143cf881f8c4e752cfce7b40c9e514bb7f676706b66fa4acd44e1a42"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_geunat_nal_01/terrain.bin",
+      "size": 7103438,
+      "sha256": "b7413ddef6d09f40c869b7c08cf214694e349cb962a8e0a25846223ea33f2fdc"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_glenlithrig_01/atmosphere.xml",
+      "size": 4958,
+      "sha256": "8969c1fa71a16af5763a8ba80a99a62f310f6ec65374c08e52c483a1c393840d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_glenlithrig_01/flora.bin",
+      "size": 695643,
+      "sha256": "70f1ccc77c5803ffcd5378fc83375c7e3bfc7ccdb22fbc1b2eec71cafeb64a91"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_glenlithrig_01/navmesh.bin",
+      "size": 1057255,
+      "sha256": "bc54ef5aa1a71ecf4413210f9f245965f4ec52aa84a0621f59f4051613994d9a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_glenlithrig_01/scene.xscene",
+      "size": 617148,
+      "sha256": "d12bb94db286b73b100cb96a4229c3efc579e375af91c882bd9ba5b34fe94423"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_glenlithrig_01/terrain.bin",
+      "size": 5522214,
+      "sha256": "f08bf28b70ec5053e4dc3d04141e89f3cdfc1d2034e673f7aa3c4cb940a1c313"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_goleryn_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_goleryn_01/flora.bin",
+      "size": 7926,
+      "sha256": "e65e1a73927dc0b8bfaaded83eb61c82d43ec81edc5a463efdaf61817d48d9bc"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_goleryn_01/navmesh.bin",
+      "size": 448451,
+      "sha256": "8685574563e74cf0b15438bb8f8710a2a0b8735ae35bc12771ce4e425bf83527"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_goleryn_01/scene.xscene",
+      "size": 532259,
+      "sha256": "7d64147539c177dce19a68c7ddbd6b4c7623e4cc019af9683c51f15a2c683a7b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_goleryn_01/terrain.bin",
+      "size": 182340,
+      "sha256": "149a9ff4cbac30e080500ba6ec8976c18a1e09902482aa877af5b425e1a0b41b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_halisvust_01/atmosphere.xml",
+      "size": 4942,
+      "sha256": "34d0efc4ee2534383fa84722abe3a887955a416dabc64527aaff61e6788ef795"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_halisvust_01/flora.bin",
+      "size": 95614,
+      "sha256": "fb16a09320aed8fba2d1944f218c44e35e1b53d3ce688d5c9aa602b479eb6d9d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_halisvust_01/navmesh.bin",
+      "size": 659144,
+      "sha256": "3964735ad72a1be4cf64df7dc0feb5beac4aa80ac72d00141ae6e593ac0d24fb"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_halisvust_01/scene.xscene",
+      "size": 373957,
+      "sha256": "6533734e21a6441a05ce8839c3b6f02c77d9519f9c6f26fa3a6949ee6a69a73e"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_halisvust_01/terrain.bin",
+      "size": 692554,
+      "sha256": "89fc9b912c47f14941672ec8ebd8c396a852689e9043606c799b511f6690bcdc"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hertogea_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hertogea_01/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hertogea_01/navmesh.bin",
+      "size": 795994,
+      "sha256": "9aadeeacf10f72e55b2c96cb3b5d7f62ab75d9933f488280f78c2d30975a3252"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hertogea_01/scene.xscene",
+      "size": 259343,
+      "sha256": "086fe37df46b9c3c5b00b77c58e7733261a5b0397f32ca15efe7bed6070daeba"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hertogea_01/terrain.bin",
+      "size": 7452584,
+      "sha256": "6b53d4e2e2b620367dbaad2970b52f2f31c49237defa665ada891bf7bfefa2f4"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hongard_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hongard_01/flora.bin",
+      "size": 172329,
+      "sha256": "ee4025978c62b8dfe363bc99c0639f81cad13ded33247509dcdc586afa94f3a6"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hongard_01/navmesh.bin",
+      "size": 916498,
+      "sha256": "330afa95629652dd4970f88c86c68b2e0e7729502de7be4b690d639f204fbe31"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hongard_01/scene.xscene",
+      "size": 346500,
+      "sha256": "bec52dc9feae235982ac094a7e5eb96da0c8228ae46126e8bf6503710d725757"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hongard_01/terrain.bin",
+      "size": 850275,
+      "sha256": "3ad7988f8b1c30d40875394a1bdf57992dd03b736b6b4888bc652abff85b8789"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hoqqa_01/atmosphere.xml",
+      "size": 4958,
+      "sha256": "8969c1fa71a16af5763a8ba80a99a62f310f6ec65374c08e52c483a1c393840d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hoqqa_01/flora.bin",
+      "size": 2150819,
+      "sha256": "385db6220fa7f88508f0075c6a65cf8249b4c7ea5ffe5777f36b3e49045c8518"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hoqqa_01/navmesh.bin",
+      "size": 1384909,
+      "sha256": "9f208f5e72c8a16db04fd80e9df9bf52aa0a906bc9ed45d5a0b1ce8c00cb99f1"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hoqqa_01/scene.xscene",
+      "size": 776951,
+      "sha256": "f571f59274a0ac6bba6845da0d886c9eb64cedbf6aadb8bc8c14ccab1c5bcbd2"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_hoqqa_01/terrain.bin",
+      "size": 8987381,
+      "sha256": "edfed269f71bb174067624830ecf32034a16a659af1c791fb211362b4e478d4e"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_jeracos_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_jeracos_01/flora.bin",
+      "size": 97932,
+      "sha256": "4c3c2a123ff5d038cb7d74118f34ff2ca0b848e8e3ab09f28294f2ecd141f4cc"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_jeracos_01/navmesh.bin",
+      "size": 885500,
+      "sha256": "3ecd28f3be62106b26d8238a2a94c2386563ddec25438f1c6536c43e351af9d8"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_jeracos_01/scene.xscene",
+      "size": 470133,
+      "sha256": "144074e056890da85819e01e99c5b7db4ff601ca7cd4d073d58624d33456a269"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_jeracos_01/terrain.bin",
+      "size": 1008095,
+      "sha256": "d314bf3866b6b4838c8436b4a5a866852837deebba75501207beddf26c574606"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_jogurys_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_jogurys_01/flora.bin",
+      "size": 1068548,
+      "sha256": "f196511476e4a9913ebad067236b2d13e1af1c120c231a4b5bba3c124bf617d8"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_jogurys_01/navmesh.bin",
+      "size": 1466760,
+      "sha256": "390b3176f9fec1d000f15509bb6ff6c81fc7b9391747a4237e4f69ee1e9d4072"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_jogurys_01/scene.xscene",
+      "size": 887277,
+      "sha256": "31f43f5e2295601e0828eee3ab0fe6517d25303d84074a663e044154e9fabdae"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_jogurys_01/terrain.bin",
+      "size": 2253153,
+      "sha256": "f3829f42afc7d0d8d015174e4da7fb9c04d0f2b85be35874a09c940e48fdf3a8"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_karahan_01/atmosphere.xml",
+      "size": 4907,
+      "sha256": "6921e48b58e5998633a50afd8a86f0f510d9b2b3043022a8538c05f254bed3ae"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_karahan_01/flora.bin",
+      "size": 111,
+      "sha256": "4e6a4ee38e6d73cdae731db39724b81bfbf9b61f5934e27bc6ede50ac332ef9a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_karahan_01/navmesh.bin",
+      "size": 556554,
+      "sha256": "076bf4eb2316e7a3f11aa34b44a68283f1976872f0d1c9d6a9e1764f42ce4e52"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_karahan_01/scene.xscene",
+      "size": 277316,
+      "sha256": "337e2761b6b1ebfbfcb41d133b47857de01a4af3074ad38bed9c301cd2f706b0"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_karahan_01/terrain.bin",
+      "size": 2300159,
+      "sha256": "4b1e099fc90536ea4282de6204a15b2c1d1d5f9a2156fda30e98501d0a292818"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kiraz_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kiraz_01/flora.bin",
+      "size": 85187,
+      "sha256": "d82050fe770579ed497a5db63dc4c169927e0ffec9b0d69741261763167bd092"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kiraz_01/navmesh.bin",
+      "size": 1077923,
+      "sha256": "4cf6d7cb21b70f163972509def7e6182501cd47db54f3c1fddc50613e133662d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kiraz_01/scene.xscene",
+      "size": 476898,
+      "sha256": "c9d1ed7156991ef1c737a0c8afeec2b1e723c1325c3bdd82c179ee7a7f0ee603"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kiraz_01/terrain.bin",
+      "size": 10147555,
+      "sha256": "3c56b681f1c15cb47396ee052550545f8044fd97304035cf648300212893a6bf"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_korsyas_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_korsyas_01/flora.bin",
+      "size": 35335,
+      "sha256": "bd5971bb85572226ba38481ff512a20e4b0470b97c3a4a93812d8b6563d00744"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_korsyas_01/navmesh.bin",
+      "size": 863480,
+      "sha256": "2156af1e0d873bf365cea9623b492f8028df675f40ca04155761811cc55486b0"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_korsyas_01/scene.xscene",
+      "size": 739239,
+      "sha256": "70bd665c46ecf2ecdbe00e00fabe336f22c2cd436c0c4ad579893a91989af5c9"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_korsyas_01/terrain.bin",
+      "size": 3945229,
+      "sha256": "25d7ab28d84e7d0fcd4fb6dd446de348be0a37ae4448c4213ed4c513d065340e"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kuruluk_01/atmosphere.xml",
+      "size": 4960,
+      "sha256": "37179cfff7f2d448fb235dc3502db8228193895d7afe2e2324b364f248c8a221"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kuruluk_01/flora.bin",
+      "size": 4811228,
+      "sha256": "d578f44bdeee7d383b6419d20866c8cbf1b5ce5f35462ef7aa60b1523126cc46"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kuruluk_01/navmesh.bin",
+      "size": 399962,
+      "sha256": "df77a7e18d1205fd2a66751fee3a18cf3203c7f5f4e8b049e07a551a6523e710"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kuruluk_01/scene.xscene",
+      "size": 339564,
+      "sha256": "7ee50465923673f5b1a34c40e8b07604cf2cbd26539126e6ff83477c301ee5bb"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kuruluk_01/terrain.bin",
+      "size": 14926314,
+      "sha256": "c93f7e2c4447a54b0d32cb6a67fd9cf543344a337876e148343dab6bfe1ebbe0"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kvol_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kvol_01/flora.bin",
+      "size": 858,
+      "sha256": "21b740f16cebd07e1913dbfee826d0305244ee95abb1ebaa66840ab6d35452fe"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kvol_01/navmesh.bin",
+      "size": 854812,
+      "sha256": "babb0a5511def888bc34328c2d0411ce5112f0ed3f48f911668933b10c14c6a2"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kvol_01/scene.xscene",
+      "size": 338773,
+      "sha256": "98dc72c4a14a49d51ad71e381c70aa0056457a051264589bada1cf4cdfbfaef8"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_kvol_01/terrain.bin",
+      "size": 774547,
+      "sha256": "dfe899fc8c52cfcd16e8de8eceb19e3bf39390095c95e27acb9c654519888a4b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_leblenion_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_leblenion_01/flora.bin",
+      "size": 139710,
+      "sha256": "f6613067b24d600b7a6fae9f8b71fb544789b5c430f739330353bb0a19e30bbd"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_leblenion_01/navmesh.bin",
+      "size": 1476145,
+      "sha256": "a70dbe9d3f1529ea6c0fb962cf45a3501bd63ea414b9330fe728347faf4fa93c"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_leblenion_01/scene.xscene",
+      "size": 403117,
+      "sha256": "c4209b56cfc8193cc008d3ed3ff6b313e7c621b52cd2d10aeb3215b554aea572"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_leblenion_01/terrain.bin",
+      "size": 2747036,
+      "sha256": "a8dbc381d0d52ce8291f2a71ea42df6c22341977b333f2fea9c2169363c9dc0d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_lochana_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_lochana_01/flora.bin",
+      "size": 484567,
+      "sha256": "5d015a7d51f1dee45edf950c81314c12409a2aaf7fd22877d4002412e91665d5"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_lochana_01/navmesh.bin",
+      "size": 903883,
+      "sha256": "cdd4a7c7b9931d3ce35626665b5fcde5e170009bb39d5e8000a220158e10417e"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_lochana_01/scene.xscene",
+      "size": 432040,
+      "sha256": "fc26b68a141046d6dfcb2d4ec337a60cdf20e3243ca792dd1bd5d4aac0a8d148"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_lochana_01/terrain.bin",
+      "size": 3332667,
+      "sha256": "dfde8763604868d2d25ab1bac6acde03ed2837cf1bf5d18ad2bd320c8a3d11d4"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mareiven_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mareiven_01/flora.bin",
+      "size": 569199,
+      "sha256": "dfd21344d5539e18b20fd1e17b62362e05386a3042f3d66c34daa52c0355bbc8"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mareiven_01/navmesh.bin",
+      "size": 765953,
+      "sha256": "4608771644187e4b2bdb7de2ced0530361eebc50037eb68c92f50c12f0d1716a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mareiven_01/scene.xscene",
+      "size": 668178,
+      "sha256": "57c12debbdb2132ef95c8b39dd1d01a631a1ddac0ba7333cae78066de1058d20"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mareiven_01/terrain.bin",
+      "size": 6185832,
+      "sha256": "05698038c91612ecaf9513901edd7e5768baccccb2591fac0c23019616405671"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mazhadan_01/atmosphere.xml",
+      "size": 4942,
+      "sha256": "34d0efc4ee2534383fa84722abe3a887955a416dabc64527aaff61e6788ef795"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mazhadan_01/flora.bin",
+      "size": 380644,
+      "sha256": "bd9ddc4f6255492965ee7f82d29c087e4bd51c4c1d31b2d1895592fcb8c2aa3e"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mazhadan_01/navmesh.bin",
+      "size": 630707,
+      "sha256": "82ca741cbbfaad85f5f00cd549edea9158f842ba04e3e4866164795d97e42b2f"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mazhadan_01/scene.xscene",
+      "size": 412250,
+      "sha256": "d7654bb6f1a7b1cc0d9b2e13344ef8f9b11072bc0d0ab63c554fc4c24efaa1cc"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mazhadan_01/terrain.bin",
+      "size": 1053711,
+      "sha256": "1f8d08a22f6a07ed1e38585f7180c64144203bce6a19a733ac975dd27853bad8"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_melion_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_melion_01/flora.bin",
+      "size": 1594405,
+      "sha256": "63c0cd0567475b9e765eab5877159cd25dcf1bdfa4899d973f825a96e514a0d5"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_melion_01/navmesh.bin",
+      "size": 454265,
+      "sha256": "8745a198279bac2a4cdd5dc61f4ddbdc92104b7dde3dcd3d27ce2d4f6b433651"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_melion_01/scene.xscene",
+      "size": 693746,
+      "sha256": "374c741f81b4105ac800045065ecd63484e0fbb557bb8079a787e112d3a821b9"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_melion_01/terrain.bin",
+      "size": 4686317,
+      "sha256": "819f90cdee17cdea141e6c968e733ee9db2b088b0dde1ab49b8768ee69697d56"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_morenia_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_morenia_01/flora.bin",
+      "size": 1327260,
+      "sha256": "5e7382ce65722ecba03180d038adbdae7aa0644d64df8961b923a14c2f43a002"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_morenia_01/navmesh.bin",
+      "size": 782121,
+      "sha256": "0fa098ec954b06e7855ebec49ee575e0781d874b565509411128f7c32f5ba942"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_morenia_01/scene.xscene",
+      "size": 495694,
+      "sha256": "d7b3eeb635ba1b4624179de3ae306c59794286f3d0a0bd54d27814e1a02e579f"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_morenia_01/terrain.bin",
+      "size": 3387452,
+      "sha256": "3f5d96f8bc41007a0c652ec61b1e4e58ad467e91de668115faa6fdb0d28d3585"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_morihig_01/atmosphere.xml",
+      "size": 4942,
+      "sha256": "34d0efc4ee2534383fa84722abe3a887955a416dabc64527aaff61e6788ef795"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_morihig_01/flora.bin",
+      "size": 254596,
+      "sha256": "78ad4da5008468b29c2e19c8321c1c8b7f00046bbeff7520ce28f54f84bf2262"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_morihig_01/navmesh.bin",
+      "size": 884918,
+      "sha256": "ac7c5b263e1b2a8341c9511b226bf548bc711404faeaccf3a0d7bdd1c7818a84"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_morihig_01/scene.xscene",
+      "size": 452468,
+      "sha256": "e2d836308ed1e86403b75dc318d8f96b765102b0da89efd49efb5029ca53e164"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_morihig_01/terrain.bin",
+      "size": 3350279,
+      "sha256": "27af6a233481f16704a5110bb505d5d2a87b735b4438b27536b3b54338ee87ca"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mossom_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mossom_01/flora.bin",
+      "size": 140510,
+      "sha256": "1def6bad2bde709c1c1ba40bab2a071872599ebebdc32a275b0e197f826018f2"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mossom_01/navmesh.bin",
+      "size": 940949,
+      "sha256": "e10ee7c77c4078a6161a14eb77b1e3ecb706d56de58cdee40c87587d6d3c4837"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mossom_01/scene.xscene",
+      "size": 570234,
+      "sha256": "1727dac238368450568ccef1782b7f462f06b7a567fdd836a216b3c314d2b555"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mossom_01/terrain.bin",
+      "size": 785940,
+      "sha256": "f355ea65274c4e825bea134cf641783af3526ffd6d8c04e2b9bcd3eb96325f1f"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mot_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mot_01/flora.bin",
+      "size": 43622,
+      "sha256": "f4e3f65353021588786c6628f5b0d0fa968a862c98f84023b3d22df15edffadc"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mot_01/navmesh.bin",
+      "size": 748921,
+      "sha256": "25cea1f99b1d2f8f857d34e03a8c75aafee30f90000ba9162e4c831411c1098a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mot_01/scene.xscene",
+      "size": 320290,
+      "sha256": "11447c6252a81d8b8507afcfb1bedd7e29780604210440a0b0c72a31cf8daa0c"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_mot_01/terrain.bin",
+      "size": 854624,
+      "sha256": "4b5d2ce00604f67ff9825d333ec000c26e4486b14e6b659a36c6d327984a7105"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_nogrent_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_nogrent_01/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_nogrent_01/navmesh.bin",
+      "size": 1094658,
+      "sha256": "2f62e120db026419b4570fc4616242387e8e939b27c4461895871eded618a591"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_nogrent_01/scene.xscene",
+      "size": 354084,
+      "sha256": "0a5bf0752a3c914a5d59f2c532462f4e1851bf5e55b4927a82b0144ca82750f6"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_nogrent_01/terrain.bin",
+      "size": 2290747,
+      "sha256": "86527c83336ab85fdd130e29302aceb689ad571c6347880d51d860714d19c5f8"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_nutyuk_01/atmosphere.xml",
+      "size": 4911,
+      "sha256": "31b4ed19f7824bb1ed435260cb527dc9c0c6e25f747ab0661c2930bf526061b4"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_nutyuk_01/flora.bin",
+      "size": 144902,
+      "sha256": "ffac03c487d4f5326666984a9d0edf8742176b586bcf9da7995e4734293ccc73"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_nutyuk_01/navmesh.bin",
+      "size": 327124,
+      "sha256": "f5157e0f5ab1f194976ee7fbb52ccfbba2504bc91f8255b803394a0f0de5c36c"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_nutyuk_01/scene.xscene",
+      "size": 311634,
+      "sha256": "9740d07a91765f3fa4faa259f38c47844b73afb07b61341b7bf79328130e5318"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_nutyuk_01/terrain.bin",
+      "size": 6017411,
+      "sha256": "cd3f3925270c20e61089d9493af95ae5c1e3d9748d1f9f02542bb9e4c026b703"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ormanfard_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ormanfard_01/flora.bin",
+      "size": 989752,
+      "sha256": "fd0bb5d720090f482d83036cdac4d39103c1bdd45f60c8081e2b6813ff45725d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ormanfard_01/navmesh.bin",
+      "size": 796622,
+      "sha256": "783f0678be2aac6b15b2977fb8b6bb30667974494f75c5bef1c88fcca02803c3"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ormanfard_01/scene.xscene",
+      "size": 626343,
+      "sha256": "740bc7ab828ccc4719dc8c426e70d162cbd1d91e2f8646ec4edd9a02ae3c43c4"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_ormanfard_01/terrain.bin",
+      "size": 8317529,
+      "sha256": "31e8d1f63ba108a80579ee0e729aa4f201b744348778449839d923d528e9a2e6"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_palisont_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_palisont_01/flora.bin",
+      "size": 1673928,
+      "sha256": "5fa2f48b03e26da380b38eefafc8b72d2d03f23f208ea2066efe01003bb9d386"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_palisont_01/navmesh.bin",
+      "size": 1554094,
+      "sha256": "e164328eda3308876feafd1ffa0f0718f48319531b3707aab2a16a9b284dec17"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_palisont_01/scene.xscene",
+      "size": 1192776,
+      "sha256": "99c46c5859435b390954dd3a768713ba0bc04fee23898e69b7741a757ce8dab4"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_palisont_01/terrain.bin",
+      "size": 6057035,
+      "sha256": "4ac730125443cf677c0194ef41f25adc79d50527d8284b74661ae6f61617af7d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_popsia_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_popsia_01/flora.bin",
+      "size": 888523,
+      "sha256": "ef3e1cffbdec080f501d572b5e40fcef428853f51a17185d5aaa56d75b8bbaa2"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_popsia_01/navmesh.bin",
+      "size": 1403334,
+      "sha256": "1c6e779ad863b2f95149e5320f286ac2888690fd23e7edd5cddc6ecfc626e6db"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_popsia_01/scene.xscene",
+      "size": 544450,
+      "sha256": "aaa3179d72a1b7cb4c0af2c7ad5210d133d21a9e38b6fa08c1143c9428892bb8"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_popsia_01/terrain.bin",
+      "size": 6952841,
+      "sha256": "6f04ca9905deba0d09e4f3f60a09c86aeccb21dbfb97b1394b05ac7e2454e6e4"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_primessos_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_primessos_01/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_primessos_01/navmesh.bin",
+      "size": 1142994,
+      "sha256": "dc70482c1e866137dda2f456324adbddff11e818ec44125ddde17539fe65f890"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_primessos_01/scene.xscene",
+      "size": 483635,
+      "sha256": "0039bec0617dd78dadcceec657fa793e33f22a28e7108d6ea3765eca279da9af"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_primessos_01/terrain.bin",
+      "size": 1341896,
+      "sha256": "bf9f305adea2ff734947cf913841223c47a2c6a9e86562dd0b88e69d657982e3"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_remental_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_remental_01/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_remental_01/navmesh.bin",
+      "size": 1344331,
+      "sha256": "2982859a94b561e4236a0cb9050f48395178836683ad62a6e104a4d844fc0431"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_remental_01/scene.xscene",
+      "size": 318739,
+      "sha256": "0e92fea65189df510ee19ef63ca32595323f888d6939c6b089d593724b5ed7e3"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_remental_01/terrain.bin",
+      "size": 4504325,
+      "sha256": "43655726c032b29924f4ec9890dacfb2cf0393d66edebe39edaf4ce488d5187b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rhemtoil_01/atmosphere.xml",
+      "size": 4912,
+      "sha256": "a3c760fe896f79b917d6f1c0363641207ae1b6370c161f712d88548b7afcb0bf"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rhemtoil_01/flora.bin",
+      "size": 449137,
+      "sha256": "be7e90af4805c5b6b3d61387373bff2052f6dc22bdec828879981a57961d2fe4"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rhemtoil_01/navmesh.bin",
+      "size": 980684,
+      "sha256": "61485df6f4aa289848ae118a5cf6fb18c487c540cd2bd3a452afbbc33a5ac2b5"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rhemtoil_01/scene.xscene",
+      "size": 820386,
+      "sha256": "48bddb93a11b2b4c0aeb6e7277e1c1c9f6af96c9663ea676ce442e98d3e3edfc"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rhemtoil_01/terrain.bin",
+      "size": 5702266,
+      "sha256": "00bc2f0b82371f96841bad7b4a2cc51fc83826cd12bd5b7311e2e04264686152"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rhesos_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rhesos_01/flora.bin",
+      "size": 709714,
+      "sha256": "6d68920b95167787fb1759baeaa41e741cd7cd62066629d05a54ce3760bc00c1"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rhesos_01/navmesh.bin",
+      "size": 779335,
+      "sha256": "202fb4caaccc4e3e3d071816681f407548cd37b7e0dc44a0ba37051e6464687f"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rhesos_01/scene.xscene",
+      "size": 416517,
+      "sha256": "9702073e30a1df38d540b5c6628c7ad4e1405e1f8b70abcc45ca54f96a47b265"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rhesos_01/terrain.bin",
+      "size": 4068961,
+      "sha256": "82ebcf831f5a8e6e22ca10266d7cd1bc4b5a911c10c895ab56da2a4e97aa8789"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rodobas_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rodobas_01/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rodobas_01/navmesh.bin",
+      "size": 791953,
+      "sha256": "8ce9fd9aafc763f2963f38c317bc55044704b645eadcc34ca6bfc26e42d762d5"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rodobas_01/scene.xscene",
+      "size": 307635,
+      "sha256": "a43b28f6bd6ac87cc117b03c5e030fc78ca4cfa421f2421698ac0ce0c2277d44"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_rodobas_01/terrain.bin",
+      "size": 1888546,
+      "sha256": "9370f35f3a8d2e7de885a29f92da26ec216ef5e197126c9ea62ac581e5a74eac"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_samatha_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_samatha_01/flora.bin",
+      "size": 540748,
+      "sha256": "a777e904e334447dca12f23a83f518d3c2cdadf88245e3bb98a4d7fe6365f864"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_samatha_01/navmesh.bin",
+      "size": 728258,
+      "sha256": "37fdc842280d1f0b288f82f300443f61a9d30396dfc838c2b9f4348c1b022906"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_samatha_01/scene.xscene",
+      "size": 354418,
+      "sha256": "288c0aefcb13e13d81f8345cd937d4dd32d588defb06ca5f3cedd26038c90399"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_samatha_01/terrain.bin",
+      "size": 309877,
+      "sha256": "ae707f98f6c5a9224d07cd3b6e873d6b1689fe6d627e1b7919e8f59d630ff016"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_shapeshte_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_shapeshte_01/flora.bin",
+      "size": 322418,
+      "sha256": "dc829f7d29b15827c21edba0ed03177de9e2ef31a7373929becd2a4569f06471"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_shapeshte_01/navmesh.bin",
+      "size": 461347,
+      "sha256": "bfbf98e7604374a5123aa7be801ef77289f2048141a230dd4e68ffbe196e6efa"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_shapeshte_01/scene.xscene",
+      "size": 550630,
+      "sha256": "e044b9fd1e851d81d17189261711b3c01dc34b71241d3644fc75a13c6d468f98"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_shapeshte_01/terrain.bin",
+      "size": 5100339,
+      "sha256": "0d84fc731f7f13adaecdb5065cbffa0a9ee2f7773120a04e23c3ea9eb4ece2ce"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_syratos_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_syratos_01/flora.bin",
+      "size": 870481,
+      "sha256": "989c336414ae316271660315a684ae19e6850a0a953d8e48fec938af1d54faf5"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_syratos_01/navmesh.bin",
+      "size": 866182,
+      "sha256": "3b449ab596866caaab88310530b8934254c2cd141a41e8fa0990ea247413fa70"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_syratos_01/scene.xscene",
+      "size": 292880,
+      "sha256": "f7776bb846392000172550dd179f4b043129b68aa216acde468aeedf61ac831d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_syratos_01/terrain.bin",
+      "size": 2617592,
+      "sha256": "3841ea579e7fcf28c7fef33e819b19b1bc0998b0ec0bb750271b1374e8c5ea60"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tasheba_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tasheba_01/flora.bin",
+      "size": 1115843,
+      "sha256": "a2e47fc950bad899c8e2e512bb813e9f311c04c651b17f09e53e9384ce33eb54"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tasheba_01/navmesh.bin",
+      "size": 2173998,
+      "sha256": "94f8ca58b62909e38a57f0b5eb8979e72bf538bcc301f8b28991c049a02b3605"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tasheba_01/scene.xscene",
+      "size": 597476,
+      "sha256": "0865d0b1e51f96610a1213cc116cef3b2110242aa0e0e3c18d9480f14b07d84b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tasheba_01/terrain.bin",
+      "size": 14984138,
+      "sha256": "d388c6878f4f9130ad1d4cf827c0ffbdac26abda44808ee3cee73402a3ce89ac"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tepes_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tepes_01/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tepes_01/navmesh.bin",
+      "size": 900039,
+      "sha256": "38ce972e1aef55bd946c70ea5890d94a263dae2470f499aeee59083fa0fd3212"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tepes_01/scene.xscene",
+      "size": 351328,
+      "sha256": "92f83e12d5aee77a7f1b244f1098382fe373556598062925fb1611a9a0e0a51c"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tepes_01/terrain.bin",
+      "size": 2777993,
+      "sha256": "e09e21f261fe84dda36491a1e5b3761169e827021c57ee58239911f2b245d5ed"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_thorios_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_thorios_01/flora.bin",
+      "size": 1955908,
+      "sha256": "892ee31eef00f81e10c46fc18f1813f3115f34aa9389de2ece5d085ca44b2dcf"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_thorios_01/navmesh.bin",
+      "size": 830615,
+      "sha256": "41fa29edd9d2f45f0c8a1f6a56c41966e5ef3df4619247cbdf1ec4a2db756ab9"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_thorios_01/scene.xscene",
+      "size": 377595,
+      "sha256": "3d8ba4ec5ff1a9e51af7254cfb45c1a6737118629c542c1eec288e75cb7d8807"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_thorios_01/terrain.bin",
+      "size": 1763812,
+      "sha256": "675833c9eaa34c201d391caa5a9cbcf10f7ddb9744696b08aecaac4bfbd64c3f"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tismil_01/atmosphere.xml",
+      "size": 4953,
+      "sha256": "2d4ea481cb01068ee33afecb228ed7466247214d3512d7142645d33409498d19"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tismil_01/flora.bin",
+      "size": 1131954,
+      "sha256": "168bdc237a0953f65f8cd3d2e3f684b85a430292d79d0d552cf2041086bed846"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tismil_01/navmesh.bin",
+      "size": 871148,
+      "sha256": "c57d80ab288e32a9af2bccda407c0f5d7036f1fc3cc8cd1c49ce23e73fac7827"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tismil_01/scene.xscene",
+      "size": 427641,
+      "sha256": "c1eaedace344a003770f280cf09181597a7081be90606e3c24424078753168e0"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tismil_01/terrain.bin",
+      "size": 4299574,
+      "sha256": "6964b7f5fa795c6f746046c7aaa4b748ab27ca2da389c248a44cc0399ea793aa"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tor_melina_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tor_melina_01/flora.bin",
+      "size": 173399,
+      "sha256": "47e4407ec6e3d00b43297ec0d150503f633ee838074dd238ce9dee8a0752c658"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tor_melina_01/navmesh.bin",
+      "size": 763743,
+      "sha256": "23dd0cae060de73d63dbd64ffe88db237fb2744b1ce0ce130399c494e656b2f9"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tor_melina_01/scene.xscene",
+      "size": 505228,
+      "sha256": "73deb3f5d0f9c58daf516f357c82d699e6cbe4a5ca1cfa3a09ee06854b8b89f4"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_tor_melina_01/terrain.bin",
+      "size": 3037501,
+      "sha256": "ad96b71356615b1aa0cec039a9c7a8bc005e4de4ef2e0a8a45ce922d97887616"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_uqba_01/atmosphere.xml",
+      "size": 4912,
+      "sha256": "a3c760fe896f79b917d6f1c0363641207ae1b6370c161f712d88548b7afcb0bf"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_uqba_01/flora.bin",
+      "size": 1366706,
+      "sha256": "8a2a85566b631304edc3b10ddda7628f2c8b066bdb1227f095462b6d4c8e5adb"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_uqba_01/navmesh.bin",
+      "size": 741487,
+      "sha256": "f1a8170cbc555bf4b2e669ad73ca4cfff44345e7f438fb29cd4597c52ad576de"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_uqba_01/scene.xscene",
+      "size": 722954,
+      "sha256": "369aeadac97d9626f7537a2fbde40d8f5805a143d7ff5f3e04771fd309321c09"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_uqba_01/terrain.bin",
+      "size": 10392448,
+      "sha256": "0b8f7675a6a7b9419c160ee718df18fa7abd69641dc5612ee19e5f4d8a3ca652"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_urikskala_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_urikskala_01/flora.bin",
+      "size": 1436850,
+      "sha256": "71a13a8ef92e1935c347650519658b39a23603b6c6cdb158f273a5cedfba59be"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_urikskala_01/navmesh.bin",
+      "size": 517544,
+      "sha256": "307c3553778c6df10c23b08a780cc4681fd723c6a1ce9c3f7a9fdc2c1f44638b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_urikskala_01/scene.xscene",
+      "size": 601073,
+      "sha256": "d6b3b73111a86843072e7efe9785f1b6d75e4b6a9915aff9e94f3dce1569bdda"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_urikskala_01/terrain.bin",
+      "size": 8125248,
+      "sha256": "4d4492cfd7e1a79d54bc9e23a323bb4ae11b23eed0ae21ee4288460f1a219bcd"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_usek_01/atmosphere.xml",
+      "size": 4954,
+      "sha256": "820b40d506392913ad641f6627298be4b2cd1399ff3117940dacad8a86d873c6"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_usek_01/flora.bin",
+      "size": 1396807,
+      "sha256": "23078d78f86d2873b8e7c181c37add0f4467d02cc98b8d95d5d4db01d9f71a65"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_usek_01/navmesh.bin",
+      "size": 974250,
+      "sha256": "5379a20791cf5f946dd185a375eb574c949a761f02db3130f7458cf4671822b1"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_usek_01/scene.xscene",
+      "size": 449971,
+      "sha256": "7a085ff5d7b69785f6a3455c193e5e1f73d8a3195f38fb78333b23a9d5e7a4d4"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_usek_01/terrain.bin",
+      "size": 4839983,
+      "sha256": "5686dd93837b3fbbafa56149bff2b3db26f297160e67066ea7ef1ffde0332672"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vargornis_01/atmosphere.xml",
+      "size": 4958,
+      "sha256": "8969c1fa71a16af5763a8ba80a99a62f310f6ec65374c08e52c483a1c393840d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vargornis_01/flora.bin",
+      "size": 1513943,
+      "sha256": "8ae244f1a53f77897b2ea06653d8141a102478ee5421b3a49d914bdc397c72a1"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vargornis_01/navmesh.bin",
+      "size": 1211075,
+      "sha256": "41e2aeaad05ee7253d1f0e0e3a8ecc9337be886513e48a8a59f4001e9747671e"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vargornis_01/scene.xscene",
+      "size": 607526,
+      "sha256": "a33622bb3f199b9f01457e3660992430b45b2af96a0d7b540e229b06a94609ab"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vargornis_01/terrain.bin",
+      "size": 3605077,
+      "sha256": "d07e8f42b14e331e0d7a56ac28dff56b221f1f311d945fd8009fb9055321207b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vathea_01/atmosphere.xml",
+      "size": 4942,
+      "sha256": "34d0efc4ee2534383fa84722abe3a887955a416dabc64527aaff61e6788ef795"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vathea_01/flora.bin",
+      "size": 551331,
+      "sha256": "2bbaf5fbe9c6b746b50721c1bc31c1392aa9d4c6044bd9f8beff03b5cd6cdf63"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vathea_01/navmesh.bin",
+      "size": 346304,
+      "sha256": "bc4ab94996d2b0f5abd55ddf91a081d863c35a07dda1dca61a3f113c148f6157"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vathea_01/scene.xscene",
+      "size": 336530,
+      "sha256": "29e733927719581638f982c914648d9b80d02646a930b06f1ee9e55453d646f3"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vathea_01/terrain.bin",
+      "size": 5268059,
+      "sha256": "2d0704cb28fa3798151cfa25a9eceafb5d95fdb28198daeaed201cbe89bbc7e3"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vealos_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vealos_01/flora.bin",
+      "size": 974799,
+      "sha256": "4b9ae1d6e3eb0c94f04d847b96922957605854b5f020f32c7b1df71bd8ca82ea"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vealos_01/navmesh.bin",
+      "size": 1673101,
+      "sha256": "dd643c113ceddd8a04769ffc83e185a3dca6ec6ea67215a7fd38f61ac41a97d7"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vealos_01/scene.xscene",
+      "size": 505012,
+      "sha256": "befd04af24ea4e67b306cb19565c2e7f82c54824d6a3b2326e3a8c6d20f5609e"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vealos_01/terrain.bin",
+      "size": 6792065,
+      "sha256": "52b8f5ec2aab15d36ff7af8ce612f22314da9bec08cec37c640bff6b621487e3"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_verecsand_01/atmosphere.xml",
+      "size": 4911,
+      "sha256": "978d3aa89aeb4538c853bdc2f0f14b8124f9be93c84589d38e62a1b0a60a225b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_verecsand_01/flora.bin",
+      "size": 4253251,
+      "sha256": "68b56211d4a84344be98b69cbf8670ca3346147997aa0cdcfc6a4477729f65af"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_verecsand_01/navmesh.bin",
+      "size": 1231609,
+      "sha256": "b83d349558aae3cd0f258cbbe0c7164c0c27129bfda40b2eb1559a480dce25c5"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_verecsand_01/scene.xscene",
+      "size": 846508,
+      "sha256": "04d3ce4f1f88bb50c6989f104fee328c1e6c690d034f554e519c710bceb24b71"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_verecsand_01/terrain.bin",
+      "size": 2793466,
+      "sha256": "5492f60316d697b2aa91177cbddf1fb9b9e688944f71a1cfed98a88a3fb234ce"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vesin_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vesin_01/flora.bin",
+      "size": 1166745,
+      "sha256": "a1401aa5dbca7b9eb1ba2f3425d4b78f954d8fcf9dacd383c99ac94708cc6f83"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vesin_01/navmesh.bin",
+      "size": 1460625,
+      "sha256": "721b19d3a82d380b8a1328f2d3d8f6090c9c5806f18baad129e36d21e481cf2d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vesin_01/scene.xscene",
+      "size": 573029,
+      "sha256": "9fbf7988bb6c851c0fa485c063e773eff5e2665547a439a0382f49d73f85b27d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vesin_01/terrain.bin",
+      "size": 3272243,
+      "sha256": "8e66bfd4818496989afc2e7a0c3904f43a2d6e5c923b8e3e25fdee25d83f74d8"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_visibrot_01/atmosphere.xml",
+      "size": 4910,
+      "sha256": "b31dac39c8daeedb497682642fb5c3aa18f111e566dad01c263793a1de18be62"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_visibrot_01/flora.bin",
+      "size": 5012,
+      "sha256": "76df514f1c3b96fa4111d29dcaffbe2b8a8080be1e17c47584f0ca369b07918b"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_visibrot_01/navmesh.bin",
+      "size": 971241,
+      "sha256": "e0b76aca4a7fcca1adbd520105d60930f46244e11adacf5484b2fe040aa79b39"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_visibrot_01/scene.xscene",
+      "size": 284735,
+      "sha256": "6e852dce0026422a59892279960154b29b029fb1892241be9762c88537be9b33"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_visibrot_01/terrain.bin",
+      "size": 3055252,
+      "sha256": "906c0f1c1663f44e7e3ec1e41a6625846775ea4cdd46f4533c2f8e5a87e4fda4"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vladiv_01/atmosphere.xml",
+      "size": 4912,
+      "sha256": "a3c760fe896f79b917d6f1c0363641207ae1b6370c161f712d88548b7afcb0bf"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vladiv_01/flora.bin",
+      "size": 663950,
+      "sha256": "4c52fa33f426b2566925c833372f58d3fbeb0e11fd8dbd9bd55e948e004347ed"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vladiv_01/navmesh.bin",
+      "size": 842950,
+      "sha256": "197c7aed1c1a8a6b12e1d5a1458493e5869437ba556b25582d910d0bc4f9c8a7"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vladiv_01/scene.xscene",
+      "size": 273846,
+      "sha256": "61232fedebf9599d73eae2de2c81b7ee2e2651dd7b5ab1589e4584825d1e75c2"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_vladiv_01/terrain.bin",
+      "size": 2235077,
+      "sha256": "32c3babe8158e04b351c41300491ab7509a9cb3ec8cef9b79daecf034e74780c"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_wadar_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_wadar_01/flora.bin",
+      "size": 527739,
+      "sha256": "494facd699b98b02733e68bc815095322105fc19c6aed42bda5cd8bda508bb98"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_wadar_01/navmesh.bin",
+      "size": 449961,
+      "sha256": "77f3a52ffed144d7804764ce8ec3220b8ab2e06765a170c8a0451fd4b0cac927"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_wadar_01/scene.xscene",
+      "size": 513396,
+      "sha256": "30fcb07860a1936e85ffd17bfb0ac904a306b90df15b6cdff6e28af676422f78"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_wadar_01/terrain.bin",
+      "size": 3327764,
+      "sha256": "a5736845022376f662ed8ecfe082c1b538fe5821a51faf48e118bf10f6ef4cac"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_yangutum_01/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_yangutum_01/flora.bin",
+      "size": 177312,
+      "sha256": "71ca35863e3a318d99e14d44de18a15fc80a6bd7b31a5beb622d8c5b44e20c36"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_yangutum_01/navmesh.bin",
+      "size": 427302,
+      "sha256": "d2f8c024102e3cf02a1573a1b28c5b66a64456d17b46d556c513aae01f352634"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_yangutum_01/scene.xscene",
+      "size": 491741,
+      "sha256": "0036b5516675c19cf90be0ba932cacdded2ec0fb245935b655b6ed069e78def1"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_yangutum_01/terrain.bin",
+      "size": 5783079,
+      "sha256": "9a4a2c1cd3f1542847d61869f52904267a0bd4ff33d24fca4023b5d321f8d13a"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_zestea_01/atmosphere.xml",
+      "size": 4960,
+      "sha256": "37179cfff7f2d448fb235dc3502db8228193895d7afe2e2324b364f248c8a221"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_zestea_01/flora.bin",
+      "size": 1018729,
+      "sha256": "e833580f685ab378a0e9ae1b49304e8db235fe7544ca1e66db87b77431b7cd9d"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_zestea_01/navmesh.bin",
+      "size": 861080,
+      "sha256": "c3bb7ae1cf742f16a8165aa544a2edf29b3e2d2373e28e8184d83eeb0d1bca22"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_zestea_01/scene.xscene",
+      "size": 739837,
+      "sha256": "28abc378b1c2f59f9c67e7e74c8eddb4090c99903f470f5e8e5ec64b4869e7e9"
+    },
+    {
+      "path": "SceneObj/strat_site_village_pilot_zestea_01/terrain.bin",
+      "size": 2704532,
+      "sha256": "60a8c44368f89c33876acf707f69b42256a4eced3db30127207768ca8fcfdf55"
+    },
+    {
       "path": "SceneObj/strategus_war_council/atmosphere.xml",
       "size": 4838,
       "sha256": "5766becf828527735ffcdee68640b0a2fe7756dca3d57c659217a71e95e9f464"
@@ -3540,7 +5595,7 @@
     {
       "path": "SubModule.xml",
       "size": 7215,
-      "sha256": "0b7173383e13d127e5ea2ffdbcf2c0df65498c961aa8dfba8b39294ed036ac8f"
+      "sha256": "afea94094c131d1308d1a227ebb15fe26aec7e3dd49519605cfbffa8113a8bca"
     },
     {
       "path": "Videos/strategus_intro.ivf",
@@ -3564,23 +5619,23 @@
     },
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.GauntletUI.dll",
-      "size": 1447424,
-      "sha256": "91382c945e84f2b4983de8cfe9f3e6321b2ba6c190a74c7a9821acad8ebd5e08"
+      "size": 1451008,
+      "sha256": "de33a4f4d5c7397c7e31304d7ad0eccc585740542903af04527d5f93cf3c9598"
     },
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.View.dll",
       "size": 34304,
-      "sha256": "b743d44c236ca28841309d09857d1cf205ca5bea93be4079ddb2db06d609d7cf"
+      "sha256": "a1d8bee4e134967caac43e349aafef70d2b021d3c8fafca6080590acfe4b2e72"
     },
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.dll",
       "size": 2268160,
-      "sha256": "184a06eac3ef19e5a78e0790efdf643e23056a3ce2a7aebd4980de305b41cdf9"
+      "sha256": "6a812a506cd6749720fec87a72a21162510a1719db9d20e59ba3dd1f53497e34"
     },
     {
       "path": "bin/Win64_Shipping_Client/StrategusBattleBridge.GauntletUI.dll",
-      "size": 574976,
-      "sha256": "38b89fdbb6d0876f241a7db24b4dea4cb596991edcc4792aedf8f7a24ef2e5f2"
+      "size": 585728,
+      "sha256": "596c2ec34ef32a7a1df1e3d0cb9c0c62399a1ea4d75174d6a5a5515a89805595"
     }
   ]
 }
