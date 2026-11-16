@@ -2,15 +2,15 @@
   "schemaVersion": 1,
   "branch": "StratLords",
   "sourceRepository": "MB-Warlords/The-Last-Concord",
-  "sourceCommit": "4392e59dbb36bf508e8639dfdd197b4dab243004",
-  "version": "1.1.19",
+  "sourceCommit": "e86d02295b34d351f0a37f4a39c8158b4bcaf199",
+  "version": "1.1.20",
   "requiredGameVersion": "v1.5.7",
   "requiredArmoryVersion": "v1.0.0.17",
-  "buildId": "49524880bdb81f80fb990df32b4c5417735a5e1fbf9b4c2f43dd6da3084a082a",
-  "createdUtc": "2026-11-16T16:57:49.470753+00:00",
-  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-4392e59dbb36-a3f118af4832/Warlords-StratLords-1.1.19-4392e59.zip",
-  "packageSha256": "a3f118af48324d719c496564bd1fb03bfe43df0fe75d1449ba500c56d307ff69",
-  "packageSize": 782891609,
+  "buildId": "98f14e859d35fb16f46406618899d0c2da66ead91a19e17fe43735dba440b742",
+  "createdUtc": "2026-11-16T17:35:51.418841+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-e86d02295b34-552f81ca23b7/Warlords-StratLords-1.1.20-e86d022.zip",
+  "packageSha256": "552f81ca23b786fe516e2405fa970469c489f2bccb0a5ac6db229a91512cb765",
+  "packageSize": 782891637,
   "files": [
     {
       "path": "AssetPackages/banner.tpac",
@@ -905,12 +905,12 @@
     {
       "path": "ModuleData/stratlords-protocol.json",
       "size": 107493,
-      "sha256": "47a19abdb4c46ce5a6ed7e9cc6f1d9d01ec667e7261743c9fb5f0848dbffda40"
+      "sha256": "71ea24dd6eb687450b7e8258f1e7dbbd327aa7a11093efd684c4e8c9e9a68608"
     },
     {
       "path": "ModuleData/stratlords-servers.json",
       "size": 2740,
-      "sha256": "1f0e45ae9f7ca7c383a342f55ec1847d1da68d7a392778353e4720cbec5a2324"
+      "sha256": "b349a2cda605c811ec2639a73177d095f1cbb0475663bdb5aec2971b6927825f"
     },
     {
       "path": "ModuleData/stratlords-village-playlist.json",
@@ -5595,7 +5595,7 @@
     {
       "path": "SubModule.xml",
       "size": 7215,
-      "sha256": "afea94094c131d1308d1a227ebb15fe26aec7e3dd49519605cfbffa8113a8bca"
+      "sha256": "b9dc229204884db0b28c0e7a14f4e0179281a142782d486846924f9e22a6d404"
     },
     {
       "path": "Videos/strategus_intro.ivf",
@@ -5620,22 +5620,22 @@
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.GauntletUI.dll",
       "size": 1451008,
-      "sha256": "de33a4f4d5c7397c7e31304d7ad0eccc585740542903af04527d5f93cf3c9598"
+      "sha256": "f6c82bb4238e2146c12e57aa66283f410e52a29bed13b975070871955d275d1a"
     },
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.View.dll",
       "size": 34304,
-      "sha256": "a1d8bee4e134967caac43e349aafef70d2b021d3c8fafca6080590acfe4b2e72"
+      "sha256": "ce3e68cae5ab275cee91eece895077cefe0ce4d171394acc8403d28f7829f85f"
     },
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.dll",
       "size": 2268160,
-      "sha256": "6a812a506cd6749720fec87a72a21162510a1719db9d20e59ba3dd1f53497e34"
+      "sha256": "e6072947c49aa2f72d0ffaeaa3013d1005cd8490b08165303074e0b084bab301"
     },
     {
       "path": "bin/Win64_Shipping_Client/StrategusBattleBridge.GauntletUI.dll",
       "size": 585728,
-      "sha256": "596c2ec34ef32a7a1df1e3d0cb9c0c62399a1ea4d75174d6a5a5515a89805595"
+      "sha256": "cd30bf3dd64d7fad46a0b042a8c120c7e3eeca1e0c58991f34ba9d6e271c6617"
     }
   ]
 }
