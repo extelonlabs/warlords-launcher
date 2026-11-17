@@ -238,13 +238,24 @@ public sealed class InstallService
             if (!expected.ContainsKey(relative)) return false;
         }
         // An install of another build needs the update anyway, so reading every file first only wastes time.
-        if (InstalledBuild(target) is { } installed && (installed.SourceCommit != release.SourceCommit || installed.BuildId != release.BuildId)) return false;
+        InstalledState? installed = InstalledBuild(target);
+        if (installed is not null && (installed.SourceCommit != release.SourceCommit || installed.BuildId != release.BuildId)) return false;
         // Read before any hashing, so a file that changes during the check is never stamped as good.
         string? stamp = Stamp(target, release);
-        if (!fullCheck && stamp is not null && ReadStamp() == stamp)
+        string? saved = ReadStamp();
+        if (!fullCheck && stamp is not null && saved == stamp)
         {
             ValidateDescriptor(target, release);
             progress.Report(new("Your files have not changed since the last full check", 1));
+            return true;
+        }
+        // No stamp yet (launchers before 0.5.9 never saved one after an update): a launcher-installed copy of
+        // this build whose every file has the right size is trusted once and stamped. Check again reads every file.
+        if (!fullCheck && stamp is not null && saved is null && installed is not null)
+        {
+            ValidateDescriptor(target, release);
+            WriteStamp(stamp);
+            progress.Report(new("Your files match this version", 1));
             return true;
         }
         DeleteStamp();
