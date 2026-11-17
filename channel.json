@@ -2,15 +2,15 @@
   "schemaVersion": 1,
   "branch": "StratLords",
   "sourceRepository": "MB-Warlords/The-Last-Concord",
-  "sourceCommit": "8178b424d7ea95e0d154a08ba880169b668a2d71",
-  "version": "1.1.24",
+  "sourceCommit": "3b34cbcbd4ef6ed5222adb1fc85700c36c6ace1b",
+  "version": "1.1.25",
   "requiredGameVersion": "v1.5.7",
   "requiredArmoryVersion": "v1.0.0.17",
-  "buildId": "c9ef370667293ab58b11f5f5434f770e65babd38d26dea7b2ad4b02624e58310",
-  "createdUtc": "2026-11-16T22:37:51.098964+00:00",
-  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-8178b424d7ea-87fdc2085cc4/Warlords-StratLords-1.1.24-8178b42.zip",
-  "packageSha256": "87fdc2085cc4a40afe57d23bb9d521faa6f8806f13789261eb07d2e5da942754",
-  "packageSize": 823905462,
+  "buildId": "c6c621a09a865ef262a784645572c13ab2430749af7f2e2b42f728c03c751c07",
+  "createdUtc": "2026-11-17T05:48:19.367235+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-3b34cbcbd4ef-e55b34aafd48/Warlords-StratLords-1.1.25-3b34cbc.zip",
+  "packageSha256": "e55b34aafd48465231c2ce844346d575cd111fda408ab1a3253d497ffedc8b2e",
+  "packageSize": 1068576275,
   "files": [
     {
       "path": "AssetPackages/banner.tpac",
@@ -909,13 +909,13 @@
     },
     {
       "path": "ModuleData/stratlords-protocol.json",
-      "size": 107493,
-      "sha256": "62f4d83e8c6570a0f26d8ddf24bb7cf7bd56a267ad164b1d08a5659ec927f736"
+      "size": 107835,
+      "sha256": "8415bbcdb8472be63aa325dd95c5364cbcf8f272583412032c5f894d44f53f87"
     },
     {
       "path": "ModuleData/stratlords-servers.json",
       "size": 2740,
-      "sha256": "29250334df61d073eb05e71289e80c8d9353f9bbab6641df6d490ba7ecf3a235"
+      "sha256": "5ad2cf59d56203158cf68d3f622da0f30768f60c909304dab1e81290a0b09f05"
     },
     {
       "path": "ModuleData/stratlords-village-playlist.json",
@@ -1658,6 +1658,256 @@
       "sha256": "42add2a30586b98bd658f54fb10bf353658821bc85ea0e42b6eb2907a320e5f7"
     },
     {
+      "path": "SceneObj/Strat_T_10/atmosphere.xml",
+      "size": 4900,
+      "sha256": "e3f3ae91ae6e4bd868f96adc26b138566de3ccad7d1a8a8d3724d4845f6e0978"
+    },
+    {
+      "path": "SceneObj/Strat_T_10/flora.bin",
+      "size": 129823,
+      "sha256": "996ebc3b994b7f7e5da410ebba1688f334ddca152a274630034085a3c7063748"
+    },
+    {
+      "path": "SceneObj/Strat_T_10/navmesh.bin",
+      "size": 3173065,
+      "sha256": "298993a96ee06ee26aba01dee1c1c3baaaee9f78d940c8dabb9fc727990ab824"
+    },
+    {
+      "path": "SceneObj/Strat_T_10/scene.xscene",
+      "size": 2664104,
+      "sha256": "d6466be0798545b637c1e7d1458f7e595e9cd84e2acd99f01b3c57dcb6d8fba4"
+    },
+    {
+      "path": "SceneObj/Strat_T_10/terrain.bin",
+      "size": 2247696,
+      "sha256": "a338918603d75c26593b9e819efcc59937491a9a0ebf1ed72bc07b85fd0195bc"
+    },
+    {
+      "path": "SceneObj/Strat_T_11/atmosphere.xml",
+      "size": 4890,
+      "sha256": "07a615059af802afe2fe9a36999618d7323e8125b1f119153ce3e64d2ed4eb5c"
+    },
+    {
+      "path": "SceneObj/Strat_T_11/flora.bin",
+      "size": 35032,
+      "sha256": "1548b9980d012a8f5807e3f43e953e0f8359ea5e6a8bf7839ab7cd3d08740f3d"
+    },
+    {
+      "path": "SceneObj/Strat_T_11/navmesh.bin",
+      "size": 2881794,
+      "sha256": "c47e08b6a546060ce71125293954b431b62b4c5c4f1368eac190b04486483afa"
+    },
+    {
+      "path": "SceneObj/Strat_T_11/scene.xscene",
+      "size": 1428155,
+      "sha256": "68e5113abadc19aaa87d1efaba3e6419d2dda9d403e0bd23f6c4d9288ea26c58"
+    },
+    {
+      "path": "SceneObj/Strat_T_11/terrain.bin",
+      "size": 3499301,
+      "sha256": "f36c82160cd61be6104e5e32d69d3a7618a89c1b56af799a9832ea69e2be2dfc"
+    },
+    {
+      "path": "SceneObj/Strat_T_12/atmosphere.xml",
+      "size": 4890,
+      "sha256": "07a615059af802afe2fe9a36999618d7323e8125b1f119153ce3e64d2ed4eb5c"
+    },
+    {
+      "path": "SceneObj/Strat_T_12/flora.bin",
+      "size": 355876,
+      "sha256": "1a2b49bb281a796af8dc7ba75d4bfcc4e167bdfae95c216a5ba960f19d786295"
+    },
+    {
+      "path": "SceneObj/Strat_T_12/navmesh.bin",
+      "size": 2303103,
+      "sha256": "3826a0328401c70befa6ae9f6965c3a4122b7dbd330be0dcb3e8030aa41abcc4"
+    },
+    {
+      "path": "SceneObj/Strat_T_12/scene.xscene",
+      "size": 1004802,
+      "sha256": "53ae69faab14ce5860af47fcb90fb812fcec697031266533b16dc12c04859fc7"
+    },
+    {
+      "path": "SceneObj/Strat_T_12/terrain.bin",
+      "size": 17968788,
+      "sha256": "195158442e97f45e572976268819a153971828775c95410283b78d6fdbf1de75"
+    },
+    {
+      "path": "SceneObj/Strat_T_13/atmosphere.xml",
+      "size": 4890,
+      "sha256": "07a615059af802afe2fe9a36999618d7323e8125b1f119153ce3e64d2ed4eb5c"
+    },
+    {
+      "path": "SceneObj/Strat_T_13/flora.bin",
+      "size": 241851,
+      "sha256": "58af09015e79a8439563e9415822719514c87190e43b553aacd3eccc0a44351c"
+    },
+    {
+      "path": "SceneObj/Strat_T_13/navmesh.bin",
+      "size": 4691495,
+      "sha256": "21fc44c23dbd39d723b1cee7822a6eb6f8a1c58c7c0dfa05e81bd30e10bde240"
+    },
+    {
+      "path": "SceneObj/Strat_T_13/scene.xscene",
+      "size": 1612793,
+      "sha256": "bf7a82487ff31615c2b6f05244837f6a9031724f54c11bf1f84875b07d90fadf"
+    },
+    {
+      "path": "SceneObj/Strat_T_13/terrain.bin",
+      "size": 14131098,
+      "sha256": "2de33b288c1c8712b3151694485ff1e9d9aa523e6c2046119ccafa39ff3c6710"
+    },
+    {
+      "path": "SceneObj/Strat_T_14/atmosphere.xml",
+      "size": 4953,
+      "sha256": "947bddfd2bfdfdc78c5d6dcd310a722f71f67d38473def593134a94d364e4cf4"
+    },
+    {
+      "path": "SceneObj/Strat_T_14/flora.bin",
+      "size": 19011,
+      "sha256": "d0fec6a393919f7d7b65a6d419578c0a6e9d1aac37d4f9be4c02dfc0400429f2"
+    },
+    {
+      "path": "SceneObj/Strat_T_14/navmesh.bin",
+      "size": 6883977,
+      "sha256": "8a40def4d35a88e51a04cde3899cf0c1aa64109c7e751746c543b8cd016ce45d"
+    },
+    {
+      "path": "SceneObj/Strat_T_14/scene.xscene",
+      "size": 2040555,
+      "sha256": "899ba003e49e52d971cba1c3a9b87eb60aaed0a387037bdcbb23e95d19a901c5"
+    },
+    {
+      "path": "SceneObj/Strat_T_14/terrain.bin",
+      "size": 7142636,
+      "sha256": "17bef48b504c0e2fb72e0b601b3d8b6edb22dc6d1344f71c55a68e579083f643"
+    },
+    {
+      "path": "SceneObj/Strat_T_15/atmosphere.xml",
+      "size": 4942,
+      "sha256": "34d0efc4ee2534383fa84722abe3a887955a416dabc64527aaff61e6788ef795"
+    },
+    {
+      "path": "SceneObj/Strat_T_15/flora.bin",
+      "size": 166185,
+      "sha256": "424a52380d5ec564b6a4c0a9b1690a545c6b01cb5518a18ab4d9053b5ef66335"
+    },
+    {
+      "path": "SceneObj/Strat_T_15/navmesh.bin",
+      "size": 9218200,
+      "sha256": "ebbedd2f20b91e483b8d8f161ecfa3b5924b0fe874246686d40f29ed0616b4e8"
+    },
+    {
+      "path": "SceneObj/Strat_T_15/scene.xscene",
+      "size": 889860,
+      "sha256": "bf2fe8a8981bed23f4a420201001df5a149e46f52d193083b56775136746d560"
+    },
+    {
+      "path": "SceneObj/Strat_T_15/terrain.bin",
+      "size": 12807166,
+      "sha256": "c4de00ed594474d9d24d608890b55ac4370b0de46b57adabb1abc981e47cc2f3"
+    },
+    {
+      "path": "SceneObj/Strat_T_16/atmosphere.xml",
+      "size": 4913,
+      "sha256": "eb8b38f5e85d97c78df9d2b5289931006af1521376494c68e56984230433499f"
+    },
+    {
+      "path": "SceneObj/Strat_T_16/flora.bin",
+      "size": 377418,
+      "sha256": "dcc9d87a8535989d98242e0e7314e737d19223645de2fbc68165793b0341285a"
+    },
+    {
+      "path": "SceneObj/Strat_T_16/navmesh.bin",
+      "size": 2827258,
+      "sha256": "c41d863a2bd42d91fd2914453127dc1628a3ce95073401acdb23f7622ae86f0c"
+    },
+    {
+      "path": "SceneObj/Strat_T_16/scene.xscene",
+      "size": 2028890,
+      "sha256": "98c6afd40c0ae7b79a9b380f0d96759e788533a93a364f3afbde349395f19523"
+    },
+    {
+      "path": "SceneObj/Strat_T_16/terrain.bin",
+      "size": 9289042,
+      "sha256": "59c33ee6a33cb25824809a080418f3f654c9c27142a28489ca4ddaa11bb32c96"
+    },
+    {
+      "path": "SceneObj/Strat_T_17/atmosphere.xml",
+      "size": 4890,
+      "sha256": "07a615059af802afe2fe9a36999618d7323e8125b1f119153ce3e64d2ed4eb5c"
+    },
+    {
+      "path": "SceneObj/Strat_T_17/flora.bin",
+      "size": 300702,
+      "sha256": "a31dce9d0193324a0425eab7852b14466e986da5776caa9d2c06bdcadba32bce"
+    },
+    {
+      "path": "SceneObj/Strat_T_17/navmesh.bin",
+      "size": 6471011,
+      "sha256": "9854b6a7db1543a93083d10d186584826cd4c37211d6ad458cf7f85e3f6bd953"
+    },
+    {
+      "path": "SceneObj/Strat_T_17/scene.xscene",
+      "size": 2228550,
+      "sha256": "e06b676f8f350e158f846355f69ed4d1f95ba8ef93f987cfeb08a1893757d8e2"
+    },
+    {
+      "path": "SceneObj/Strat_T_17/terrain.bin",
+      "size": 9337016,
+      "sha256": "91cdf61c2c0adb8851c323688b1f9393c71d7223468f916c32e01d5d7d05bb18"
+    },
+    {
+      "path": "SceneObj/Strat_T_18/atmosphere.xml",
+      "size": 4890,
+      "sha256": "07a615059af802afe2fe9a36999618d7323e8125b1f119153ce3e64d2ed4eb5c"
+    },
+    {
+      "path": "SceneObj/Strat_T_18/flora.bin",
+      "size": 15684,
+      "sha256": "393889bcd070864bcdb9017369c761646526039c40586fa10a3e18b555632fae"
+    },
+    {
+      "path": "SceneObj/Strat_T_18/navmesh.bin",
+      "size": 2481408,
+      "sha256": "4cbd0ef4d5d2eb57270c55b654f2b89becd1dae2c088737e16283c6ce6de2b3f"
+    },
+    {
+      "path": "SceneObj/Strat_T_18/scene.xscene",
+      "size": 2639474,
+      "sha256": "249dd762ade3892c449ef00a482d9345719a8670c53f229b83e3ddee14aeab9e"
+    },
+    {
+      "path": "SceneObj/Strat_T_18/terrain.bin",
+      "size": 18120949,
+      "sha256": "7ca69d8e8103323bae7985b6a80899e7f963cceb7eb6a75938f652e5f66f9749"
+    },
+    {
+      "path": "SceneObj/Strat_T_19/atmosphere.xml",
+      "size": 4890,
+      "sha256": "07a615059af802afe2fe9a36999618d7323e8125b1f119153ce3e64d2ed4eb5c"
+    },
+    {
+      "path": "SceneObj/Strat_T_19/flora.bin",
+      "size": 41513,
+      "sha256": "17ecc359c2d5d14fa7468dd83f186b203cbd6275c16137372e7384fb6e58fade"
+    },
+    {
+      "path": "SceneObj/Strat_T_19/navmesh.bin",
+      "size": 3971307,
+      "sha256": "4a20b99fd01ff75016b08a53b53fdcaa4dbebc8e1c86c932d625b582c6959976"
+    },
+    {
+      "path": "SceneObj/Strat_T_19/scene.xscene",
+      "size": 1135372,
+      "sha256": "e2983afb31bda183a8f96a64fb44af629298dc61645bcaf1a7cb5362c7edaeb7"
+    },
+    {
+      "path": "SceneObj/Strat_T_19/terrain.bin",
+      "size": 11091447,
+      "sha256": "446a5fb7acb2c5efcce716bbcdaa1f71520698d0f835ac8a9503136b6709e5c8"
+    },
+    {
       "path": "SceneObj/Strat_T_2/atmosphere.xml",
       "size": 4938,
       "sha256": "fe5f8f26c755479c94988c9f9bf56160c2ec0f7186f36c8d82a5ae40cedd6c66"
@@ -1681,6 +1931,181 @@
       "path": "SceneObj/Strat_T_2/terrain.bin",
       "size": 3684451,
       "sha256": "1bf2ae876c474f97678e663900cbc0c09beb86398349f014ee4c6744562384ac"
+    },
+    {
+      "path": "SceneObj/Strat_T_20/atmosphere.xml",
+      "size": 4962,
+      "sha256": "2589e6c308542737ce22d583fb0408c1a92e8549eddd907a55b2a34d21e8b844"
+    },
+    {
+      "path": "SceneObj/Strat_T_20/flora.bin",
+      "size": 91747,
+      "sha256": "db9d709a9a15066e2ce46971878bc368ddb8b6a544c31f4cd56949e863e841fd"
+    },
+    {
+      "path": "SceneObj/Strat_T_20/navmesh.bin",
+      "size": 4184486,
+      "sha256": "49ae703fb89286b2cc7b53485f9037c35255b7aff34a40b175f585fec1ebd4a6"
+    },
+    {
+      "path": "SceneObj/Strat_T_20/scene.xscene",
+      "size": 2540733,
+      "sha256": "087150f45a932e80cf94c7a7fb6c1c680f044c4d507289f87472f1b9840295f9"
+    },
+    {
+      "path": "SceneObj/Strat_T_20/terrain.bin",
+      "size": 14363462,
+      "sha256": "f3f7c377e7a3cdeee117329b09fd4f9ef46bbccce3a73915c197d93bb1220481"
+    },
+    {
+      "path": "SceneObj/Strat_T_21/atmosphere.xml",
+      "size": 4890,
+      "sha256": "07a615059af802afe2fe9a36999618d7323e8125b1f119153ce3e64d2ed4eb5c"
+    },
+    {
+      "path": "SceneObj/Strat_T_21/flora.bin",
+      "size": 46712,
+      "sha256": "d5a91baeb4cf019881559a1d239c38baf9ed126cf35b5b94de2a12db8826732a"
+    },
+    {
+      "path": "SceneObj/Strat_T_21/navmesh.bin",
+      "size": 3994614,
+      "sha256": "df059c2b6de51195477603f5b89747067db4c1d4f55a18f56015fd45ce0af59b"
+    },
+    {
+      "path": "SceneObj/Strat_T_21/scene.xscene",
+      "size": 580885,
+      "sha256": "6bd0ea8223e04d4590ac6dff0cd29d35df316044534dc11f14afd8051be3ee87"
+    },
+    {
+      "path": "SceneObj/Strat_T_21/terrain.bin",
+      "size": 9898035,
+      "sha256": "248458040c95e79f03bb25060d72e2556952c681c07b1b0d300da195f3b398ad"
+    },
+    {
+      "path": "SceneObj/Strat_T_22/atmosphere.xml",
+      "size": 4958,
+      "sha256": "205077e55a9bc2c0870ae84d7d794ced9eb131ed6c4e6b5822f2e704066edd46"
+    },
+    {
+      "path": "SceneObj/Strat_T_22/flora.bin",
+      "size": 225713,
+      "sha256": "356a50e1c5104a61888225ebfffe9a4727ef0aa44ef89f95db9f2cf9756deea3"
+    },
+    {
+      "path": "SceneObj/Strat_T_22/navmesh.bin",
+      "size": 2907408,
+      "sha256": "70e3971646e7e7e287ac19b9376541541c5fd4a767501a8b9db4bef19420ab26"
+    },
+    {
+      "path": "SceneObj/Strat_T_22/scene.xscene",
+      "size": 859079,
+      "sha256": "067c971da00c5a4a3300cf1de343ac79a1ec8456341e9e1f2b17f80cfb91f70c"
+    },
+    {
+      "path": "SceneObj/Strat_T_22/terrain.bin",
+      "size": 12895175,
+      "sha256": "471b9f8550f7173018ed59f9c6b09088c69887b6830b115922d94b7641709fe1"
+    },
+    {
+      "path": "SceneObj/Strat_T_23/atmosphere.xml",
+      "size": 4890,
+      "sha256": "07a615059af802afe2fe9a36999618d7323e8125b1f119153ce3e64d2ed4eb5c"
+    },
+    {
+      "path": "SceneObj/Strat_T_23/flora.bin",
+      "size": 343283,
+      "sha256": "34d4fc355596e0738dbd977e39b91b8c3d0290905efa101b16be1f68a9b3ee1d"
+    },
+    {
+      "path": "SceneObj/Strat_T_23/navmesh.bin",
+      "size": 4473156,
+      "sha256": "a7d5edba7af5067b6bc75528f74033e75c832bd5a80d591f027c6fe631910d93"
+    },
+    {
+      "path": "SceneObj/Strat_T_23/scene.xscene",
+      "size": 1087610,
+      "sha256": "519fa9d60dfe93cdd638e5530466c3e3c581de4c03cb4ae9ddd1e9a0017d760a"
+    },
+    {
+      "path": "SceneObj/Strat_T_23/terrain.bin",
+      "size": 6308969,
+      "sha256": "9ac7c66a3f2310c182f8da0dd1f5558d8878c12ecb98cfc1d0859b089d9ec6c2"
+    },
+    {
+      "path": "SceneObj/Strat_T_24/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/Strat_T_24/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/Strat_T_24/navmesh.bin",
+      "size": 3625728,
+      "sha256": "5c28dbbf04eb0a1f2e98e57490706498409361b618b62b79c24cd395d3f6a594"
+    },
+    {
+      "path": "SceneObj/Strat_T_24/scene.xscene",
+      "size": 1062701,
+      "sha256": "5c5291f14cf9cd6d73900105db0f288f63878b69404d798452dffdb078662236"
+    },
+    {
+      "path": "SceneObj/Strat_T_24/terrain.bin",
+      "size": 10690181,
+      "sha256": "39aa89b9a02b0dae24e5caede11a4287c49ff5f08bdb8cb935fe6fe23d12d78a"
+    },
+    {
+      "path": "SceneObj/Strat_T_25/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/Strat_T_25/flora.bin",
+      "size": 1453,
+      "sha256": "e21faff55cedafb216f738262332400e236802d86a1daf93f4f1da7d037839dc"
+    },
+    {
+      "path": "SceneObj/Strat_T_25/navmesh.bin",
+      "size": 3275114,
+      "sha256": "655ad8b1e3e9913603fd1e04d56c013c288dbe380ef976939240db11a068bb7d"
+    },
+    {
+      "path": "SceneObj/Strat_T_25/scene.xscene",
+      "size": 1065603,
+      "sha256": "fa9d3a4b537c9231824c0515d192b65e06037a1f299bc8c1012679551c3aa552"
+    },
+    {
+      "path": "SceneObj/Strat_T_25/terrain.bin",
+      "size": 10335415,
+      "sha256": "b4518c478580421a9c5c0a5540388a8b635531565dd852ebca20a7fd51ca2ecd"
+    },
+    {
+      "path": "SceneObj/Strat_T_26/atmosphere.xml",
+      "size": 4890,
+      "sha256": "07a615059af802afe2fe9a36999618d7323e8125b1f119153ce3e64d2ed4eb5c"
+    },
+    {
+      "path": "SceneObj/Strat_T_26/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/Strat_T_26/navmesh.bin",
+      "size": 2030990,
+      "sha256": "378325163445fa869758e798e882c5b9aa1481e829d89a594475484aa1daf770"
+    },
+    {
+      "path": "SceneObj/Strat_T_26/scene.xscene",
+      "size": 1327312,
+      "sha256": "f08bc7758acb1e7b3415f675219ee2dd1bb8bc5b5fe062508d9c5f1340a4c3df"
+    },
+    {
+      "path": "SceneObj/Strat_T_26/terrain.bin",
+      "size": 11585314,
+      "sha256": "2d877fe9e2c6f8eaf762af97ec98ff90bb2acaa79e3585766abe3979e15e12e6"
     },
     {
       "path": "SceneObj/Strat_T_3/atmosphere.xml",
@@ -1774,8 +2199,8 @@
     },
     {
       "path": "SceneObj/Strat_T_6/scene.xscene",
-      "size": 2063734,
-      "sha256": "fd4e5b7c0086d9b34497a32d2967d785cef1644fdcd42b3705d5aa31b1fd37aa"
+      "size": 2060784,
+      "sha256": "1a5bd9c24bb5fa0de164abb06e9030e683712eaa5264a2543f2fb22399540a54"
     },
     {
       "path": "SceneObj/Strat_T_6/terrain.bin",
@@ -1799,8 +2224,8 @@
     },
     {
       "path": "SceneObj/Strat_T_7/scene.xscene",
-      "size": 1869466,
-      "sha256": "653904094b2f3e3ffefce3c8db6586692670d10fe2e7145e16866bf8e80fee37"
+      "size": 1866543,
+      "sha256": "487902e006df8e5db9ecebc702304ef2a7d9300eec6b954bdf9672ba0654956f"
     },
     {
       "path": "SceneObj/Strat_T_7/terrain.bin",
@@ -1824,13 +2249,38 @@
     },
     {
       "path": "SceneObj/Strat_T_8/scene.xscene",
-      "size": 1685245,
-      "sha256": "d9114967b2977cb2b031b83be57dd0656fdf935f7210dc93f780cab4ead12c4e"
+      "size": 1682309,
+      "sha256": "366093938bc85f5a107c20f119e26bc6f23382739e23bf688ac8abfbbdab635e"
     },
     {
       "path": "SceneObj/Strat_T_8/terrain.bin",
       "size": 7817666,
       "sha256": "9a9d6c04d184a3094438819d33398b59059de0466abaf02edf22450d5e702579"
+    },
+    {
+      "path": "SceneObj/Strat_T_9/atmosphere.xml",
+      "size": 4955,
+      "sha256": "bfd9e02d755752c6dcfd44277a5b0ae6f898e4516cd4e993e57bc91f8017c54f"
+    },
+    {
+      "path": "SceneObj/Strat_T_9/flora.bin",
+      "size": 96283,
+      "sha256": "aa20912efc8eed110eaed61cb20818656db1a4bdd505c642bddbdb75ee2b4291"
+    },
+    {
+      "path": "SceneObj/Strat_T_9/navmesh.bin",
+      "size": 7132920,
+      "sha256": "6e8c98fc4b5e4fa20646936c104d0d10761344cbe866c86491aa6a7ddfa2a472"
+    },
+    {
+      "path": "SceneObj/Strat_T_9/scene.xscene",
+      "size": 1449901,
+      "sha256": "b6fb4b7a07a7859eb9ba17f3b6258308e95f290ec693c00637863c692b3ce24b"
+    },
+    {
+      "path": "SceneObj/Strat_T_9/terrain.bin",
+      "size": 7001951,
+      "sha256": "5f33acea2bc4650405bbacd39bb912f1656af3404d1ab23a1b4cd2ab0b6ec8bd"
     },
     {
       "path": "SceneObj/SwampBrawlBTL/atmosphere.xml",
@@ -5675,7 +6125,7 @@
     {
       "path": "SubModule.xml",
       "size": 7215,
-      "sha256": "97f3eed76df835d508c3f9735f186ae03ee3905cfc3176c2ead49e0f0363aab5"
+      "sha256": "ee237c7418fb980190661140080dec5ba3e7defc38da48c9d54b90661855a1bb"
     },
     {
       "path": "Videos/strategus_intro.ivf",
@@ -5700,22 +6150,22 @@
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.GauntletUI.dll",
       "size": 1451520,
-      "sha256": "0712fdf676f88684982b0c77bc0b8be264e8b4d264ce8e2a137fdb83c8d38c65"
+      "sha256": "42aaf88813f3f45f67c0d17e1b6f277387520cdb1f2930c4d1d4e64644cbde5c"
     },
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.View.dll",
       "size": 34304,
-      "sha256": "b8fa2bbe7577ff4a79614b1a7c000de6785867841006c91f45d3a1703500aef0"
+      "sha256": "8ecf0e0c06f9663ba40e1b0a3253af417fa5bd585f789b8b4285f956ad026e40"
     },
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.dll",
       "size": 2268160,
-      "sha256": "6a8ae2ca2a2b01449b039a094d01889d686dfdaf18ba71e0a01b29617f0ebcfc"
+      "sha256": "75519239489a1c5a8d9d2352bf0c7e7ec45a2f95d1493cceef7f8b1612dda1b5"
     },
     {
       "path": "bin/Win64_Shipping_Client/StrategusBattleBridge.GauntletUI.dll",
-      "size": 587776,
-      "sha256": "bc5c0c7f8eae69427424048d8c3d38e01b644d9a4b065cd4ed6aa6f2b2d00e5d"
+      "size": 604672,
+      "sha256": "37bcccc57b6e672ace40fa5b09e0b17308e096b652fc26dae5b6019f1e68f1b3"
     }
   ]
 }
