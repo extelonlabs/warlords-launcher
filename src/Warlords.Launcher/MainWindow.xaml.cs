@@ -195,7 +195,7 @@ public partial class MainWindow : Window
 
     private Task RefreshAndSynchronizeAsync(CancellationToken token) => RefreshAndSynchronizeAsync(token, false);
 
-    // fullCheck hashes every file. Otherwise an unchanged folder since the last full check passes at once.
+    // fullCheck hashes every file. Otherwise only file sizes are checked.
     private async Task RefreshAndSynchronizeAsync(CancellationToken token, bool fullCheck)
     {
         if (string.IsNullOrWhiteSpace(_channelLocation))
@@ -244,7 +244,8 @@ public partial class MainWindow : Window
         return _releaseReady;
     }
 
-    private async Task InstallCurrentAsync(CancellationToken token)
+    // repair reads every file; an update trusts the files the last check stamped.
+    private async Task InstallCurrentAsync(CancellationToken token, bool repair = false)
     {
         _releaseReady = false;
         var source = _source ?? throw new InvalidOperationException("Refresh the update channel before installing.");
@@ -258,7 +259,7 @@ public partial class MainWindow : Window
         foreach (var id in new[] { "Native", "Multiplayer" })
             if (SafeFiles.ReadXml(Path.Combine(modules, id, "SubModule.xml")).Root?.Element("Version")?.Attribute("value")?.Value != Profile.GameVersion)
                 throw new InvalidOperationException("This build requires Bannerlord " + Profile.GameVersion + ". Select the matching Steam installation.");
-        var result = await _installer.InstallAsync(root, source, Reporter(), token);
+        var result = await _installer.InstallAsync(root, source, Reporter(), token, repair);
         EndSteps(true);
         if (result.BackupPath is not null) Append("Previous module retained at " + result.BackupPath);
         await InspectGameAsync(token);
@@ -701,9 +702,8 @@ public partial class MainWindow : Window
             case PrimaryAction.Install: await RunAsync(InstallWithConsentAsync); break;
             case PrimaryAction.Play: await RunAsync(PlayCurrentAsync); break;
             default:
-                // "Check again" hashes every file. "Try again" after an error or cancel is a quick retry.
-                var fullCheck = !_hadError && !_wasCancelled;
-                await RunAsync(token => RefreshAndSynchronizeAsync(token, fullCheck));
+                // "Check again" and "Try again" are quick. Only Repair and Verify files read every file.
+                await RunAsync(token => RefreshAndSynchronizeAsync(token, false));
                 break;
         }
     }
@@ -870,7 +870,7 @@ public partial class MainWindow : Window
 
     private async void Refresh_Click(object sender, RoutedEventArgs e) => await RunAsync(async token =>
     {
-        await RefreshAndSynchronizeAsync(token, true);
+        await RefreshAndSynchronizeAsync(token, false);
     });
 
     private async void Install_Click(object sender, RoutedEventArgs e) => await RunAsync(InstallWithConsentAsync);
@@ -896,7 +896,7 @@ public partial class MainWindow : Window
                 return;
             }
         }
-        await InstallCurrentAsync(token);
+        await InstallCurrentAsync(token, true);
     }
 
     private async void Verify_Click(object sender, RoutedEventArgs e) => await RunAsync(async token =>

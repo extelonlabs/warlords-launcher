@@ -107,7 +107,8 @@ public sealed class InstallService
         return true;
     }
 
-    public async Task<InstallResult> InstallAsync(string gameRoot, ChannelSource source, IProgress<OperationProgress> progress, CancellationToken cancellationToken)
+    // repair reads every kept file. An update trusts files whose size and date still match the last stamp.
+    public async Task<InstallResult> InstallAsync(string gameRoot, ChannelSource source, IProgress<OperationProgress> progress, CancellationToken cancellationToken, bool repair = false)
     {
         ValidateRelease(source.Release);
         using IDisposable exclusive = AcquireLock(gameRoot);
@@ -128,7 +129,7 @@ public sealed class InstallService
         {
             Directory.CreateDirectory(stage);
             File.WriteAllText(Path.Combine(stage, OwnerName), transaction);
-            if (!await TryPatchAsync(target, stage, source, progress, cancellationToken).ConfigureAwait(false))
+            if (!await TryPatchAsync(target, stage, source, progress, cancellationToken, repair).ConfigureAwait(false))
             {
                 PackageLocation packageLocation = await GetPackageAsync(source, progress, cancellationToken).ConfigureAwait(false);
                 string package = packageLocation.Path;
@@ -168,7 +169,7 @@ public sealed class InstallService
             Directory.Move(stage, target);
             WriteJournal(modules, journal with { Phase = "committed" });
             File.Delete(Path.Combine(modules, JournalName));
-            // Every file was checked against its SHA-256 on the way in, so the next start or Play need not read them again.
+            // Every file was checked against its SHA-256 or the last stamp on the way in, so the next start or Play need not read them again.
             try
             {
                 if (Stamp(target, source.Release) is { } stamp) WriteStamp(stamp);
@@ -217,8 +218,8 @@ public sealed class InstallService
         return true;
     }
 
-    // A quick check compares sizes and dates with the stamp of the last full check. It can only pass
-    // or fall through to the full check, never fail on its own: a failed check starts a reinstall.
+    // Only a full check (Verify files) reads every file. A quick check passes a launcher-installed copy of this
+    // build whose files all have the right size, and fails otherwise: a failed check starts an update.
     private static async Task<bool> VerifyCoreAsync(string gameRoot, ReleaseChannel release, IProgress<OperationProgress> progress, CancellationToken cancellationToken, bool fullCheck)
     {
         GameService.EnsureClosed();
@@ -242,18 +243,15 @@ public sealed class InstallService
         if (installed is not null && (installed.SourceCommit != release.SourceCommit || installed.BuildId != release.BuildId)) return false;
         // Read before any hashing, so a file that changes during the check is never stamped as good.
         string? stamp = Stamp(target, release);
-        string? saved = ReadStamp();
-        if (!fullCheck && stamp is not null && saved == stamp)
+        if (!fullCheck)
         {
+            if (stamp is null || installed is null) return false;
             ValidateDescriptor(target, release);
-            progress.Report(new("Your files have not changed since the last full check", 1));
-            return true;
-        }
-        // No stamp yet (launchers before 0.5.9 never saved one after an update): a launcher-installed copy of
-        // this build whose every file has the right size is trusted once and stamped. Check again reads every file.
-        if (!fullCheck && stamp is not null && saved is null && installed is not null)
-        {
-            ValidateDescriptor(target, release);
+            if (ReadStamp() == stamp)
+            {
+                progress.Report(new("Your files have not changed since the last check", 1));
+                return true;
+            }
             WriteStamp(stamp);
             progress.Report(new("Your files match this version", 1));
             return true;
@@ -274,7 +272,7 @@ public sealed class InstallService
 
     private static string StampPath => Path.Combine(App.DataDirectory, "verified-files.txt");
 
-    // One line that changes when the folder, the build, or any file's size or date changes.
+    // The folder, the build, then path|size|sha|date for each file. An update reads it to keep files without hashing them.
     private static string? Stamp(string target, ReleaseChannel release)
     {
         StringBuilder text = new();
@@ -286,13 +284,26 @@ public sealed class InstallService
             if (!info.Exists || info.Length != file.Size) return null;
             text.Append(file.Path).Append('|').Append(file.Size).Append('|').Append(file.Sha256).Append('|').Append(info.LastWriteTimeUtc.Ticks).Append('\n');
         }
-        using SHA256 sha = SHA256.Create();
-        return Net48.ToHex(sha.ComputeHash(Encoding.UTF8.GetBytes(text.ToString())));
+        return text.ToString();
+    }
+
+    // Files of the stamped folder by path, as (size, sha, date). Empty when the stamp is missing or for another folder.
+    private static Dictionary<string, (long Size, string Sha256, long Ticks)> StampedFiles(string target)
+    {
+        Dictionary<string, (long, string, long)> files = new(StringComparer.OrdinalIgnoreCase);
+        string[] lines = (ReadStamp() ?? "").Split('\n');
+        if (lines.Length < 4 || lines[0] != SafeFiles.Long(target)) return files;
+        foreach (string line in lines.Skip(3))
+        {
+            string[] parts = line.Split('|');
+            if (parts.Length == 4 && long.TryParse(parts[1], out long size) && long.TryParse(parts[3], out long ticks)) files[parts[0]] = (size, parts[2], ticks);
+        }
+        return files;
     }
 
     private static string? ReadStamp()
     {
-        try { return File.Exists(StampPath) ? File.ReadAllText(StampPath).Trim() : null; }
+        try { return File.Exists(StampPath) ? File.ReadAllText(StampPath) : null; }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException) { return null; }
     }
 
@@ -368,8 +379,9 @@ public sealed class InstallService
 
     // An update keeps the installed files that did not change and downloads only the changed ones,
     // reading just their bytes out of the ZIP with HTTP ranges. Every file is still checked against
-    // its SHA-256. Any surprise empties the stage and returns false, and the whole ZIP is downloaded.
-    private static async Task<bool> TryPatchAsync(string target, string stage, ChannelSource source, IProgress<OperationProgress> progress, CancellationToken cancellationToken)
+    // its SHA-256, except a kept file whose size and date match the stamp: the stamp's SHA-256 stands for it.
+    // A repair ignores the stamp. Any surprise empties the stage and returns false, and the whole ZIP is downloaded.
+    private static async Task<bool> TryPatchAsync(string target, string stage, ChannelSource source, IProgress<OperationProgress> progress, CancellationToken cancellationToken, bool repair)
     {
         ReleaseChannel release = source.Release;
         Uri? address = RemoteAddress(source);
@@ -381,16 +393,25 @@ public sealed class InstallService
             // Read the ZIP's table of contents first, so a server without ranges costs nothing.
             (Dictionary<string, ZipEntry> entries, List<long> starts) = await ReadZipDirectoryAsync(client, address, release, cancellationToken).ConfigureAwait(false);
             List<ReleaseFile> changed = [];
-            int done = 0;
+            Dictionary<string, (long Size, string Sha256, long Ticks)> stamped = repair ? new(StringComparer.OrdinalIgnoreCase) : StampedFiles(target);
+            int done = 0, trusted = 0;
             foreach (ReleaseFile file in release.Files)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                if (!await CopyIfSameAsync(SafeFiles.Under(target, file.Path), SafeFiles.Under(stage, file.Path), file, cancellationToken).ConfigureAwait(false))
+                string installed = SafeFiles.Under(target, file.Path);
+                FileInfo info = new(installed);
+                if (stamped.TryGetValue(file.Path, out var known) && known.Size == file.Size && string.Equals(known.Sha256, file.Sha256, StringComparison.OrdinalIgnoreCase)
+                    && info.Exists && info.Length == file.Size && info.LastWriteTimeUtc.Ticks == known.Ticks)
+                {
+                    Copy(installed, SafeFiles.Under(stage, file.Path));
+                    trusted++;
+                }
+                else if (!await CopyIfSameAsync(installed, SafeFiles.Under(stage, file.Path), file, cancellationToken).ConfigureAwait(false))
                     changed.Add(file);
                 progress.Report(new("Keeping your unchanged files (" + (++done) + " / " + release.Files.Count + ")", 0.6 * done / release.Files.Count, Step: "download"));
             }
             await DownloadChangedAsync(client, address, release, entries, starts, changed, stage, progress, cancellationToken).ConfigureAwait(false);
-            App.Log("Kept " + (release.Files.Count - changed.Count) + " unchanged files and downloaded " + changed.Count + " changed files.");
+            App.Log("Kept " + (release.Files.Count - changed.Count) + " unchanged files (" + trusted + " by size and date) and downloaded " + changed.Count + " changed files.");
             return true;
         }
         // A timed-out request also throws a cancellation; only the player's Cancel stops the update.
@@ -407,6 +428,14 @@ public sealed class InstallService
             }
             return false;
         }
+    }
+
+    // Copies a file the stamp vouches for into the stage without hashing it. File.Copy, because reading a freshly
+    // written file through a FileStream waits for the virus scan: about 250 s against 20 s for 1.3 GB.
+    private static void Copy(string installed, string destination)
+    {
+        Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
+        File.Copy(installed, destination);
     }
 
     // Copies an installed file into the stage while hashing it. Returns false, keeping nothing, when it differs.
