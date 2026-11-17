@@ -2,15 +2,15 @@
   "schemaVersion": 1,
   "branch": "StratLords",
   "sourceRepository": "MB-Warlords/The-Last-Concord",
-  "sourceCommit": "888151137b2abf1c49f2e59d5f43e0ba4535ff72",
-  "version": "1.1.27",
+  "sourceCommit": "1bfc6d2785cd1086eacc5561b208411c7bb67f67",
+  "version": "1.1.28",
   "requiredGameVersion": "v1.5.7",
   "requiredArmoryVersion": "v1.0.0.17",
-  "buildId": "55e51e4e77b751068dc428f4d84faaf4277246479c6778e24ac9441cf9d5d733",
-  "createdUtc": "2026-11-17T16:03:09.427221+00:00",
-  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-888151137b2a-a2aa23a0eba6/Warlords-StratLords-1.1.27-8881511.zip",
-  "packageSha256": "a2aa23a0eba62054f28f12d1db4cb1995e02135f2feefb23f1b78e91eb65a11d",
-  "packageSize": 1068578549,
+  "buildId": "cd034fa9e73bc4b97d926a1d73fb7c4afbd377b54d0880effc00d1b8933c6558",
+  "createdUtc": "2026-11-17T18:07:22.453593+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-1bfc6d2785cd-f91a07f991de/Warlords-StratLords-1.1.28-1bfc6d2.zip",
+  "packageSha256": "f91a07f991de873030fc523d22586f205047d7a35581977d5a513962decba473",
+  "packageSize": 1068579419,
   "files": [
     {
       "path": "AssetPackages/banner.tpac",
@@ -910,12 +910,12 @@
     {
       "path": "ModuleData/stratlords-protocol.json",
       "size": 107835,
-      "sha256": "311ac86d036d8bddfcdb73ebb24661d4d129c17311ab3569090a6b28614b7c9d"
+      "sha256": "888f4c9d4e9f3bb34f7ddb271c9b7ec44228a6f91779149e2857e0a2f2c30b13"
     },
     {
       "path": "ModuleData/stratlords-servers.json",
       "size": 2740,
-      "sha256": "9c887021503e17e4b5249a6be5c6caa8d186c1efaa0bbef6fb930c63f62f7c7e"
+      "sha256": "67cabda745fec130317c92c6f1502539cc90486bb87a1c03a3b3afc49ae1a9e0"
     },
     {
       "path": "ModuleData/stratlords-village-playlist.json",
@@ -1674,8 +1674,8 @@
     },
     {
       "path": "SceneObj/Strat_T_10/scene.xscene",
-      "size": 2664104,
-      "sha256": "d6466be0798545b637c1e7d1458f7e595e9cd84e2acd99f01b3c57dcb6d8fba4"
+      "size": 2664336,
+      "sha256": "95e22551b14baf2ff13c56119469bfb8e2df5742812ccdaae150f015a1f06e39"
     },
     {
       "path": "SceneObj/Strat_T_10/terrain.bin",
@@ -1699,8 +1699,8 @@
     },
     {
       "path": "SceneObj/Strat_T_11/scene.xscene",
-      "size": 1425784,
-      "sha256": "89c63e29b469d5aeab61e4c400d8d73ebc411caf48e843242f63fc0187642a15"
+      "size": 1426024,
+      "sha256": "34b3ca895142bb2e0050a49a7de98fc28c257f6eefc61c35f0209513bae299ec"
     },
     {
       "path": "SceneObj/Strat_T_11/terrain.bin",
@@ -1724,8 +1724,8 @@
     },
     {
       "path": "SceneObj/Strat_T_12/scene.xscene",
-      "size": 1004802,
-      "sha256": "53ae69faab14ce5860af47fcb90fb812fcec697031266533b16dc12c04859fc7"
+      "size": 1004987,
+      "sha256": "e7c41c36ac2a4058c6ec603583e9a452d6faf3f636595b38b1e31b2e6f05b1fd"
     },
     {
       "path": "SceneObj/Strat_T_12/terrain.bin",
@@ -1749,8 +1749,8 @@
     },
     {
       "path": "SceneObj/Strat_T_13/scene.xscene",
-      "size": 1612793,
-      "sha256": "bf7a82487ff31615c2b6f05244837f6a9031724f54c11bf1f84875b07d90fadf"
+      "size": 1612988,
+      "sha256": "d1a781269b365656c73ac8099794d492a406b5b1538ea3055fc3d0c711530824"
     },
     {
       "path": "SceneObj/Strat_T_13/terrain.bin",
@@ -1774,8 +1774,8 @@
     },
     {
       "path": "SceneObj/Strat_T_14/scene.xscene",
-      "size": 2040555,
-      "sha256": "899ba003e49e52d971cba1c3a9b87eb60aaed0a387037bdcbb23e95d19a901c5"
+      "size": 2040801,
+      "sha256": "b8ea2a1c429835bca9fc57a3b634efa5d57abf9cea94a177788ecf14034287c5"
     },
     {
       "path": "SceneObj/Strat_T_14/terrain.bin",
@@ -1799,8 +1799,8 @@
     },
     {
       "path": "SceneObj/Strat_T_15/scene.xscene",
-      "size": 889860,
-      "sha256": "bf2fe8a8981bed23f4a420201001df5a149e46f52d193083b56775136746d560"
+      "size": 890104,
+      "sha256": "58e836277fdad5ed02b2de8d7f7379ab21dff60db6949c7b4b7e844d9d26ba83"
     },
     {
       "path": "SceneObj/Strat_T_15/terrain.bin",
@@ -1824,8 +1824,8 @@
     },
     {
       "path": "SceneObj/Strat_T_16/scene.xscene",
-      "size": 2028890,
-      "sha256": "98c6afd40c0ae7b79a9b380f0d96759e788533a93a364f3afbde349395f19523"
+      "size": 2029070,
+      "sha256": "adbf4b51d7cf12b39cc17fa3245bfe373804fdac4861553c88536df30cdc9954"
     },
     {
       "path": "SceneObj/Strat_T_16/terrain.bin",
@@ -1849,8 +1849,8 @@
     },
     {
       "path": "SceneObj/Strat_T_17/scene.xscene",
-      "size": 2228550,
-      "sha256": "e06b676f8f350e158f846355f69ed4d1f95ba8ef93f987cfeb08a1893757d8e2"
+      "size": 2228755,
+      "sha256": "2f0d07669c9960e3a7b5e3e188651cd9dca96613588752798a1acdda33133c14"
     },
     {
       "path": "SceneObj/Strat_T_17/terrain.bin",
@@ -1874,8 +1874,8 @@
     },
     {
       "path": "SceneObj/Strat_T_18/scene.xscene",
-      "size": 2639474,
-      "sha256": "249dd762ade3892c449ef00a482d9345719a8670c53f229b83e3ddee14aeab9e"
+      "size": 2639669,
+      "sha256": "677a411991a20ef242e105bdb04f48cc90fbe25b5ab90169ad6810567adaabe0"
     },
     {
       "path": "SceneObj/Strat_T_18/terrain.bin",
@@ -1899,8 +1899,8 @@
     },
     {
       "path": "SceneObj/Strat_T_19/scene.xscene",
-      "size": 1135372,
-      "sha256": "e2983afb31bda183a8f96a64fb44af629298dc61645bcaf1a7cb5362c7edaeb7"
+      "size": 1135604,
+      "sha256": "ed839b3132d9a8a2d5e1c05f06b76f5f858d671ba05a542ecc1f71ea01d15be5"
     },
     {
       "path": "SceneObj/Strat_T_19/terrain.bin",
@@ -1949,8 +1949,8 @@
     },
     {
       "path": "SceneObj/Strat_T_20/scene.xscene",
-      "size": 2540733,
-      "sha256": "087150f45a932e80cf94c7a7fb6c1c680f044c4d507289f87472f1b9840295f9"
+      "size": 2540938,
+      "sha256": "1542d335f4b2638c4e3fbdc1589d100d018a10ece0d5ec0d867f634eafde1d87"
     },
     {
       "path": "SceneObj/Strat_T_20/terrain.bin",
@@ -1974,8 +1974,8 @@
     },
     {
       "path": "SceneObj/Strat_T_21/scene.xscene",
-      "size": 580885,
-      "sha256": "6bd0ea8223e04d4590ac6dff0cd29d35df316044534dc11f14afd8051be3ee87"
+      "size": 581103,
+      "sha256": "754c9bd34d659a4d32d3421d77f9e05c7699757719a39b7a1eef61c223eda462"
     },
     {
       "path": "SceneObj/Strat_T_21/terrain.bin",
@@ -1999,8 +1999,8 @@
     },
     {
       "path": "SceneObj/Strat_T_22/scene.xscene",
-      "size": 859082,
-      "sha256": "e318297f07f2d92b933d6db634f3ed1e04ffdc99aad6d7b8bd64772ab71305c9"
+      "size": 859325,
+      "sha256": "a69e6d716d918dd1c145adbb2103f135493692924b57674b1b177a8770f053fa"
     },
     {
       "path": "SceneObj/Strat_T_22/terrain.bin",
@@ -2024,8 +2024,8 @@
     },
     {
       "path": "SceneObj/Strat_T_23/scene.xscene",
-      "size": 1087610,
-      "sha256": "519fa9d60dfe93cdd638e5530466c3e3c581de4c03cb4ae9ddd1e9a0017d760a"
+      "size": 1087855,
+      "sha256": "d5283e30c596d66b968a020b8ba90ed45424f122fcb13bc4673072060b4130fa"
     },
     {
       "path": "SceneObj/Strat_T_23/terrain.bin",
@@ -2049,8 +2049,8 @@
     },
     {
       "path": "SceneObj/Strat_T_24/scene.xscene",
-      "size": 1062701,
-      "sha256": "5c5291f14cf9cd6d73900105db0f288f63878b69404d798452dffdb078662236"
+      "size": 1062945,
+      "sha256": "4bcd1b10fac51686afb7f66b7845907bdf89fd4d815ac8053021ba9fdd6401be"
     },
     {
       "path": "SceneObj/Strat_T_24/terrain.bin",
@@ -2074,8 +2074,8 @@
     },
     {
       "path": "SceneObj/Strat_T_25/scene.xscene",
-      "size": 1065603,
-      "sha256": "fa9d3a4b537c9231824c0515d192b65e06037a1f299bc8c1012679551c3aa552"
+      "size": 1065803,
+      "sha256": "2244cb704373802f0142209b0f90ef7120a8ceb0c3181c044922614986ced12b"
     },
     {
       "path": "SceneObj/Strat_T_25/terrain.bin",
@@ -2099,8 +2099,8 @@
     },
     {
       "path": "SceneObj/Strat_T_26/scene.xscene",
-      "size": 1327312,
-      "sha256": "f08bc7758acb1e7b3415f675219ee2dd1bb8bc5b5fe062508d9c5f1340a4c3df"
+      "size": 1327553,
+      "sha256": "1a4d504cd49cc5a24c6d517f00f4940080288a2a4cb512e3184199511f206a56"
     },
     {
       "path": "SceneObj/Strat_T_26/terrain.bin",
@@ -2124,8 +2124,8 @@
     },
     {
       "path": "SceneObj/Strat_T_3/scene.xscene",
-      "size": 1333061,
-      "sha256": "2d5d013ae300276080b1494e4691d890cd9a06c03a75d281325da16af59530de"
+      "size": 1333101,
+      "sha256": "496edbe912f82056dd4ec63dc68767d69c798ec14e287510bd8a95df4af849d2"
     },
     {
       "path": "SceneObj/Strat_T_3/terrain.bin",
@@ -2149,8 +2149,8 @@
     },
     {
       "path": "SceneObj/Strat_T_4/scene.xscene",
-      "size": 1662710,
-      "sha256": "60f0b1a7d5e931e3ba9a8b8a9bac7075ae863390ee40bae362e203207b75d15b"
+      "size": 1662945,
+      "sha256": "a21638837c826a1c122346d9e5438692ee27ce33280003b0ffdc03f494c5db25"
     },
     {
       "path": "SceneObj/Strat_T_4/terrain.bin",
@@ -2224,8 +2224,8 @@
     },
     {
       "path": "SceneObj/Strat_T_7/scene.xscene",
-      "size": 1866543,
-      "sha256": "487902e006df8e5db9ecebc702304ef2a7d9300eec6b954bdf9672ba0654956f"
+      "size": 1866733,
+      "sha256": "6d350a76c3aa33ebd259b51939fae12013d7429e15898e8d68ba6c4e23bc9647"
     },
     {
       "path": "SceneObj/Strat_T_7/terrain.bin",
@@ -2249,8 +2249,8 @@
     },
     {
       "path": "SceneObj/Strat_T_8/scene.xscene",
-      "size": 1682309,
-      "sha256": "366093938bc85f5a107c20f119e26bc6f23382739e23bf688ac8abfbbdab635e"
+      "size": 1682573,
+      "sha256": "004ce05de7ba3aadca0c2232c34aa12e23038038135fcf87664c241811b20471"
     },
     {
       "path": "SceneObj/Strat_T_8/terrain.bin",
@@ -2274,8 +2274,8 @@
     },
     {
       "path": "SceneObj/Strat_T_9/scene.xscene",
-      "size": 1449901,
-      "sha256": "b6fb4b7a07a7859eb9ba17f3b6258308e95f290ec693c00637863c692b3ce24b"
+      "size": 1450141,
+      "sha256": "39f2147706e7a607183ee945f03ea97c851d8cec7735bfe2bd14bae5ea7eb532"
     },
     {
       "path": "SceneObj/Strat_T_9/terrain.bin",
@@ -6125,7 +6125,7 @@
     {
       "path": "SubModule.xml",
       "size": 7215,
-      "sha256": "966aa8fcdd8b8ac0968a0ad193a52dfc2aceac6269aec2e17e91dfe68f98ebb2"
+      "sha256": "b207d2f75984c0313fdef686dacc162c8d204b8869b61c8035342f3c41a6e2f6"
     },
     {
       "path": "Videos/strategus_intro.ivf",
@@ -6150,22 +6150,22 @@
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.GauntletUI.dll",
       "size": 1451520,
-      "sha256": "9f71f85772a6c7b9cdfe8c81c2a07fa8b72dacac203a9ba0515049b68e67aa3b"
+      "sha256": "46a85ad221fbf7a83005b058c22b7e29dd1c4e679ab5ac5d3d36e48465250e88"
     },
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.View.dll",
       "size": 34304,
-      "sha256": "11c5c17b072b4a1a67bafb463bcda3c7002256dffb01f4f9c08b9cb9bf30b5c8"
+      "sha256": "ae3b840c8dcee7650abccf16b43ff77228be900c64ac3d99aa820e92bde248c0"
     },
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.dll",
       "size": 2268160,
-      "sha256": "39a386994330b2ade272a780fa391eff901d21d2f924a2c5361ca375f9782f80"
+      "sha256": "d2a8290d80f2e3801e7cec967a43210a4f9d2503835951854d9594736b4f7442"
     },
     {
       "path": "bin/Win64_Shipping_Client/StrategusBattleBridge.GauntletUI.dll",
       "size": 611328,
-      "sha256": "0f0b61baeaeee8731f902cf8eae6f6cf283b4a2e3b442434a402c3dcb5b15759"
+      "sha256": "25183b20e89c403d1da104796307586061614b8391d4b721d693caf79162d381"
     }
   ]
 }
