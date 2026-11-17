@@ -162,11 +162,11 @@ public sealed class InstallService
             if (Directory.Exists(target))
             {
                 progress.Report(new("Saving a backup of the old version", 0.98, Step: "backup"));
-                Directory.Move(target, backup);
+                MoveWhenFree(target, backup, progress, "backup");
             }
             WriteJournal(modules, journal with { Phase = "backedUp" });
             progress.Report(new("Installing Warlords", 0.99, Step: "swap"));
-            Directory.Move(stage, target);
+            MoveWhenFree(stage, target, progress, "swap");
             WriteJournal(modules, journal with { Phase = "committed" });
             File.Delete(Path.Combine(modules, JournalName));
             // Every file was checked against its SHA-256 or the last stamp on the way in, so the next start or Play need not read them again.
@@ -195,6 +195,29 @@ public sealed class InstallService
             {
                 SafeFiles.NoLinks(downloadedPackage);
                 File.Delete(downloadedPackage);
+            }
+        }
+    }
+
+    // Windows can refuse to move a folder for a short time after many of its files were read, most likely
+    // while a virus scan finishes. A refused move changes nothing, so wait and try again for up to a minute.
+    private static void MoveWhenFree(string from, string to, IProgress<OperationProgress> progress, string step)
+    {
+        for (int attempt = 1; ; attempt++)
+        {
+            try
+            {
+                Directory.Move(from, to);
+                return;
+            }
+            catch (Exception ex) when ((ex is IOException or UnauthorizedAccessException) && attempt < 60 && Directory.Exists(from) && !Directory.Exists(to))
+            {
+                if (attempt == 1)
+                {
+                    App.Log("Windows is still using the files, so the launcher waits and tries again: " + ex.Message);
+                    progress.Report(new("Waiting for Windows to finish with the files", 0.99, Step: step));
+                }
+                Thread.Sleep(1000);
             }
         }
     }
