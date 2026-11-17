@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "3b34cbcbd4ef6ed5222adb1fc85700c36c6ace1b",
+  "version": "1.1.25",
+  "entries": [
+    {
+      "version": "1.1.25",
+      "date": "2026-11-17",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Castle Sieges now has 21 converted maps for multiplayer testing. Admins can switch maps in Change Map."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Attacker flags use the siege camp or staging area. Human defenders and AI reinforcements spawn around the defender flag inside the castle. Castle flag spacing follows each layout. Villages still require at least 250 metres."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.24",
+      "date": "2026-11-17",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added Ain Baliq, Ab Comer and Lochana to the shared client for multiplayer siege testing. The castle test session has 500 AI defender tickets and a 10-second warmup. Admins can switch between the three castles in Change Map."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.23",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added server support for the approved village maps in campaign battles. Campaign battles can use the scene assigned to the village when the campaign map routing is enabled."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.22",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "If a generated village spawn is blocked, the server finds safe spawn positions near that side's flag. The approved flag positions stay fixed."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.21",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Corrected how the village server checks map files in Battle Lab so it can read the approved village package from its mounted folders."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.20",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed a server startup error that prevented the approved village maps from loading. Map files and reviewed flag layouts are unchanged."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.19",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added 77 approved village maps to the normal client download, bringing the village test selection to 82 maps. Four rejected villages are left out."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Admins can choose from the full approved village selection in Change Map. Village names appear in the map picker and battle interface.",
+            "New village layouts keep the reviewed flag positions at least 250 metres apart. Each switch keeps the attacker roster, AI defenders and 15-second warmup.",
+            "The new villages are ready for in-game review once this release is delivered."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.18",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed the missing Change Map option for admins in village siege rehearsals."
+          ]
+        }
+      ]
+    }
+  ]
+}
