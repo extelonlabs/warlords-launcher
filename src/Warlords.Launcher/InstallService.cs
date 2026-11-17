@@ -128,13 +128,16 @@ public sealed class InstallService
         {
             Directory.CreateDirectory(stage);
             File.WriteAllText(Path.Combine(stage, OwnerName), transaction);
-            PackageLocation packageLocation = await GetPackageAsync(source, progress, cancellationToken).ConfigureAwait(false);
-            string package = packageLocation.Path;
-            if (packageLocation.Temporary) downloadedPackage = package;
-            progress.Report(new("Checking the download", 0.82, Step: "check"));
-            if (!await SafeFiles.MatchesAsync(package, source.Release.PackageSize, source.Release.PackageSha256, cancellationToken).ConfigureAwait(false))
-                throw new InvalidDataException("The download is damaged or incomplete. Choose Try again to download it again.");
-            await ExtractAsync(package, stage, source.Release, progress, cancellationToken).ConfigureAwait(false);
+            if (!await TryPatchAsync(target, stage, source, progress, cancellationToken).ConfigureAwait(false))
+            {
+                PackageLocation packageLocation = await GetPackageAsync(source, progress, cancellationToken).ConfigureAwait(false);
+                string package = packageLocation.Path;
+                if (packageLocation.Temporary) downloadedPackage = package;
+                progress.Report(new("Checking the download", 0.82, Step: "check"));
+                if (!await SafeFiles.MatchesAsync(package, source.Release.PackageSize, source.Release.PackageSha256, cancellationToken).ConfigureAwait(false))
+                    throw new InvalidDataException("The download is damaged or incomplete. Choose Try again to download it again.");
+                await ExtractAsync(package, stage, source.Release, progress, cancellationToken).ConfigureAwait(false);
+            }
             ValidateDescriptor(stage, source.Release);
             string oldOptions = SafeFiles.Under(target, OptionsPath);
             if (File.Exists(oldOptions))
@@ -165,6 +168,15 @@ public sealed class InstallService
             Directory.Move(stage, target);
             WriteJournal(modules, journal with { Phase = "committed" });
             File.Delete(Path.Combine(modules, JournalName));
+            // Every file was checked against its SHA-256 on the way in, so the next start or Play need not read them again.
+            try
+            {
+                if (Stamp(target, source.Release) is { } stamp) WriteStamp(stamp);
+            }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+            {
+                App.Log("The file check stamp could not be saved: " + ex.Message);
+            }
             if (journal.TargetWasPresent) RemoveOlderBackups(recovery, journal.BackupName);
             progress.Report(new("Installed", 1));
             return new InstallResult(SafeFiles.Long(target), journal.TargetWasPresent ? SafeFiles.Long(backup) : null);
@@ -225,6 +237,8 @@ public sealed class InstallService
             if (relative.Equals(StateName, StringComparison.OrdinalIgnoreCase) || relative.Equals(OptionsPath, StringComparison.OrdinalIgnoreCase)) continue;
             if (!expected.ContainsKey(relative)) return false;
         }
+        // An install of another build needs the update anyway, so reading every file first only wastes time.
+        if (InstalledBuild(target) is { } installed && (installed.SourceCommit != release.SourceCommit || installed.BuildId != release.BuildId)) return false;
         // Read before any hashing, so a file that changes during the check is never stamped as good.
         string? stamp = Stamp(target, release);
         if (!fullCheck && stamp is not null && ReadStamp() == stamp)
@@ -333,12 +347,242 @@ public sealed class InstallService
         }
     }
 
+    private static Uri? RemoteAddress(ChannelSource source)
+    {
+        if (Uri.TryCreate(source.Release.Package, UriKind.Absolute, out Uri? absolute)) return absolute;
+        if (Uri.TryCreate(source.Location, UriKind.Absolute, out Uri? channelUri) && channelUri.Scheme == Uri.UriSchemeHttps)
+            return new Uri(channelUri, source.Release.Package);
+        return null;
+    }
+
+    // An update keeps the installed files that did not change and downloads only the changed ones,
+    // reading just their bytes out of the ZIP with HTTP ranges. Every file is still checked against
+    // its SHA-256. Any surprise empties the stage and returns false, and the whole ZIP is downloaded.
+    private static async Task<bool> TryPatchAsync(string target, string stage, ChannelSource source, IProgress<OperationProgress> progress, CancellationToken cancellationToken)
+    {
+        ReleaseChannel release = source.Release;
+        Uri? address = RemoteAddress(source);
+        if (address is null || address.Scheme != Uri.UriSchemeHttps || !Directory.Exists(target)) return false;
+        try
+        {
+            using HttpClient client = new(new HttpClientHandler { AllowAutoRedirect = false }) { Timeout = TimeSpan.FromMinutes(5) };
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("Warlords-Launcher/0.2.0");
+            // Read the ZIP's table of contents first, so a server without ranges costs nothing.
+            (Dictionary<string, ZipEntry> entries, List<long> starts) = await ReadZipDirectoryAsync(client, address, release, cancellationToken).ConfigureAwait(false);
+            List<ReleaseFile> changed = [];
+            int done = 0;
+            foreach (ReleaseFile file in release.Files)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                if (!await CopyIfSameAsync(SafeFiles.Under(target, file.Path), SafeFiles.Under(stage, file.Path), file, cancellationToken).ConfigureAwait(false))
+                    changed.Add(file);
+                progress.Report(new("Keeping your unchanged files (" + (++done) + " / " + release.Files.Count + ")", 0.6 * done / release.Files.Count, Step: "download"));
+            }
+            await DownloadChangedAsync(client, address, release, entries, starts, changed, stage, progress, cancellationToken).ConfigureAwait(false);
+            App.Log("Kept " + (release.Files.Count - changed.Count) + " unchanged files and downloaded " + changed.Count + " changed files.");
+            return true;
+        }
+        // A timed-out request also throws a cancellation; only the player's Cancel stops the update.
+        catch (Exception ex) when (!cancellationToken.IsCancellationRequested)
+        {
+            App.Log("Downloading only the changed files did not work, so the whole update is downloaded: " + ex.Message);
+            // The stage and its owner file stay, so recovery still knows the stage is ours if this stops halfway.
+            _ = SafeFiles.TreeFiles(stage); // Refuses a folder with links inside.
+            foreach (string entry in Directory.EnumerateFileSystemEntries(SafeFiles.Extended(stage)).ToList())
+            {
+                if (Path.GetFileName(entry).Equals(OwnerName, StringComparison.OrdinalIgnoreCase)) continue;
+                if (Directory.Exists(entry)) Directory.Delete(entry, true);
+                else File.Delete(entry);
+            }
+            return false;
+        }
+    }
+
+    // Copies an installed file into the stage while hashing it. Returns false, keeping nothing, when it differs.
+    private static async Task<bool> CopyIfSameAsync(string installed, string destination, ReleaseFile file, CancellationToken cancellationToken)
+    {
+        if (!File.Exists(installed) || new FileInfo(installed).Length != file.Size) return false;
+        Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
+        bool same;
+        using (FileStream input = new(installed, FileMode.Open, FileAccess.Read, FileShare.Read, 131072, FileOptions.Asynchronous | FileOptions.SequentialScan))
+        using (FileStream output = new(destination, FileMode.CreateNew, FileAccess.Write, FileShare.None, 131072, FileOptions.Asynchronous))
+        using (IncrementalHash hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256))
+        {
+            byte[] buffer = new byte[131072];
+            long total = 0;
+            int read;
+            while ((read = await input.ReadAsync(buffer, cancellationToken).ConfigureAwait(false)) > 0)
+            {
+                total += read;
+                if (total > file.Size) break;
+                hash.AppendData(buffer, 0, read);
+                await output.WriteAsync(buffer, 0, read, cancellationToken).ConfigureAwait(false);
+            }
+            same = total == file.Size && Net48.FixedTimeEquals(hash.GetHashAndReset(), Net48.FromHex(file.Sha256));
+        }
+        if (!same) File.Delete(destination);
+        return same;
+    }
+
+    private sealed record ZipEntry(long Offset, long CompressedSize, long Size, int Method);
+
+    // Reads the central directory: the list at the end of a ZIP of every file and where its bytes start.
+    private static async Task<(Dictionary<string, ZipEntry> Entries, List<long> Starts)> ReadZipDirectoryAsync(HttpClient client, Uri address, ReleaseChannel release, CancellationToken cancellationToken)
+    {
+        long packageSize = release.PackageSize;
+        int tailLength = (int)Math.Min(packageSize, 65536 + 22);
+        byte[] tail = await GetRangeAsync(client, address, packageSize, packageSize - tailLength, tailLength, cancellationToken).ConfigureAwait(false);
+        int end = -1;
+        for (int index = tail.Length - 22; index >= 0 && end < 0; index--)
+            if (BitConverter.ToUInt32(tail, index) == 0x06054b50) end = index;
+        if (end < 0) throw new InvalidDataException("The ZIP has no end record.");
+        int count = BitConverter.ToUInt16(tail, end + 10);
+        long directorySize = BitConverter.ToUInt32(tail, end + 12);
+        long directoryOffset = BitConverter.ToUInt32(tail, end + 16);
+        // A ZIP64 or split archive marks these fields; it goes the safe whole-file way.
+        if (BitConverter.ToUInt16(tail, end + 4) != 0 || BitConverter.ToUInt16(tail, end + 6) != 0 || BitConverter.ToUInt16(tail, end + 8) != count
+            || count == 0xFFFF || directorySize == 0xFFFFFFFF || directoryOffset == 0xFFFFFFFF
+            || directorySize > 16 * 1024 * 1024 || directoryOffset + directorySize > packageSize - tailLength + end)
+            throw new InvalidDataException("The ZIP's file list is not supported for partial downloads.");
+        byte[] directory = await GetRangeAsync(client, address, packageSize, directoryOffset, (int)directorySize, cancellationToken).ConfigureAwait(false);
+        Dictionary<string, ZipEntry> entries = new(StringComparer.OrdinalIgnoreCase);
+        int position = 0;
+        for (int index = 0; index < count; index++)
+        {
+            if (position + 46 > directory.Length || BitConverter.ToUInt32(directory, position) != 0x02014b50) throw new InvalidDataException("The ZIP's file list is damaged.");
+            int flags = BitConverter.ToUInt16(directory, position + 8);
+            int method = BitConverter.ToUInt16(directory, position + 10);
+            long compressed = BitConverter.ToUInt32(directory, position + 20);
+            long size = BitConverter.ToUInt32(directory, position + 24);
+            int nameLength = BitConverter.ToUInt16(directory, position + 28);
+            int skip = nameLength + BitConverter.ToUInt16(directory, position + 30) + BitConverter.ToUInt16(directory, position + 32);
+            long offset = BitConverter.ToUInt32(directory, position + 42);
+            if (position + 46 + skip > directory.Length) throw new InvalidDataException("The ZIP's file list is damaged.");
+            byte[] nameBytes = new byte[nameLength];
+            Array.Copy(directory, position + 46, nameBytes, 0, nameLength);
+            // Names are UTF-8 when flag 11 is set; otherwise only plain ASCII names are safe to read.
+            if ((flags & 0x800) == 0 && nameBytes.Any(value => value >= 0x80)) throw new InvalidDataException("The ZIP has a file name in an old encoding.");
+            string name = Encoding.UTF8.GetString(nameBytes);
+            position += 46 + skip;
+            if (name.EndsWith('/')) continue;
+            if (!name.StartsWith("StratLords/", StringComparison.Ordinal)) throw new InvalidDataException("The ZIP must contain only the StratLords module folder.");
+            if ((flags & 1) != 0 || method is not (0 or 8) || (method == 0 && compressed != size) || offset >= directoryOffset)
+                throw new InvalidDataException("The ZIP stores a file in an unsupported way.");
+            if (!entries.TryAdd(name.Substring("StratLords/".Length), new ZipEntry(offset, compressed, size, method)))
+                throw new InvalidDataException("The ZIP contains duplicate paths.");
+        }
+        foreach (ReleaseFile file in release.Files)
+            if (!entries.TryGetValue(file.Path, out ZipEntry? entry) || entry.Size != file.Size)
+                throw new InvalidDataException("The ZIP does not match its approved file inventory: " + file.Path);
+        // Each entry's bytes end where the next entry starts, so one range read covers its header and data.
+        List<long> starts = entries.Values.Select(entry => entry.Offset).Concat(new[] { directoryOffset }).Distinct().OrderBy(offset => offset).ToList();
+        if (starts.Count != entries.Count + 1) throw new InvalidDataException("The ZIP has overlapping files.");
+        return (entries, starts);
+    }
+
+    private static async Task DownloadChangedAsync(HttpClient client, Uri address, ReleaseChannel release, Dictionary<string, ZipEntry> entries, List<long> starts, List<ReleaseFile> changed,
+        string stage, IProgress<OperationProgress> progress, CancellationToken cancellationToken)
+    {
+        if (changed.Count == 0) return;
+        const long Gap = 256 * 1024, MaximumRange = 64L * 1024 * 1024;
+        // Neighbouring files are fetched together; a gap is cheaper to download than another request.
+        List<(long Start, long End, List<ReleaseFile> Files)> ranges = [];
+        foreach (ReleaseFile file in changed.OrderBy(file => entries[file.Path].Offset))
+        {
+            ZipEntry entry = entries[file.Path];
+            // The last start is the file list itself, so every entry has a next start.
+            long end = starts[starts.BinarySearch(entry.Offset) + 1];
+            if (end - entry.Offset > MaximumRange) throw new InvalidDataException("A changed file is too large for a partial download.");
+            int last = ranges.Count - 1;
+            if (last >= 0 && entry.Offset - ranges[last].End <= Gap && end - ranges[last].Start <= MaximumRange)
+            {
+                ranges[last].Files.Add(file);
+                ranges[last] = (ranges[last].Start, end, ranges[last].Files);
+            }
+            else ranges.Add((entry.Offset, end, [file]));
+        }
+        if (ranges.Count > 300) throw new InvalidDataException("Too many separate changes for a partial download.");
+        long total = ranges.Sum(range => range.End - range.Start), received = 0;
+        int written = 0;
+        foreach ((long start, long end, List<ReleaseFile> files) in ranges)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            byte[] bytes = await GetRangeAsync(client, address, release.PackageSize, start, (int)(end - start), cancellationToken).ConfigureAwait(false);
+            foreach (ReleaseFile file in files)
+            {
+                ZipEntry entry = entries[file.Path];
+                int header = (int)(entry.Offset - start);
+                if (header + 30 > bytes.Length || BitConverter.ToUInt32(bytes, header) != 0x04034b50) throw new InvalidDataException("A ZIP file header is damaged: " + file.Path);
+                long data = header + 30L + BitConverter.ToUInt16(bytes, header + 26) + BitConverter.ToUInt16(bytes, header + 28);
+                if (data + entry.CompressedSize > bytes.Length) throw new InvalidDataException("A ZIP file runs past its range: " + file.Path);
+                string destination = SafeFiles.Under(stage, file.Path);
+                Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
+                using Stream packed = new MemoryStream(bytes, (int)data, (int)entry.CompressedSize, false);
+                using Stream input = entry.Method == 8 ? new DeflateStream(packed, CompressionMode.Decompress) : packed;
+                using (FileStream output = new(destination, FileMode.CreateNew, FileAccess.Write, FileShare.None, 131072, FileOptions.Asynchronous))
+                {
+                    using IncrementalHash hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+                    byte[] buffer = new byte[131072];
+                    long length = 0;
+                    int read;
+                    while ((read = await input.ReadAsync(buffer, 0, buffer.Length, cancellationToken).ConfigureAwait(false)) > 0)
+                    {
+                        length += read;
+                        if (length > file.Size) throw new InvalidDataException("A ZIP entry expands beyond its approved length.");
+                        hash.AppendData(buffer, 0, read);
+                        await output.WriteAsync(buffer, 0, read, cancellationToken).ConfigureAwait(false);
+                    }
+                    if (length != file.Size || !Net48.FixedTimeEquals(hash.GetHashAndReset(), Net48.FromHex(file.Sha256)))
+                        throw new InvalidDataException("A downloaded file failed SHA-256 verification: " + file.Path);
+                }
+                written++;
+            }
+            received += end - start;
+            progress.Report(new("Downloading changed files (" + written + " / " + changed.Count + ")", 0.6 + 0.37 * received / total, received, total, "download"));
+        }
+    }
+
+    // Reads exactly length bytes at offset. Only a 206 reply for that exact range is accepted.
+    private static async Task<byte[]> GetRangeAsync(HttpClient client, Uri address, long packageSize, long offset, int length, CancellationToken cancellationToken)
+    {
+        // HttpClient's own timeout stops at the headers; this one also ends a stalled body read.
+        using CancellationTokenSource timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeout.CancelAfter(TimeSpan.FromMinutes(2));
+        CancellationToken token = timeout.Token;
+        for (int redirects = 0; redirects < 6; redirects++)
+        {
+            using HttpRequestMessage request = new(HttpMethod.Get, address);
+            request.Headers.Range = new System.Net.Http.Headers.RangeHeaderValue(offset, offset + length - 1);
+            using HttpResponseMessage response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, token).ConfigureAwait(false);
+            if (response.StatusCode is HttpStatusCode.MovedPermanently or HttpStatusCode.Redirect or HttpStatusCode.RedirectMethod or HttpStatusCode.TemporaryRedirect or (HttpStatusCode)308)
+            {
+                Uri next = response.Headers.Location is { } location ? new Uri(address, location) : throw new IOException("The download server returned an empty redirect.");
+                if (next.Scheme != Uri.UriSchemeHttps || !string.IsNullOrEmpty(next.UserInfo)) throw new IOException("The download redirected away from a safe HTTPS address.");
+                address = next;
+                continue;
+            }
+            System.Net.Http.Headers.ContentRangeHeaderValue? range = response.Content.Headers.ContentRange;
+            if (response.StatusCode != HttpStatusCode.PartialContent || range is null || range.From != offset || range.To != offset + length - 1 || range.Length != packageSize)
+                throw new IOException("The download server does not support partial downloads.");
+            using Stream input = await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false);
+            byte[] bytes = new byte[length];
+            byte[] buffer = new byte[131072];
+            int total = 0, read;
+            while ((read = await input.ReadAsync(buffer, token).ConfigureAwait(false)) > 0)
+            {
+                if (read > length - total) throw new IOException("The server sent more data than the requested range.");
+                Array.Copy(buffer, 0, bytes, total, read);
+                total += read;
+            }
+            if (total != length) throw new IOException("A partial download ended early.");
+            return bytes;
+        }
+        throw new IOException("The download server returned too many redirects.");
+    }
+
     private static async Task<PackageLocation> GetPackageAsync(ChannelSource source, IProgress<OperationProgress> progress, CancellationToken cancellationToken)
     {
-        Uri? address = null;
-        if (Uri.TryCreate(source.Release.Package, UriKind.Absolute, out Uri? absolute)) address = absolute;
-        else if (Uri.TryCreate(source.Location, UriKind.Absolute, out Uri? channelUri) && channelUri.Scheme == Uri.UriSchemeHttps)
-            address = new Uri(channelUri, source.Release.Package);
+        Uri? address = RemoteAddress(source);
         if (address is null)
         {
             string folder = Path.GetDirectoryName(Path.GetFullPath(source.Location)) ?? throw new InvalidDataException("The local channel has no parent folder.");
@@ -523,6 +767,15 @@ public sealed class InstallService
             Directory.Delete(SafeFiles.Extended(stage), true);
         }
         File.Delete(path);
+    }
+
+    private static InstalledState? InstalledBuild(string folder)
+    {
+        string path = Path.Combine(folder, StateName);
+        SafeFiles.NoLinks(path);
+        if (!File.Exists(path) || new FileInfo(path).Length > 8192) return null;
+        try { return JsonSerializer.Deserialize<InstalledState>(File.ReadAllText(path), Profile.Json); }
+        catch (JsonException) { return null; }
     }
 
     private static bool StateOwns(string folder, string transaction)
