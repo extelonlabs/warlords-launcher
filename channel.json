@@ -6,10 +6,10 @@
   "version": "1.1.30",
   "requiredGameVersion": "v1.5.7",
   "requiredArmoryVersion": "v1.0.0.17",
-  "buildId": "486573712529618700afcffef84aebde127048c0603d1bf596da4b07e29eb423",
-  "createdUtc": "2026-11-18T11:29:20.915818+00:00",
-  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-7910e77cef51-f251893b6dad/Warlords-StratLords-1.1.30-7910e77.zip",
-  "packageSha256": "f251893b6dad329f56694a40c80a4b827d5adcd8fa1504716ccbc1a9d9fa2c60",
+  "buildId": "c8c31cbc9cd4d09e811e172c843a86f2d8dd72f5aef44e27d54da2721d14968a",
+  "createdUtc": "2026-11-18T11:33:06.541891+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-7910e77cef51-3e7ab2a19858/Warlords-StratLords-1.1.30-7910e77.zip",
+  "packageSha256": "3e7ab2a198589bd19d983de1b05b9e9648a4ef0e2af4df0104e5758f725f425b",
   "packageSize": 1068596918,
   "files": [
     {
@@ -915,7 +915,7 @@
     {
       "path": "ModuleData/stratlords-servers.json",
       "size": 2740,
-      "sha256": "dce06d8664853216ab2a4ce2b64ff75f968afb3f7f7ffe02c574766acc659bb5"
+      "sha256": "5d83ebddd123cedd33325e5bb4ab828e25794a92b02c8c64037b23abd581d702"
     },
     {
       "path": "ModuleData/stratlords-village-playlist.json",
