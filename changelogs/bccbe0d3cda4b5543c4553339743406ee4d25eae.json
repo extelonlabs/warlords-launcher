@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "bccbe0d3cda4b5543c4553339743406ee4d25eae",
+  "version": "1.1.29",
+  "entries": [
+    {
+      "version": "1.1.29",
+      "date": "2026-11-18",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Mazhadan Castle can be rehearsed under moonlight in Battle Lab, with the same lighting for everyone who joins.",
+            "Teammates can pick up an unused portable ladder dropped when its carrier dies and deploy it without spending a second ladder."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Updated the Mazhadan test map with the edited castle scene and new wall banners.",
+            "Both portable ladder sizes now have 300 durability."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.28",
+      "date": "2026-11-17",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Updated 35 attacker and defender flag positions across 22 siege maps using the in-game marks. Spawn areas follow the moved flags.",
+            "All 24 castle test maps are available in the combat test rotation."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.27",
+      "date": "2026-11-17",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Battle Lab admins can spawn as defenders for castle flag review. Stand at a proposed flag location and choose Mark Attacker Flag or Mark Defender Flag to save it."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed Barihal's siege map startup crash caused by empty deployment markers."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.26",
+      "date": "2026-11-17",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Updated AI archer placement on Jamayeh, Ataconia and Talivel to address the startup hold before flags appeared.",
+            "Moved Mazhadan’s defender flag and spawn area into open courtyard space.",
+            "Updated the gate squads on Mecalovea and Simira to defend reachable ground inside the gates."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.25",
+      "date": "2026-11-17",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Castle Sieges now has 21 converted maps for multiplayer testing. Admins can switch maps in Change Map."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Attacker flags use the siege camp or staging area. Human defenders and AI reinforcements spawn around the defender flag inside the castle. Castle flag spacing follows each layout. Villages still require at least 250 metres."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.24",
+      "date": "2026-11-17",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added Ain Baliq, Ab Comer and Lochana to the shared client for multiplayer siege testing. The castle test session has 500 AI defender tickets and a 10-second warmup. Admins can switch between the three castles in Change Map."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.23",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added server support for the approved village maps in campaign battles. Campaign battles can use the scene assigned to the village when the campaign map routing is enabled."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.22",
+      "date": "2026-11-16",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "If a generated village spawn is blocked, the server finds safe spawn positions near that side's flag. The approved flag positions stay fixed."
+          ]
+        }
+      ]
+    }
+  ]
+}
