@@ -18,7 +18,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "a95d1e6d5867117bdb095edaabb6dd774c1098913c887455c51280ffbd6ccfbd",
+      "sha256": "75bda175ecc0eb289f12e8121e325fd894a3dd8b31b29fb181c4fcede55ce01e",
       "size": 3714
     },
     {
@@ -43,8 +43,8 @@
     },
     {
       "path": "src/Warlords.Launcher/App.xaml.cs",
-      "sha256": "69e935dfefa7bce714ea276dc0842ce3b5a462503a70deec87d83d97146cd04e",
-      "size": 5081
+      "sha256": "15cb7a496e709327953f6a284481771a40ce05fbc0b4549398f41f13e500ef3b",
+      "size": 5303
     },
     {
       "path": "src/Warlords.Launcher/Assets/NOTICE.md",
@@ -83,13 +83,13 @@
     },
     {
       "path": "src/Warlords.Launcher/GameService.cs",
-      "sha256": "2d9a0e28f051c4b6b0ea945c647a76e50f512f2800cb0559f5228350c50c1a85",
-      "size": 18639
+      "sha256": "846f0109c4d2b395be90249ac0819e8335e098772773447ce2a2bfaa6106e130",
+      "size": 18941
     },
     {
       "path": "src/Warlords.Launcher/InstallService.cs",
-      "sha256": "f6b596ef9bdc55ba664d8f69583e84fafa8673272cc16a15caf36013c5882c41",
-      "size": 55851
+      "sha256": "4a3005a4276fa5ebde4ec6e8a38cc18b7675c66d527b8a0c85dcea811fbd22a3",
+      "size": 56387
     },
     {
       "path": "src/Warlords.Launcher/MainWindow.xaml",
@@ -98,12 +98,12 @@
     },
     {
       "path": "src/Warlords.Launcher/MainWindow.xaml.cs",
-      "sha256": "cbc1cc16ed19de52bc928df364d67141be114a2a68f90ffb93e31f969e11d3f1",
-      "size": 53673
+      "sha256": "f9826490f89cfa43b6d7fbd0a984b430aa3f3b1b4e9531b44d71f5f1465b1966",
+      "size": 54036
     },
     {
       "path": "src/Warlords.Launcher/Models.cs",
-      "sha256": "8dded382b9df86f38951eae025772e796a19d18d4d48f98161b9239025dc0101",
+      "sha256": "276161fefd7135753aa5b68e8855c9ac42b1afdcf98ad486caaacfdf9647cb15",
       "size": 5525
     },
     {
@@ -118,11 +118,11 @@
     },
     {
       "path": "src/Warlords.Launcher/Warlords.Launcher.csproj",
-      "sha256": "2c99ced5e754687f531cae5c09c24791912b30f36c6155301351fcacee190429",
+      "sha256": "85c2d46e8e50f64c722b4cd2d8abcf906257ebea18c2b75f79f98d18fd32e175",
       "size": 1826
     }
   ],
-  "launcherVersion": "0.5.12",
+  "launcherVersion": "0.5.13",
   "license": "MIT",
   "schemaVersion": 1,
   "scope": "launcher-app-with-named-branding-assets"

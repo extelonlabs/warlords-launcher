@@ -13,7 +13,6 @@ namespace Warlords.Launcher;
 /// <summary>Discovers the Steam game and inspects only the profile this launcher manages.</summary>
 public sealed class GameService
 {
-    private const string GameName = "Mount & Blade II Bannerlord";
     private const string SteamAppId = "261550";
     private const string LegacyWarlordsWorkshopId = "3716004111";
     private const string ArmoryId = "MBWarlords.Armory";
@@ -23,7 +22,8 @@ public sealed class GameService
 
     public string? Discover()
     {
-        return SteamGameRoots().FirstOrDefault(IsGameRoot);
+        string? root = RegisteredSteamGameRoot(SteamLibraries());
+        return root is not null && IsGameRoot(root) ? root : null;
     }
 
     public GameInspection Inspect(string gameRoot)
@@ -32,7 +32,7 @@ public sealed class GameService
         string root;
         try
         {
-            root = Path.GetFullPath(gameRoot.Trim());
+            root = Net48.TrimEndingSeparator(Path.GetFullPath(gameRoot.Trim()));
             if (!IsGameRoot(root))
                 return new GameInspection(root, null, false, ["Select the Bannerlord game folder containing Modules and bin/Win64_Shipping_Client."]);
             AssertNotLink(root);
@@ -205,9 +205,8 @@ public sealed class GameService
         if (!inspection.CanPlay)
             throw new InvalidOperationException(string.Join(Environment.NewLine, inspection.Messages));
         string root = Net48.TrimEndingSeparator(Path.GetFullPath(gameRoot));
-        bool registered = SteamGameRoots().Any(candidate => Net48.TrimEndingSeparator(candidate).Equals(root, StringComparison.OrdinalIgnoreCase));
-        if (!registered)
-            throw new InvalidOperationException("Select the Bannerlord folder installed by Steam. Play opens Steam's registered game, so a separate copied game folder cannot be launched here.");
+        if (!root.Equals(RegisteredSteamGameRoot(SteamLibraries()), StringComparison.OrdinalIgnoreCase))
+            throw new InvalidOperationException("Steam could not confirm this Bannerlord folder. In Steam, open Bannerlord's Manage > Browse local files, then select that folder in Warlords. If Steam has two copies registered, resolve the duplicate first.");
         EnsureClosed();
         // Shell activation can reuse an existing Steam process and legitimately return null.
         Process.Start(new ProcessStartInfo("steam://rungameid/" + SteamAppId)
@@ -263,27 +262,30 @@ public sealed class GameService
         return containers;
     }
 
-    private static IEnumerable<string> SteamGameRoots()
+    private static string? RegisteredSteamGameRoot(IEnumerable<string> libraries)
     {
-        foreach (string library in SteamLibraries())
+        string[] roots = SteamGameRoots(libraries).Distinct(StringComparer.OrdinalIgnoreCase).Take(2).ToArray();
+        // The Steam URI selects the game by App ID, without a folder argument.
+        return roots.Length == 1 ? roots[0] : null;
+    }
+
+    private static IEnumerable<string> SteamGameRoots(IEnumerable<string> libraries)
+    {
+        foreach (string library in libraries)
         {
-            string installName = GameName;
             string manifest = Path.Combine(library, "steamapps", "appmanifest_" + SteamAppId + ".acf");
+            string root;
             try
             {
-                if (File.Exists(manifest) && new FileInfo(manifest).Length <= 1024 * 1024)
-                {
-                    Match match = InstallDirectory.Match(File.ReadAllText(manifest));
-                    if (match.Success)
-                    {
-                        string candidate = UnescapeVdf(match.Groups["value"].Value);
-                        if (candidate.Length > 0 && candidate.IndexOfAny(Path.GetInvalidFileNameChars()) < 0 && candidate is not "." and not "..")
-                            installName = candidate;
-                    }
-                }
+                if (!File.Exists(manifest) || new FileInfo(manifest).Length > 1024 * 1024) continue;
+                Match match = InstallDirectory.Match(File.ReadAllText(manifest));
+                if (!match.Success) continue;
+                string installName = UnescapeVdf(match.Groups["value"].Value);
+                if (string.IsNullOrWhiteSpace(installName) || installName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0 || installName is "." or "..") continue;
+                root = Path.GetFullPath(Path.Combine(library, "steamapps", "common", installName));
             }
-            catch (Exception ex) when (IsPathError(ex)) { }
-            yield return Path.GetFullPath(Path.Combine(library, "steamapps", "common", installName));
+            catch (Exception ex) when (IsPathError(ex)) { continue; }
+            yield return root;
         }
     }
 

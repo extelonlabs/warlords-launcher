@@ -132,9 +132,9 @@ public partial class MainWindow : Window
                 }
             }
         }
-        await InspectGameAsync(token);
         if (string.IsNullOrWhiteSpace(_channelLocation))
         {
+            await InspectGameAsync(token);
             ReleaseText.Text = "No automatic update channel is configured.";
             SetStatus("Connect an update channel to get started.");
             return;
@@ -171,9 +171,10 @@ public partial class MainWindow : Window
         }
     }
 
-    private async Task LoadChannelAsync(string location, CancellationToken token)
+    private async Task<ChannelSource> LoadChannelAsync(string location, CancellationToken token)
     {
         CancelChangelogRequest();
+        NewsCard.Visibility = Visibility.Collapsed;
         ChangelogText.Clear();
         ChangelogStatusText.Text = "Release notes will be available after the update check.";
         ChangelogRetryButton.Visibility = Visibility.Collapsed;
@@ -187,28 +188,22 @@ public partial class MainWindow : Window
         _channelLocation = loaded.Location;
         var release = loaded.Release;
         ReleaseText.Text = $"Latest version: {release.Version}";
-        SavePreferences();
         Append($"Loaded module {release.Version}, source {release.SourceCommit.Substring(0, 12)}, {release.Files.Count} verified inventory entries.");
         SetStatus("Latest version found. Checking your installation…", "Checking your files");
         _ = RefreshChangelogAsync();
+        return loaded;
     }
 
-    private Task RefreshAndSynchronizeAsync(CancellationToken token) => RefreshAndSynchronizeAsync(token, false);
+    private Task RefreshAndSynchronizeAsync(CancellationToken token) => RefreshAndSynchronizeAsync(_channelLocation, token);
 
-    // fullCheck hashes every file. Otherwise only file sizes are checked.
-    private async Task RefreshAndSynchronizeAsync(CancellationToken token, bool fullCheck)
-    {
-        if (string.IsNullOrWhiteSpace(_channelLocation))
-            throw new InvalidOperationException("Connect the owner's HTTPS update channel first.");
-        await LoadChannelAsync(_channelLocation, token);
-        await SynchronizeCurrentAsync(token, fullCheck);
-    }
-
-    private async Task<bool> SynchronizeCurrentAsync(CancellationToken token, bool fullCheck = false)
+    private async Task<bool> RefreshAndSynchronizeAsync(string location, CancellationToken token)
     {
         _releaseReady = false;
-        var source = _source ?? throw new InvalidOperationException("The update channel has not been loaded.");
+        // The selected folder must be reflected in setup even if the feed is offline.
         await InspectGameAsync(token);
+        if (string.IsNullOrWhiteSpace(location))
+            throw new InvalidOperationException("Connect the owner's HTTPS update channel first.");
+        var source = await LoadChannelAsync(location, token);
         if (string.IsNullOrWhiteSpace(GameRootBox.Text))
         {
             SetStatus("Choose your Bannerlord folder to continue.");
@@ -232,7 +227,7 @@ public partial class MainWindow : Window
             return false;
         }
         SetStatus("Checking your installed files…", "Checking your files");
-        if (await _installer.VerifyAsync(root, source.Release, Reporter(), token, fullCheck))
+        if (await _installer.VerifyAsync(root, source.Release, Reporter(), token, fullCheck: false))
         {
             _releaseReady = true;
             Progress.Value = 100;
@@ -703,7 +698,7 @@ public partial class MainWindow : Window
             case PrimaryAction.Play: await RunAsync(PlayCurrentAsync); break;
             default:
                 // "Check again" and "Try again" are quick. Only Repair and Verify files read every file.
-                await RunAsync(token => RefreshAndSynchronizeAsync(token, false));
+                await RunAsync(RefreshAndSynchronizeAsync);
                 break;
         }
     }
@@ -861,17 +856,10 @@ public partial class MainWindow : Window
         if (!_localChannelMode) return;
         var dialog = new OpenFileDialog { Title = "Choose channel.json from the extracted Warlords test pack", Filter = "Warlords channel (channel.json)|channel.json|JSON files (*.json)|*.json", CheckFileExists = true };
         if (dialog.ShowDialog(this) == true)
-            await RunAsync(async token =>
-            {
-                await LoadChannelAsync(dialog.FileName, token);
-                await SynchronizeCurrentAsync(token);
-            });
+            await RunAsync(token => RefreshAndSynchronizeAsync(dialog.FileName, token));
     }
 
-    private async void Refresh_Click(object sender, RoutedEventArgs e) => await RunAsync(async token =>
-    {
-        await RefreshAndSynchronizeAsync(token, false);
-    });
+    private async void Refresh_Click(object sender, RoutedEventArgs e) => await RunAsync(RefreshAndSynchronizeAsync);
 
     private async void Install_Click(object sender, RoutedEventArgs e) => await RunAsync(InstallWithConsentAsync);
 
@@ -901,21 +889,20 @@ public partial class MainWindow : Window
 
     private async void Verify_Click(object sender, RoutedEventArgs e) => await RunAsync(async token =>
     {
-        await LoadChannelAsync(_channelLocation, token);
-        if (_source is null) return;
-        var valid = await _installer.VerifyAsync(GameRootBox.Text.Trim(), _source.Release, Reporter(), token, true);
+        var source = await LoadChannelAsync(_channelLocation, token);
+        var valid = await _installer.VerifyAsync(GameRootBox.Text.Trim(), source.Release, Reporter(), token, true);
         await InspectGameAsync(token);
-        _releaseReady = valid && _inspection?.CanPlay == true && IsManagedInstallation(GameRootBox.Text.Trim());
+        _releaseReady = valid && _inspection?.CanPlay == true && _managedInstallation;
         _showVerifyResult = true;
         SetStatus(_releaseReady ? "Your Warlords files are up to date."
+            : valid && _inspection?.CanPlay != true ? "The Warlords files passed verification. Finish the setup steps before playing."
             : valid ? "Files are up to date. Choose Install Warlords once to enable automatic updates."
             : "Some Warlords files need updating. Choose Repair Warlords to replace them.");
     });
 
     private async Task PlayCurrentAsync(CancellationToken token)
     {
-        await LoadChannelAsync(_channelLocation, token);
-        if (!await SynchronizeCurrentAsync(token) || _source is null) return;
+        if (!await RefreshAndSynchronizeAsync(_channelLocation, token) || _source is null) return;
         var root = GameRootBox.Text.Trim();
         var valid = await _installer.VerifyAndRunAsync(root, _source.Release, Reporter(), token, () => _game.PlayUnderLock(root));
         _releaseReady = valid;
@@ -990,7 +977,7 @@ public partial class MainWindow : Window
         try
         {
             _launcherUpdate = await _channels.CheckLauncherUpdateAsync(CancellationToken.None);
-            if (_launcherUpdate is null) return;
+            if (_windowClosed || _launcherUpdate is null) return;
             LauncherUpdateText.Text = "Update launcher " + _launcherUpdate.Version;
             LauncherUpdateButton.Visibility = Visibility.Visible;
             Append("Launcher " + _launcherUpdate.Version + " is available. Choose Update launcher at the top.");
@@ -1015,44 +1002,58 @@ public partial class MainWindow : Window
         SetStatus("Downloading launcher " + update.Version + "…", "Updating the launcher");
         StartSteps(LauncherSteps);
         var current = App.LauncherPath;
+        var arguments = Environment.GetCommandLineArgs().Skip(1).Where(arg => arg != App.AfterUpdateArgument).Append(App.AfterUpdateArgument);
+        var restart = new ProcessStartInfo(current) { Arguments = string.Join(" ", arguments.Select(Net48.QuoteArgument)), UseShellExecute = false };
         try
         {
             await _channels.DownloadLauncherAsync(update, App.NewLauncherPath, Reporter(), token);
             ShowStep("swap", "Swapping the old launcher for the new one");
-            if (File.Exists(App.OldLauncherPath)) File.Delete(App.OldLauncherPath);
-            // Windows lets a running exe be renamed, not overwritten.
-            File.Move(current, App.OldLauncherPath);
-            try
+            await SwapLauncherAsync(current, App.NewLauncherPath, App.OldLauncherPath, () =>
             {
-                // Antivirus often holds a freshly written exe for a moment.
-                for (var attempt = 1; ; attempt++)
-                {
-                    try { File.Move(App.NewLauncherPath, current); break; }
-                    catch (IOException) when (attempt < 5) { await Task.Delay(1000, token); }
-                }
-            }
-            catch
-            {
-                File.Move(App.OldLauncherPath, current);
-                throw;
-            }
+                ShowStep("restart", "Restarting the launcher");
+                // The new instance waits for OnExit to release the mutex.
+                using var process = Process.Start(restart)
+                    ?? throw new InvalidOperationException("Windows did not start the updated launcher.");
+            }, token);
         }
         catch (UnauthorizedAccessException)
         {
-            if (File.Exists(App.NewLauncherPath)) File.Delete(App.NewLauncherPath);
             EndSteps(false, reason: "the launcher folder can't be changed");
             OpenLink(Profile.LauncherReleasesUrl, "the launcher download page");
-            SetStatus("The launcher's folder can't be changed. Download the new Warlords.exe from the page that just opened.");
+            SetStatus("The launcher's folder can't be changed. Download the new Warlords.exe from the Warlords releases page.");
             return;
         }
-        var arguments = Environment.GetCommandLineArgs().Skip(1).Where(arg => arg != App.AfterUpdateArgument).Append(App.AfterUpdateArgument);
-        var restart = new ProcessStartInfo(current) { Arguments = string.Join(" ", arguments.Select(Net48.QuoteArgument)), UseShellExecute = false };
-        ShowStep("restart", "Restarting the launcher");
-        ((App)Application.Current).ReleaseSingleInstance();
-        Process.Start(restart);
+        _closeAfterOperation = true;
         EndSteps(true);
         SetStatus("Launcher " + update.Version + " installed. Restarting…");
-        _closeAfterOperation = true;
+    }
+
+    internal static async Task SwapLauncherAsync(string current, string downloaded, string backup, Action restart, CancellationToken token)
+    {
+        token.ThrowIfCancellationRequested();
+        // Windows allows the running executable to be moved but not overwritten.
+        File.Delete(backup);
+        File.Move(current, backup);
+        try
+        {
+            // Antivirus often holds a freshly written exe for a moment.
+            for (var attempt = 1; ; attempt++)
+            {
+                try { File.Move(downloaded, current); break; }
+                catch (IOException) when (attempt < 5) { await Task.Delay(1000, token); }
+            }
+            restart();
+        }
+        catch (Exception failure)
+        {
+            try { SafeFiles.MoveReplacing(backup, current); }
+            catch (Exception rollback) when (rollback is IOException or UnauthorizedAccessException)
+            {
+                throw new IOException($"Launcher update failed and the previous launcher could not be restored. It is saved at {backup}.",
+                    new AggregateException(failure, rollback));
+            }
+            throw;
+        }
     }
 
     private void Armory_Click(object sender, RoutedEventArgs e) => OpenArmoryPage();

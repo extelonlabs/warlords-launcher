@@ -24,6 +24,7 @@ public sealed class InstallService
     private const string StateName = ".warlords-launcher-state.json";
     private const string OwnerName = ".warlords-stage-owner.json";
     private const string OptionsPath = "ModuleData/wl_client_options.json";
+    private const string StampVersion = "2";
     private static readonly Regex Hash = new("^[0-9a-fA-F]{64}$", RegexOptions.CultureInvariant);
     private static readonly Regex Commit = new("^[0-9a-f]{40}$", RegexOptions.CultureInvariant);
     private static readonly Regex ModuleVersion = new(@"^\d+\.\d+\.\d+$", RegexOptions.CultureInvariant);
@@ -162,11 +163,11 @@ public sealed class InstallService
             if (Directory.Exists(target))
             {
                 progress.Report(new("Saving a backup of the old version", 0.98, Step: "backup"));
-                MoveWhenFree(target, backup, progress, "backup");
+                await MoveWhenFreeAsync(target, backup, progress, "backup", cancellationToken).ConfigureAwait(false);
             }
             WriteJournal(modules, journal with { Phase = "backedUp" });
             progress.Report(new("Installing Warlords", 0.99, Step: "swap"));
-            MoveWhenFree(stage, target, progress, "swap");
+            await MoveWhenFreeAsync(stage, target, progress, "swap", cancellationToken).ConfigureAwait(false);
             WriteJournal(modules, journal with { Phase = "committed" });
             File.Delete(Path.Combine(modules, JournalName));
             // Every file was checked against its SHA-256 or the last stamp on the way in, so the next start or Play need not read them again.
@@ -201,10 +202,12 @@ public sealed class InstallService
 
     // Windows can refuse to move a folder for a short time after many of its files were read, most likely
     // while a virus scan finishes. A refused move changes nothing, so wait and try again for up to a minute.
-    private static void MoveWhenFree(string from, string to, IProgress<OperationProgress> progress, string step)
+    private static async Task MoveWhenFreeAsync(string from, string to, IProgress<OperationProgress> progress, string step, CancellationToken cancellationToken)
     {
         for (int attempt = 1; ; attempt++)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+            GameService.EnsureClosed();
             try
             {
                 Directory.Move(from, to);
@@ -217,7 +220,7 @@ public sealed class InstallService
                     App.Log("Windows is still using the files, so the launcher waits and tries again: " + ex.Message);
                     progress.Report(new("Waiting for Windows to finish with the files", 0.99, Step: step));
                 }
-                Thread.Sleep(1000);
+                await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken).ConfigureAwait(false);
             }
         }
     }
@@ -241,10 +244,10 @@ public sealed class InstallService
         return true;
     }
 
-    // Only a full check (Verify files) reads every file. A quick check passes a launcher-installed copy of this
-    // build whose files all have the right size, and fails otherwise: a failed check starts an update.
+    // A quick check can reuse a matching SHA-256 verification stamp for a launcher-managed build.
     private static async Task<bool> VerifyCoreAsync(string gameRoot, ReleaseChannel release, IProgress<OperationProgress> progress, CancellationToken cancellationToken, bool fullCheck)
     {
+        cancellationToken.ThrowIfCancellationRequested();
         GameService.EnsureClosed();
         string modules = SafeFiles.Extended(SafeFiles.Modules(gameRoot));
         SafeFiles.NoLinks(Path.Combine(modules, JournalName));
@@ -264,19 +267,13 @@ public sealed class InstallService
         // An install of another build needs the update anyway, so reading every file first only wastes time.
         InstalledState? installed = InstalledBuild(target);
         if (installed is not null && (installed.SourceCommit != release.SourceCommit || installed.BuildId != release.BuildId)) return false;
+        if (!fullCheck && installed is null) return false;
         // Read before any hashing, so a file that changes during the check is never stamped as good.
         string? stamp = Stamp(target, release);
-        if (!fullCheck)
+        if (!fullCheck && stamp is not null && ReadStamp() == stamp)
         {
-            if (stamp is null || installed is null) return false;
             ValidateDescriptor(target, release);
-            if (ReadStamp() == stamp)
-            {
-                progress.Report(new("Your files have not changed since the last check", 1));
-                return true;
-            }
-            WriteStamp(stamp);
-            progress.Report(new("Your files match this version", 1));
+            progress.Report(new("Your files have not changed since the last check", 1));
             return true;
         }
         DeleteStamp();
@@ -295,11 +292,13 @@ public sealed class InstallService
 
     private static string StampPath => Path.Combine(App.DataDirectory, "verified-files.txt");
 
-    // The folder, the build, then path|size|sha|date for each file. An update reads it to keep files without hashing them.
+    // Format version, folder, build identity, then path|size|sha|date for each verified file.
+    // Older stamps may have been written after a size-only check.
     private static string? Stamp(string target, ReleaseChannel release)
     {
         StringBuilder text = new();
-        text.Append(SafeFiles.Long(target)).Append('\n').Append(release.SourceCommit).Append('\n').Append(release.BuildId).Append('\n');
+        text.Append(StampVersion).Append('\n').Append(SafeFiles.Long(target)).Append('\n')
+            .Append(release.SourceCommit).Append('\n').Append(release.BuildId).Append('\n');
         foreach (ReleaseFile file in release.Files.OrderBy(file => file.Path, StringComparer.OrdinalIgnoreCase))
         {
             if (file.Path.Equals(OptionsPath, StringComparison.OrdinalIgnoreCase)) continue;
@@ -315,8 +314,8 @@ public sealed class InstallService
     {
         Dictionary<string, (long, string, long)> files = new(StringComparer.OrdinalIgnoreCase);
         string[] lines = (ReadStamp() ?? "").Split('\n');
-        if (lines.Length < 4 || lines[0] != SafeFiles.Long(target)) return files;
-        foreach (string line in lines.Skip(3))
+        if (lines.Length < 5 || lines[0] != StampVersion || lines[1] != SafeFiles.Long(target)) return files;
+        foreach (string line in lines.Skip(4))
         {
             string[] parts = line.Split('|');
             if (parts.Length == 4 && long.TryParse(parts[1], out long size) && long.TryParse(parts[3], out long ticks)) files[parts[0]] = (size, parts[2], ticks);
@@ -822,9 +821,12 @@ public sealed class InstallService
         {
             string owner = Path.Combine(stage, OwnerName);
             SafeFiles.NoLinks(owner);
-            bool owned = File.Exists(owner) && new FileInfo(owner).Length <= 100 && File.ReadAllText(owner) == journal.Transaction;
-            // Empty: stopped before the owner file was written, and there is nothing to lose.
-            bool empty = !Directory.EnumerateFileSystemEntries(stage).Any();
+            long ownerLength = File.Exists(owner) ? new FileInfo(owner).Length : -1;
+            bool owned = ownerLength is > 0 and <= 100 && File.ReadAllText(owner) == journal.Transaction;
+            // An interruption can leave the stage empty or leave only the newly created, unwritten owner file.
+            bool incompleteOwner = journal.Phase == "staging" && ownerLength == 0;
+            bool empty = !Directory.EnumerateFileSystemEntries(stage).Any(entry =>
+                !incompleteOwner || !Path.GetFileName(entry).Equals(OwnerName, StringComparison.OrdinalIgnoreCase));
             if (!owned && !empty && !StateOwns(stage, journal.Transaction)) throw new IOException("The staging folder is not owned by this update. Keep it intact and contact the owner.");
             _ = SafeFiles.TreeFiles(stage);
             Directory.Delete(SafeFiles.Extended(stage), true);

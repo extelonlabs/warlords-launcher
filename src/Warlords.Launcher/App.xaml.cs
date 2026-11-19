@@ -57,10 +57,11 @@ public partial class App : Application
             Shutdown();
             return;
         }
-        var args = e.Args.Where(arg => arg != AfterUpdateArgument).ToArray();
+        bool afterUpdate = e.Args.LastOrDefault() == AfterUpdateArgument;
+        var args = afterUpdate ? e.Args.Take(e.Args.Length - 1).ToArray() : e.Args;
         _instance = new Mutex(true, @"Local\WarlordsClosedTestLauncherV2", out var created);
         // A self-update starts the new launcher while the old one is still closing.
-        if (!created && args.Length != e.Args.Length)
+        if (!created && afterUpdate)
         {
             try { created = _instance.WaitOne(TimeSpan.FromSeconds(15)); }
             catch (AbandonedMutexException) { created = true; }
@@ -81,16 +82,15 @@ public partial class App : Application
             args.Handled = true;
             Shutdown(1);
         };
-#if !WARLORDS_STORE
-        try { File.Delete(OldLauncherPath); }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException) { }
-#endif
         try
         {
-            string? channel = null;
-            if (args.Length == 2 && args[0] == "--channel") channel = args[1];
-            MainWindow = new MainWindow(channel);
+            MainWindow = new MainWindow(ReadChannelArgument(args));
             MainWindow.Show();
+#if !WARLORDS_STORE
+            // A failed startup leaves the previous executable available for recovery.
+            try { File.Delete(OldLauncherPath); }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException) { }
+#endif
         }
         catch (Exception ex)
         {
@@ -100,12 +100,12 @@ public partial class App : Application
         }
     }
 
-    /// <summary>Lets the updated launcher take the single-instance lock before this one closes.</summary>
-    public void ReleaseSingleInstance()
+    private static string? ReadChannelArgument(string[] args)
     {
-        _instance?.ReleaseMutex();
-        _instance?.Dispose();
-        _instance = null;
+        if (args.Length == 0) return null;
+        if (args.Length == 2 && args[0] == "--channel" && !string.IsNullOrWhiteSpace(args[1]) && args[1] != AfterUpdateArgument)
+            return args[1];
+        throw new ArgumentException("Open Warlords.exe without arguments, or use --channel with a channel file path or HTTPS address.");
     }
 
     protected override void OnExit(ExitEventArgs e)
