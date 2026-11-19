@@ -2,15 +2,15 @@
   "schemaVersion": 1,
   "branch": "StratLords",
   "sourceRepository": "MB-Warlords/The-Last-Concord",
-  "sourceCommit": "1369b97171d325003034d973a6f1b7bccdc7aeaa",
-  "version": "1.1.36",
+  "sourceCommit": "8e4c224ef8e8ffb4ce4f06bdf059987d457bfd85",
+  "version": "1.1.37",
   "requiredGameVersion": "v1.5.7",
   "requiredArmoryVersion": "v1.0.0.17",
-  "buildId": "43944f626fc17b3f5881e70e1484ede341b496604ec308b36915cc3b8b3d5994",
-  "createdUtc": "2026-11-19T19:10:09.999861+00:00",
-  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-1369b97171d3-163044cc9024/Warlords-StratLords-1.1.36-1369b97.zip",
-  "packageSha256": "163044cc90241ae03e8b3f04b17b0a55c38e793f80ab7c34c6b77f4686975776",
-  "packageSize": 1083262799,
+  "buildId": "5315d17ab42a196558ff10999f4455692f29371bf81c008ef7542fdb37be3cee",
+  "createdUtc": "2026-11-19T21:00:49.058392+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-8e4c224ef8e8-dcbe2cee2440/Warlords-StratLords-1.1.37-8e4c224.zip",
+  "packageSha256": "dcbe2cee2440808d42bd4524d7bb0c44164cc91c2aa68310d3934069b1fb9007",
+  "packageSize": 1083265839,
   "files": [
     {
       "path": "AssetPackages/banner.tpac",
@@ -920,12 +920,12 @@
     {
       "path": "ModuleData/stratlords-protocol.json",
       "size": 108177,
-      "sha256": "8d4de4a9df6361d62735abfef889f7c699f76617190c9ed4a7840d828e1bae41"
+      "sha256": "5802269142c28b887d3a92fb4029f1a8c5f6bc663c90e6ef931853c0738860fa"
     },
     {
       "path": "ModuleData/stratlords-servers.json",
       "size": 3802,
-      "sha256": "529fc3d2afad7d3c1e767a1a3fccabd8f8f82554c302cae3506d2638a6a0bbf1"
+      "sha256": "dd21a699aa45ae39bf81878331739bbc6201b9b307e7c97015ef3b7b2a5b5434"
     },
     {
       "path": "ModuleData/stratlords-village-playlist.json",
@@ -1705,17 +1705,17 @@
     {
       "path": "SceneObj/Strat_T_11/navmesh.bin",
       "size": 2881794,
-      "sha256": "949fbdee537feac43c488abe4af8f333991b27d6fe511358b14bcef566074042"
+      "sha256": "987dd300aa631e9ad9ad391014fb571c0e999397731733309429ec5c0fb62279"
     },
     {
       "path": "SceneObj/Strat_T_11/scene.xscene",
-      "size": 1470843,
-      "sha256": "acc63484fa650519576fdc478153e848ad5471242ac4c2075b7666fa5f3b2ab8"
+      "size": 1470779,
+      "sha256": "7055821c3e76edd6a5b2dd3962e0275b17dc6beab8646618e0ede9a5e484270d"
     },
     {
       "path": "SceneObj/Strat_T_11/terrain.bin",
       "size": 3984000,
-      "sha256": "6910647fc5f64027e70351003c51243713859c4b058619ba1bfdd1fd6c29bea0"
+      "sha256": "820cce79f2cf71b7d18bf37e36944b78aac9926e3937d1b5cf2d7971063e3288"
     },
     {
       "path": "SceneObj/Strat_T_12/atmosphere.xml",
@@ -1730,17 +1730,17 @@
     {
       "path": "SceneObj/Strat_T_12/navmesh.bin",
       "size": 2303103,
-      "sha256": "dc68ad9334d616129a09b583ae422d637f410660aa8ef253c359f2bb69d0ef53"
+      "sha256": "d92f9fc3f874d4778e858863c86b3094ea1c89b5f27991ecc0993a329ca29891"
     },
     {
       "path": "SceneObj/Strat_T_12/scene.xscene",
-      "size": 964771,
-      "sha256": "b7e101b221819941303ce73b70c5383ac34ff877f8e7a98c02fcbedbd66a2398"
+      "size": 964738,
+      "sha256": "da85ca9182e2e17a9f08e1b85086387bc0a436e10dac5f57e3f98319f06ad10e"
     },
     {
       "path": "SceneObj/Strat_T_12/terrain.bin",
       "size": 17976799,
-      "sha256": "21966185bcab477fe70d4044420b7bb064240584e5f5c53f1b6752b21c66532a"
+      "sha256": "8b342a1f526b02e2835bf2305031cdef94a5fe7cf046cacee4b2c60234aba848"
     },
     {
       "path": "SceneObj/Strat_T_13/atmosphere.xml",
@@ -1830,17 +1830,17 @@
     {
       "path": "SceneObj/Strat_T_16/navmesh.bin",
       "size": 2827258,
-      "sha256": "cab58b17fe845dfd85e73dd1dd02f724b2d1b34497dcba866f55a126db16a8fb"
+      "sha256": "c842e77f17fa0ea830322cbc10f5c785ddd9b5edef8f43f48ecb6797c62825c4"
     },
     {
       "path": "SceneObj/Strat_T_16/scene.xscene",
-      "size": 2007814,
-      "sha256": "345aaa95b162ca30e6c710321eefb1565d09756b18eddd109e9fbfbee41ae64e"
+      "size": 2023176,
+      "sha256": "68ff1bec63d60cfc91eca5c41f4d55272be9cd067aa6c222bb82b41ccdf0f20a"
     },
     {
       "path": "SceneObj/Strat_T_16/terrain.bin",
       "size": 9298066,
-      "sha256": "8d3e1eb3468f7538a7bdf3d46ff36a9064bd0137b981544173daa8c8589e71ae"
+      "sha256": "69cc0d9716a21c00ca66bc87ed5f8566fee5b283ea0457bdaeae8241cfad8ab4"
     },
     {
       "path": "SceneObj/Strat_T_17/atmosphere.xml",
@@ -1955,17 +1955,17 @@
     {
       "path": "SceneObj/Strat_T_20/navmesh.bin",
       "size": 4184486,
-      "sha256": "685b1c97a144df4583a231d648e99804073bba761337135fa51b787e6a079a27"
+      "sha256": "1f792467bbbeb4feb31c5d5bf5e295507a9690cdba3275b3f94cc7f988d9c943"
     },
     {
       "path": "SceneObj/Strat_T_20/scene.xscene",
-      "size": 2503614,
-      "sha256": "b8b9e01ebb41d44d8062dbf1b2d75c7cee727673ff25b6ee0d7f8988e6c1cc10"
+      "size": 2503617,
+      "sha256": "4928159960db4356c44e2600c0fef743ebb32c11f3e43b2cd600be4c4cd3c3d6"
     },
     {
       "path": "SceneObj/Strat_T_20/terrain.bin",
       "size": 14604221,
-      "sha256": "7ad28ed7e7c96814777896884866c668a1e91558b39ebb924b5b6d943188b7c4"
+      "sha256": "00cc9f1d5886a91a349825a2f9153b9e3f1b16db76875f80f5da4532e02ad3dc"
     },
     {
       "path": "SceneObj/Strat_T_21/atmosphere.xml",
@@ -2259,8 +2259,8 @@
     },
     {
       "path": "SceneObj/Strat_T_8/scene.xscene",
-      "size": 1672288,
-      "sha256": "8b342ba3a1ea4f4e836e5e1b19a595888ceca16ffe66721a326d0672b58540f2"
+      "size": 1672573,
+      "sha256": "f1df5f5e01195f1d0ead7b80e16be35acb26aed1c9192752bafbbe1050698126"
     },
     {
       "path": "SceneObj/Strat_T_8/terrain.bin",
@@ -6135,7 +6135,7 @@
     {
       "path": "SubModule.xml",
       "size": 7215,
-      "sha256": "734e5adb0169ab8ee31213ecf3635930a3b3f8468ad07e5b44f85fde60493168"
+      "sha256": "a030d124c49403e9bee11654370bc365b8ea314661addf52594e2609a684c59c"
     },
     {
       "path": "Videos/strategus_intro.ivf",
@@ -6160,22 +6160,22 @@
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.GauntletUI.dll",
       "size": 1451520,
-      "sha256": "e245c93da600f4ea9b106862f8d5562ea5f63b8725958d3b02e8914381378d6f"
+      "sha256": "3361ec4d399e3a1bc09d39dae01974ed8d733efea9cdce4135d13886d866fada"
     },
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.View.dll",
       "size": 34304,
-      "sha256": "38c70be697995a9fcfac2520af869908ad20a5c518a07ed12a88974c1f6a3931"
+      "sha256": "dbb01b336051285c095607d10590cac21a7e1ed3ac43e15e244545a8a551af3b"
     },
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.dll",
       "size": 2268672,
-      "sha256": "58107218037ddd6630c91e8f44a039a22e258f4b9ca3087e63f78fcc07a012b9"
+      "sha256": "4639a266d5dffddd87cf7d518e722b73580171ecff6c0fa2ee8e52d81dd117c3"
     },
     {
       "path": "bin/Win64_Shipping_Client/StrategusBattleBridge.GauntletUI.dll",
       "size": 628224,
-      "sha256": "3d106529483b0f4f7d9dd686cd912cef5f966dbf82649f410ff56df7566b5510"
+      "sha256": "6a55f7bc97332f167067a1e13252e8d8165f50c166d8d67f0665bdc0fc7013f8"
     }
   ]
 }
