@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "4483a7dca6f2be41c9616d83ad8eb27e46a3fddd",
+  "version": "1.1.35",
+  "entries": [
+    {
+      "version": "1.1.35",
+      "date": "2026-11-19",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Recorded the live attack minimums in the release source. Attacking a village requires 150 tickets, a castle 500, and a city 800.",
+            "Added game support for three dedicated campaign Battle slots and three dedicated Siege slots."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.34",
+      "date": "2026-11-19",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "The first loading screen now shows the Mount & Blade II Bannerlord title below the crests."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.33",
+      "date": "2026-11-19",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "New Warlords and StratLords artwork on the startup and TaleWorlds connecting screens, with the original animated horse and live sign-in status."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.32",
+      "date": "2026-11-19",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Organized the Warlords client files in the project repository for easier maintenance."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.32",
+      "date": "2026-11-18",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed how Mazhadan's wall banners pick up the castle owner's crest."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.31",
+      "date": "2026-11-18",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Mazhadan's wall and dragon banners can display the castle owner's crest in multiplayer sieges."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.30",
+      "date": "2026-11-18",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "The Mazhadan Battle Lab rehearsal now loads with daytime heavy rain."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.29",
+      "date": "2026-11-18",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Mazhadan Castle can be rehearsed under moonlight in Battle Lab, with the same lighting for everyone who joins.",
+            "Teammates can pick up an unused portable ladder dropped when its carrier dies and deploy it without spending a second ladder."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Updated the Mazhadan test map with the edited castle scene and new wall banners.",
+            "Both portable ladder sizes now have 300 durability."
+          ]
+        }
+      ]
+    }
+  ]
+}
