@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "f9c1e37d7173fbce369ad563e189f791571d70ae",
+  "version": "1.1.38",
+  "entries": [
+    {
+      "version": "1.1.38",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Each of the 43 campaign castles has an assigned siege map based on its home region and architecture. Capturing a castle keeps the same battlefield for its next siege."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.37",
+      "date": "2026-11-19",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed the missing wall pieces used for debris that caused Lochana to crash on load. Restored the same pieces on the edited Jogurys walls."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Updated defender archer positions in Barihal and Jamayeh, and the left-wall waiting points in Jamayeh and Simira. Updated two wall sections in Jogurys."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.36",
+      "date": "2026-11-19",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "On 21 siege maps, hold the middle flag B uncontested for 30 seconds to bring reinforcements forward. Defenders can take it back. You can still choose your home spawn or an available Forward Spawn cart."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "The attacker camp is A and the defender stronghold is C. Both take 120 seconds to capture. Updated 22 siege maps with the editor placements for defender banners."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.35",
+      "date": "2026-11-19",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Recorded the live attack minimums in the release source. Attacking a village requires 150 tickets, a castle 500, and a city 800.",
+            "Added game support for three dedicated campaign Battle slots and three dedicated Siege slots."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.34",
+      "date": "2026-11-19",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "The first loading screen now shows the Mount & Blade II Bannerlord title below the crests."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.33",
+      "date": "2026-11-19",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "New Warlords and StratLords artwork on the startup and TaleWorlds connecting screens, with the original animated horse and live sign-in status."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.32",
+      "date": "2026-11-19",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Organized the Warlords client files in the project repository for easier maintenance."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.32",
+      "date": "2026-11-18",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed how Mazhadan's wall banners pick up the castle owner's crest."
+          ]
+        }
+      ]
+    }
+  ]
+}
