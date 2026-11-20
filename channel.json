@@ -2,15 +2,15 @@
   "schemaVersion": 1,
   "branch": "StratLords",
   "sourceRepository": "MB-Warlords/The-Last-Concord",
-  "sourceCommit": "600eddf3a1263bb4c78adfc6626f86ac540c5e97",
-  "version": "1.1.42",
+  "sourceCommit": "fbd7182e988d1d88a5605987fde96a01426ad427",
+  "version": "1.1.43",
   "requiredGameVersion": "v1.5.7",
   "requiredArmoryVersion": "v1.0.0.17",
-  "buildId": "3a862aa0c7ee7a0b29a23f1552927901802111fb680839735504b2c5b03f3149",
-  "createdUtc": "2026-11-19T22:49:47.785887+00:00",
-  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-600eddf3a126-293078499e4d/Warlords-StratLords-1.1.42-600eddf.zip",
-  "packageSha256": "293078499e4d26d7d48277657c099a1e1339a87117a30b8685903e0df47f2ac0",
-  "packageSize": 1083266556,
+  "buildId": "540d6c799a2a4bb5ee8a0bb639568fadc586d3d46a83777230c30c029413cf86",
+  "createdUtc": "2026-11-20T11:41:25.514205+00:00",
+  "package": "https://github.com/extelonlabs/warlords-launcher/releases/download/client-fbd7182e988d-373ccc15ab36/Warlords-StratLords-1.1.43-fbd7182.zip",
+  "packageSha256": "373ccc15ab364166b067f914625c63ca35098419da019939ae1883b181fa8287",
+  "packageSize": 1106937802,
   "files": [
     {
       "path": "AssetPackages/banner.tpac",
@@ -920,12 +920,12 @@
     {
       "path": "ModuleData/stratlords-protocol.json",
       "size": 108177,
-      "sha256": "10aac1ac37d17d941fc0ab59a6b424159d66e92193986fc296f08934b28f6bf8"
+      "sha256": "1218c2f5d610540baf570f6a97fadae953bbe0c12810226da9f7755208d34921"
     },
     {
       "path": "ModuleData/stratlords-servers.json",
       "size": 3802,
-      "sha256": "c662f21c4f0aae48083d7a87a6f335380bd624e23ff3eebe4d5b976c6ca733d6"
+      "sha256": "3c70dc44d69ef15d275ce86195bc080ca44b8a9af5f7a280ae5748694a1fac3a"
     },
     {
       "path": "ModuleData/stratlords-village-playlist.json",
@@ -2116,6 +2116,81 @@
       "path": "SceneObj/Strat_T_26/terrain.bin",
       "size": 11585314,
       "sha256": "2d877fe9e2c6f8eaf762af97ec98ff90bb2acaa79e3585766abe3979e15e12e6"
+    },
+    {
+      "path": "SceneObj/Strat_T_27/atmosphere.xml",
+      "size": 4894,
+      "sha256": "658c421d81d301a5313e4067f856823cf5056afc5d0cf4c3d4053ba8fe400321"
+    },
+    {
+      "path": "SceneObj/Strat_T_27/flora.bin",
+      "size": 177150,
+      "sha256": "19830c45015bd2a6832d9dd8dae5419f94957557c5ce6de7448a7131c1b84fd1"
+    },
+    {
+      "path": "SceneObj/Strat_T_27/navmesh.bin",
+      "size": 2993315,
+      "sha256": "6c689923be9737b3827af81bffdee8f8903337cc363b961aa6614c606b4b024e"
+    },
+    {
+      "path": "SceneObj/Strat_T_27/scene.xscene",
+      "size": 1985720,
+      "sha256": "5eb8281b87f74e9d42d252f3e0c1559a846b8405dd2f65d50363628c25780513"
+    },
+    {
+      "path": "SceneObj/Strat_T_27/terrain.bin",
+      "size": 2682037,
+      "sha256": "9f5ea0f4093c3b8e76ecaeb868b6aa199eecc404960b7a9817a90084bead081f"
+    },
+    {
+      "path": "SceneObj/Strat_T_28/atmosphere.xml",
+      "size": 4961,
+      "sha256": "29fe74dcaf063a58ff8a9f28400ba69cb210b58e46ae739b203c018cf16ac38c"
+    },
+    {
+      "path": "SceneObj/Strat_T_28/flora.bin",
+      "size": 12,
+      "sha256": "a711b21e6cf9374aaf87b613e945f381b68a827fdf7dd8395add83364ed0a569"
+    },
+    {
+      "path": "SceneObj/Strat_T_28/navmesh.bin",
+      "size": 3796934,
+      "sha256": "e97b1ce717b60cf251ee1bddb3087c79d6e155373fdcec816ad3bce2e6e11cfb"
+    },
+    {
+      "path": "SceneObj/Strat_T_28/scene.xscene",
+      "size": 2990805,
+      "sha256": "8574c194cbf53050ff4f153f0b024275a2ce4a44f18dd2ed13bfd8bd483f7f9c"
+    },
+    {
+      "path": "SceneObj/Strat_T_28/terrain.bin",
+      "size": 9336827,
+      "sha256": "0b185de55b321493dd6da3bf3d0857a991f73db59bf6559d589fcab67720ef60"
+    },
+    {
+      "path": "SceneObj/Strat_T_29/atmosphere.xml",
+      "size": 4958,
+      "sha256": "1ad866dbc4a95640d360f223515cf5e63e69346c77bbdf985c9fac9b0eccb5ff"
+    },
+    {
+      "path": "SceneObj/Strat_T_29/flora.bin",
+      "size": 1327121,
+      "sha256": "1923ff6113bf35e2278198822a54fa4746a5b5dd17d0f5d8db1d4ac0f71a0c8b"
+    },
+    {
+      "path": "SceneObj/Strat_T_29/navmesh.bin",
+      "size": 6122118,
+      "sha256": "a4794d7ca70af1f3c317156833fe1c16513bb516788f7a6da3fcc445effe2bb8"
+    },
+    {
+      "path": "SceneObj/Strat_T_29/scene.xscene",
+      "size": 1951344,
+      "sha256": "af1b92b79da4e23bb1ebb569c9769b355f7f627cf3f2f7e7aafc58849d1d9398"
+    },
+    {
+      "path": "SceneObj/Strat_T_29/terrain.bin",
+      "size": 1301565,
+      "sha256": "4e3880e936ab50fc8857b77633ca6b4c0258503a0fed6ef415e6177d8b68b2a3"
     },
     {
       "path": "SceneObj/Strat_T_3/atmosphere.xml",
@@ -6135,7 +6210,7 @@
     {
       "path": "SubModule.xml",
       "size": 7215,
-      "sha256": "95f5a29fd0ba0737c06bedfb65b7f12e20a410ec1c718dbd16904eb49a523549"
+      "sha256": "f9f41dee7e5bba82a6bf7254ec46a4c9ab49c5f95a2560f028667bc99d6e6f22"
     },
     {
       "path": "Videos/strategus_intro.ivf",
@@ -6160,22 +6235,22 @@
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.GauntletUI.dll",
       "size": 1451520,
-      "sha256": "25af9bb5411b17e32255c311d68ca55b9cfd4a585058a1e0e1ce9404fccfeb08"
+      "sha256": "ea33f55464fb620ef186b3012ee2e57cdce6551a56ba25721a2ebc88fc91f0cc"
     },
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.View.dll",
       "size": 34304,
-      "sha256": "543901f10197d83fd82d2fed63ce6ff9619c0d7f5ff6cafd14cb14110233fdcc"
+      "sha256": "01b4f7b7420992b4341993c409d945ed0e7e7cb2e785ed2d34e20af655cab47e"
     },
     {
       "path": "bin/Win64_Shipping_Client/MBWarlords.LastConcord.dll",
       "size": 2270720,
-      "sha256": "d724d9243d233183860248ae8f3386b63c0c27eacf63dc69a4f35cfd23169330"
+      "sha256": "cc88a840d453995ed1f49f348e006953fd5e42a5304e0078aa726bc454807647"
     },
     {
       "path": "bin/Win64_Shipping_Client/StrategusBattleBridge.GauntletUI.dll",
-      "size": 628224,
-      "sha256": "7f198fac1a856794ddff7b71b4f1d3b2bbe9de2e316f03d0ac0b4e620f8fa4fc"
+      "size": 630784,
+      "sha256": "98d9d0f219c72d91d17f4a9334608d6ce61926bad6d068f52ab9f99411706bdf"
     }
   ]
 }
