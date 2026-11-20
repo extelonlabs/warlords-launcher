@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "25f3090e7ccaa4db3952b16e3492cf0d13434664",
+  "version": "1.1.48",
+  "entries": [
+    {
+      "version": "1.1.48",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fix shared village map verification after the project migration."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.47",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Restore preparation of supported downloadable battle maps before leaving the lobby; an unavailable map service leaves you in the lobby."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.46",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Bannerlord’s original loading screen and opening video are back, along with the previous TaleWorlds connecting screen."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.45",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed the launcher download package for the Donkey Battle Lab build."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.44",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added a rideable Donkey for Battle Lab trials."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.43",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Test three-flag city sieges at Myzea, Marunath, and Balgard in Battle Lab."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.42",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "NPC castle defenders can attack an enemy Forward Spawn cart they can see and reach inside the castle."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Ballistas in converted sieges now start with 20 bolts."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.41",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Bazeck, Bhulaban, Mazen, Shapheste, Shulus, and Hanun now have snowy battlefields when attacked in the campaign."
+          ]
+        }
+      ]
+    }
+  ]
+}
