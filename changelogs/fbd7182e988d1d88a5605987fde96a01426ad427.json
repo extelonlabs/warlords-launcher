@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "fbd7182e988d1d88a5605987fde96a01426ad427",
+  "version": "1.1.43",
+  "entries": [
+    {
+      "version": "1.1.43",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Test three-flag city sieges at Myzea, Marunath, and Balgard in Battle Lab."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.42",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "NPC castle defenders can attack an enemy Forward Spawn cart they can see and reach inside the castle."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Ballistas in converted sieges now start with 20 bolts."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.41",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Bazeck, Bhulaban, Mazen, Shapheste, Shulus, and Hanun now have snowy battlefields when attacked in the campaign."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.40",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "The snowy Castle Battle Lab starts on Slezhk’s Takor map. Admins can switch to Yruma’s Mazhadan map from the Esc menu."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.39",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Expect snow on the ground when attacking Slezhk or Yruma. Takor keeps its summer terrain at Albruq and Bulugha, and Mazhadan keeps its usual terrain at Jeirbe."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.38",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Each of the 43 campaign castles has an assigned siege map based on its home region and architecture. Capturing a castle keeps the same battlefield for its next siege."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.37",
+      "date": "2026-11-19",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed the missing wall pieces used for debris that caused Lochana to crash on load. Restored the same pieces on the edited Jogurys walls."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Updated defender archer positions in Barihal and Jamayeh, and the left-wall waiting points in Jamayeh and Simira. Updated two wall sections in Jogurys."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.36",
+      "date": "2026-11-19",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "On 21 siege maps, hold the middle flag B uncontested for 30 seconds to bring reinforcements forward. Defenders can take it back. You can still choose your home spawn or an available Forward Spawn cart."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "The attacker camp is A and the defender stronghold is C. Both take 120 seconds to capture. Updated 22 siege maps with the editor placements for defender banners."
+          ]
+        }
+      ]
+    }
+  ]
+}
