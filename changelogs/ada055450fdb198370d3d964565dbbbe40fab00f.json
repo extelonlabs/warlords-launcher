@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "ada055450fdb198370d3d964565dbbbe40fab00f",
+  "version": "1.1.45",
+  "entries": [
+    {
+      "version": "1.1.45",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed the launcher download package for the Donkey Battle Lab build."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.44",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added a rideable Donkey for Battle Lab trials."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.43",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Test three-flag city sieges at Myzea, Marunath, and Balgard in Battle Lab."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.42",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "NPC castle defenders can attack an enemy Forward Spawn cart they can see and reach inside the castle."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Ballistas in converted sieges now start with 20 bolts."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.41",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Bazeck, Bhulaban, Mazen, Shapheste, Shulus, and Hanun now have snowy battlefields when attacked in the campaign."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.40",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "The snowy Castle Battle Lab starts on Slezhk’s Takor map. Admins can switch to Yruma’s Mazhadan map from the Esc menu."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.39",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Expect snow on the ground when attacking Slezhk or Yruma. Takor keeps its summer terrain at Albruq and Bulugha, and Mazhadan keeps its usual terrain at Jeirbe."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.38",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Each of the 43 campaign castles has an assigned siege map based on its home region and architecture. Capturing a castle keeps the same battlefield for its next siege."
+          ]
+        }
+      ]
+    }
+  ]
+}
