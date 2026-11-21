@@ -48,8 +48,13 @@ public partial class MainWindow : Window
     private Storyboard? _splash;
     private bool? _setupFoldedFor;
     private readonly Stopwatch _speedClock = new();
+    private readonly Stopwatch _downloadIdleClock = new();
+    private readonly System.Windows.Threading.DispatcherTimer _downloadTimer = new() { Interval = TimeSpan.FromSeconds(1) };
     private long _speedBytes;
+    private long _downloadBytes;
+    private long _downloadTotal;
     private double _bytesPerSecond;
+    private bool _downloadWaiting;
     private readonly List<(string Key, string Label, DockPanel Line)> _steps = new();
     private int _activeStep = -1;
     private bool _stepsOpen;
@@ -79,6 +84,7 @@ public partial class MainWindow : Window
     public MainWindow(string? channelOverride)
     {
         InitializeComponent();
+        _downloadTimer.Tick += (_, _) => RefreshDownloadWait();
         LauncherVersionText.Text = "Launcher " + Profile.LauncherVersion;
         var workArea = SystemParameters.WorkArea;
         var availableWidth = Math.Max(1, workArea.Width - 24);
@@ -98,6 +104,7 @@ public partial class MainWindow : Window
         Closed += (_, _) =>
         {
             _windowClosed = true;
+            ResetDownloadDetail();
             CancelChangelogRequest();
         };
         // Window chrome and the startup animation are visual only. The splash
@@ -331,7 +338,7 @@ public partial class MainWindow : Window
             ShowDownloadDetail(value);
             if (value.Step is { } step)
                 ShowStep(step, value.DoneBytes is { } done && value.TotalBytes is { } total
-                    ? $"{value.Message}  {done / (1024.0 * 1024):0} / {total / (1024.0 * 1024):0} MB"
+                    ? $"{value.Message}  {done / (1024.0 * 1024):0.0} / {total / (1024.0 * 1024):0.0} MB"
                     : value.Message);
             Progress.IsIndeterminate = value.Fraction is null;
             if (value.Fraction is { } fraction)
@@ -347,17 +354,22 @@ public partial class MainWindow : Window
     {
         if (value.DoneBytes is not { } done || value.TotalBytes is not { } total)
         {
-            _speedClock.Reset();
-            _bytesPerSecond = 0;
-            ProgressDetailText.Visibility = Visibility.Collapsed;
+            ResetDownloadDetail();
             return;
         }
-        if (!_speedClock.IsRunning)
+        var advanced = done > _downloadBytes;
+        if (!_speedClock.IsRunning || done < _downloadBytes || total != _downloadTotal || (_downloadWaiting && advanced))
         {
-            _speedClock.Start();
+            _speedClock.Restart();
             _speedBytes = done;
+            _bytesPerSecond = 0;
+            _downloadWaiting = false;
         }
-        else if (_speedClock.Elapsed.TotalSeconds >= 1)
+        if (!_downloadIdleClock.IsRunning || advanced || done < _downloadBytes || total != _downloadTotal)
+            _downloadIdleClock.Restart();
+        _downloadBytes = done;
+        _downloadTotal = total;
+        if (!_downloadWaiting && _speedClock.Elapsed.TotalSeconds >= 1)
         {
             // Smoothed, so the time left doesn't jump around.
             var latest = (done - _speedBytes) / _speedClock.Elapsed.TotalSeconds;
@@ -365,14 +377,49 @@ public partial class MainWindow : Window
             _speedBytes = done;
             _speedClock.Restart();
         }
-        const double Megabyte = 1024 * 1024;
-        var text = $"{done / Megabyte:0} MB of {total / Megabyte:0} MB";
-        if (_bytesPerSecond > 0)
+        if (done < total) _downloadTimer.Start();
+        else _downloadTimer.Stop();
+        RenderDownloadDetail();
+    }
+
+    private void RefreshDownloadWait()
+    {
+        if (!_busy || _windowClosed || _operation?.IsCancellationRequested != false)
         {
-            var seconds = (total - done) / _bytesPerSecond;
+            ResetDownloadDetail();
+            return;
+        }
+        if (_downloadIdleClock.Elapsed.TotalSeconds < 5) return;
+        _downloadWaiting = true;
+        _bytesPerSecond = 0;
+        RenderDownloadDetail();
+    }
+
+    private void ResetDownloadDetail()
+    {
+        _downloadTimer.Stop();
+        _speedClock.Reset();
+        _downloadIdleClock.Reset();
+        _bytesPerSecond = 0;
+        _downloadBytes = _downloadTotal = 0;
+        _downloadWaiting = false;
+        ProgressDetailText.Visibility = Visibility.Collapsed;
+    }
+
+    private void RenderDownloadDetail()
+    {
+        const double Megabyte = 1024 * 1024;
+        var text = $"{_downloadBytes / Megabyte:0.0} MB of {_downloadTotal / Megabyte:0.0} MB";
+        if (_downloadWaiting)
+            text += "  ·  Waiting for download server…";
+        else if (_bytesPerSecond > 0 && _downloadBytes < _downloadTotal)
+        {
+            var seconds = (_downloadTotal - _downloadBytes) / _bytesPerSecond;
             text += $"  ·  {_bytesPerSecond / Megabyte:0.0} MB/s  ·  about "
                 + (seconds < 60 ? $"{Math.Ceiling(seconds):0} s left" : $"{Math.Ceiling(seconds / 60):0} min left");
         }
+        else if (_downloadBytes < _downloadTotal)
+            text += _downloadBytes > 0 ? "  ·  Downloading…" : "  ·  Starting download…";
         ProgressDetailText.Text = text;
         ProgressDetailText.Visibility = Visibility.Visible;
     }
@@ -466,6 +513,7 @@ public partial class MainWindow : Window
         _showVerifyResult = false;
         _busyTitle = "Checking your setup";
         _operation = new CancellationTokenSource();
+        ResetDownloadDetail();
         OperationText.Foreground = (Brush)FindResource("Text");
         OperationText.Text = "Checking your setup…";
         Progress.Value = 0;
@@ -500,6 +548,7 @@ public partial class MainWindow : Window
         }
         finally
         {
+            ResetDownloadDetail();
             _operation.Dispose();
             _operation = null;
             _busy = false;

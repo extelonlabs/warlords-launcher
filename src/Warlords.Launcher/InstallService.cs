@@ -440,6 +440,7 @@ public sealed class InstallService
         catch (Exception ex) when (!cancellationToken.IsCancellationRequested)
         {
             App.Log("Downloading only the changed files did not work, so the whole update is downloaded: " + ex.Message);
+            progress.Report(new("Partial download unavailable. Preparing the full update", Step: "download"));
             // The stage and its owner file stay, so recovery still knows the stage is ours if this stops halfway.
             _ = SafeFiles.TreeFiles(stage); // Refuses a folder with links inside.
             foreach (string entry in Directory.EnumerateFileSystemEntries(SafeFiles.Extended(stage)).ToList())
@@ -569,7 +570,10 @@ public sealed class InstallService
         foreach ((long start, long end, List<ReleaseFile> files) in ranges)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            byte[] bytes = await GetRangeAsync(client, address, release.PackageSize, start, (int)(end - start), cancellationToken).ConfigureAwait(false);
+            byte[] bytes = await GetRangeAsync(client, address, release.PackageSize, start, (int)(end - start), cancellationToken, downloaded =>
+                progress.Report(new("Downloading changed files (" + written + " / " + changed.Count + ")", 0.6 + 0.37 * (received + downloaded) / total, received + downloaded, total, "download"))).ConfigureAwait(false);
+            received += end - start;
+            progress.Report(new("Unpacking and checking files (" + written + " / " + changed.Count + ")", 0.6 + 0.37 * received / total, Step: "download"));
             foreach (ReleaseFile file in files)
             {
                 ZipEntry entry = entries[file.Path];
@@ -598,19 +602,20 @@ public sealed class InstallService
                         throw new InvalidDataException("A downloaded file failed SHA-256 verification: " + file.Path);
                 }
                 written++;
+                progress.Report(new("Unpacking and checking files (" + written + " / " + changed.Count + ")", 0.6 + 0.37 * received / total, Step: "download"));
             }
-            received += end - start;
-            progress.Report(new("Downloading changed files (" + written + " / " + changed.Count + ")", 0.6 + 0.37 * received / total, received, total, "download"));
         }
     }
 
     // Reads exactly length bytes at offset. Only a 206 reply for that exact range is accepted.
-    private static async Task<byte[]> GetRangeAsync(HttpClient client, Uri address, long packageSize, long offset, int length, CancellationToken cancellationToken)
+    private static async Task<byte[]> GetRangeAsync(HttpClient client, Uri address, long packageSize, long offset, int length, CancellationToken cancellationToken, Action<int>? reportBytes = null)
     {
         // HttpClient's own timeout stops at the headers; this one also ends a stalled body read.
         using CancellationTokenSource timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         timeout.CancelAfter(TimeSpan.FromMinutes(2));
         CancellationToken token = timeout.Token;
+        reportBytes?.Invoke(0);
+        var progressClock = System.Diagnostics.Stopwatch.StartNew();
         for (int redirects = 0; redirects < 6; redirects++)
         {
             using HttpRequestMessage request = new(HttpMethod.Get, address);
@@ -635,6 +640,11 @@ public sealed class InstallService
                 if (read > length - total) throw new IOException("The server sent more data than the requested range.");
                 Array.Copy(buffer, 0, bytes, total, read);
                 total += read;
+                if (progressClock.ElapsedMilliseconds >= 100 || total == length)
+                {
+                    reportBytes?.Invoke(total);
+                    progressClock.Restart();
+                }
             }
             if (total != length) throw new IOException("A partial download ended early.");
             return bytes;
@@ -661,6 +671,7 @@ public sealed class InstallService
             CancellationToken downloadToken = timeout.Token;
             using HttpClient client = new(new HttpClientHandler { AllowAutoRedirect = false }) { Timeout = TimeSpan.FromMinutes(20) };
             client.DefaultRequestHeaders.UserAgent.ParseAdd("Warlords-Launcher/0.2.0");
+            progress.Report(new("Downloading Warlords", 0, 0, source.Release.PackageSize, "download"));
             for (int redirects = 0; redirects < 6; redirects++)
             {
                 using HttpResponseMessage response = await client.GetAsync(address, HttpCompletionOption.ResponseHeadersRead, downloadToken).ConfigureAwait(false);
