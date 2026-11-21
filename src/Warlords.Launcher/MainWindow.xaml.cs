@@ -67,7 +67,7 @@ public partial class MainWindow : Window
         ("check", "Check the download is safe"),
         ("unpack", "Unpack and check every file"),
         ("settings", "Keep your settings"),
-        ("backup", "Save a backup of the old version"),
+        ("backup", "Prepare to replace the old version"),
         ("swap", "Put the new version in place"),
     };
     private static readonly (string Key, string Label)[] LauncherSteps =
@@ -263,7 +263,7 @@ public partial class MainWindow : Window
                 throw new InvalidOperationException("This build requires Bannerlord " + Profile.GameVersion + ". Select the matching Steam installation.");
         var result = await _installer.InstallAsync(root, source, Reporter(), token, repair);
         EndSteps(true);
-        if (result.BackupPath is not null) Append("Previous module retained at " + result.BackupPath);
+        if (result.BackupPath is not null) Append("Windows could not remove temporary old-version files at " + result.BackupPath + ". Cleanup will be retried at the next update.");
         await InspectGameAsync(token);
         _releaseReady = _inspection?.CanPlay == true && IsManagedInstallation(root);
         Progress.Value = 100;
@@ -718,7 +718,7 @@ public partial class MainWindow : Window
         {
             StatusTitleText.Text = _managedInstallation ? "Repair your Warlords files" : "Install Warlords once";
             StatusHintText.Text = _managedInstallation
-                ? "Some files changed or are missing. The launcher replaces them and keeps a backup."
+                ? "Some files changed or are missing. The launcher replaces them and preserves your player options."
                 : "The launcher downloads the correct version and keeps it updated for you.";
         }
     }
@@ -926,7 +926,7 @@ public partial class MainWindow : Window
         if (Directory.Exists(target) && !IsManagedInstallation(root))
         {
             if (MessageBox.Show(this,
-                "Let Warlords manage this existing installation and download the latest version?\n\nThe launcher keeps a recovery backup and preserves your player options. Future updates are automatic.\n\n" + target,
+                "Let Warlords manage this existing installation and download the latest version?\n\nYour player options are preserved. Old-version files are removed after a successful update. Future updates are automatic.\n\n" + target,
                 "Set up Warlords", MessageBoxButton.OKCancel, MessageBoxImage.Question) != MessageBoxResult.OK)
             {
                 SetStatus("Nothing was changed. You can choose Install Warlords when you’re ready.");

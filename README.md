@@ -12,11 +12,11 @@ Mount & Blade II: Bannerlord and keeps it up to date. That is all it does.
 
 Yes. You do not have to trust us. You can check it yourself:
 
-- **Virus scan:** [VirusTotal scan of Warlords.exe 0.5.14](https://www.virustotal.com/gui/file/bbf6c12d4e7cef570645e598c24dc6b9c17a2c6d7700651ca20b402fa8753ef3).
+- **Virus scan:** [VirusTotal scan of Warlords.exe 0.5.15](https://www.virustotal.com/gui/file/cfa577215570dcff1614326580b57c20886e7b05c1b85ce769fe1f5805463004).
   VirusTotal checks a file with dozens of antivirus programs at once.
 - **Same file:** in PowerShell, run `Get-FileHash .\Warlords.exe`.
-  For launcher 0.5.14 it must show
-  `BBF6C12D4E7CEF570645E598C24DC6B9C17A2C6D7700651CA20B402FA8753EF3`.
+  For launcher 0.5.15 it must show
+  `CFA577215570DCFF1614326580B57C20886E7B05C1B85CE769FE1F5805463004`.
   This is the file's fingerprint. It is the same one VirusTotal scanned, and the
   release page lists it in `SHA256SUMS.txt`.
 - **Open code:** every line of the app is in [src/Warlords.Launcher](src/Warlords.Launcher).
@@ -33,7 +33,7 @@ Yes. You do not have to trust us. You can check it yourself:
 What it does:
 
 - downloads only, over HTTPS, from GitHub
-- writes only the StratLords mod (plus a backup of the old copy) in your
+- writes only the StratLords mod (plus temporary recovery files) in your
   Bannerlord folder, and its own settings in `%LOCALAPPDATA%\WarlordsLauncherV2`
 - reads the Windows registry only to find where Steam is installed and to check
   that .NET Framework 4.8 is there

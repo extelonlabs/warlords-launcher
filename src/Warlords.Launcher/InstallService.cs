@@ -162,14 +162,13 @@ public sealed class InstallService
             if (File.Exists(backup) || Directory.Exists(backup)) throw new IOException("The backup destination already exists. Nothing was replaced.");
             if (Directory.Exists(target))
             {
-                progress.Report(new("Saving a backup of the old version", 0.98, Step: "backup"));
+                progress.Report(new("Preparing to replace the old version", 0.98, Step: "backup"));
                 await MoveWhenFreeAsync(target, backup, progress, "backup", cancellationToken).ConfigureAwait(false);
             }
             WriteJournal(modules, journal with { Phase = "backedUp" });
             progress.Report(new("Installing Warlords", 0.99, Step: "swap"));
             await MoveWhenFreeAsync(stage, target, progress, "swap", cancellationToken).ConfigureAwait(false);
             WriteJournal(modules, journal with { Phase = "committed" });
-            File.Delete(Path.Combine(modules, JournalName));
             // Every file was checked against its SHA-256 or the last stamp on the way in, so the next start or Play need not read them again.
             try
             {
@@ -179,9 +178,10 @@ public sealed class InstallService
             {
                 App.Log("The file check stamp could not be saved: " + ex.Message);
             }
-            if (journal.TargetWasPresent) RemoveOlderBackups(recovery, journal.BackupName);
+            RemoveBackups(recovery);
+            File.Delete(Path.Combine(modules, JournalName));
             progress.Report(new("Installed", 1));
-            return new InstallResult(SafeFiles.Long(target), journal.TargetWasPresent ? SafeFiles.Long(backup) : null);
+            return new InstallResult(SafeFiles.Long(target), Directory.Exists(backup) ? SafeFiles.Long(backup) : null);
         }
         catch
         {
@@ -764,20 +764,20 @@ public sealed class InstallService
         if (completed != release.Files.Count) throw new InvalidDataException("The ZIP is missing approved files.");
     }
 
-    // A backup is a full copy of the module, so only the newest stays. The update already worked, so
-    // a failure here must not undo it: whatever can't be removed now goes at the next update.
-    private static void RemoveOlderBackups(string recovery, string keep)
+    // Recovery files are temporary: remove them only after the new version is in place.
+    // A cleanup failure must not undo a successful update; try again at the next update.
+    private static void RemoveBackups(string recovery)
     {
         string[] folders;
         try { folders = Directory.GetDirectories(recovery, ".StratLords.warlords-backup-*"); }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
-            App.Log("Older backups could not be listed: " + ex.Message);
+            App.Log("Temporary old-version files could not be listed: " + ex.Message);
             return;
         }
         foreach (string folder in folders)
         {
-            if (Path.GetFileName(folder).Equals(keep, StringComparison.OrdinalIgnoreCase)) continue;
+            if (!Regex.IsMatch(Path.GetFileName(folder), @"^\.StratLords\.warlords-backup-[0-9a-f]{32}$")) continue;
             try
             {
                 _ = SafeFiles.TreeFiles(folder); // Refuses a folder with links inside.
@@ -785,7 +785,7 @@ public sealed class InstallService
             }
             catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
             {
-                App.Log("An older backup could not be removed: " + ex.Message);
+                App.Log("Temporary old-version files could not be removed; cleanup will be retried at the next update: " + ex.Message);
             }
         }
     }
@@ -842,6 +842,7 @@ public sealed class InstallService
             _ = SafeFiles.TreeFiles(stage);
             Directory.Delete(SafeFiles.Extended(stage), true);
         }
+        if (completed) RemoveBackups(recovery);
         File.Delete(path);
     }
 
