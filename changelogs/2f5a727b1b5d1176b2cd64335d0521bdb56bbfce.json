@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "2f5a727b1b5d1176b2cd64335d0521bdb56bbfce",
+  "version": "1.1.51",
+  "entries": [
+    {
+      "version": "1.1.51",
+      "date": "2026-11-22",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Battle reports distinguish combat losses from campaign penalties and show recorded spoils."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Flag defeats now remove 60% of surviving troops instead of reducing the defeated party to one soldier.",
+            "After a defeat, unused equipment is split: 50% to the winner, 35% returned to the loser and 15% destroyed. Whole-item rounding applies.",
+            "Defeat transfers 70% of remaining trading goods to the winner; the loser keeps the rest.",
+            "Retreat transfers 10% of unused equipment and trading goods to the winner, alongside the existing 30% troop penalty.",
+            "Winning armies, AI parties and defending settlements receive the appropriate spoils."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.50",
+      "date": "2026-11-22",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Open campaign now leads to stratlords.online, and the website label shows the current address.",
+            "Steam sign-in retry guidance now names the correct button."
+          ]
+        },
+        {
+          "title": "Removed",
+          "items": [
+            "Removed the full village-map scan before joining a battle."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Joining checks only that the selected village map is installed. If it is missing, update through the launcher."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.49",
+      "date": "2026-11-22",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed the shared village map verification error that prevented joining battles with the latest launcher update."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.48",
+      "date": "2026-11-21",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Updated development instructions for the reorganized project. No gameplay changes."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.48",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fix shared village map verification after the project migration."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.47",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Restore preparation of supported downloadable battle maps before leaving the lobby; an unavailable map service leaves you in the lobby."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.46",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Bannerlord’s original loading screen and opening video are back, along with the previous TaleWorlds connecting screen."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.45",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed the launcher download package for the Donkey Battle Lab build."
+          ]
+        }
+      ]
+    }
+  ]
+}
