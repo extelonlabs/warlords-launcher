@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "48c2694ca9c21d5ac2f65da44eea0437912f71da",
+  "version": "1.1.49",
+  "entries": [
+    {
+      "version": "1.1.49",
+      "date": "2026-11-22",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed the shared village map verification error that prevented joining battles with the latest launcher update."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.48",
+      "date": "2026-11-21",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Updated development instructions for the reorganized project. No gameplay changes."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.48",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fix shared village map verification after the project migration."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.47",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Restore preparation of supported downloadable battle maps before leaving the lobby; an unavailable map service leaves you in the lobby."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.46",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Bannerlord’s original loading screen and opening video are back, along with the previous TaleWorlds connecting screen."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.45",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed the launcher download package for the Donkey Battle Lab build."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.44",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Added a rideable Donkey for Battle Lab trials."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.43",
+      "date": "2026-11-20",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Test three-flag city sieges at Myzea, Marunath, and Balgard in Battle Lab."
+          ]
+        }
+      ]
+    }
+  ]
+}
