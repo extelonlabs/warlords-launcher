@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "661189f1ef55f8f11a2574eb1a9c812c9a7d2387",
+  "version": "1.1.56",
+  "entries": [
+    {
+      "version": "1.1.56",
+      "date": "2026-11-27",
+      "sections": [
+        {
+          "title": "New",
+          "items": [
+            "Practise with your team's gear during warmup for free, then bring the same loadout into battle.",
+            "Place your team's Ammo Box with Shift + Deploy, then hold F at the box to refill arrows or bolts from team stock."
+          ]
+        },
+        {
+          "title": "Fixed",
+          "items": [
+            "You can now spawn with the rest of your loadout when an item runs out. Red chat text tells you which gear was skipped."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Human and AI defenders in AI garrisons use the same armour. Villages get light armour and towns and castles get medium armour.",
+            "AI garrisons get three Healing Tents and three Forward Spawns in stock. Each placement spends a kit."
+          ]
+        },
+        {
+          "title": "Disabled",
+          "items": [
+            "Free arrow barrels on campaign maps are disabled during live combat."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.55",
+      "date": "2026-11-23",
+      "sections": [
+        {
+          "title": "Adjusted",
+          "items": [
+            "Portable ladders now lower four times faster after being placed while still settling cleanly against walls and floors."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.54",
+      "date": "2026-11-23",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed siege defending bots not marching over to destroy an attacker Forward Spawn placed inside the castle walls."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Portable ladders now lower three times faster after being placed while still settling cleanly against walls and floors."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.53",
+      "date": "2026-11-23",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed hidden teammate markers continuing to run off-screen overhead calculations before they were first toggled.",
+            "Fixed destroyed pavise shields leaving invisible collision blockers behind after breaking.",
+            "Aligned portable ladder climb-hold timing between the client and server so ladders respond consistently.",
+            "Fixed siege defending archers sharing a duplicate battlement group so all four archer groups hold separate wall sections."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Reduced client and server engine work during large battles and sieges so gameplay stays smoother with many players, mounts and NPC defenders.",
+            "Spread simultaneous reinforcement spawns cleanly across consecutive ticks while keeping wave timing, fairness and battle accounting unchanged.",
+            "Reduced stutter during banner, tent, cart and ladder placement, match-end processing, and round team balancing."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.52",
+      "date": "2026-11-23",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Administrators carrying a hammer can enable the admin hammer bonus without changing equipment during battle."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Each side can now keep two tents and two carts deployed. Both tents and carts have their own markers, and overlapping tents do not heal twice as fast.",
+            "Cart spawning can use another available friendly cart when one is blocked or has no free spawn position.",
+            "Donkeys are slightly slower."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.51",
+      "date": "2026-11-22",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Battle reports distinguish combat losses from campaign penalties and show recorded spoils."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Flag defeats now remove 60% of surviving troops instead of reducing the defeated party to one soldier.",
+            "After a defeat, unused equipment is split: 50% to the winner, 35% returned to the loser and 15% destroyed. Whole-item rounding applies.",
+            "Defeat transfers 70% of remaining trading goods to the winner; the loser keeps the rest.",
+            "Retreat transfers 10% of unused equipment and trading goods to the winner, alongside the existing 30% troop penalty.",
+            "Winning armies, AI parties and defending settlements receive the appropriate spoils."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.50",
+      "date": "2026-11-22",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Open campaign now leads to stratlords.online, and the website label shows the current address.",
+            "Steam sign-in retry guidance now names the correct button."
+          ]
+        },
+        {
+          "title": "Removed",
+          "items": [
+            "Removed the full village-map scan before joining a battle."
+          ]
+        },
+        {
+          "title": "Adjusted",
+          "items": [
+            "Joining checks only that the selected village map is installed. If it is missing, update through the launcher."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.49",
+      "date": "2026-11-22",
+      "sections": [
+        {
+          "title": "Fixed",
+          "items": [
+            "Fixed the shared village map verification error that prevented joining battles with the latest launcher update."
+          ]
+        }
+      ]
+    }
+  ]
+}
